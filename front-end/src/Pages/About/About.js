@@ -1,7 +1,7 @@
-import './About.scoped.scss'
+import './About.scss'
 export default function AboutPage() {
     return (
-        <div>
+        <div className='p-About'>
             <h1>Hey from about Page</h1>
             <p>About abhinay</p>
         </div>

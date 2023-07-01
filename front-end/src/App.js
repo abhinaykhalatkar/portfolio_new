@@ -1,27 +1,25 @@
-import { RouterProvider } from "react-router-dom";
-import router from './Router/router';
-import { Link } from "react-router-dom";
+
+// import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+// import HomePage from "./Pages/Home/Home";
+// import AboutPage from "./Pages/About/About";
+// import NotFound404 from "./Pages/NotFound404/NotFound404";
+import Navbar from './Components/nav';
+import RenderRoutes from './Router/router';
+import { BrowserRouter as Router, Routes,Route } from 'react-router-dom';
 import './App.scss';
 
 function App() {
   return (
-    <div>
-      {/* <Link to='/About'>Go to Aboutpage</Link> */}
-      {/* <ul>
-        <li>
-          <Link to="../" relative="path">
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link to="../" relative="path">
-            Home
-          </Link>
-        </li>
-      </ul> */}
-
-      <RouterProvider router={router} />
-    </div>
+<div>
+<Router>
+    <Navbar />
+    <Routes>
+      {RenderRoutes().map((route, index) => (
+        <Route key={index} path={route.path} element={route.element} />
+      ))}
+    </Routes>
+  </Router>
+</div>
   );
 }
 
