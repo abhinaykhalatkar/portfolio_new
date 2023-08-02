@@ -17,9 +17,11 @@ const SideBar = ({passIsSidebarOpen}) => {
 
   return (
     <>
+      <div className='t-btn-container'>
       <button className="sidebar-toggle-btn" onClick={handleSidebarToggle}>
         ☰
       </button>
+      </div>
       <motion.div
         className={`sidebar ${isSidebarOpen ? 'open' : ''}`}
         initial={{ x: '-100%' }}

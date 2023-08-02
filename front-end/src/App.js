@@ -17,6 +17,7 @@ function App() {
   return (  
       <ThemeProvider>
         <Router>
+
           <SideBar passIsSidebarOpen={getIsSidebarOpen}/>
           <motion.div
           className={`page-content ${isSidebarOpen ? 'page-content-collapsed' : ''}`}
@@ -30,6 +31,7 @@ function App() {
             ))}
           </Routes>
         </motion.div>
+
         </Router>
       </ThemeProvider>
   );

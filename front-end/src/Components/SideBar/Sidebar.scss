@@ -1,14 +1,18 @@
 .sidebar-toggle-btn {
-    position: fixed;
-    top: 10px;
+    position: absolute;
+    top: 23px;
     left: 10px;
+    width: 2%;
+    height: auto;
     z-index: 10;
     background-color: transparent;
+    color: #fff;
     border: none;
     font-size: 24px;
     cursor: pointer;
     outline: none;
   }
+
   
   .sidebar {
     position: fixed;
