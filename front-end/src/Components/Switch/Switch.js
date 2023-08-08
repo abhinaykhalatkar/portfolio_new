@@ -3,6 +3,8 @@ import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import { ThemeContext } from '../../Context/ThemeContext/ThemeContext';
 import React,{useContext} from 'react';
+import "./Switch.scss"
+
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -54,7 +56,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   export function Switch1(){
     const darkTheme=useContext(ThemeContext)
     return(
-      <FormControlLabel onClick={darkTheme.toggleTheme}
+      <FormControlLabel onClick={darkTheme.toggleTheme} className={`${darkTheme.darkTheme?'switch-dark':'switch-white'}`}
       control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
       label="MUI switch"
     />

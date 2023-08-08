@@ -1,41 +1,18 @@
-import React ,{useState}from 'react';
-
-import RenderRoutes from './Context/router';
-import SideBar from './Components/SideBar/SideBar';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.scss';
-import { motion } from 'framer-motion';
-import { ThemeProvider} from './Context/ThemeContext/ThemeContext';
-
+import React from "react";
+import { ThemeProvider } from "./Context/ThemeContext/ThemeContext";
+import ChildApp1 from "./ChildApp1";
+import { BrowserRouter } from "react-router-dom";
+import { PageAnimationProvider } from "./Context/PageAnimationContext/PageAnimationContext";
 function App() {
-  const [isSidebarOpen,setIsSidebarOpen] =useState(false)
-  function getIsSidebarOpen(val){
-    console.log(isSidebarOpen)
-    setIsSidebarOpen(!val)
-  }
-
-  return (  
+  return (
+    <BrowserRouter>
       <ThemeProvider>
-        <Router>
-
-          <SideBar passIsSidebarOpen={getIsSidebarOpen}/>
-          <motion.div
-          className={`page-content ${isSidebarOpen ? 'page-content-collapsed' : ''}`}
-          initial={false}
-          animate={{ marginLeft: isSidebarOpen ? 250 : 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <Routes>
-            {RenderRoutes().map((route, index) => (
-              <Route key={index} path={route.path} element={route.element} />
-            ))}
-          </Routes>
-        </motion.div>
-
-        </Router>
+        <PageAnimationProvider>
+          <ChildApp1 />
+        </PageAnimationProvider>
       </ThemeProvider>
+    </BrowserRouter>
   );
 }
 
 export default App;
-
