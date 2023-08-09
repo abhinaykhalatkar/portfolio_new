@@ -10,11 +10,22 @@
   color: $white;
   background-color: $darkBlue;
   // background-image: linear-gradient(135deg, $darkGray 38%, $darkBlue ),
-  //   linear-gradient(315deg, $darkBlack 10%, $black 74%);
+  // linear-gradient(315deg, $darkBlack 10%, $black 74%);
 }
+
 .c-app {
   .p-app {
     display: flex;
+
+    .gitIcon {
+      img {
+        z-index: 1;
+        position: fixed;
+        width: 2.5rem;
+        bottom: 2.5rem;
+        left: 2.5rem;
+      }
+    }
   }
 
   background-size: cover;

@@ -1,9 +1,10 @@
 import React, { useState ,createContext} from "react";
-
 export const PageAnimationContext = createContext();
 
 export function PageAnimationProvider(props) {
  const [scrollDirection, setScrollDirection] = useState(0);
+ const [activeIndex, setActiveIndex] = useState(0);
+
  const pageVariants = {
     initial: {
       opacity: 0,
@@ -37,7 +38,7 @@ export function PageAnimationProvider(props) {
   }
 
   return (
-    <PageAnimationContext.Provider value={{handleSetScrollDirection,pageVariants,pageTransition}}>
+    <PageAnimationContext.Provider value={{handleSetScrollDirection,pageVariants,pageTransition,activeIndex,setActiveIndex}}>
         {props.children}
     </PageAnimationContext.Provider>
   );

@@ -1,36 +1,44 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation,useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { PageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import "./ProgressNav.scss";
 
 export const navsData = [
-  { Name: "HOME", Address: "/" },
-  { Name: "ABOUT", Address: "/about" },
-  { Name: "SKILLS", Address: "/skills" },
-  { Name: "PROJECTS", Address: "/projects" },
+  { Name: "00", Address: "/" },
+  { Name: "01", Address: "/about" },
+  { Name: "02", Address: "/skills" },
+  { Name: "03", Address: "/projects" },
+  { Name: "04", Address: "/contact" },
 ];
-export function ProgressNav() {
+export function ProgressNav( ) {
   const location = useLocation();
+  const navigate = useNavigate();
   const [squash, setSquash] = useState(false);
-  const [prevIndex, setCurIndex] = useState(0);
+  const [prevIndex, setPrevIndex] = useState(navsData.findIndex(
+    (item) => item.Address === location.pathname
+  ));
   const activeNavLinkRef = useRef(null);
   const [activeLinkWidth, setActiveLinkWidth] = useState(100);
-  const { handleSetScrollDirection } = useContext(PageAnimationContext);
+  const { handleSetScrollDirection ,setActiveIndex} = useContext(PageAnimationContext);
 
   useEffect(() => {
     if (activeNavLinkRef.current) {
       setActiveLinkWidth(100);
     }
-  }, []);
+  }, [location.pathname]);
 
-  const handleSquash = () => {
+  const handleSquash = (e) => {
+    let curAddress=e.target.getAttribute("address")
     const index = navsData.findIndex(
-      (item) => item.Address === location.pathname
+      (item) => item.Address === curAddress
     );
+    setActiveIndex(index)
+    navigate(curAddress)
+    console.log(prevIndex,index)
     if (index !== -1) {
-      handleSetScrollDirection(prevIndex >= index ? 0 : 1);
-      setCurIndex(index);
+      handleSetScrollDirection(prevIndex >= index ? 1 : 0);
+      setPrevIndex(index);
     }
     setSquash(true);
     setTimeout(() => {
@@ -40,20 +48,20 @@ export function ProgressNav() {
 
   return (
     <div className="navigation-progress">
-      <AnimatePresence mode="wait">
+      <AnimatePresence >
         {navsData.map((el, ind) => {
           return (
-            <NavLink
+            <span
               key={`sideNav ${ind}`}
               className={`NavLink ${
                 location.pathname === el.Address ? "NavActive" : ""
               }`}
-              to={el.Address}
+              address={el.Address}
               onClick={handleSquash}
               ref={location.pathname === el.Address ? activeNavLinkRef : null}
             >
               {el.Name}
-            </NavLink>
+            </span>
           );
         })}
       </AnimatePresence>
@@ -63,7 +71,7 @@ export function ProgressNav() {
         animate={{
           x:
             navsData.findIndex((el) => el.Address === location.pathname) * 100 -
-            150,
+            200,
           width: activeLinkWidth,
         }}
         transition={{ ease: "easeOut", duration: 0.3 }}

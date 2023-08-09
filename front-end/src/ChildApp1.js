@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect, useCallback } from "react";
+import "./App.scss";
+import githubDay from "./Assets/github-icon/github-day.svg"
+import githubNight from "./Assets/github-icon/github-night.svg"
 import RenderRoutes from "./Context/router";
 import SideBar from "./Components/SideBar/SideBar";
 import {useNavigate } from "react-router-dom";
-import "./App.scss";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeContext } from "./Context/ThemeContext/ThemeContext";
 import { PageAnimationContext } from "./Context/PageAnimationContext/PageAnimationContext";
@@ -11,11 +13,9 @@ import { ProgressNav, navsData } from "./Components/ProgressNav/ProgressNav";
 function ChildApp1() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { darkTheme } = useContext(ThemeContext);
-  const {handleSetScrollDirection}=useContext(PageAnimationContext)
-  const [activeIndex, setActiveIndex] = useState(0);
+  const {handleSetScrollDirection,activeIndex,setActiveIndex}=useContext(PageAnimationContext)
   const [isScrolling, setIsScrolling] = useState(false);
   const navigate = useNavigate();
-
 
   const handleMouseWheel = useCallback(
     (e) => {
@@ -28,13 +28,15 @@ function ChildApp1() {
         setActiveIndex((prevIndex) =>
           Math.min(prevIndex + 1, navsData.length - 1)
         );
+        navigate(navsData[activeIndex].Address);
       } else if (e.deltaY < 0) {
         handleSetScrollDirection(1);
         setActiveIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+        navigate(navsData[activeIndex].Address);
       }
-      navigate(navsData[activeIndex].Address);
+
     },
-    [activeIndex,handleSetScrollDirection,isScrolling,navigate]
+    [activeIndex,handleSetScrollDirection,isScrolling,navigate,setActiveIndex]
   );
 
   useEffect(() => {
@@ -63,6 +65,7 @@ function ChildApp1() {
           <AnimatePresence mode="wait" >
             <RenderRoutes/>
           </AnimatePresence>
+          <a className="gitIcon" href="https://github.com/abhinaykhalatkar" target="_blank" rel="noreferrer"><img src={darkTheme?githubNight:githubDay} alt="github"/></a>
           <ProgressNav />
         </motion.div>
       </div>
