@@ -21,20 +21,22 @@ function ChildApp1() {
     (e) => {
       if (isScrolling) return;
       setIsScrolling(true);
-      setTimeout(() => setIsScrolling(false), 400);
+      setTimeout(() => setIsScrolling(false), 500);
 
-      if (e.deltaY > 0) {
-        handleSetScrollDirection(0);
-        setActiveIndex((prevIndex) =>
-          Math.min(prevIndex + 1, navsData.length - 1)
-        );
-        navigate(navsData[activeIndex].Address);
-      } else if (e.deltaY < 0) {
-        handleSetScrollDirection(1);
-        setActiveIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-        navigate(navsData[activeIndex].Address);
-      }
-
+ if(activeIndex<=navsData.length && activeIndex>=0){
+  if (e.deltaY > 0) {
+    handleSetScrollDirection(0);
+    setActiveIndex((prevIndex) =>
+      Math.min(prevIndex + 1, navsData.length - 1)
+    );
+    navigate(navsData[activeIndex].Address);
+  } else if (e.deltaY < 0) {
+    handleSetScrollDirection(1);
+    setActiveIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+    navigate(navsData[activeIndex].Address);
+  }
+   console.log(activeIndex)
+ }
     },
     [activeIndex,handleSetScrollDirection,isScrolling,navigate,setActiveIndex]
   );

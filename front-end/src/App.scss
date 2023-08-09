@@ -9,8 +9,6 @@
 .dark-theme {
   color: $white;
   background-color: $darkBlue;
-  // background-image: linear-gradient(135deg, $darkGray 38%, $darkBlue ),
-  // linear-gradient(315deg, $darkBlack 10%, $black 74%);
 }
 
 .c-app {
@@ -21,9 +19,17 @@
       img {
         z-index: 1;
         position: fixed;
-        width: 2.5rem;
-        bottom: 2.5rem;
-        left: 2.5rem;
+        width: 2.2rem;
+        bottom: 3.5rem;
+        left: 3.5rem;
+        transition: color 0.4s ease, transform 0.4s ease;
+        &:hover {
+          color: darken(#80afe5, 20%);
+          transform: scale(1.2); 
+        }
+      }
+      @media only screen and (max-width: 480px) {
+        display: none;
       }
     }
   }

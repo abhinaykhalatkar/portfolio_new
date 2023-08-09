@@ -5,17 +5,25 @@
     left: 50%;
     bottom: 5%;
     transform: translateX(-50%);
-    background-color: transparents;
+    background-color: transparent;
     display: flex;
     align-items: center;
     overflow: hidden;  
     text-align: center;
     justify-content: center;
-    border-bottom: 4px solid $YInMnBlue; /* Increase thickness */
-    border-radius: 2px; /* Make the border rounded */
+    border-bottom: 4px solid $YInMnBlue; 
+    border-radius: 2px;
+    max-width: 400px;
     
+    @media only screen and (min-width: 480px) and (max-width:768px) {
+      width: 150px;
+    }
+    @media only screen and (max-width: 480px) {
+      display: none;
+    }
   
   .NavLink {
+    cursor: pointer;
     width: 100px;
     padding-bottom: 20px;
     color: $YInMnBlue;
@@ -25,23 +33,30 @@
     transition: color 0.2s ease, transform 0.2s ease;
 
     &:hover {
-        color: darken($YInMnBlue, 10%);
-        transform: scale(1.05 ); 
+        color: darken(#80afe5, 20%);
+        transform: scale(1.1 ); 
       }
+  }
+  .NavActive{
+    color: darken(#80afe5,5% );
+    transform: scale(1.1 ); 
+    transition: color 0.3s ease, transform 0.2s ease;
+    &:hover {
+      color: darken(#80afe5,5% );
+      transform: scale(1.1 );  
+    }
   }
   
   .lavalamp {
-    width: 100px; 
+    width: 20%; 
     margin: 8px 10px;
-
     height: 5px;
-    background-color: $YInMnBlue;
+    background-color: $gray;
     position: absolute;
     bottom: 0;
     transition: all 0.3s ease;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     border-radius: 50%; 
-
   }
   
   .lavalamp.squash {
@@ -49,4 +64,45 @@
     border-radius: 50% / 50%; 
   }
   
+}
+.c-ScrollBtn{
+  cursor: pointer;
+  position: fixed;
+  right: 1.5rem;
+  font-weight: 450;
+  bottom: 5%;
+  transform: translateX(-50%);
+  background-color: transparent;
+  color:$darkGray;
+  transition: right 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  div{display: flex;}
+  svg {
+    align-self: center;
+    margin: 0 4px;
+    transition: margin 0.3s ease;
+  }
+  &.night{
+    color:darken($gray,15% );
+    &:hover{
+      color: $gray;
+    }
+  }
+  &:hover{
+    svg{
+      margin: 0 10px;
+    }
+    right: 1rem;
+    color:darken($darkGray,10% );
+    transform: translateX(-50%) scale(1.01);
+    transform-origin: center;
+  }
+      
+  @media only screen and (min-width: 480px) and (max-width:768px) {
+    right: 0.5rem;
+  }
+  @media only screen and (max-width: 480px) {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%); 
+  }
 }
