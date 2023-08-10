@@ -24,6 +24,7 @@ export default function ScrollBtn() {
                 handleSetScrollDirection(0)
                 navigate(navsData[activeIndex+1].Address)
                 setActiveIndex(activeIndex+1)
+
             }
            
         }

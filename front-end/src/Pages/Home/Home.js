@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import { ThemeContext } from "../../Context/ThemeContext/ThemeContext";
 import { PageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
+import logo from "../../Assets/logoAK.svg";
 
 export default function HomePage() {
   const { darkTheme } = useContext(ThemeContext);
@@ -18,7 +19,7 @@ export default function HomePage() {
       transition={pageTransition}
     >
       <h1>Hey from HomePage</h1>
-      <p>This is your awesome HomePage subtitle</p>
+      <img src={logo} alt="hi"/>
     </motion.div>
   );
 }
