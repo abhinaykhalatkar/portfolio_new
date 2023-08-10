@@ -33,7 +33,12 @@
       }
     }
   }
-
+  .button-test{
+    position: fixed;
+    right: 2rem;
+    top: 1.5rem;
+    z-index: 10;
+  }
   background-size: cover;
   background-repeat: no-repeat;
   overflow: hidden;
@@ -43,7 +48,6 @@
     height: 100vh;
     width: 100vw;
     overflow: hidden;
-
   }
 
   .page-content-collapsed {
@@ -51,6 +55,6 @@
   }
 
   >.b-white {
-    color: #131212;
+    color: $pitchBlack;
   }
 }

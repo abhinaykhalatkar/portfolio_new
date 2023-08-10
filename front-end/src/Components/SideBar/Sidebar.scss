@@ -16,13 +16,12 @@
     .t-btn-container {
         > .sidebar-toggle-btn {
             position:fixed;
-            top: 20px;
-            left: 10px;
+            top: 1.5rem;
+            left: 1rem;
             width: 2%;
             height: auto;
             z-index: 100;
             background-color: transparent;
-            // color: #fff;
             border: none;
             font-size: 24px;
             cursor: pointer;
@@ -36,7 +35,7 @@
         height: 100vh;
         width: 250px;
         border-left: 50px;
-        color: #fff;
+        color: $white;
         z-index: 1
         ;
         overflow: hidden;
