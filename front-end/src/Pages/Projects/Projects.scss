@@ -9,4 +9,10 @@
     background-image: linear-gradient(135deg, $pitchBlack 38%, $darkBlack ),
         linear-gradient(315deg, $black 18%, $pitchBlack 74%);
 
+    &.light {
+        background: #E0EAFC;
+        background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);
+        background: linear-gradient(to right, #CFDEF3, #E0EAFC);
+    }
+
 }

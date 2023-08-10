@@ -19,7 +19,7 @@ function useSharedFunctionality() {
         handleButtonClick,
     };
 }
-export function PrimeryBtn({text, path = 0}) {
+export function PrimeryBtn({text, path = 0,icon=null}) {
     const { darkTheme, handleButtonClick } = useSharedFunctionality();
     return (
         <motion.button
@@ -28,7 +28,7 @@ export function PrimeryBtn({text, path = 0}) {
             whileTap={{ scale: 0.98 }}
             onClick={() => { handleButtonClick(path) }}
         >
-            {text}
+            {icon}{text}
         </motion.button>
     );
 }

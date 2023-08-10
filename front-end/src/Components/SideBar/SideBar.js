@@ -1,17 +1,18 @@
 import React, { useState, useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink ,Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Sidebar.scss";
 import { Switch1 } from "../Switch/Switch";
 import { ThemeContext } from "../../Context/ThemeContext/ThemeContext";
+import { DangerBtn,PrimeryBtn} from "../Buttons/Buttons";
+import {MdFileDownload} from "react-icons/md";
 
 const SideBar = ({ passIsSidebarOpen }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { darkTheme } = useContext(ThemeContext);
   const navLinksData = [
     { name: "HOME", link: "/" },
-    { name: "ABOUT", link: "/about" },
-    { name: "OTHER", link: "/ats" },
+    { name: "ABOUT", link: "/about" }
   ];
   const handleSidebarToggle = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -49,6 +50,9 @@ const SideBar = ({ passIsSidebarOpen }) => {
                 </NavLink>
               );
             })}
+            
+            <Link to="/RESUME-Abhinay_Khalatkar.pdf" target="_blank" download><PrimeryBtn text="My Resume" icon={<MdFileDownload/>}></PrimeryBtn></Link>
+            
             <Switch1 />
           </div>
         </nav>

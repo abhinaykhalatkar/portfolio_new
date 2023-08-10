@@ -28,16 +28,19 @@
           transform: scale(1.2); 
         }
       }
-      @media only screen and (max-width: 480px) {
+      @media only screen and (max-width:768px) {
         display: none;
       }
     }
   }
-  .button-test{
+  .button-contact{
     position: fixed;
     right: 2rem;
     top: 1.5rem;
     z-index: 10;
+    @media only screen and (max-width: 600px) {
+      display: none;
+    }
   }
   background-size: cover;
   background-repeat: no-repeat;

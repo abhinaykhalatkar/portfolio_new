@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ThemeContext } from "./Context/ThemeContext/ThemeContext";
 import { PageAnimationContext } from "./Context/PageAnimationContext/PageAnimationContext";
 import { ProgressNav, navsData } from "./Components/ProgressNav/ProgressNav";
-import { PrimeryBtn} from "./Components/Buttons/Buttons";
+import {  SecondaryBtn} from "./Components/Buttons/Buttons";
 
 function ChildApp1() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -65,12 +65,12 @@ function ChildApp1() {
           transition={{ duration: 0.3 }}
         >
           {activeIndex !== (navsData.length - 1) ? <motion.div
-            className="button-test"
+            className="button-contact"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <PrimeryBtn text="Contact" path="/contact" />
+            <SecondaryBtn text="Contact" path="/contact" />
           </motion.div>
             : null}
           <AnimatePresence mode="wait" >

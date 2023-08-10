@@ -10,7 +10,7 @@ export default function HomePage() {
 
   return (
     <motion.div
-      className="p-Home"
+      className={`p-Home ${darkTheme ? "" : "light"}`}
       initial='initial'
       animate='animate'
       exit='exit'

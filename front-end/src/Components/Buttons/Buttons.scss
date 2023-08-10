@@ -9,63 +9,75 @@
     font-size: 16px;
     font-weight: 600;
     line-height: normal;
-    margin:5px;
+    margin: 5px;
     min-height: 50px;
     min-width: 0;
     outline: none;
     padding: 16px 24px;
     text-align: center;
     text-decoration: none;
-    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    transition: all 700ms cubic-bezier(.23, 1, 0.32, 1);
     will-change: transform;
 }
+
 .primeryBtn {
     border: 2px solid $white;
     color: $white;
+    svg{
+        margin:0 6px -2px 0;
+    }
+
     &:hover {
         background-color: $white;
         color: $pitchBlack;
     }
-    
+
     &.light {
-    border: 2px solid $pitchBlack;
-    color: $pitchBlack;
-    &:hover {
-        background-color: $pitchBlack;
-        color: $white;
-    }
+        border: 2px solid $pitchBlack;
+        color: $pitchBlack;
+
+        &:hover {
+            background-color: $pitchBlack;
+            color: $white;
+        }
     }
 
 }
 
 .secondaryBtn {
-    border: 2px solid $YInMnBlue;
-    color: $YInMnBlue;
+    border: 2px solid $heighlightBlue;
+    color:  darken($heighlightBlue, 10%);
+
     &:hover {
         background-color: $YInMnBlue;
         color: $white;
     }
+
     &.light {
         border: 2px solid $blue;
         color: $blue;
+
         &:hover {
             background-color: $blue;
-            color:$gray;
+            color: $gray;
         }
     }
 
 }
 
 .DangerBtn {
-     border: 2px solid $orange;
+    border: 2px solid $orange;
     color: $orange;
+
     &:hover {
         background-color: $orange;
         color: $darkBlack;
     }
+
     &.light {
-         border: 2px solid $darkOrange;
+        border: 2px solid $darkOrange;
         color: $darkOrange;
+
         &:hover {
             background-color: $darkOrange;
             color: $pitchBlack;
@@ -73,9 +85,3 @@
     }
 
 }
-
-
-
-
-
-

@@ -10,7 +10,7 @@ export default function ContactPage() {
 
   return (
     <motion.div
-      className="p-Contact"
+      className={`p-Contact ${darkTheme ? "" : "light"}`}
       initial='initial'
       animate='animate'
       exit='exit'

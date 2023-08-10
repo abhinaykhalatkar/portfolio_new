@@ -10,7 +10,7 @@ export default function ProjectsPage() {
 
   return (
     <motion.div
-      className="p-Projects"
+      className={`p-Projects ${darkTheme ? "" : "light"}`}
       initial='initial'
       animate='animate'
       exit='exit'

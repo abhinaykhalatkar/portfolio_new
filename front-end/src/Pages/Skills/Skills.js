@@ -10,7 +10,7 @@ export default function SkillsPage() {
 
   return (
     <motion.div
-      className={`p-Skills${darkTheme ? "" : "light"}`}
+      className={`p-Skills ${darkTheme ? "" : "light"}`}
       initial='initial'
       animate='animate'
       exit='exit'
