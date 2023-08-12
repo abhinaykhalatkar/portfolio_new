@@ -1,29 +1,24 @@
 import "./Home.scss";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../../Context/ThemeContext/ThemeContext";
 import { PageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import AnimatedLogo from "../../Components/logoAnimated/AnimatedLogo";
 import BouncyText from "../../Components/Bouncy-text/BouncyText";
+import { FaChevronDown } from "react-icons/fa";
+
 export default function HomePage() {
   const { darkTheme } = useContext(ThemeContext);
-  const { pageVariants, pageTransition, contentVariants } =
-    useContext(PageAnimationContext);
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const handleResize = () => {
-      const screenWidth = window.innerWidth;
-      setIsMobile(screenWidth <= 800);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    handleResize();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const {
+    pageVariants,
+    pageTransition,
+    contentVariants,
+    screenSize,
+    setActiveIndex,
+    handleSetScrollDirection,
+  } = useContext(PageAnimationContext);
+  const navigate = useNavigate();
 
   return (
     <motion.div
@@ -44,7 +39,6 @@ export default function HomePage() {
       >
         <BouncyText
           name_class="home-heading"
-
           text="Full-Stack Software Developer"
         />
         <motion.div
@@ -61,8 +55,26 @@ export default function HomePage() {
           User-Friendly Interfaces with Mastery ,Implementing Back-End Logic for
           Robust Applications
         </motion.div>
+        {screenSize < 480 ? null : (
+          <motion.div
+            className="next-page"
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            custom={0.5}
+            variants={contentVariants}
+            onClick={() => {
+              handleSetScrollDirection(0);
+              navigate("/about");
+              setActiveIndex(1);
+            }}
+          >
+            <div>About me</div>
+            <FaChevronDown />
+          </motion.div>
+        )}
       </motion.div>
-      {isMobile ? null : <AnimatedLogo name_class="logoBack" />}
+      {screenSize < 768 ? null : <AnimatedLogo name_class="logoBack" />}
     </motion.div>
   );
 }

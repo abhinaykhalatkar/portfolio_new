@@ -6,9 +6,8 @@
     overflow: hidden;
     padding: 0 50px;
     background-color: $darkBlack;
-    background-image: linear-gradient(135deg, $pitchBlack 38%, $darkBlack ),
-        linear-gradient(315deg, $black 18%, $pitchBlack 74%);
-
+    background-image: linear-gradient(135deg, $black 38%, $darkBlack ),
+    linear-gradient(315deg, $black 18%, $pitchBlack 74%);
     &.light {
         background: #E0EAFC;
         background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);

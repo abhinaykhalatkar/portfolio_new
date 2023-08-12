@@ -14,11 +14,12 @@
 
     .logoBack {
         position: fixed;
-        top: -22vh;
-        right: -8vw;
+        top: -14vh;
+        left: 87vw;
+        transform: translateX(87vw);
         z-index: -1;
         height: 130vh;
-        transform: rotate(328deg);
+        transform: rotate(340deg);
     }
 
     .content-block {
@@ -39,6 +40,28 @@
         .heading-para {
             line-height: 1.5;
             max-width: 520px;
+            margin-bottom: 2.5rem;
+        }
+
+        .next-page{
+            padding:10px 0;
+            cursor: pointer;
+            color: $heighlightBlue;
+            display: flex;
+            div{
+                margin-right: 7px;
+            }
+            svg {
+                align-self: center;
+                transition: transform 0.3s ease;
+              }
+            
+              &:hover {
+                color: $heighlightBlue;
+                svg {
+                  transform: rotate(-90deg); 
+                }
+              }
         }
 
         @media only screen and (min-width: 480px) and (max-width:768px) {
@@ -63,6 +86,8 @@
             min-width: 310px;
             top: 20%;
             transform: translateY(-20%);
+            left: 10%;
+            transform: translateX(-10%);
 
             .home-heading {
                 color: $yellow;

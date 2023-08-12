@@ -57,6 +57,7 @@ function ChildApp1() {
     setIsSidebarOpen(!val);
   }
 
+  
   return (
     <div className={`c-app ${darkTheme ? "dark-theme" : "white-theme"}`}>
       <div className={`p-app  ${darkTheme ? "" : "b-white"}`}>

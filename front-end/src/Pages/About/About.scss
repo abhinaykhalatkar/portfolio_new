@@ -5,13 +5,94 @@
   overflow: hidden;
   padding: 0 50px;
   background-color: $darkBlack;
-  background-image: linear-gradient(135deg, $pitchBlack 38%, $darkBlack ),
+  background-image: linear-gradient(135deg, $black 38%, $darkBlack ),
     linear-gradient(315deg, $black 18%, $pitchBlack 74%);
 
   &.light {
-    background: #E0EAFC; 
+    background: #E0EAFC;
     background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);
-    background: linear-gradient(to right, #CFDEF3, #E0EAFC); 
-    
+    background: linear-gradient(to right, #CFDEF3, #E0EAFC);
+  }
+
+  .logoBack {
+    position: fixed;
+    top: -14vh;
+    left: -13vw;
+    transform: translateX(-13vw);
+    z-index: -1;
+    height: 130vh;
+    transform: rotate(340deg);
+  }
+
+  .about-content {
+    display: flex;
+    position: relative;
+    top: 25%;
+    transform: translateY(-25%);
+
+    .content-block-heading {
+      padding-left: 1rem;
+      margin-right: 1rem;
+
+      .about-heading {
+        padding-top: 1.5rem;
+        word-wrap: break-word;
+        max-width: 40%;
+        min-width: 40%;
+        font-size: 3.5rem;
+        font-weight: 500;
+        flex-wrap: wrap;
+        margin-bottom: 2.5rem; 
+      }
+
+      .heading-foot-text {
+        color: rgba(255, 255, 255, 0.74);
+      }
+    }
+    .sidePara{
+      width: 60%;
+      line-height: 1.5;
+      font-size: 1.1rem;
+      div{
+        margin-bottom: 15px;
+      }
+
+    }
+    @media only screen and (min-width: 684px) and (max-width:900px) {
+      .content-block-heading {
+        .about-heading {
+          max-width: 40%;
+          min-width: 40%;
+          font-size: 2rem;
+        }
+      }
+      .sidePara{
+        font-size: 1rem;
+        line-height: 1.3;
+      }
+
+    }
+    @media only screen and (max-width: 684px) {
+      flex-direction: column;
+      .content-block-heading {
+        padding-left: 0rem;
+        .about-heading {
+          font-size: 2rem;
+          margin-bottom: 1rem; 
+        }
+        .heading-foot-text {
+          margin-bottom: 2rem;
+        }
+      }
+      .sidePara{
+        width: 90%;
+        font-size: 1rem;
+        line-height: 1.3;
+        div{
+          
+        }
+  
+      }
+  }
   }
 }

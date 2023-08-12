@@ -1,9 +1,24 @@
-import React, { useState ,createContext} from "react";
+import React, { useState,useEffect ,createContext} from "react";
 export const PageAnimationContext = createContext();
 
 export function PageAnimationProvider(props) {
  const [scrollDirection, setScrollDirection] = useState(0);
  const [activeIndex, setActiveIndex] = useState(0);
+ const [screenSize, setScreenSize] = useState(1000);
+ useEffect(() => {
+   const handleResize = () => {
+     const screenWidth = window.innerWidth;
+     setScreenSize(screenWidth);
+   };
+
+   window.addEventListener("resize", handleResize);
+
+   handleResize();
+
+   return () => {
+     window.removeEventListener("resize", handleResize);
+   };
+ }, []);
 
  const pageVariants = {
     initial: {
@@ -64,7 +79,7 @@ export function PageAnimationProvider(props) {
   }
 
   return (
-    <PageAnimationContext.Provider value={{contentVariants2,handleSetScrollDirection,pageVariants,pageTransition,activeIndex,setActiveIndex,contentVariants}}>
+    <PageAnimationContext.Provider value={{screenSize,contentVariants2,handleSetScrollDirection,pageVariants,pageTransition,activeIndex,setActiveIndex,contentVariants}}>
         {props.children}
     </PageAnimationContext.Provider>
   );
