@@ -3,7 +3,7 @@
 .p-Home {
     height: 100vh;
     overflow: hidden;
-    padding: 0 50px;
+    padding: 0 6rem;
     background-image: linear-gradient(135deg, $darkGray 38%, $darkBlue ),
         linear-gradient(315deg, $darkBlack 10%, $black 74%);
 
@@ -11,4 +11,20 @@
         background-color: #b8c6db;
         background-image: linear-gradient(315deg, #b8c6db 0%, #faf3f3 74%)
     }
+
+    .logoBack {
+        position: fixed;
+        top: -22vh;
+        right: -8vw;
+        z-index: -1;
+        height: 130vh;
+        transform: rotate(328deg);
+    }
+
+    .home-heading{
+        font-weight: 500;
+        max-width: 670px;
+        flex-wrap: wrap;
+    }
+
 }
