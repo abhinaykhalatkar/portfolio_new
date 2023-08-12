@@ -18,6 +18,10 @@ function ChildApp1() {
   const [isScrolling, setIsScrolling] = useState(false);
   const navigate = useNavigate();
 
+  const contactBtnHandler=()=>{
+    setActiveIndex(4)
+  }
+
   const handleMouseWheel = useCallback(
     (e) => {
       if (isScrolling) return;
@@ -70,7 +74,7 @@ function ChildApp1() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <SecondaryBtn text="Contact" path="/contact" />
+            <SecondaryBtn text="Contact" path="/contact" on_Click={contactBtnHandler}/>
           </motion.div>
             : null}
           <AnimatePresence mode="wait" >

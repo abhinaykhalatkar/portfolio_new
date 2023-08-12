@@ -32,14 +32,17 @@ export function PrimeryBtn({text, path = 0,icon=null}) {
         </motion.button>
     );
 }
-export function SecondaryBtn({text, path = 0}) {
+export function SecondaryBtn({text, path = 0,on_Click=null}) {
     const { darkTheme, handleButtonClick } = useSharedFunctionality();
     return (
         <motion.button
             className={`secondaryBtn btn ${darkTheme ? "" : "light"}`}
             whileHover={{ scale: 1.05}}
             whileTap={{ scale: 0.98 }}
-            onClick={() => { handleButtonClick(path) }}
+            onClick={() => { handleButtonClick(path);
+                if(on_Click){
+                    on_Click();
+                } }}
         >
             {text}
         </motion.button>

@@ -3,7 +3,7 @@
 .p-Home {
     height: 100vh;
     overflow: hidden;
-    padding: 0 6rem;
+    padding: 0 4rem;
     background-image: linear-gradient(135deg, $darkGray 38%, $darkBlue ),
         linear-gradient(315deg, $darkBlack 10%, $black 74%);
 
@@ -21,10 +21,63 @@
         transform: rotate(328deg);
     }
 
-    .home-heading{
-        font-weight: 500;
-        max-width: 670px;
-        flex-wrap: wrap;
+    .content-block {
+        letter-spacing: 1.2px;
+        margin-left: 5rem;
+        position: relative;
+        top: 25%;
+        transform: translateY(-25%);
+        max-width: 580px;
+
+        .home-heading {
+            font-size: 3.5rem;
+            font-weight: 500;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+
+        .heading-para {
+            line-height: 1.5;
+            max-width: 520px;
+        }
+
+        @media only screen and (min-width: 480px) and (max-width:768px) {
+            min-width: 580px;
+            margin-left: 0;
+
+            .home-heading {
+                color: $yellow;
+                font-size: 2.5rem;
+                max-width: 440px;
+            }
+
+            .heading-para {
+                line-height: 1.5;
+                max-width: 410px;
+            }
+        }
+
+        @media only screen and (max-width: 480px) {
+            margin-left: 0;
+            max-width: 310px;
+            min-width: 310px;
+            top: 20%;
+            transform: translateY(-20%);
+
+            .home-heading {
+                color: $yellow;
+                font-size: 2rem;
+                max-width: 181px;
+            }
+
+            .heading-para {
+                line-height: 1.5;
+                max-width: 520px;
+            }
+        }
+    }
+    @media only screen and (max-width: 480px) {
+        padding: 0 2rem;
     }
 
 }

@@ -7,7 +7,8 @@ import AnimatedLogo from "../../Components/logoAnimated/AnimatedLogo";
 import BouncyText from "../../Components/Bouncy-text/BouncyText";
 export default function HomePage() {
   const { darkTheme } = useContext(ThemeContext);
-  const { pageVariants, pageTransition } = useContext(PageAnimationContext);
+  const { pageVariants, pageTransition, contentVariants } =
+    useContext(PageAnimationContext);
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     const handleResize = () => {
@@ -33,11 +34,34 @@ export default function HomePage() {
       variants={pageVariants}
       transition={pageTransition}
     >
-      <BouncyText
-        name_class="home-heading"
-        font_size="4rem"
-        text="Full-Stack Software Developer"
-      />
+      <motion.div
+        className="content-block"
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        custom={0.5}
+        variants={contentVariants}
+      >
+        <BouncyText
+          name_class="home-heading"
+
+          text="Full-Stack Software Developer"
+        />
+        <motion.div
+          className="heading-para"
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          custom={0.5}
+          variants={contentVariants}
+        >
+          Crafting Complete Web Solutions with Expertise, Integrating Design to
+          Create Seamless Experiences, Ensuring Data Integrity in Database
+          Management, Efficiently Developing and Maintaining APIs, Creating
+          User-Friendly Interfaces with Mastery ,Implementing Back-End Logic for
+          Robust Applications
+        </motion.div>
+      </motion.div>
       {isMobile ? null : <AnimatedLogo name_class="logoBack" />}
     </motion.div>
   );

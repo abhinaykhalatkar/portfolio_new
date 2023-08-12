@@ -253,7 +253,7 @@ export default function AnimatedLogo({ name_class }) {
         xlinkHref={darkTheme?backIMG:backIMGDay}
         transform=" matrix(2.0466 0 0 2.0466 23.867 15.534) "
 
-        clip-path="url(#custom-clip)"
+        clipPath="url(#custom-clip)"
         width="52"
         height="52"
         x="0"
