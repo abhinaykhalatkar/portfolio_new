@@ -32,13 +32,13 @@ export default function AboutPage() {
           <div className="about-heading">
             <BouncyText text="Hi, I'm Abhinay." />
             <BouncyText
-              text={`Decoding the ${screenSize < 1000 ? "" : "Digital"}`}
+              text={`Decoding the ${screenSize < 1114 ? "" : "Digital"}`}
             />
             <BouncyText
-              text={`${screenSize < 1000 ? "Digital " : ""}Symphony`}
+              text={`${screenSize < 1114 ? "Digital " : ""}Symphony`}
             />
           </div>
-          <div className="heading-foot-text">
+          <div className={`heading-foot-text ${darkTheme ? "" : "light"}`}>
             Full-Stack Jedi / JavaScript Sorcerer / API Composer and React
             Fanboy
           </div>

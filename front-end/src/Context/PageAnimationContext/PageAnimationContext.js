@@ -48,7 +48,7 @@ export function PageAnimationProvider(props) {
       opacity: 1,
       y: 0,
       transition: {
-        delay: i * 0.3 + 0.3,
+        delay: i * 0.07 ,
         ease: "easeOut",
         duration: 1,
       },
@@ -64,7 +64,7 @@ export function PageAnimationProvider(props) {
       transition: {
         delay: i * 0.3 + 0.3,
         ease: customEase, 
-        duration: 0.4,
+        duration: 0.6,
       },
     }),
   };
