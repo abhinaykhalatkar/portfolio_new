@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { PageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import "./ProgressNav.scss";
 import ScrollBtn from "./ScrollBtn";
@@ -15,7 +15,8 @@ export const navsData = [
 export function ProgressNav() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [squash, setSquash] = useState(false);
+  const [squash] = useState(false);
+  // const [squash, setSquash] = useState(false);
   const [prevIndex, setPrevIndex] = useState(
     navsData.findIndex((item) => item.Address === location.pathname)
   );
