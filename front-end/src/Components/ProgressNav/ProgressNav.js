@@ -15,8 +15,7 @@ export const navsData = [
 export function ProgressNav() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [squash] = useState(false);
-  // const [squash, setSquash] = useState(false);
+  const [squash, setSquash] = useState(false);
   const [prevIndex, setPrevIndex] = useState(
     navsData.findIndex((item) => item.Address === location.pathname)
   );
@@ -42,46 +41,44 @@ export function ProgressNav() {
       handleSetScrollDirection(prevIndex >= index ? 1 : 0);
       setPrevIndex(index);
     }
-    // setSquash(true);
-    // setTimeout(() => {
-    //   setSquash(false);
-    // }, 1000);
+    setSquash(true);
+    setTimeout(() => {
+      setSquash(false);
+    }, 1000);
   };
 
   return (
     <div>
-   
-        <div className="navigation-progress">
+      <div className="navigation-progress">
+        {navsData.map((el, ind) => {
+          return (
+            <span
+              key={`sideNav ${ind}`}
+              className={`NavLink ${
+                location.pathname === el.Address ? "NavActive" : ""
+              }`}
+              address={el.Address}
+              onClick={handleSquash}
+              ref={location.pathname === el.Address ? activeNavLinkRef : null}
+            >
+              {el.Name}
+            </span>
+          );
+        })}
 
-          {navsData.map((el, ind) => {
-            return (
-              <span
-                key={`sideNav ${ind}`}
-                className={`NavLink ${location.pathname === el.Address ? "NavActive" : ""
-                  }`}
-                address={el.Address}
-                onClick={handleSquash}
-                ref={location.pathname === el.Address ? activeNavLinkRef : null}
-              >
-                {el.Name}
-              </span>
-            );
-          })}
-
-          <motion.div
-            className={`lavalamp ${squash ? "squash" : ""}`}
-            animate={{
-              x:
-                navsData.findIndex((el) => el.Address === location.pathname) *
+        <motion.div
+          className={`lavalamp ${squash ? "squash" : ""}`}
+          animate={{
+            x:
+              navsData.findIndex((el) => el.Address === location.pathname) *
                 activeLinkWidth -
-                activeLinkWidth * 2,
-              width: activeLinkWidth,
-            }}
-            transition={{ ease: "easeOut", duration: 0.3 }}
-          />
-        </div>
-        <ScrollBtn />
-    
+              activeLinkWidth * 2,
+            width: activeLinkWidth,
+          }}
+          transition={{ ease: "easeOut", duration: 0.3 }}
+        />
+      </div>
+      <ScrollBtn />
     </div>
   );
 }

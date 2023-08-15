@@ -43,25 +43,30 @@
             margin-bottom: 2.5rem;
         }
 
-        .next-page{
-            padding:10px 0;
+        .next-page {
+            padding: 10px 0;
             cursor: pointer;
-            color: $heighlightBlue;
+            color: darken($heighlightBlue, 20%);
+            transition: color 0.3s ease;
+
             display: flex;
-            div{
+
+            div {
                 margin-right: 7px;
             }
+
             svg {
                 align-self: center;
                 transition: transform 0.3s ease;
-              }
-            
-              &:hover {
+            }
+
+            &:hover {
                 color: $heighlightBlue;
+
                 svg {
-                  transform: rotate(-90deg); 
+                    transform: rotate(-90deg);
                 }
-              }
+            }
         }
 
         @media only screen and (min-width: 480px) and (max-width:768px) {
@@ -101,6 +106,7 @@
             }
         }
     }
+
     @media only screen and (max-width: 480px) {
         padding: 0 2rem;
     }

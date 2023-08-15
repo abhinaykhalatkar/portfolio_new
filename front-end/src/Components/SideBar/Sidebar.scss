@@ -46,16 +46,19 @@
       .sidebar.open {
         transform: translateX(0);
       }
+      .Nav{
+        padding-left:20px;
+      }
+
       
       .NavMenu {
         display: flex;
         flex-direction: column;
         gap: 20px;
-        padding: 20px;
+        margin-bottom: 20px;
       }
       
       .NavLink {
-        
         text-decoration: none;
         font-size: 18px;
         padding: 8px;

@@ -1,0 +1,85 @@
+@import '../../../Styles/variables';
+
+.p-Project-home {
+    min-width: 70vw;
+    height: 100vh;
+    overflow: hidden;
+    padding: 0 50px;
+    background-color: $darkBlack;
+    background-image: linear-gradient(135deg, $black 38%, $darkBlack ),
+        linear-gradient(315deg, $black 18%, $pitchBlack 74%);
+
+    &.light {
+        background: #E0EAFC;
+        background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);
+        background: linear-gradient(to right, #CFDEF3, #E0EAFC);
+    }
+
+    .project-page-content {
+        display: flex;
+        flex-direction: column;
+        max-height: 80vh;
+        text-align: center;
+        position: relative;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -60%);
+
+        .heading {
+            flex-wrap: wrap;
+            max-width: 560px;
+            min-width: 560px;
+            margin-bottom: 2rem;
+            font-size: 3.5rem;
+            align-self: center;
+            font-weight: 500;
+            justify-content: center;
+        }
+
+        .para-content {
+            align-self: center;
+            min-width: 70vw;
+            max-width: 60vw;
+            margin-bottom: 3rem;
+            .gitLink,.contactLink{
+                text-decoration: none;
+                color: $orange;
+                transition: color 0.3s ease;
+                &:hover{
+                    color: $blue;
+                }
+            }
+
+
+        }
+
+        .catalogue-link {
+            align-self: center;
+            text-decoration: none;
+
+            &>div {
+                display: flex;
+                color: darken($heighlightBlue,20% );
+                transition: color 0.3s ease;
+
+
+                div {
+                    margin-right: 7px;
+                }
+
+                svg {
+                    align-self: center;
+                    transition: transform 0.3s ease;
+                }
+
+                &:hover {
+                    color: darken($heighlightBlue,0% );
+                    svg {
+                        transform: rotate(90deg);
+                    }
+                }
+            }
+        }
+    }
+
+}

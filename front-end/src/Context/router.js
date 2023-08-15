@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import HomePage from "../Pages/Home/Home";
 import AboutPage from "../Pages/About/About";
 import SkillsPage from "../Pages/Skills/Skills";
-import ProjectsPage from "../Pages/Projects/Projects";
+import RenderProjectsRoutes from "../Pages/Projects/project-router";
 import ContactPage from "../Pages/Contact/Contact";
 import NotFound404 from "../Pages/NotFound404/NotFound404";
 
@@ -22,8 +22,8 @@ const RenderRoutes = () => {
       element: <SkillsPage />,
     },
     {
-      path: "/projects",
-      element: <ProjectsPage />,
+      path: "/projects/*",
+      element: <RenderProjectsRoutes />,
     },
     {
       path: "/contact",
@@ -36,7 +36,7 @@ const RenderRoutes = () => {
   ];
 
   return (
-    <Routes>
+    <Routes >
       {routesData.map((el, ind) => {
         return (
           <Route
