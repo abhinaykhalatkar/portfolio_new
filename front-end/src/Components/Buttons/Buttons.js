@@ -4,60 +4,66 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ThemeContext } from "../../Context/ThemeContext/ThemeContext";
 
-
 function useSharedFunctionality() {
-    const { darkTheme } = useContext(ThemeContext);
-    const navigate = useNavigate();
+  const { darkTheme } = useContext(ThemeContext);
+  const navigate = useNavigate();
 
-    const handleButtonClick = (path) => {
-        if (path) {
-            navigate(path)
+  const handleButtonClick = (path) => {
+    if (path) {
+      navigate(path);
+    }
+  };
+  return {
+    darkTheme,
+    handleButtonClick,
+  };
+}
+export function PrimeryBtn({ text, path = 0, icon = null }) {
+  const { darkTheme, handleButtonClick } = useSharedFunctionality();
+  return (
+    <motion.button
+      className={`primeryBtn btn ${darkTheme ? "" : "light"}`}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.98 }}
+      onClick={() => {
+        handleButtonClick(path);
+      }}
+    >
+      {icon}
+      {text}
+    </motion.button>
+  );
+}
+export function SecondaryBtn({ text, path = 0, on_Click = null }) {
+  const { darkTheme, handleButtonClick } = useSharedFunctionality();
+  return (
+    <motion.button
+      className={`secondaryBtn btn ${darkTheme ? "" : "light"}`}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.98 }}
+      onClick={() => {
+        handleButtonClick(path);
+        if (on_Click) {
+          on_Click();
         }
-    };
-    return {
-        darkTheme,
-        handleButtonClick,
-    };
+      }}
+    >
+      {text}
+    </motion.button>
+  );
 }
-export function PrimeryBtn({text, path = 0,icon=null}) {
-    const { darkTheme, handleButtonClick } = useSharedFunctionality();
-    return (
-        <motion.button
-            className={`primeryBtn btn ${darkTheme ? "" : "light"}`}
-            whileHover={{ scale: 1.05}}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => { handleButtonClick(path) }}
-        >
-            {icon}{text}
-        </motion.button>
-    );
-}
-export function SecondaryBtn({text, path = 0,on_Click=null}) {
-    const { darkTheme, handleButtonClick } = useSharedFunctionality();
-    return (
-        <motion.button
-            className={`secondaryBtn btn ${darkTheme ? "" : "light"}`}
-            whileHover={{ scale: 1.05}}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => { handleButtonClick(path);
-                if(on_Click){
-                    on_Click();
-                } }}
-        >
-            {text}
-        </motion.button>
-    );
-}
-export function DangerBtn({text, path = 0}) {
-    const { darkTheme, handleButtonClick } = useSharedFunctionality();
-    return (
-        <motion.button
-            className={`DangerBtn btn ${darkTheme ? "" : "light"}`}
-            whileHover={{ scale: 1.05}}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => { handleButtonClick(path) }}
-        >
-            {text}
-        </motion.button>
-    );
+export function DangerBtn({ text, path = 0 }) {
+  const { darkTheme, handleButtonClick } = useSharedFunctionality();
+  return (
+    <motion.button
+      className={`DangerBtn btn ${darkTheme ? "" : "light"}`}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.98 }}
+      onClick={() => {
+        handleButtonClick(path);
+      }}
+    >
+      {text}
+    </motion.button>
+  );
 }

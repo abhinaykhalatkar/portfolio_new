@@ -243,23 +243,33 @@ export default function AnimatedLogo({ name_class }) {
         </clipPath>
         <filter id="darken-filter">
           <feComponentTransfer in="SourceGraphic">
-            <feFuncR type="linear" slope={darkTheme?"0.21":"0.6"} intercept={darkTheme?"0.01":"0.4" }/>
-            <feFuncG type="linear" slope={darkTheme?"0.21":"0.6"} intercept={darkTheme?"0.01":"0.4" }/>
-            <feFuncB type="linear" slope={darkTheme?"0.21":"0.6"} intercept={darkTheme?"0.01":"0.4" } />
+            <feFuncR
+              type="linear"
+              slope={darkTheme ? "0.21" : "0.6"}
+              intercept={darkTheme ? "0.01" : "0.4"}
+            />
+            <feFuncG
+              type="linear"
+              slope={darkTheme ? "0.21" : "0.6"}
+              intercept={darkTheme ? "0.01" : "0.4"}
+            />
+            <feFuncB
+              type="linear"
+              slope={darkTheme ? "0.21" : "0.6"}
+              intercept={darkTheme ? "0.01" : "0.4"}
+            />
           </feComponentTransfer>
         </filter>
       </defs>
       <image
-        xlinkHref={darkTheme?backIMG:backIMGDay}
+        xlinkHref={darkTheme ? backIMG : backIMGDay}
         transform=" matrix(2.0466 0 0 2.0466 23.867 15.534) "
-
         clipPath="url(#custom-clip)"
         width="52"
         height="52"
         x="0"
         y="0"
-         filter="url(#darken-filter)"
-
+        filter="url(#darken-filter)"
       />
 
       <g

@@ -9,7 +9,7 @@
     // background-image: linear-gradient(135deg, $black 38%, $darkBlack ),
     //     linear-gradient(315deg, $black 18%, $pitchBlack 74%);
     background-image: linear-gradient(135deg, $darkGray 38%, $darkBlue ),
-    linear-gradient(315deg, $darkBlack 10%, $black 74%);
+        linear-gradient(315deg, $darkBlack 10%, $black 74%);
 
     &.light {
         background: #E0EAFC;
@@ -43,11 +43,14 @@
             min-width: 70vw;
             max-width: 60vw;
             margin-bottom: 3rem;
-            .gitLink,.contactLink{
+
+            .gitLink,
+            .contactLink {
                 text-decoration: none;
                 color: $orange;
                 transition: color 0.3s ease;
-                &:hover{
+
+                &:hover {
                     color: $blue;
                 }
             }
@@ -61,7 +64,7 @@
 
             &>div {
                 display: flex;
-                color: darken($heighlightBlue,20% );
+                color: darken($heighlightBlue, 20%);
                 transition: color 0.3s ease;
 
 
@@ -75,39 +78,43 @@
                 }
 
                 &:hover {
-                    color: darken($heighlightBlue,0% );
+                    color: darken($heighlightBlue, 0%);
+
                     svg {
                         transform: rotate(90deg);
                     }
                 }
             }
         }
+
         @media only screen and (min-width: 480px) and (max-width:768px) {
 
-        .heading {
-            max-width: 420px;
-            min-width: 420px;
-            font-size: 2.5rem;
-        }
-
-        .para-content {
-            min-width: 70vw;
-            max-width: 60vw;
-        }
-        }
-        @media only screen and (max-width: 480px) {
-            min-width: 340px;
             .heading {
-                max-width: 315px;
-                min-width: 315px;
-                font-size: 2rem;
+                max-width: 420px;
+                min-width: 420px;
+                font-size: 2.5rem;
             }
-    
+
             .para-content {
                 min-width: 70vw;
                 max-width: 60vw;
             }
         }
-    } 
+
+        @media only screen and (max-width: 480px) {
+            min-width: 340px;
+
+            .heading {
+                max-width: 315px;
+                min-width: 315px;
+                font-size: 2rem;
+            }
+
+            .para-content {
+                min-width: 70vw;
+                max-width: 60vw;
+            }
+        }
+    }
 
 }

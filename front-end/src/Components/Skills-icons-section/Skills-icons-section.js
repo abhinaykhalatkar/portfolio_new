@@ -45,11 +45,11 @@ export default function SkillIconSection() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            custom={ind*0.2}
+            custom={ind * 0.2}
             variants={contentVariants}
             key={ind}
           >
-            <img  className="icons" src={el.icon} alt="github" />
+            <img className="icons" src={el.icon} alt="github" />
             <p>{el.title}</p>
           </motion.div>
         );

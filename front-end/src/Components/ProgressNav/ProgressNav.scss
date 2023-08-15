@@ -1,13 +1,15 @@
 @import '../../Styles/variables';
-.progressSideIcon{
+
+.progressSideIcon {
   position: fixed;
   bottom: 5%;
-  left:5%;
-  height:30px;
+  left: 5%;
+  height: 30px;
   width: auto;
 }
+
 .navigation-progress {
-  .progressBarClose{
+  .progressBarClose {
     height: 30px;
     width: auto;
     color: darken($YInMnBlue, 0%);
@@ -15,38 +17,40 @@
     transition: color 0.2s ease, transform 0.2s ease;
 
     &:hover {
-        color: darken($heighlightBlue, 20%);
-        transform: scale(1.3); 
-      }
+      color: darken($heighlightBlue, 20%);
+      transform: scale(1.3);
+    }
   }
 
   z-index: 0;
-    // position: fixed;
-    // left: 50%;
-    // bottom: 5%;
-    // transform: translateX(-50%);
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    overflow: hidden;  
-    text-align: center;
-    justify-content: center;
-    border-bottom: 4px solid $YInMnBlue; 
-    border-radius: 2px;
-    max-width: 450px;
-    @media only screen and (min-width:768px) and (max-width:900px) {
-      max-width: 300px;
-      transform: translateX(-50%);
-    }
-    
-    @media only screen and (min-width: 480px) and (max-width:768px) {
-      max-width: 200px;
-      transform: translateX(-80%);
-    }
-    @media only screen and (max-width: 480px) {
-      display: none;
-    }
-  
+  // position: fixed;
+  // left: 50%;
+  // bottom: 5%;
+  // transform: translateX(-50%);
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  text-align: center;
+  justify-content: center;
+  border-bottom: 4px solid $YInMnBlue;
+  border-radius: 2px;
+  max-width: 450px;
+
+  @media only screen and (min-width:768px) and (max-width:900px) {
+    max-width: 300px;
+    transform: translateX(-50%);
+  }
+
+  @media only screen and (min-width: 480px) and (max-width:768px) {
+    max-width: 200px;
+    transform: translateX(-80%);
+  }
+
+  @media only screen and (max-width: 480px) {
+    display: none;
+  }
+
   .NavLink {
     cursor: pointer;
     width: 100px;
@@ -58,22 +62,24 @@
     transition: color 0.2s ease, transform 0.2s ease;
 
     &:hover {
-        color: darken($heighlightBlue, 20%);
-        transform: scale(1.1 ); 
-      }
-  }
-  .NavActive{
-    color: darken($heighlightBlue,5% );
-    transform: scale(1.1 ); 
-    transition: color 0.3s ease, transform 0.2s ease;
-    &:hover {
-      color: darken($heighlightBlue,5% );
-      transform: scale(1.1 );  
+      color: darken($heighlightBlue, 20%);
+      transform: scale(1.1);
     }
   }
-  
+
+  .NavActive {
+    color: darken($heighlightBlue, 5%);
+    transform: scale(1.1);
+    transition: color 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+      color: darken($heighlightBlue, 5%);
+      transform: scale(1.1);
+    }
+  }
+
   .lavalamp {
-    width: 20%; 
+    width: 20%;
     margin: 8px 10px;
     height: 5px;
     background-color: $gray;
@@ -81,16 +87,17 @@
     bottom: 0;
     transition: all 0.3s ease;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 50%; 
+    border-radius: 50%;
   }
-  
+
   .lavalamp.squash {
-    transform: scaleX(2); 
-    border-radius: 50% / 50%; 
+    transform: scaleX(2);
+    border-radius: 50% / 50%;
   }
-  
+
 }
-.c-ScrollBtn{
+
+.c-ScrollBtn {
   cursor: pointer;
   position: fixed;
   right: 1.5rem;
@@ -98,36 +105,45 @@
   bottom: 5%;
   transform: translateX(-50%);
   background-color: transparent;
-  color:$darkGray;
+  color: $darkGray;
   transition: right 0.3s ease, color 0.3s ease, transform 0.2s ease;
-  div{display: flex;}
+
+  div {
+    display: flex;
+  }
+
   svg {
     align-self: center;
     margin: 0 4px;
     transition: margin 0.3s ease;
   }
-  &.night{
-    color:darken($gray,15% );
-    &:hover{
-      color:darken($heighlightBlue,0% )
+
+  &.night {
+    color: darken($gray, 15%);
+
+    &:hover {
+      color: darken($heighlightBlue, 0%)
     }
   }
-  &:hover{
-    svg{
+
+  &:hover {
+    svg {
       margin: 0 10px;
     }
+
     right: 1rem;
-    color:darken($darkGray,10% );
+    color:darken($darkGray, 10%);
     transform: translateX(-50%) scale(1.01);
     transform-origin: center;
   }
-      
+
   @media only screen and (min-width: 480px) and (max-width:768px) {
     right: 0.5rem;
   }
+
   @media only screen and (max-width: 480px) {
     right: auto;
     left: 50%;
-    transform: translateX(-50%); 
+    transform: translateX(-50%);
   }
 }

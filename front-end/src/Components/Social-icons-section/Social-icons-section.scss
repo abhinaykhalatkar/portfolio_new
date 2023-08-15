@@ -10,7 +10,7 @@
 
         .exit-heading-contact {
             display: flex;
-            
+
             align-self: center;
             font-size: 2rem;
         }
@@ -163,20 +163,23 @@
     ul li a:hover:nth-child(4) {
         color: #25d366;
     }
+
     @media only screen and (min-width: 480px) and (max-width:1000px) {
         margin-top: 2rem;
     }
+
     @media only screen and (max-width: 480px) {
         margin-top: 2rem;
 
-        .contact-container-Out{
-            & > ul{
+        .contact-container-Out {
+            &>ul {
                 flex-wrap: wrap;
                 gap: 10px;
-             li{
-                text-align: -webkit-center;
-                flex-basis: calc(50% - 10px);
-             }
+
+                li {
+                    text-align: -webkit-center;
+                    flex-basis: calc(50% - 10px);
+                }
             }
         }
     }

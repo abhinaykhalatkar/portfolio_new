@@ -7,7 +7,7 @@ export function PageAnimationProvider(props) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [screenSize, setScreenSize] = useState(1000);
   const [isProgressBarOpen, setIsProgressBarOpen] = useState(true);
-  const [isOnMainPage,setIsOnMainPage]=useState(false)
+  const [isOnMainPage, setIsOnMainPage] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -75,13 +75,12 @@ export function PageAnimationProvider(props) {
       opacity: 1,
       y: 0,
       transition: {
-        delay:( i * 0.3) + 0.3,
+        delay: i * 0.3 + 0.3,
         ease: customEase,
         duration: 1,
       },
     }),
   };
-
 
   const contentVariants2 = {
     hidden: { opacity: 0, x: "20%" },
@@ -89,7 +88,7 @@ export function PageAnimationProvider(props) {
       opacity: 1,
       x: 0,
       transition: {
-        delay: (i * 0.3) + 0.3,
+        delay: i * 0.3 + 0.3,
         ease: customEase,
         duration: 0.6,
       },
@@ -122,7 +121,7 @@ export function PageAnimationProvider(props) {
         isProgressBarOpen,
         setIsProgressBarOpen,
         setIsOnMainPage,
-        isOnMainPage
+        isOnMainPage,
       }}
     >
       {props.children}

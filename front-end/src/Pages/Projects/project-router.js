@@ -6,7 +6,7 @@ import NotFound404 from "../NotFound404/NotFound404";
 export const projectsRoutesData = [
   {
     path: "/",
-    element: <ProjectsHome/>,
+    element: <ProjectsHome />,
   },
   {
     path: "/project-catalogue",
@@ -15,14 +15,12 @@ export const projectsRoutesData = [
   {
     path: "/*",
     element: <NotFound404 />,
-  }
+  },
 ];
 
-export default function RenderProjectsRoutes  () {
-
-
+export default function RenderProjectsRoutes() {
   return (
-    <Routes >
+    <Routes>
       {projectsRoutesData.map((el, ind) => {
         return (
           <Route
@@ -34,6 +32,4 @@ export default function RenderProjectsRoutes  () {
       })}
     </Routes>
   );
-};
-
-
+}

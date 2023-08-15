@@ -8,7 +8,8 @@ import SocialIconsSection from "../../Components/Social-icons-section/Social-ico
 
 export default function ContactPage() {
   const { darkTheme } = useContext(ThemeContext);
-  const { pageVariants, pageTransition ,contentVariants} = useContext(PageAnimationContext);
+  const { pageVariants, pageTransition, contentVariants } =
+    useContext(PageAnimationContext);
 
   return (
     <motion.div
@@ -22,12 +23,14 @@ export default function ContactPage() {
       <div className="contact-container-Out">
         <BouncyText name_class="contact-heading" text={"Contact"} />
         <div className="contact-container">
-          <motion.div className="contact-content" initial="hidden"
-              animate="visible"
-              exit="exit"
-              custom={1}
-              variants={contentVariants}
-              >
+          <motion.div
+            className="contact-content"
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            custom={1}
+            variants={contentVariants}
+          >
             Got questions or a project idea? With a software developer at your
             fingertips, I'm here to assist. Let's connect and explore
             possibilities. contact at

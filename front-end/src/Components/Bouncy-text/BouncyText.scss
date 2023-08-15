@@ -4,18 +4,21 @@
     display: flex;
     align-items: center;
     color: $white;
+
     &.light {
         color: $pitchBlack;
     }
 
     .bouncyLetter {
         cursor: default;
+
         &:hover {
             color: $orange;
             animation: animate 0.65s ease-in-out;
         }
 
         @keyframes animate {
+
             0%,
             100% {
                 transform: translateY(0) scale(1, 1) rotate(0deg);

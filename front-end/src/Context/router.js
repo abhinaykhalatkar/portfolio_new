@@ -44,10 +44,7 @@ const RenderRoutes = () => {
     ],
     []
   );
-  const {
-    setIsOnMainPage,
-    isOnMainPage,
-  } = useContext(PageAnimationContext);
+  const { setIsOnMainPage, isOnMainPage } = useContext(PageAnimationContext);
 
   useEffect(() => {
     let curVal = false;
@@ -65,7 +62,8 @@ const RenderRoutes = () => {
           return (
             <Route key={`route${ind}`} path={el.path} element={el.element} />
           );
-        } return null
+        }
+        return null;
       })}
     </Routes>
   );

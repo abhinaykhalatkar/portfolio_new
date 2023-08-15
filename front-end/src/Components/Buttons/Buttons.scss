@@ -23,8 +23,9 @@
 .primeryBtn {
     border: 2px solid $white;
     color: $white;
-    svg{
-        margin:0 6px -2px 0;
+
+    svg {
+        margin: 0 6px -2px 0;
     }
 
     &:hover {
@@ -46,7 +47,7 @@
 
 .secondaryBtn {
     border: 2px solid $heighlightBlue;
-    color:  darken($heighlightBlue, 10%);
+    color: darken($heighlightBlue, 10%);
 
     &:hover {
         background-color: $YInMnBlue;

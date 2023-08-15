@@ -1,24 +1,36 @@
 .fade-in-out {
-    animation: fadeInOut 4s ease-in-out infinite; 
+  animation: fadeInOut 4s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+
+  100%,
+  0% {
+    opacity: 1;
   }
-  
-  @keyframes fadeInOut {
-    100%,0%{
-      opacity: 1;
-    }
-    90%,10%{
-      opacity: 0.8;
-    }
-    80%,20% {
-      opacity: 0.6;
-    }
-    70%,30% {
-      opacity: 0.4;
-    }
-    60%,40% {
-      opacity: 0.2;
-    }
-    50%,50%{
-      opacity: 0.1;
-    }
+
+  90%,
+  10% {
+    opacity: 0.8;
   }
+
+  80%,
+  20% {
+    opacity: 0.6;
+  }
+
+  70%,
+  30% {
+    opacity: 0.4;
+  }
+
+  60%,
+  40% {
+    opacity: 0.2;
+  }
+
+  50%,
+  50% {
+    opacity: 0.1;
+  }
+}

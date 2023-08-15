@@ -19,8 +19,8 @@ export default function ProjectsHome() {
   } = useContext(PageAnimationContext);
 
   useEffect(() => {
-    setHorizontalScrollDirection(2)
-  },[setHorizontalScrollDirection])
+    setHorizontalScrollDirection(2);
+  }, [setHorizontalScrollDirection]);
   return (
     <motion.div
       className={`p-Project-home ${darkTheme ? "" : "light"}`}
@@ -63,7 +63,11 @@ export default function ProjectsHome() {
           </Link>
         </motion.div>
         <NavLink to="project-catalogue" className="catalogue-link">
-          <div onClick={()=>{setHorizontalScrollDirection(0)}}>
+          <div
+            onClick={() => {
+              setHorizontalScrollDirection(0);
+            }}
+          >
             <div>Projects catalogue </div>
             <AiOutlineRight />
           </div>
