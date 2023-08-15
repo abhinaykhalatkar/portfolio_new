@@ -41,7 +41,7 @@ export default function ProjectsHome() {
           initial="hidden"
           animate="visible"
           exit="exit"
-          custom={1.5}
+          custom={0.5}
           variants={contentVariants}
         >
           I've worked on various projects, both within professional settings and

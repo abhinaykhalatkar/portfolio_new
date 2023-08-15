@@ -68,19 +68,20 @@ export function PageAnimationProvider(props) {
       },
     },
   };
+  const customEase = [0.4, 0.0, 0.2, 1];
   const contentVariants = {
     hidden: { opacity: 0, y: 10 },
     visible: (i) => ({
       opacity: 1,
       y: 0,
       transition: {
-        delay: i * 0.07,
-        ease: "easeOut",
+        delay:( i * 0.3) + 0.3,
+        ease: customEase,
         duration: 1,
       },
     }),
   };
-  const customEase = [0.4, 0.0, 0.2, 1];
+
 
   const contentVariants2 = {
     hidden: { opacity: 0, x: "20%" },
@@ -88,7 +89,7 @@ export function PageAnimationProvider(props) {
       opacity: 1,
       x: 0,
       transition: {
-        delay: i * 0.3 + 0.3,
+        delay: (i * 0.3) + 0.3,
         ease: customEase,
         duration: 0.6,
       },

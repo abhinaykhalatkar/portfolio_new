@@ -4,7 +4,7 @@ import githubDay from "./Assets/github-icon/github-day.svg";
 import githubNight from "./Assets/github-icon/github-night.svg";
 import RenderRoutes from "./Context/router";
 import SideBar from "./Components/SideBar/SideBar";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,useLocation} from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeContext } from "./Context/ThemeContext/ThemeContext";
 import { PageAnimationContext } from "./Context/PageAnimationContext/PageAnimationContext";
@@ -20,6 +20,7 @@ function ChildApp1() {
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
   const navigate = useNavigate();
+  const location=useLocation();
 
   const contactBtnHandler = () => {
     setActiveIndex(4);
@@ -120,7 +121,7 @@ function ChildApp1() {
               <RenderRoutes />
             </div>
           </AnimatePresence>
-          {activeIndex!==3 && (
+          {(activeIndex!==3 && location.pathname!=="/projects/project-catalogue") && (
             <a
               className="gitIcon"
               href="https://github.com/abhinaykhalatkar"

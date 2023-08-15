@@ -26,7 +26,7 @@ export default function SkillsPage() {
           initial="hidden"
           animate="visible"
           exit="exit"
-          custom={2}
+          custom={0.1}
           variants={contentVariants}
         >
           Transforming Challenges into Pathways for Achievement
@@ -36,7 +36,7 @@ export default function SkillsPage() {
           initial="hidden"
           animate="visible"
           exit="exit"
-          custom={4}
+          custom={0.2}
           variants={contentVariants}
         >
           <BouncyText text="Skills & Experience" />
@@ -46,7 +46,7 @@ export default function SkillsPage() {
           initial="hidden"
           animate="visible"
           exit="exit"
-          custom={6}
+          custom={0.3}
           variants={contentVariants}
         >
           My primary domain of expertise lies in front-end development, the
@@ -57,7 +57,7 @@ export default function SkillsPage() {
           initial="hidden"
           animate="visible"
           exit="exit"
-          custom={8}
+          custom={0.4}
           variants={contentVariants}
         >
           Proficient in HTML, CSS, and JS, I specialize in crafting compact to
@@ -72,7 +72,7 @@ export default function SkillsPage() {
           initial="hidden"
           animate="visible"
           exit="exit"
-          custom={10}
+          custom={3}
           variants={contentVariants}
         >
           Feel free to explore my LinkedIn for a more comprehensive overview of

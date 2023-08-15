@@ -5,9 +5,11 @@
   min-width: 362px;
   overflow: hidden;
   padding: 0 50px;
-  background-color: $darkBlack;
-  background-image: linear-gradient(135deg, $black 38%, $darkBlack ),
-    linear-gradient(315deg, $black 18%, $pitchBlack 74%);
+  // background-color: $darkBlack;
+  // background-image: linear-gradient(135deg, $black 38%, $darkBlack ),
+  //   linear-gradient(315deg, $black 18%, $pitchBlack 74%);
+  background-image: linear-gradient(135deg, $darkGray 38%, $darkBlue ),
+    linear-gradient(315deg, $darkBlack 10%, $black 74%);
 
   &.light {
     background: #E0EAFC;
@@ -43,85 +45,102 @@
         font-size: 3.5rem;
         font-weight: 500;
         flex-wrap: wrap;
-        margin-bottom: 2.5rem; 
+        margin-bottom: 2.5rem;
       }
 
       .heading-foot-text {
         color: rgba(255, 255, 255, 0.74);
-        &.light{
+
+        &.light {
           color: rgba(31, 30, 30, 0.74);
         }
       }
     }
-    .sidePara{
+
+    .sidePara {
       width: 60%;
       line-height: 1.5;
       font-size: 1.1rem;
-      div{
+
+      div {
         margin-bottom: 1.5rem;
 
       }
 
     }
+
     @media only screen and (min-width: 1000px) and (max-width:1300px) {
       .content-block-heading {
         margin-right: 2rem;
+
         .about-heading {
           max-width: 40vw;
           min-width: 40vw;
           font-size: 2rem;
         }
       }
-      .sidePara{
+
+      .sidePara {
         font-size: 1rem;
         line-height: 1.3;
       }
 
     }
+
     @media only screen and (min-width: 684px) and (max-width:1000px) {
       .content-block-heading {
         margin-right: 1rem;
+
         .about-heading {
           font-size: 2rem;
           min-width: 40%;
         }
       }
-      .sidePara{
+
+      .sidePara {
         font-size: 0.9rem;
         line-height: 1.2;
       }
 
     }
+
     @media only screen and (max-width: 684px) {
       flex-direction: column;
+
       .content-block-heading {
         padding-left: 0rem;
+
         .about-heading {
           min-width: 40%;
           font-size: 2rem;
-          margin-bottom: 1rem; 
+          margin-bottom: 1rem;
         }
+
         .heading-foot-text {
           margin-bottom: 2rem;
         }
       }
-      .sidePara{
+
+      .sidePara {
         width: 90%;
         font-size: 1rem;
         line-height: 1.3;
-        div{
+
+        div {
           &:nth-child(1) {
             color: $yellow;
           }
+
           &:nth-child(2) {
             color: $darkOrange;
           }
+
           &:nth-child(3) {
             color: $heighlightBlue;
           }
         }
-  
+
       }
-  }
+    }
   }
 }

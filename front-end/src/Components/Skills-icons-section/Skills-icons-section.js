@@ -45,7 +45,7 @@ export default function SkillIconSection() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            custom={ind}
+            custom={ind*0.2}
             variants={contentVariants}
             key={ind}
           >

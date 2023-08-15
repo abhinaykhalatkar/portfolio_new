@@ -1,0 +1,183 @@
+@import '../../Styles/variables';
+
+.contact-btn-section {
+    display: flex;
+    flex-direction: column;
+
+    .exit-heading-contact-div {
+        align-self: center;
+        margin-top: 3rem;
+
+        .exit-heading-contact {
+            display: flex;
+            
+            align-self: center;
+            font-size: 2rem;
+        }
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    ul li {
+        list-style: none;
+    }
+
+    ul li a {
+        display: flex;
+        position: relative;
+        width: 70px;
+        height: 70px;
+        line-height: 100px;
+        font-size: 40px;
+        text-align: center;
+        text-decoration: none;
+        color: $white;
+        margin: 0 30px;
+        transition: .5s;
+
+        &.light {
+            color: $pitchBlack ;
+        }
+
+        .fa {
+            align-self: center;
+            margin: auto;
+        }
+    }
+
+    ul li a span {
+        position: absolute;
+        transition: transform .5s;
+    }
+
+    ul li a span:nth-child(1),
+    ul li a span:nth-child(3) {
+        width: 100%;
+        height: 3px;
+        background: $gray;
+    }
+
+    ul li a span:nth-child(1) {
+        top: 0;
+        left: 0;
+        transform-origin: right;
+    }
+
+    ul li a:hover span:nth-child(1) {
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform .5s;
+    }
+
+    ul li a span:nth-child(3) {
+        bottom: 0;
+        left: 0;
+        transform-origin: left;
+    }
+
+    ul li a:hover span:nth-child(3) {
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform .5s;
+    }
+
+    ul li a span:nth-child(2),
+    ul li a span:nth-child(4) {
+        width: 3px;
+        height: 100%;
+        background: $gray;
+
+    }
+
+    ul li a span:nth-child(2) {
+        top: 0;
+        left: 0;
+        transform: scale(0);
+        transform-origin: bottom;
+    }
+
+    ul li a:hover span:nth-child(2) {
+        transform: scale(1);
+        transform-origin: top;
+        transition: transform .5s;
+    }
+
+    ul li a span:nth-child(4) {
+        top: 0;
+        right: 0;
+        transform: scale(0);
+        transform-origin: top;
+    }
+
+    ul li a:hover span:nth-child(4) {
+        transform: scale(1);
+        transform-origin: bottom;
+        transition: transform .5s;
+    }
+
+    .Git:hover {
+        color: $gray;
+    }
+
+    .Git:hover span {
+        background: $gray;
+    }
+
+    .LinkedIn:hover {
+        color: #1da1f2;
+    }
+
+    .LinkedIn:hover span {
+        background: #1da1f2;
+    }
+
+    .Instagram:hover {
+        color: #c32aa3;
+    }
+
+    .Instagram:hover span {
+        background: #c32aa3;
+    }
+
+    .Whatsapp:hover {
+        color: #25d366;
+    }
+
+    .Whatsapp:hover span {
+        background: #25d366;
+    }
+
+    ul li a .LinkedIn {
+        color: #1da1f2;
+    }
+
+    ul li a:hover:nth-child(3) {
+        color: #c32aa3;
+    }
+
+    ul li a:hover:nth-child(4) {
+        color: #25d366;
+    }
+    @media only screen and (min-width: 480px) and (max-width:1000px) {
+        margin-top: 2rem;
+    }
+    @media only screen and (max-width: 480px) {
+        margin-top: 2rem;
+
+        .contact-container-Out{
+            & > ul{
+                flex-wrap: wrap;
+                gap: 10px;
+             li{
+                text-align: -webkit-center;
+                flex-basis: calc(50% - 10px);
+             }
+            }
+        }
+    }
+}

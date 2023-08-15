@@ -5,9 +5,11 @@
     height: 100vh;
     overflow: hidden;
     padding: 0 50px;
-    background-color: $darkBlack;
-    background-image: linear-gradient(135deg, $black 38%, $darkBlack ),
-        linear-gradient(315deg, $black 18%, $pitchBlack 74%);
+    // background-color: $darkBlack;
+    // background-image: linear-gradient(135deg, $black 38%, $darkBlack ),
+    //     linear-gradient(315deg, $black 18%, $pitchBlack 74%);
+    background-image: linear-gradient(135deg, $darkGray 38%, $darkBlue ),
+    linear-gradient(315deg, $darkBlack 10%, $black 74%);
 
     &.light {
         background: #E0EAFC;
@@ -25,7 +27,14 @@
         left: 50%;
         transform: translate(-50%, -60%);
 
+        .heading-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         .heading {
+            display: flex;
             flex-wrap: wrap;
             max-width: 560px;
             min-width: 560px;
@@ -34,6 +43,10 @@
             align-self: center;
             font-weight: 500;
             justify-content: center;
+            @media only screen and (max-width: 480px) {
+               font-size: 2rem;
+               margin-bottom: 1rem;
+              }
         }
 
         .para-content {
@@ -46,6 +59,7 @@
                 display: flex;
                 justify-content: center;
                 margin-top: 0.3rem;
+
                 svg {
                     align-self: center;
                     transition: transform 0.3s ease;
@@ -59,49 +73,57 @@
                     transition: color 0.3s ease;
 
                 }
-                
+
                 &:hover {
                     color: $blue;
+
                     svg {
                         transform: rotate(-50deg);
                     }
+
                     .gitLink {
                         color: $blue;
-    
+
                     }
                 }
 
             }
         }
 
-        .catalogue-link {
-            align-self: center;
-            text-decoration: none;
+        .catalogue-link-div {
+            display: grid;
 
-            &>div {
+            .catalogue-link {
                 display: flex;
-                color: darken($heighlightBlue, 20%);
-                transition: color 0.3s ease;
+                justify-content: center;
+                text-decoration: none;
+
+                &>div {
+                    display: flex;
+                    color: darken($heighlightBlue, 20%);
+                    transition: color 0.3s ease;
 
 
-                div {
-                    margin-right: 7px;
-                }
-
-                svg {
-                    align-self: center;
-                    transition: transform 0.3s ease;
-                }
-
-                &:hover {
-                    color: darken($heighlightBlue, 0%);
+                    div {
+                        margin-right: 7px;
+                    }
 
                     svg {
-                        transform: rotate(-90deg);
+                        align-self: center;
+                        transition: transform 0.3s ease;
+                    }
+
+                    &:hover {
+                        color: darken($heighlightBlue, 0%);
+
+                        svg {
+                            transform: rotate(-90deg);
+                        }
                     }
                 }
             }
         }
+
     }
 
 }

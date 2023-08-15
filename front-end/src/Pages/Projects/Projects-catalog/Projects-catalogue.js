@@ -9,8 +9,12 @@ import BouncyText from "../../../Components/Bouncy-text/BouncyText";
 
 export default function ProjectscataloguePage() {
   const { darkTheme } = useContext(ThemeContext);
-  const { pageVariants, subPageVariants ,setHorizontalScrollDirection} = useContext(PageAnimationContext);
- 
+  const {
+    pageVariants,
+    subPageVariants,
+    contentVariants,
+    setHorizontalScrollDirection,
+  } = useContext(PageAnimationContext);
 
   return (
     <motion.div
@@ -22,38 +26,70 @@ export default function ProjectscataloguePage() {
       transition={pageVariants}
     >
       <div className="project-page-content">
-        <BouncyText
-          name_class="heading"
-          text="Catalogue Coming"
-        />
-        <BouncyText
-          name_class="heading"
-          text="Soon"
-        />
-        <motion.div className="para-content">
-          Currently in the process of curating a catalogue section to feature some
-          of my standout projects for your exploration. In the meantime, feel
-          welcome to navigate my GitHub repositories at your convenience.
+        <motion.div
+          className="heading-div"
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          custom={0.2}
+          variants={contentVariants}
+        >
+          <BouncyText name_class="heading" text="Catalogue Coming" />
+        </motion.div>
+
+        <motion.div
+          className="heading-div"
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          custom={0.4}
+          variants={contentVariants}
+        >
+          <BouncyText name_class="heading" text="Soon" />
+        </motion.div>
+
+        <motion.div
+          className="para-content"
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          custom={0.6}
+          variants={contentVariants}
+        >
+          Currently in the process of curating a catalogue section to feature
+          some of my standout projects for your exploration. In the meantime,
+          feel welcome to navigate my GitHub repositories at your convenience.
           <div className="gitLink-div">
-            <a className="gitLink"
+            <a
+              className="gitLink"
               href="https://github.com/abhinaykhalatkar?tab=repositories"
               target="_blank"
               rel="noreferrer"
             >
               GitHub profile
-             
             </a>
             <AiOutlineRight />
           </div>
         </motion.div>
-        <NavLink to="/projects" className="catalogue-link">
-          <div onClick={()=>{
-            setHorizontalScrollDirection(1)
-          }}>
-            <div>Back to Projects</div>
-            <AiOutlineRight />
-          </div>
-        </NavLink>
+        <motion.div
+          className="catalogue-link-div"
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          custom={0.8}
+          variants={contentVariants}
+        >
+          <NavLink to="/projects" className="catalogue-link">
+            <div
+              onClick={() => {
+                setHorizontalScrollDirection(1);
+              }}
+            >
+              <div>Back to Projects</div>
+              <AiOutlineRight />
+            </div>
+          </NavLink>
+        </motion.div>
       </div>
     </motion.div>
   );

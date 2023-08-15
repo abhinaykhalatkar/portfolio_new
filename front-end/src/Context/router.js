@@ -45,8 +45,6 @@ const RenderRoutes = () => {
     []
   );
   const {
-    isProgressBarOpen,
-    setIsProgressBarOpen,
     setIsOnMainPage,
     isOnMainPage,
   } = useContext(PageAnimationContext);
@@ -58,7 +56,6 @@ const RenderRoutes = () => {
       return null;
     });
     setIsOnMainPage(curVal);
-    console.log(isOnMainPage);
   }, [location.pathname, setIsOnMainPage, routesData, isOnMainPage]);
 
   return (

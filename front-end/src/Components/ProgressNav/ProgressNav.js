@@ -7,7 +7,6 @@ import ScrollBtn from "./ScrollBtn";
 import { TfiLayoutSlider } from "react-icons/tfi";
 import { AiOutlineLeft } from "react-icons/ai";
 
-
 // let isOnMainPageP = true;
 export const navsData = [
   { Name: "00", Address: "/" },
@@ -68,17 +67,31 @@ export function ProgressNav() {
   return (
     <div>
       {isProgressBarOpen ? (
-        <motion.div className="navigation-progress" 
-        initial={{ x: '-50%', y: '90%' }}
-        animate={{ x: isProgressBarOpen ? '50%' : '-50%', y: '90%' }}
-        exit={{ x: isProgressBarOpen ? '-50%' : '50%', y: '90%' }}
-        transition={{
-          ease: 'easeOut',
-          duration: 0.5,
-          delay: isProgressBarOpen ? 0 : 0.5 
-        }}
-        style={{ bottom: '12%', right: '50%', position: 'fixed' }}>
-          {!isOnMainPage && <AiOutlineLeft className="progressBarClose" onClick={()=>{setIsProgressBarOpen(false)}}/>}
+        <motion.div
+          className="navigation-progress"
+          initial={{ x: "-50%", y: "90vh" }}
+          animate={{ x: isProgressBarOpen ? "50%" : "-50%", y: "90vh" }}
+          exit={{ x: isProgressBarOpen ? "-150%" : "150%", y: "90vh" }}
+          transition={{
+            ease: "easeOut",
+            duration: 0.5,
+            delay: isProgressBarOpen ? 0 : 0.5,
+          }}
+          style={{
+            bottom: "95vh",
+            right: "50%",
+            transform: "translateX(50%)",
+            position: "fixed",
+          }}
+        >
+          {!isOnMainPage && (
+            <AiOutlineLeft
+              className="progressBarClose"
+              onClick={() => {
+                setIsProgressBarOpen(false);
+              }}
+            />
+          )}
           {navsData.map((el, ind) => {
             return (
               <span
@@ -115,7 +128,7 @@ export function ProgressNav() {
               initial={{ opacity: 0, x: "100%", y: "100%" }}
               animate={{ opacity: 1, x: "0%", y: "0%" }}
               exit={{ opacity: 0, x: "100%", y: "100%" }}
-              style={{ position: "fixed", bottom: '5%', left: '5%'}}
+              style={{ position: "fixed", bottom: "5%", left: "5%" }}
             >
               <TfiLayoutSlider
                 className="progressSideIcon"
