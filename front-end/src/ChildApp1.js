@@ -26,18 +26,21 @@ function ChildApp1() {
   };
 
   const handleMouseWheel = useCallback(
-    (e,swipe=0) => {
+    (e, swipe = 0) => {
       if (isScrolling) return;
       setIsScrolling(true);
       setTimeout(() => setIsScrolling(false), 400);
       if (activeIndex <= navsData.length && activeIndex >= 0) {
-
         let newIndex;
-        if (swipe==="L" || e.deltaY > 0 ) {
-          swipe==="L"?handleSetScrollDirection(1):handleSetScrollDirection(0);
+        if (swipe === "L" || e.deltaY > 0) {
+          swipe === "L"
+            ? handleSetScrollDirection(1)
+            : handleSetScrollDirection(0);
           newIndex = Math.min(activeIndex + 1, navsData.length - 1);
-        } else if (swipe==="R" || e.deltaY < 0) {
-          swipe==="R"?handleSetScrollDirection(0):handleSetScrollDirection(1);
+        } else if (swipe === "R" || e.deltaY < 0) {
+          swipe === "R"
+            ? handleSetScrollDirection(0)
+            : handleSetScrollDirection(1);
           newIndex = Math.max(activeIndex - 1, 0);
         }
         setActiveIndex(newIndex);
@@ -75,10 +78,10 @@ function ChildApp1() {
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
-    if (isLeftSwipe){
-      handleMouseWheel(e,"L")
-    }else if (isRightSwipe){
-      handleMouseWheel(e,"R")
+    if (isLeftSwipe) {
+      handleMouseWheel(e, "L");
+    } else if (isRightSwipe) {
+      handleMouseWheel(e, "R");
     }
   };
 
@@ -117,14 +120,16 @@ function ChildApp1() {
               <RenderRoutes />
             </div>
           </AnimatePresence>
-          <a
-            className="gitIcon"
-            href="https://github.com/abhinaykhalatkar"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img src={darkTheme ? githubNight : githubDay} alt="github" />
-          </a>
+          {activeIndex!==3 && (
+            <a
+              className="gitIcon"
+              href="https://github.com/abhinaykhalatkar"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src={darkTheme ? githubNight : githubDay} alt="github" />
+            </a>
+          )}
           <ProgressNav />
         </motion.div>
       </div>

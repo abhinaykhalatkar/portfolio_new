@@ -6,6 +6,9 @@ export function PageAnimationProvider(props) {
   const [horizontalScrollDirection, setHorizontalScrollDirection] = useState(2);
   const [activeIndex, setActiveIndex] = useState(0);
   const [screenSize, setScreenSize] = useState(1000);
+  const [isProgressBarOpen, setIsProgressBarOpen] = useState(true);
+  const [isOnMainPage,setIsOnMainPage]=useState(false)
+
   useEffect(() => {
     const handleResize = () => {
       const screenWidth = window.innerWidth;
@@ -46,7 +49,7 @@ export function PageAnimationProvider(props) {
   const subPageVariants = {
     initial: {
       opacity: 0,
-      y:horizontalScrollDirection===0? "-100%":"100%",
+      y: horizontalScrollDirection === 0 ? "-100%" : "100%",
     },
     animate: {
       opacity: 1,
@@ -58,7 +61,7 @@ export function PageAnimationProvider(props) {
     },
     exit: {
       opacity: 0,
-      y: horizontalScrollDirection===0?"100%":"-100%",
+      y: horizontalScrollDirection === 0 ? "100%" : "-100%",
       transition: {
         ease: "easeIn",
         duration: 0.5,
@@ -115,6 +118,10 @@ export function PageAnimationProvider(props) {
         activeIndex,
         setActiveIndex,
         contentVariants,
+        isProgressBarOpen,
+        setIsProgressBarOpen,
+        setIsOnMainPage,
+        isOnMainPage
       }}
     >
       {props.children}

@@ -80,6 +80,32 @@
                 }
             }
         }
-    }
+        @media only screen and (min-width: 480px) and (max-width:768px) {
+
+        .heading {
+            max-width: 420px;
+            min-width: 420px;
+            font-size: 2.5rem;
+        }
+
+        .para-content {
+            min-width: 70vw;
+            max-width: 60vw;
+        }
+        }
+        @media only screen and (max-width: 480px) {
+            min-width: 340px;
+            .heading {
+                max-width: 315px;
+                min-width: 315px;
+                font-size: 2rem;
+            }
+    
+            .para-content {
+                min-width: 70vw;
+                max-width: 60vw;
+            }
+        }
+    } 
 
 }

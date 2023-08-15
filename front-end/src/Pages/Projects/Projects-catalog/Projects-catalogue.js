@@ -24,19 +24,19 @@ export default function ProjectscataloguePage() {
       <div className="project-page-content">
         <BouncyText
           name_class="heading"
-          text="Catalog Coming"
+          text="Catalogue Coming"
         />
         <BouncyText
           name_class="heading"
           text="Soon"
         />
         <motion.div className="para-content">
-          Currently in the process of curating a catalog section to feature some
+          Currently in the process of curating a catalogue section to feature some
           of my standout projects for your exploration. In the meantime, feel
           welcome to navigate my GitHub repositories at your convenience.
           <div className="gitLink-div">
             <a className="gitLink"
-              href="https://github.com/abhinaykhalatkar"
+              href="https://github.com/abhinaykhalatkar?tab=repositories"
               target="_blank"
               rel="noreferrer"
             >

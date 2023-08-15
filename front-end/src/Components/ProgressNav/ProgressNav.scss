@@ -1,10 +1,30 @@
 @import '../../Styles/variables';
+.progressSideIcon{
+  position: fixed;
+  bottom: 5%;
+  left:5%;
+  height:30px;
+  width: auto;
+}
 .navigation-progress {
+  .progressBarClose{
+    height: 30px;
+    width: auto;
+    color: darken($YInMnBlue, 0%);
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+        color: darken($heighlightBlue, 20%);
+        transform: scale(1.3); 
+      }
+  }
+
   z-index: 0;
-    position: fixed;
-    left: 50%;
-    bottom: 5%;
-    transform: translateX(-50%);
+    // position: fixed;
+    // left: 50%;
+    // bottom: 5%;
+    // transform: translateX(-50%);
     background-color: transparent;
     display: flex;
     align-items: center;

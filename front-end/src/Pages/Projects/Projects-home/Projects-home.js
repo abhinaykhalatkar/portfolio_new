@@ -14,7 +14,6 @@ export default function ProjectsHome() {
     setHorizontalScrollDirection,
     subPageVariants,
     pageVariants,
-
     pageTransition,
     contentVariants,
   } = useContext(PageAnimationContext);
