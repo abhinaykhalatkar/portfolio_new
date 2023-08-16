@@ -60,23 +60,31 @@ export default function SkillsPage() {
           custom={0.4}
           variants={contentVariants}
         >
-          Proficient in HTML, CSS, and JS, I specialize in crafting compact to
-          midsize web applications using Vue or React. My repertoire extends to
-          building custom plugins, dynamic features, engaging animations, and
-          coding interactive layouts. Adding to this, my skill-set also includes
-          a backend development experience in node.js, and I've experience with
-          open-source CMS, Pimcore.
+          Proficient in JavaScript, I specialize in crafting responsive,
+          user-friendly web applications using Vue or React. My expertise
+          extends to building custom plugins, dynamic features, engaging
+          animations, and coding interactive layouts. Adding to this, my skill
+          set also includes backend development experience in node.js, and I
+          have experience with the open-source CMS, Pimcore.
         </motion.div>
         <motion.div
-          className="linkedInLink"
+          className="linkedInPara"
           initial="hidden"
           animate="visible"
           exit="exit"
           custom={3}
           variants={contentVariants}
         >
-          Feel free to explore my LinkedIn for a more comprehensive overview of
-          my skills and experiences.
+          Feel free to explore my{" "}
+          <a
+            className="linkedInLink"
+            href="https://www.linkedin.com/in/abhinay-khalatkar/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            LinkedIn
+          </a>{" "}
+          for a more comprehensive overview of my skills and experiences.
         </motion.div>
         <SkillIconSection />
       </div>

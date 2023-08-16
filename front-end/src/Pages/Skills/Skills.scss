@@ -49,8 +49,18 @@
             margin-bottom: 1rem;
         }
 
-        .linkedInLink {
+        .linkedInPara {
             margin-bottom: 3rem;
+            .linkedInLink{
+                text-decoration: none;
+                color: darken($color: $heighlightBlue, $amount: 15%);
+                font-size: larger;
+                font-weight: 500;
+                transition: color 0.4s ease;
+                &:hover{
+                    color: $heighlightBlue;
+                }
+            }
         }
 
         @media only screen and (min-width: 850px) and (max-width:1330px) {
@@ -68,7 +78,7 @@
                 margin-bottom: 1.3rem;
             }
 
-            .linkedInLink {
+            .linkedInPara {
                 margin-bottom: 4rem;
             }
         }
@@ -91,7 +101,7 @@
                 font-weight: 500;
             }
 
-            .linkedInLink {
+            .linkedInPara {
                 margin-bottom: 2rem;
             }
 
