@@ -6,6 +6,10 @@
     column-gap: 2rem;
     justify-content: space-around;
     align-items: center;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        width: 0; /* Hide the scrollbar */
+      }
 
     .icon-container {
         display: flex;
