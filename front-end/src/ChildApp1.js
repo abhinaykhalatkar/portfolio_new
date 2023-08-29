@@ -121,16 +121,19 @@ function ChildApp1() {
               <RenderRoutes />
             </div>
           </AnimatePresence>
-          {activeIndex !== 3 &&
-            location.pathname !== "/projects/project-catalogue" && (
-              <a
+          {((activeIndex !== 3 && 
+            location.pathname !== "/projects/project-catalogue") && !isSidebarOpen) && (
+              <motion.a 
                 className="gitIcon"
                 href="https://github.com/abhinaykhalatkar"
                 target="_blank"
                 rel="noreferrer"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
               >
                 <img src={darkTheme ? githubNight : githubDay} alt="github" />
-              </a>
+              </motion.a>
             )}
           <ProgressNav />
         </motion.div>

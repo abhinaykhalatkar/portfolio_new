@@ -38,8 +38,11 @@ export default function SkillsPage() {
           exit="exit"
           custom={0.2}
           variants={contentVariants}
-        >
-          <BouncyText text="Skills & Experience" />
+        > 
+        <div className="Skills-heading1">
+        <BouncyText text="Skills & Experience" />
+        </div>
+          
         </motion.div>
         <motion.div
           className="skill-para-head"

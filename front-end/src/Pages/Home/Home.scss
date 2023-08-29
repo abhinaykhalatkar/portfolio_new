@@ -26,14 +26,17 @@
         letter-spacing: 1.2px;
         margin-left: 5rem;
         position: relative;
-        top: 25%;
-        transform: translateY(-25%);
+        height: 70vh;
+        top: 15%;
+        transform: translateY(-15%);
         max-width: 580px;
 
         .home-heading {
             font-size: 3.5rem;
             font-weight: 500;
             flex-wrap: wrap;
+        }
+        .home-heading2{
             margin-bottom: 2.5rem;
         }
 

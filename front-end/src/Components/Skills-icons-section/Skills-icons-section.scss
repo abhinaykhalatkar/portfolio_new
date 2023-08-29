@@ -1,5 +1,7 @@
 .skills-icons-section {
+    
     display: flex;
+   
     flex-wrap: wrap;
     align-content: center;
     row-gap: 1.5rem;
@@ -51,6 +53,7 @@
         row-gap: 0rem;
         column-gap: 0.6rem;
 
+
         .icon-container {
             flex: 0 0 calc(16.6667% - 4rem);
 
@@ -59,15 +62,36 @@
             }
         }
     }
+@media screen and (max-height:600px){
+    // align-content: baseline;
+    // // align-content: center;
+    // // row-gap: 0.1rem;
+    // column-gap: 0.1rem;
+    // // align-items: center;
+    // // padding-top: 30%;
+    // height: 30vh;
+    // // min-height: 27vh;
+    // overflow-y: scroll;
 
-    @media only screen and (max-width:480px) {
-        align-content: center;
-        row-gap: 0.1rem;
+    .icon-container {
+
+    row-gap: 0.1rem;
+    column-gap: 0.1rem;
+        .icons {
+            height: 20px;
+        }
+    }
+    
+}
+    @media only screen and (max-width:480px)  {
+        align-content: baseline;
+        // align-content: center;
+        // row-gap: 0.1rem;
         column-gap: 0.1rem;
-        align-items: center;
-        padding-top: 30%;
-        max-height: 27vh;
-        min-height: 27vh;
+        // align-items: center;
+        // padding-top: 30%;
+        height: 30vh;
+        // min-height: 27vh;
         overflow-y: scroll;
 
         .icon-container {

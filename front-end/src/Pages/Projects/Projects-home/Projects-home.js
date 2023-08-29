@@ -35,7 +35,8 @@ export default function ProjectsHome() {
       transition={pageTransition}
     >
       <div className="project-page-content">
-        <BouncyText name_class="heading" text="Portfolio & Previous Projects" />
+        <BouncyText name_class="heading" text="Portfolio & Previous" />
+        <BouncyText name_class="heading heading1" text="Projects" />
         <motion.div
           className="para-content"
           initial="hidden"

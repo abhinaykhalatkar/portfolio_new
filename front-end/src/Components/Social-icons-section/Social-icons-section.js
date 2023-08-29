@@ -12,22 +12,22 @@ export default function SocialIconsSection() {
   const contactBtnData = [
     {
       name: "Git",
-      icon: <BsGit class={`fa fa-Git`} />,
+      icon: <BsGit className={`fa fa-Git`} />,
       link: "https://github.com/abhinaykhalatkar",
     },
     {
       name: "LinkedIn",
-      icon: <BsLinkedin class={`fa fa-LinkedIn`} />,
+      icon: <BsLinkedin className={`fa fa-LinkedIn`} />,
       link: "https://www.linkedin.com/in/abhinay-khalatkar/",
     },
     {
       name: "Whatsapp",
-      icon: <BsWhatsapp class={`fa fa-Whatsapp`} />,
+      icon: <BsWhatsapp className={`fa fa-Whatsapp`} />,
       link: "https://wa.me/+4917677947889",
     },
     {
       name: "Instagram",
-      icon: <BsInstagram class={`fa fa-Instagram`} />,
+      icon: <BsInstagram className={`fa fa-Instagram`} />,
       link: "https://www.instagram.com/abhinaykhalatkar/",
     },
   ];

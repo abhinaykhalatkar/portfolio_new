@@ -1,8 +1,8 @@
 @import '../../Styles/variables';
 
 .p-Skills {
-    min-width: 90vw;
-    height: 100vh;
+    // min-width: 100vw;
+    min-height: 100vh;
     overflow: hidden;
     background-image: linear-gradient(135deg, $darkGray 38%, $darkBlue ),
         linear-gradient(315deg, $darkBlack 10%, $black 74%);
@@ -15,19 +15,15 @@
     text-align: center;
 
     .container {
-        
-        min-width: 70%;
-        max-height: 80%;
+        top: 20vh;
+        transform: translateY(-10vh);
         line-height: 1.5;
         font-size: 18px;
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 20%;
-        left: 50%;
-        transform: translate(-50%, -20%);
+        position: relative;
+        margin: auto;
 
         .top-quote {
+            height: 1vh;
             margin-bottom: 1rem;
             text-transform: uppercase;
             font-weight: 300;
@@ -35,21 +31,28 @@
         }
 
         .Skills-heading {
+            // height: 7vh;
+            display: flex;
             margin-bottom: 1.3rem;
             font-size: 3.5rem;
-            align-self: center;
             font-weight: 500;
+            .Skills-heading1{
+                margin: auto;
+            }
         }
 
         .skill-para-head {
+            // height: 2vh;
             margin-bottom: 1rem;
         }
 
         .skill-para-content {
+            // height: 12vh;
             margin-bottom: 1rem;
         }
 
         .linkedInPara {
+            // height: 5vh;
             margin-bottom: 3rem;
             .linkedInLink{
                 text-decoration: none;
@@ -64,7 +67,8 @@
         }
 
         @media only screen and (min-width: 850px) and (max-width:1330px) {
-            min-width: 90vw;
+            
+            // min-width: 90vw;
             line-height: 1.3;
             font-size: 18px;
 
@@ -82,11 +86,30 @@
                 margin-bottom: 4rem;
             }
         }
+        @media screen and (max-height:600px){
+            line-height: 1;
+            font-size: 12px;
+
+            .top-quote {
+                margin-bottom: 1rem;
+                font-weight: 300;
+                opacity: .7;
+            }
+
+            .Skills-heading {
+                margin-bottom: 1.1rem;
+            }
+
+            .linkedInPara {
+                margin-bottom: 2rem;
+            }
+        }
 
         @media only screen and (min-width: 480px) and (max-width:850px) {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            // top:15%;
+            // top: 50%;
+            // left: 50%;
+            // transform: translate(-50%, -50%);
             min-width: 90%;
             line-height: 1.3;
             font-size: 14px;
@@ -108,11 +131,13 @@
         }
 
         @media only screen and (max-width:480px) {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            // top:5%;
+            // top: 50%;
+            // left: 50%;
+            // transform: translate(-50%, -50%);
             font-size: 10px;
             min-width: 90%;
+            max-width: 90%;
 
             .top-quote {
                 font-weight: 200;

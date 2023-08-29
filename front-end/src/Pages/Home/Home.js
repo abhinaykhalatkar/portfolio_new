@@ -39,7 +39,11 @@ export default function HomePage() {
       >
         <BouncyText
           name_class="home-heading"
-          text="Full-Stack Software Developer"
+          text="Full-Stack Software"
+        />
+                <BouncyText
+          name_class="home-heading home-heading2"
+          text="Developer"
         />
         <motion.div
           className="heading-para"

@@ -107,6 +107,7 @@ export function PageAnimationProvider(props) {
   return (
     <PageAnimationContext.Provider
       value={{
+        setScrollDirection,
         horizontalScrollDirection,
         setHorizontalScrollDirection,
         subPageVariants,
