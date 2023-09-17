@@ -37,14 +37,8 @@ export default function HomePage() {
         custom={0.5}
         variants={contentVariants}
       >
-        <BouncyText
-          name_class="home-heading"
-          text="Full-Stack Software"
-        />
-                <BouncyText
-          name_class="home-heading home-heading2"
-          text="Developer"
-        />
+        <BouncyText name_class="home-heading" text="Full-Stack  Software" />
+        <BouncyText name_class="home-heading home-heading2" text="Developer" />
         <motion.div
           className="heading-para"
           initial="hidden"
