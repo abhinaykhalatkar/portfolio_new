@@ -54,7 +54,6 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 export function Switch1() {
   const darkTheme = useContext(ThemeContext);
-  console.log(darkTheme.darkTheme)
   return (
     <FormControlLabel
       onClick={darkTheme.toggleTheme}
