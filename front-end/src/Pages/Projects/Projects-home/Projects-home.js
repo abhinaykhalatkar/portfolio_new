@@ -63,7 +63,7 @@ export default function ProjectsHome() {
             reach out and Connect !
           </Link>
         </motion.div>
-        <NavLink to="project-catalogue" className="catalogue-link">
+        <NavLink to="project-1" className="catalogue-link">
           <div
             onClick={() => {
               setHorizontalScrollDirection(0);

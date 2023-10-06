@@ -1,6 +1,7 @@
 @import '../../Styles/variables';
 
 .p-Home {
+    display: flex;
     height: 100vh;
     overflow: hidden;
     padding: 0 4rem;
@@ -108,6 +109,9 @@
                 max-width: 520px;
             }
         }
+    }
+    .TimeLineblock{
+
     }
 
     @media only screen and (max-width: 480px) {
