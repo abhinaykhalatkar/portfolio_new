@@ -4,12 +4,14 @@ import { motion } from "framer-motion";
 import "./Sidebar.scss";
 import { Switch1 } from "../Switch/Switch";
 import { ThemeContext } from "../../Context/ThemeContext/ThemeContext";
+import { PageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import { PrimeryBtn } from "../Buttons/Buttons";
 import { MdFileDownload } from "react-icons/md";
 
 const SideBar = ({ passIsSidebarOpen }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { darkTheme } = useContext(ThemeContext);
+  const {setActiveIndex}=useContext(PageAnimationContext)
   const navLinksData = [
     { name: "HOME", link: "/" },
     { name: "ABOUT", link: "/about" },
@@ -52,7 +54,9 @@ const SideBar = ({ passIsSidebarOpen }) => {
                     darkTheme ? "s-color-white" : "s-color-black"
                   }`}
                   to={el.link}
-                  onClick={handleSidebarToggle}
+                  onClick={()=>{handleSidebarToggle();
+                    setActiveIndex(ind)
+                  }}
                 >
                   {el.name}
                 </NavLink>
