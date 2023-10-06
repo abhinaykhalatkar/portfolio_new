@@ -10,7 +10,7 @@ import { navsData } from "./ProgressNav";
 export default function ScrollBtn() {
   const navigate = useNavigate();
   const { darkTheme } = useContext(ThemeContext);
-  const { handleSetScrollDirection, activeIndex, setActiveIndex } =
+  const { handleSetScrollDirection, activeIndex, setActiveIndex,isOnNotFound404Page } =
     useContext(PageAnimationContext);
 
   const handlePageNavigation = useCallback(() => {
@@ -31,7 +31,7 @@ export default function ScrollBtn() {
       className={`c-ScrollBtn ${darkTheme ? "night" : ""}`}
       onClick={handlePageNavigation}
     >
-      {activeIndex < navsData.length - 1 ? (
+      {(activeIndex < navsData.length - 1) && !isOnNotFound404Page ? (
         <div>
           <div>Scroll To Next</div>
           <AiOutlineRight />
@@ -39,7 +39,7 @@ export default function ScrollBtn() {
       ) : (
         <div>
           <AiOutlineDoubleLeft />
-          <div>Back To Start</div>
+          <div>{isOnNotFound404Page?"Back To Home":"Back To Start"} </div>
         </div>
       )}
     </motion.div>

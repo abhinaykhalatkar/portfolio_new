@@ -120,26 +120,28 @@ export function ProgressNav() {
             transition={{ ease: "easeOut", duration: 0.3 }}
           />
         </motion.div>
-      ) : (
-        <AnimatePresence>
-          {!isOnMainPage && (
-            <motion.div
-              className="icon"
-              initial={{ opacity: 0, x: "100%", y: "100%" }}
-              animate={{ opacity: 1, x: "0%", y: "0%" }}
-              exit={{ opacity: 0, x: "100%", y: "100%" }}
-              style={{ position: "fixed", bottom: "5%", left: "5%" }}
-            >
-              <TfiLayoutSlider
-                className="progressSideIcon"
-                onClick={() => {
-                  setIsProgressBarOpen(true);
-                }}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      )}
+      ) : console.log('hi1')
+      // (
+      //   <AnimatePresence>
+      //     {!isOnMainPage && (
+      //       <motion.div
+      //         className="icon"
+      //         initial={{ opacity: 0, x: "100%", y: "100%" }}
+      //         animate={{ opacity: 1, x: "0%", y: "0%" }}
+      //         exit={{ opacity: 0, x: "100%", y: "100%" }}
+      //         style={{ position: "fixed", bottom: "5%", left: "5%" }}
+      //       >
+      //         <TfiLayoutSlider
+      //           className="progressSideIcon"
+      //           onClick={() => {
+      //             setIsProgressBarOpen(true);
+      //           }}
+      //         />
+      //       </motion.div>
+      //     )}
+      //   </AnimatePresence>
+      // )
+      }
 
       <ScrollBtn />
     </div>

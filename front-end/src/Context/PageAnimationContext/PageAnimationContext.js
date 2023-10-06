@@ -8,6 +8,7 @@ export function PageAnimationProvider(props) {
   const [screenSize, setScreenSize] = useState(1000);
   const [isProgressBarOpen, setIsProgressBarOpen] = useState(true);
   const [isOnMainPage, setIsOnMainPage] = useState(false);
+  const [isOnNotFound404Page, setIsOnNotFound404Page] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -123,6 +124,8 @@ export function PageAnimationProvider(props) {
         setIsProgressBarOpen,
         setIsOnMainPage,
         isOnMainPage,
+        isOnNotFound404Page,
+        setIsOnNotFound404Page
       }}
     >
       {props.children}

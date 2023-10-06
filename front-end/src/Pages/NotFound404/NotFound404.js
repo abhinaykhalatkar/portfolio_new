@@ -1,9 +1,15 @@
 import "./NotFound404.scoped.scss";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 export default function NotFound404() {
-  const { pageVariants, pageTransition } = useContext(PageAnimationContext);
+  const { pageVariants, pageTransition, setIsOnNotFound404Page} = useContext(PageAnimationContext);
+  useEffect(()=>{
+    setIsOnNotFound404Page(true);
+    return()=>{
+      setIsOnNotFound404Page(false);
+    }
+  },[setIsOnNotFound404Page])
   return (
     <motion.div
       className="p-NotFound404"

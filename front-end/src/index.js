@@ -17,8 +17,8 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_PORTF_FIREBASE_appId,
   measurementId: process.env.REACT_APP_PORTF_FIREBASE_measurementId
 };
-const app = initializeApp(firebaseConfig);
-const analytics=getAnalytics(app); 
+// const app = initializeApp(firebaseConfig);
+// const analytics=getAnalytics(app); 
 
 
 
@@ -32,12 +32,12 @@ const AppWithAnalytics = () => {
         const { query, city, regionName, country } = response.data;
     
         // Log an event with user details
-        logEvent(analytics,'R_user_details', {
-          ip_address: query,
-          city:city,
-          region: regionName,
-          country:country,
-        });
+        // logEvent(analytics,'R_user_details', {
+        //   ip_address: query,
+        //   city:city,
+        //   region: regionName,
+        //   country:country,
+        // });
       } catch (error) {
         console.error('Error fetching user details:', error);
       }
