@@ -14,7 +14,7 @@ import { SecondaryBtn } from "./Components/Buttons/Buttons";
 function ChildApp1() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { darkTheme } = useContext(ThemeContext);
-  const { handleSetScrollDirection, activeIndex, setActiveIndex } =
+  const { handleSetScrollDirection, activeIndex, setActiveIndex ,isOnMainPage} =
     useContext(PageAnimationContext);
   const [isScrolling, setIsScrolling] = useState(false);
   const [touchStart, setTouchStart] = useState(null);
@@ -90,6 +90,7 @@ function ChildApp1() {
     <div className={`c-app ${darkTheme ? "dark-theme" : "white-theme"}`}>
       <div className={`p-app  ${darkTheme ? "" : "b-white"}`}>
         <SideBar passIsSidebarOpen={getIsSidebarOpen} />
+        <AnimatePresence mode="wait">
         <motion.div
           className={`page-content ${
             isSidebarOpen ? "page-content-collapsed" : ""
@@ -98,7 +99,7 @@ function ChildApp1() {
           animate={{ marginLeft: isSidebarOpen ? 250 : 0 }}
           transition={{ duration: 0.3 }}
         >
-          {activeIndex !== navsData.length - 1 ? (
+          {activeIndex !== navsData.length - 1 && isOnMainPage? (
             <motion.div
               className="button-contact"
               initial={{ opacity: 0 }}
@@ -112,7 +113,7 @@ function ChildApp1() {
               />
             </motion.div>
           ) : null}
-          <AnimatePresence mode="wait">
+          
             <div
               onTouchStart={onTouchStart}
               onTouchMove={onTouchMove}
@@ -120,9 +121,9 @@ function ChildApp1() {
             >
               <RenderRoutes />
             </div>
-          </AnimatePresence>
+          
           {((activeIndex !== 3 && 
-            location.pathname !== "/projects/project-catalogue") && !isSidebarOpen) && (
+            location.pathname !== "/projects/project-catalogue") && !isSidebarOpen && isOnMainPage) && (
               <motion.a 
                 className="gitIcon"
                 href="https://github.com/abhinaykhalatkar"
@@ -137,6 +138,7 @@ function ChildApp1() {
             )}
           <ProgressNav />
         </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

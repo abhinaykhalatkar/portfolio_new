@@ -14,6 +14,22 @@ export const projectsRoutesData = [
     element: <Project1 />,
   },
   {
+    path: "/project-2",
+    element: <Project1 />,
+  },
+  {
+    path: "/project-3",
+    element: <Project1 />,
+  },
+  {
+    path: "/project-4",
+    element: <Project1 />,
+  },
+  {
+    path: "/project-5",
+    element: <Project1 />,
+  },
+  {
     path: "/project-catalogue",
     element: <ProjectsCataloguePage />,
   },

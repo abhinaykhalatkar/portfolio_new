@@ -2,26 +2,25 @@ import React, { useState, useRef, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { PageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
-import "./ProgressNav.scss";
+import "./VerticalProgressNav.scss";
 import ScrollBtn from "./ScrollBtn";
 import { TfiLayoutSlider } from "react-icons/tfi";
 import { AiOutlineLeft } from "react-icons/ai";
-import { VerticalProgressNav } from "./VerticalProgressNav";
 
 // let isOnMainPageP = true;
-export const navsData = [
-  { Name: "00", Address: "/" },
-  { Name: "01", Address: "/about" },
-  { Name: "02", Address: "/skills" },
-  { Name: "03", Address: "/projects" },
-  { Name: "04", Address: "/contact" },
+export const ProjectsNavData = [
+  { Name: "05", Address: "/projects/project-5" },
+  { Name: "04", Address: "/projects/project-4" },
+  { Name: "03", Address: "/projects/project-3" },
+  { Name: "02", Address: "/projects/project-2" },
+  { Name: "01", Address: "/projects/project-1" },
 ];
-export function ProgressNav() {
+export function VerticalProgressNav() {
   const location = useLocation();
   const navigate = useNavigate();
   const [squash, setSquash] = useState(false);
   const [prevIndex, setPrevIndex] = useState(
-    navsData.findIndex((item) => item.Address === location.pathname)
+    ProjectsNavData.findIndex((item) => item.Address === location.pathname)
   );
   const activeNavLinkRef = useRef(null);
   const [activeLinkWidth, setActiveLinkWidth] = useState(0);
@@ -52,7 +51,7 @@ export function ProgressNav() {
 
   const handleSquash = (e) => {
     let curAddress = e.target.getAttribute("address");
-    const index = navsData.findIndex((item) => item.Address === curAddress);
+    const index = ProjectsNavData.findIndex((item) => item.Address === curAddress);
     setActiveIndex(index);
     navigate(curAddress);
     if (index !== -1) {
@@ -67,17 +66,15 @@ export function ProgressNav() {
 
   return (
     <div>
-
-      {isProgressBarOpen ? (
         <motion.div
-          className="navigation-progress"
+          className="Vernavigation-progress"
           initial={{ x: "50%", y: "90vh" }}
-          animate={{ x: isProgressBarOpen ? "50%" : "-50%", y: "90vh" }}
-          exit={{ x: isProgressBarOpen ? "-150%" : "150%", y: "90vh" }}
+          animate={{ x: "175%", y: "50vh" , rotate:-90}}
+          exit={{ x:  "50%", y: "90vh" , rotate:90}}
           transition={{
             ease: "easeOut",
             duration: 0.5,
-            delay: isProgressBarOpen ? 0 : 0.5,
+            // delay: isOnMainPage ? 0 : 0.5,
           }}
           style={{
             bottom: "95vh",
@@ -86,15 +83,7 @@ export function ProgressNav() {
             position: "fixed",
           }}
         >
-          {/* {!isOnMainPage && (
-            <AiOutlineLeft
-              className="progressBarClose"
-              onClick={() => {
-                setIsProgressBarOpen(false);
-              }}
-            />
-          )} */}
-          {navsData.map((el, ind) => {
+          {ProjectsNavData.map((el, ind) => {
             return (
               <span
                 key={`sideNav ${ind}`}
@@ -114,7 +103,7 @@ export function ProgressNav() {
             className={`lavalamp ${squash ? "squash" : ""}`}
             animate={{
               x:
-                navsData.findIndex((el) => el.Address === location.pathname) *
+                ProjectsNavData.findIndex((el) => el.Address === location.pathname) *
                   activeLinkWidth -
                 activeLinkWidth * 2,
               width: activeLinkWidth,
@@ -122,11 +111,6 @@ export function ProgressNav() {
             transition={{ ease: "easeOut", duration: 0.3 }}
           />
         </motion.div>
-      ) : 
-      (<VerticalProgressNav/>
-      )}
-
-      <ScrollBtn />
     </div>
   );
 }
