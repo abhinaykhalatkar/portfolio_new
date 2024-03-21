@@ -11,7 +11,7 @@ export const projectsRoutesData = [
   },
   {
     path: "/project-1",
-    element: <Project1 />,
+    element: <ProjectsCataloguePage />,
   },
   {
     path: "/project-2",

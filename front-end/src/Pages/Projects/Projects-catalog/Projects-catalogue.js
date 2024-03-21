@@ -1,5 +1,5 @@
 import "./Projects-catalogue.scss";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import { AiOutlineRight } from "react-icons/ai";
@@ -10,12 +10,17 @@ import BouncyText from "../../../Components/Bouncy-text/BouncyText";
 export default function ProjectscataloguePage() {
   const { darkTheme } = useContext(ThemeContext);
   const {
+    setIsVerProgressBarOpen,
     pageVariants,
     subPageVariants,
     contentVariants,
+    isOnMainPage,
     setHorizontalScrollDirection,
   } = useContext(PageAnimationContext);
 
+  useEffect(() => {
+    setIsVerProgressBarOpen(!isOnMainPage);
+  }, [setIsVerProgressBarOpen, isOnMainPage]);
   return (
     <motion.div
       className={`p-Project-catalogue ${darkTheme ? "" : "light"}`}

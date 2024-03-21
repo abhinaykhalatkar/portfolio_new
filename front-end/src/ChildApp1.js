@@ -10,17 +10,23 @@ import { ThemeContext } from "./Context/ThemeContext/ThemeContext";
 import { PageAnimationContext } from "./Context/PageAnimationContext/PageAnimationContext";
 import { ProgressNav, navsData } from "./Components/ProgressNav/ProgressNav";
 import { SecondaryBtn } from "./Components/Buttons/Buttons";
+import { VerticalProgressNav } from "./Components/ProgressNav/VerticalProgressNav";
 
 function ChildApp1() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { darkTheme } = useContext(ThemeContext);
-  const { handleSetScrollDirection, activeIndex, setActiveIndex ,isOnMainPage} =
-    useContext(PageAnimationContext);
   const [isScrolling, setIsScrolling] = useState(false);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
+  const [endPosition, setEndPosition] = useState("67vw");
   const navigate = useNavigate();
   const location = useLocation();
+  const {
+    handleSetScrollDirection,
+    activeIndex,
+    setActiveIndex,
+    isOnMainPage,
+  } = useContext(PageAnimationContext);
 
   const contactBtnHandler = () => {
     setActiveIndex(4);
@@ -91,29 +97,29 @@ function ChildApp1() {
       <div className={`p-app  ${darkTheme ? "" : "b-white"}`}>
         <SideBar passIsSidebarOpen={getIsSidebarOpen} />
         <AnimatePresence mode="wait">
-        <motion.div
-          className={`page-content ${
-            isSidebarOpen ? "page-content-collapsed" : ""
-          }`}
-          initial={false}
-          animate={{ marginLeft: isSidebarOpen ? 250 : 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          {activeIndex !== navsData.length - 1 && isOnMainPage? (
-            <motion.div
-              className="button-contact"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <SecondaryBtn
-                text="Contact"
-                path="/contact"
-                on_Click={contactBtnHandler}
-              />
-            </motion.div>
-          ) : null}
-          
+          <motion.div
+            className={`page-content ${
+              isSidebarOpen ? "page-content-collapsed" : ""
+            }`}
+            initial={false}
+            animate={{ marginLeft: isSidebarOpen ? 250 : 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {activeIndex !== navsData.length - 1 && isOnMainPage ? (
+              <motion.div
+                className="button-contact"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <SecondaryBtn
+                  text="Contact"
+                  path="/contact"
+                  on_Click={contactBtnHandler}
+                />
+              </motion.div>
+            ) : null}
+
             <div
               onTouchStart={onTouchStart}
               onTouchMove={onTouchMove}
@@ -121,23 +127,32 @@ function ChildApp1() {
             >
               <RenderRoutes />
             </div>
-          
-          {((activeIndex !== 3 && 
-            location.pathname !== "/projects/project-catalogue") && !isSidebarOpen && isOnMainPage) && (
-              <motion.a 
-                className="gitIcon"
-                href="https://github.com/abhinaykhalatkar"
-                target="_blank"
-                rel="noreferrer"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <img src={darkTheme ? githubNight : githubDay} alt="github" />
-              </motion.a>
+
+            {activeIndex !== 3 &&
+              location.pathname !== "/projects/project-catalogue" &&
+              !isSidebarOpen &&
+              isOnMainPage && (
+                <motion.a
+                  className="gitIcon"
+                  href="https://github.com/abhinaykhalatkar"
+                  target="_blank"
+                  rel="noreferrer"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <img src={darkTheme ? githubNight : githubDay} alt="github" />
+                </motion.a>
+              )}
+            {isOnMainPage ? (
+              <ProgressNav endPosition={endPosition} />
+            ) : (
+              <VerticalProgressNav
+                setEndPosition={setEndPosition}
+                endPosition={endPosition}
+              />
             )}
-          <ProgressNav />
-        </motion.div>
+          </motion.div>
         </AnimatePresence>
       </div>
     </div>

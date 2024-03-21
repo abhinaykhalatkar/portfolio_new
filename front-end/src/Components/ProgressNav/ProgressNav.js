@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { PageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import "./ProgressNav.scss";
 import ScrollBtn from "./ScrollBtn";
-import { TfiLayoutSlider } from "react-icons/tfi";
-import { AiOutlineLeft } from "react-icons/ai";
-import { VerticalProgressNav } from "./VerticalProgressNav";
+// import { TfiLayoutSlider } from "react-icons/tfi";
+// import { AiOutlineLeft } from "react-icons/ai";
+// import { VerticalProgressNav } from "./VerticalProgressNav";
 
 // let isOnMainPageP = true;
 export const navsData = [
@@ -16,7 +16,7 @@ export const navsData = [
   { Name: "03", Address: "/projects" },
   { Name: "04", Address: "/contact" },
 ];
-export function ProgressNav() {
+export function ProgressNav({ endPosition }) {
   const location = useLocation();
   const navigate = useNavigate();
   const [squash, setSquash] = useState(false);
@@ -28,21 +28,17 @@ export function ProgressNav() {
   const {
     handleSetScrollDirection,
     setActiveIndex,
-    isProgressBarOpen,
-    setIsProgressBarOpen,
     isOnMainPage,
+    isVerProgressBarOpen,
   } = useContext(PageAnimationContext);
 
   useEffect(() => {
-    setIsProgressBarOpen(isOnMainPage);
     const lavalampElement = document.querySelector(".lavalamp");
-    const lavalampWidth = lavalampElement
-      ? lavalampElement.getBoundingClientRect().width
-      : 0;
+    const lavalampWidth = lavalampElement ? 90 : 0;
     if (activeNavLinkRef.current && lavalampElement) {
       setActiveLinkWidth(lavalampWidth);
     }
-  }, [location.pathname, activeLinkWidth, isOnMainPage, setIsProgressBarOpen]);
+  }, [location.pathname, activeLinkWidth, isOnMainPage]);
 
   useEffect(() => {
     if (isOnMainPage) {
@@ -53,6 +49,7 @@ export function ProgressNav() {
   const handleSquash = (e) => {
     let curAddress = e.target.getAttribute("address");
     const index = navsData.findIndex((item) => item.Address === curAddress);
+
     setActiveIndex(index);
     navigate(curAddress);
     if (index !== -1) {
@@ -67,64 +64,54 @@ export function ProgressNav() {
 
   return (
     <div>
+      <motion.div
+        className="navigation-progress"
+        initial={{
+          x: `${!isVerProgressBarOpen ? "50%" : `${endPosition}`}`,
+          y: `${!isVerProgressBarOpen ? "90vh" : "50vh"}`,
+          rotate: `${!isVerProgressBarOpen ? 0 : -90}`,
+        }}
+        animate={{ x: "50%", y: "90vh", rotate: 0 }}
+        transition={{
+          ease: "easeOut",
+          duration: 0.5,
+          delay: 0,
+        }}
+        style={{
+          bottom: "95vh",
+          right: "50%",
+          transform: "translateX(50%)",
+          position: "fixed",
+        }}
+      >
+        {navsData.map((el, ind) => {
+          return (
+            <span
+              key={`sideNav ${ind}`}
+              className={`NavLink ${
+                location.pathname === el.Address ? "NavActive" : ""
+              }`}
+              address={el.Address}
+              onClick={handleSquash}
+              ref={location.pathname === el.Address ? activeNavLinkRef : null}
+            >
+              {el.Name}
+            </span>
+          );
+        })}
 
-      {isProgressBarOpen ? (
         <motion.div
-          className="navigation-progress"
-          initial={{ x: "50%", y: "90vh" }}
-          animate={{ x: isProgressBarOpen ? "50%" : "-50%", y: "90vh" }}
-          exit={{ x: isProgressBarOpen ? "-150%" : "150%", y: "90vh" }}
-          transition={{
-            ease: "easeOut",
-            duration: 0.5,
-            delay: isProgressBarOpen ? 0 : 0.5,
+          className={`lavalamp ${squash ? "squash" : ""}`}
+          animate={{
+            x:
+              navsData.findIndex((el) => el.Address === location.pathname) *
+                activeLinkWidth -
+              activeLinkWidth * 2,
+            width: activeLinkWidth,
           }}
-          style={{
-            bottom: "95vh",
-            right: "50%",
-            transform: "translateX(50%)",
-            position: "fixed",
-          }}
-        >
-          {/* {!isOnMainPage && (
-            <AiOutlineLeft
-              className="progressBarClose"
-              onClick={() => {
-                setIsProgressBarOpen(false);
-              }}
-            />
-          )} */}
-          {navsData.map((el, ind) => {
-            return (
-              <span
-                key={`sideNav ${ind}`}
-                className={`NavLink ${
-                  location.pathname === el.Address ? "NavActive" : ""
-                }`}
-                address={el.Address}
-                onClick={handleSquash}
-                ref={location.pathname === el.Address ? activeNavLinkRef : null}
-              >
-                {el.Name}
-              </span>
-            );
-          })}
-
-          <motion.div
-            className={`lavalamp ${squash ? "squash" : ""}`}
-            animate={{
-              x:
-                navsData.findIndex((el) => el.Address === location.pathname) *
-                  activeLinkWidth -
-                activeLinkWidth * 2,
-              width: activeLinkWidth,
-            }}
-            transition={{ ease: "easeOut", duration: 0.3 }}
-          />
-        </motion.div>
-      ) : 
-      (<VerticalProgressNav/>
-      )}
+          transition={{ ease: "easeOut", duration: 0.3 }}
+        />
+      </motion.div>
 
       <ScrollBtn />
     </div>

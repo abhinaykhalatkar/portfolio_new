@@ -9,6 +9,7 @@
 // }
 
 .Vernavigation-progress {
+
   .progressBarClose {
     height: 30px;
     width: auto;
@@ -73,7 +74,7 @@
     }
   }
 
-  .lavalamp {
+  .lavalamp1 {
     width: 20%;
     margin: 8px 10px;
     height: 5px;
@@ -85,7 +86,7 @@
     border-radius: 50%;
   }
 
-  .lavalamp.squash {
+  .lavalamp1.squash {
     transform: scaleX(2);
     border-radius: 50% / 50%;
   }
@@ -136,7 +137,8 @@
     display: flex;
     left: 50%;
     transform: translateX(-50%);
-    & >div{
+
+    &>div {
       margin: auto;
     }
   }
@@ -145,7 +147,8 @@
     display: flex;
     left: 50%;
     transform: translateX(-50%);
-    & >div{
+
+    &>div {
       margin: auto;
     }
   }

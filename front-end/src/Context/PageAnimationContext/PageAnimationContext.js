@@ -6,8 +6,8 @@ export function PageAnimationProvider(props) {
   const [horizontalScrollDirection, setHorizontalScrollDirection] = useState(2);
   const [activeIndex, setActiveIndex] = useState(0);
   const [screenSize, setScreenSize] = useState(1000);
-  const [isProgressBarOpen, setIsProgressBarOpen] = useState(true);
-  const [isOnMainPage, setIsOnMainPage] = useState(false);
+  const [isVerProgressBarOpen, setIsVerProgressBarOpen] = useState(false);
+  const [isOnMainPage, setIsOnMainPage] = useState(true);
   const [isOnNotFound404Page, setIsOnNotFound404Page] = useState(false);
 
   useEffect(() => {
@@ -120,12 +120,12 @@ export function PageAnimationProvider(props) {
         activeIndex,
         setActiveIndex,
         contentVariants,
-        isProgressBarOpen,
-        setIsProgressBarOpen,
+        isVerProgressBarOpen,
+        setIsVerProgressBarOpen,
         setIsOnMainPage,
         isOnMainPage,
         isOnNotFound404Page,
-        setIsOnNotFound404Page
+        setIsOnNotFound404Page,
       }}
     >
       {props.children}
