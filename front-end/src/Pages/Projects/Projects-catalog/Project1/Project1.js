@@ -79,7 +79,7 @@ export default function Project1() {
           custom={0.8}
           variants={contentVariants}
         >
-          <NavLink to="/projects" className="catalogue-link">
+          {/* <NavLink to="/projects" className="catalogue-link">
             <div
               onClick={() => {
                 setHorizontalScrollDirection(1);
@@ -88,7 +88,7 @@ export default function Project1() {
               <div>Back to Projects</div>
               <AiOutlineRight />
             </div>
-          </NavLink>
+          </NavLink> */}
         </motion.div>
       </div>
     </motion.div>

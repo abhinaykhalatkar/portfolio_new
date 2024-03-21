@@ -49,7 +49,6 @@ export function ProgressNav({ endPosition }) {
   const handleSquash = (e) => {
     let curAddress = e.target.getAttribute("address");
     const index = navsData.findIndex((item) => item.Address === curAddress);
-
     setActiveIndex(index);
     navigate(curAddress);
     if (index !== -1) {

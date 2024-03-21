@@ -5,7 +5,7 @@ import { PageAnimationContext } from "../../Context/PageAnimationContext/PageAni
 import "./VerticalProgressNav.scss";
 
 // let isOnMainPageP = true;
-export const ProjectsNavData = [
+export const projectsNavData = [
   { Name: "05", Address: "/projects/project-5" },
   { Name: "04", Address: "/projects/project-4" },
   { Name: "03", Address: "/projects/project-3" },
@@ -16,17 +16,13 @@ export function VerticalProgressNav({ setEndPosition, endPosition }) {
   const location = useLocation();
   const navigate = useNavigate();
   const [squash, setSquash] = useState(false);
-
   const [prevIndex, setPrevIndex] = useState(
-    ProjectsNavData.findIndex((item) => item.Address === location.pathname)
+    projectsNavData.findIndex((item) => item.Address === location.pathname)
   );
   const activeNavLinkRef = useRef(null);
   const [activeVerLinkWidth, setActiveVerLinkWidth] = useState(0);
-  const {
-    handleSetScrollDirection,
-
-    isOnMainPage,
-  } = useContext(PageAnimationContext);
+  const { setActiveProjectIndex, setHorizontalScrollDirection, isOnMainPage } =
+    useContext(PageAnimationContext);
 
   useEffect(() => {
     const lavalampElement = document.querySelector(".lavalamp1");
@@ -44,13 +40,13 @@ export function VerticalProgressNav({ setEndPosition, endPosition }) {
 
   const handleSquash = (e) => {
     let curAddress = e.target.getAttribute("address");
-    const index = ProjectsNavData.findIndex(
+    const index = projectsNavData.findIndex(
       (item) => item.Address === curAddress
     );
-
+    setActiveProjectIndex(index);
     navigate(curAddress);
     if (index !== -1) {
-      handleSetScrollDirection(prevIndex >= index ? 1 : 0);
+      setHorizontalScrollDirection(prevIndex >= index ? 0 : 1);
       setPrevIndex(index);
     }
     setSquash(true);
@@ -79,7 +75,7 @@ export function VerticalProgressNav({ setEndPosition, endPosition }) {
     handleResize();
 
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [setEndPosition]);
 
   return (
     <div>
@@ -98,7 +94,7 @@ export function VerticalProgressNav({ setEndPosition, endPosition }) {
           transform: "translateX(-50%)",
         }}
       >
-        {ProjectsNavData.map((el, ind) => {
+        {projectsNavData.map((el, ind) => {
           return (
             <span
               key={`sideNav ${ind}`}
@@ -118,7 +114,7 @@ export function VerticalProgressNav({ setEndPosition, endPosition }) {
           className={`lavalamp1 ${squash ? "squash" : ""}`}
           animate={{
             x:
-              ProjectsNavData.findIndex(
+              projectsNavData.findIndex(
                 (el) => el.Address === location.pathname
               ) *
                 activeVerLinkWidth -

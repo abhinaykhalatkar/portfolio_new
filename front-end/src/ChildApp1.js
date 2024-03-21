@@ -10,7 +10,10 @@ import { ThemeContext } from "./Context/ThemeContext/ThemeContext";
 import { PageAnimationContext } from "./Context/PageAnimationContext/PageAnimationContext";
 import { ProgressNav, navsData } from "./Components/ProgressNav/ProgressNav";
 import { SecondaryBtn } from "./Components/Buttons/Buttons";
-import { VerticalProgressNav } from "./Components/ProgressNav/VerticalProgressNav";
+import {
+  VerticalProgressNav,
+  projectsNavData,
+} from "./Components/ProgressNav/VerticalProgressNav";
 
 function ChildApp1() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -25,13 +28,15 @@ function ChildApp1() {
     handleSetScrollDirection,
     activeIndex,
     setActiveIndex,
+    activeProjectIndex,
+    setActiveProjectIndex,
     isOnMainPage,
+    setHorizontalScrollDirection,
   } = useContext(PageAnimationContext);
 
   const contactBtnHandler = () => {
     setActiveIndex(4);
   };
-
   const handleMouseWheel = useCallback(
     (e, swipe = 0) => {
       if (isScrolling) return;
@@ -40,21 +45,43 @@ function ChildApp1() {
       if (activeIndex <= navsData.length && activeIndex >= 0) {
         let newIndex;
         if (swipe === "L" || e.deltaY > 0) {
-          swipe === "L"
-            ? handleSetScrollDirection(1)
-            : handleSetScrollDirection(0);
-          newIndex = Math.min(activeIndex + 1, navsData.length - 1);
+          if (isOnMainPage) {
+            swipe === "L"
+              ? handleSetScrollDirection(1)
+              : handleSetScrollDirection(0);
+            newIndex = Math.min(activeIndex + 1, navsData.length - 1);
+          } else {
+            setHorizontalScrollDirection(1);
+            newIndex = Math.max(activeProjectIndex - 1, 0);
+          }
         } else if (swipe === "R" || e.deltaY < 0) {
-          swipe === "R"
-            ? handleSetScrollDirection(0)
-            : handleSetScrollDirection(1);
-          newIndex = Math.max(activeIndex - 1, 0);
+          if (isOnMainPage) {
+            swipe === "R"
+              ? handleSetScrollDirection(0)
+              : handleSetScrollDirection(1);
+            newIndex = Math.max(activeIndex - 1, 0);
+          } else {
+            setHorizontalScrollDirection(0);
+            newIndex = Math.min(
+              activeProjectIndex + 1,
+              projectsNavData.length - 1
+            );
+          }
         }
-        setActiveIndex(newIndex);
-        navigate(navsData[newIndex].Address);
+        if (isOnMainPage) {
+          setActiveIndex(newIndex);
+          navigate(navsData[newIndex].Address);
+        } else {
+          setActiveProjectIndex(newIndex);
+          navigate(projectsNavData[newIndex].Address);
+        }
       }
     },
     [
+      setHorizontalScrollDirection,
+      setActiveProjectIndex,
+      activeProjectIndex,
+      isOnMainPage,
       activeIndex,
       handleSetScrollDirection,
       isScrolling,

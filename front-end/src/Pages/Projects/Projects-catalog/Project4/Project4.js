@@ -1,28 +1,21 @@
-import "./Projects-catalogue.scss";
-import React, { useContext, useEffect } from "react";
+import "./Project4.scss";
+import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import { AiOutlineRight } from "react-icons/ai";
-import { ThemeContext } from "../../../Context/ThemeContext/ThemeContext";
-import { PageAnimationContext } from "../../../Context/PageAnimationContext/PageAnimationContext";
-import BouncyText from "../../../Components/Bouncy-text/BouncyText";
+import { ThemeContext } from "../../../../Context/ThemeContext/ThemeContext";
+import { PageAnimationContext } from "../../../../Context/PageAnimationContext/PageAnimationContext";
+import BouncyText from "../../../../Components/Bouncy-text/BouncyText";
 
-export default function ProjectscataloguePage() {
+export default function Project4() {
   const { darkTheme } = useContext(ThemeContext);
   const {
-    setIsVerProgressBarOpen,
     pageVariants,
     subPageVariants,
     contentVariants,
-    isOnMainPage,
     setHorizontalScrollDirection,
-    setActiveProjectIndex,
   } = useContext(PageAnimationContext);
-  //0-down 1-up
 
-  useEffect(() => {
-    setIsVerProgressBarOpen(!isOnMainPage);
-  }, [setIsVerProgressBarOpen, isOnMainPage]);
   return (
     <motion.div
       className={`p-Project-catalogue ${darkTheme ? "" : "light"}`}
@@ -41,7 +34,7 @@ export default function ProjectscataloguePage() {
           custom={0.2}
           variants={contentVariants}
         >
-          <BouncyText name_class="heading" text="Catalogue Coming" />
+          <BouncyText name_class="heading" text="PROJECT 4" />
         </motion.div>
 
         <motion.div
@@ -86,17 +79,16 @@ export default function ProjectscataloguePage() {
           custom={0.8}
           variants={contentVariants}
         >
-          <NavLink to="/projects" className="catalogue-link">
+          {/* <NavLink to="/projects" className="catalogue-link">
             <div
               onClick={() => {
-                setActiveProjectIndex(4);
                 setHorizontalScrollDirection(1);
               }}
             >
               <div>Back to Projects</div>
               <AiOutlineRight />
             </div>
-          </NavLink>
+          </NavLink> */}
         </motion.div>
       </div>
     </motion.div>

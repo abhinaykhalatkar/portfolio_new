@@ -1,10 +1,14 @@
 import React, { useState, useEffect, createContext } from "react";
+import { projectsNavData } from "../../Components/ProgressNav/VerticalProgressNav";
 export const PageAnimationContext = createContext();
 
 export function PageAnimationProvider(props) {
   const [scrollDirection, setScrollDirection] = useState(0);
   const [horizontalScrollDirection, setHorizontalScrollDirection] = useState(2);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [activeProjectIndex, setActiveProjectIndex] = useState(
+    projectsNavData.length - 1
+  );
   const [screenSize, setScreenSize] = useState(1000);
   const [isVerProgressBarOpen, setIsVerProgressBarOpen] = useState(false);
   const [isOnMainPage, setIsOnMainPage] = useState(true);
@@ -114,6 +118,8 @@ export function PageAnimationProvider(props) {
         subPageVariants,
         screenSize,
         contentVariants2,
+        setActiveProjectIndex,
+        activeProjectIndex,
         handleSetScrollDirection,
         pageVariants,
         pageTransition,
