@@ -2,11 +2,11 @@ import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timel
 import 'react-vertical-timeline-component/style.min.css';
 import "./MyTimeline.scss"
 import { FaChevronDown } from "react-icons/fa";
-import React, { useContext } from "react";
-import { ThemeContext } from "../../Context/ThemeContext/ThemeContext";
+// import React, { useContext } from "react";
+// import { ThemeContext } from "../../Context/ThemeContext/ThemeContext";
 
 export default function MyTimeline() {
-    const { darkTheme } = useContext(ThemeContext);
+    // const { darkTheme } = useContext(ThemeContext);
     return(
 <VerticalTimeline lineColor="red">
   <VerticalTimelineElement

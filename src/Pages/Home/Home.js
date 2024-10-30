@@ -7,7 +7,7 @@ import { PageAnimationContext } from "../../Context/PageAnimationContext/PageAni
 import AnimatedLogo from "../../Components/logoAnimated/AnimatedLogo";
 import BouncyText from "../../Components/Bouncy-text/BouncyText";
 import { FaChevronDown } from "react-icons/fa";
-import MyTimeline from "../../Components/MyTimeLine/MyTimeline";
+// import MyTimeline from "../../Components/MyTimeLine/MyTimeline";
 
 export default function HomePage() {
   const { darkTheme } = useContext(ThemeContext);

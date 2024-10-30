@@ -1,7 +1,7 @@
 import "./Project1.scss";
 import React, { useContext } from "react";
 import { motion } from "framer-motion";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import { AiOutlineRight } from "react-icons/ai";
 import { ThemeContext } from "../../../../Context/ThemeContext/ThemeContext";
 import { PageAnimationContext } from "../../../../Context/PageAnimationContext/PageAnimationContext";
@@ -13,7 +13,7 @@ export default function Project1() {
     pageVariants,
     subPageVariants,
     contentVariants,
-    setHorizontalScrollDirection,
+    // setHorizontalScrollDirection,
   } = useContext(PageAnimationContext);
 
   return (
