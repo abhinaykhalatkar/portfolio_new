@@ -1,20 +1,20 @@
-import "./Project1.scss";
-import React, { useContext } from "react";
+import "./Project2.scss";
+import React from "react";
 import { motion } from "framer-motion";
 // import { NavLink } from "react-router-dom";
 import { AiOutlineRight } from "react-icons/ai";
-import { ThemeContext } from "../../../../Context/ThemeContext/ThemeContext";
-import { PageAnimationContext } from "../../../../Context/PageAnimationContext/PageAnimationContext";
+import { useThemeContext } from "../../../../Context/ThemeContext/ThemeContext";
+import { usePageAnimationContext } from "../../../../Context/PageAnimationContext/PageAnimationContext";
 import BouncyText from "../../../../Components/Bouncy-text/BouncyText";
 
-export default function Project1() {
-  const { darkTheme } = useContext(ThemeContext);
+export default function Project2() {
+  const { darkTheme } = useThemeContext();
   const {
     pageVariants,
     subPageVariants,
     contentVariants,
     // setHorizontalScrollDirection,
-  } = useContext(PageAnimationContext);
+  } = usePageAnimationContext();
 
   return (
     <motion.div
@@ -34,7 +34,7 @@ export default function Project1() {
           custom={0.2}
           variants={contentVariants}
         >
-          <BouncyText name_class="heading" text="PROJECT 1" />
+          <BouncyText name_class="heading" text="PROJECT 2" />
         </motion.div>
 
         <motion.div

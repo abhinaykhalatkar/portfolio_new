@@ -1,14 +1,14 @@
 import "./Projects-home.scss";
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ThemeContext } from "../../../Context/ThemeContext/ThemeContext";
-import { PageAnimationContext } from "../../../Context/PageAnimationContext/PageAnimationContext";
+import { useThemeContext } from "../../../Context/ThemeContext/ThemeContext";
+import { usePageAnimationContext } from "../../../Context/PageAnimationContext/PageAnimationContext";
 import BouncyText from "../../../Components/Bouncy-text/BouncyText";
 import { AiOutlineRight } from "react-icons/ai";
 
 export default function ProjectsHome() {
-  const { darkTheme } = useContext(ThemeContext);
+  const { darkTheme } = useThemeContext();
   const {
     horizontalScrollDirection,
     setHorizontalScrollDirection,
@@ -16,7 +16,7 @@ export default function ProjectsHome() {
     pageVariants,
     pageTransition,
     contentVariants,
-  } = useContext(PageAnimationContext);
+  } = usePageAnimationContext();
 
   useEffect(() => {
     setHorizontalScrollDirection(2);

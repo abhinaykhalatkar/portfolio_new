@@ -1,15 +1,15 @@
 import "./About.scss";
-import React, { useContext } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { ThemeContext } from "../../Context/ThemeContext/ThemeContext";
-import { PageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
+import { useThemeContext } from "../../Context/ThemeContext/ThemeContext";
+import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import BouncyText from "../../Components/Bouncy-text/BouncyText";
 import AnimatedLogo from "../../Components/logoAnimated/AnimatedLogo";
 
 export default function AboutPage() {
   const { pageVariants, pageTransition, contentVariants2, screenSize } =
-    useContext(PageAnimationContext);
-  const { darkTheme } = useContext(ThemeContext);
+    usePageAnimationContext();
+  const { darkTheme } = useThemeContext();
 
   return (
     <motion.div

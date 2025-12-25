@@ -1,17 +1,21 @@
 import "./ProgressNav.scss";
 import { AiOutlineRight, AiOutlineDoubleLeft } from "react-icons/ai";
-import React, { useCallback, useContext } from "react";
+import React, { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { PageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
-import { ThemeContext } from "../../Context/ThemeContext/ThemeContext";
+import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
+import { useThemeContext } from "../../Context/ThemeContext/ThemeContext";
 import { navsData } from "./ProgressNav";
 
 export default function ScrollBtn() {
   const navigate = useNavigate();
-  const { darkTheme } = useContext(ThemeContext);
-  const { handleSetScrollDirection, activeIndex, setActiveIndex,isOnNotFound404Page } =
-    useContext(PageAnimationContext);
+  const { darkTheme } = useThemeContext();
+  const {
+    handleSetScrollDirection,
+    activeIndex,
+    setActiveIndex,
+    isOnNotFound404Page,
+  } = usePageAnimationContext();
 
   const handlePageNavigation = useCallback(() => {
     if (activeIndex >= 0 && activeIndex <= navsData.length) {
@@ -31,7 +35,7 @@ export default function ScrollBtn() {
       className={`c-ScrollBtn ${darkTheme ? "night" : ""}`}
       onClick={handlePageNavigation}
     >
-      {(activeIndex < navsData.length - 1) && !isOnNotFound404Page ? (
+      {activeIndex < navsData.length - 1 && !isOnNotFound404Page ? (
         <div>
           <div>Scroll To Next</div>
           <AiOutlineRight />
@@ -39,7 +43,7 @@ export default function ScrollBtn() {
       ) : (
         <div>
           <AiOutlineDoubleLeft />
-          <div>{isOnNotFound404Page?"Back To Home":"Back To Start"} </div>
+          <div>{isOnNotFound404Page ? "Back To Home" : "Back To Start"} </div>
         </div>
       )}
     </motion.div>

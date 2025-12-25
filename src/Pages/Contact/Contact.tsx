@@ -1,15 +1,15 @@
 import "./Contact.scss";
-import React, { useContext } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { ThemeContext } from "../../Context/ThemeContext/ThemeContext";
-import { PageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
+import { useThemeContext } from "../../Context/ThemeContext/ThemeContext";
+import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import BouncyText from "../../Components/Bouncy-text/BouncyText";
 import SocialIconsSection from "../../Components/Social-icons-section/Social-icons-section";
 
 export default function ContactPage() {
-  const { darkTheme } = useContext(ThemeContext);
+  const { darkTheme } = useThemeContext();
   const { pageVariants, pageTransition, contentVariants } =
-    useContext(PageAnimationContext);
+    usePageAnimationContext();
 
   return (
     <motion.div

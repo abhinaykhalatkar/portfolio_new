@@ -1,12 +1,19 @@
 import "./AnimatedLogo.scss";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../Context/ThemeContext/ThemeContext";
 import backIMG from "../../Assets/myPics/backLogoImg.jpg";
 import backIMGDay from "../../Assets/myPics/backLogoImgDay.jpg";
 
-export default function AnimatedLogo({ name_class }) {
-  const { darkTheme } = useContext(ThemeContext);
-  const [currentPaths, setCurrentPaths] = useState([]);
+type AnimatedLogoProps = {
+  name_class?: string;
+};
+
+export default function AnimatedLogo({ name_class }: AnimatedLogoProps) {
+  const theme = useContext(ThemeContext);
+  if (!theme) throw new Error('ThemeContext provider is missing');
+  const { darkTheme } = theme;
+
+  const [currentPaths, setCurrentPaths] = useState<string[]>([]);
   const numberOfRandomPaths = 6;
 
   useEffect(() => {
@@ -43,7 +50,7 @@ export default function AnimatedLogo({ name_class }) {
       "path30",
     ];
     const interval = setInterval(() => {
-      const randomIndices = [];
+  const randomIndices: number[] = [];
       while (randomIndices.length < numberOfRandomPaths) {
         const randomIndex = Math.floor(Math.random() * pathIds.length);
         if (!randomIndices.includes(randomIndex)) {
@@ -73,7 +80,6 @@ export default function AnimatedLogo({ name_class }) {
         <g
           transform={`matrix(1.4469 0 0 1.4469 -.0017333 -.014469)`}
           fill={`${darkTheme ? "#111" : "#b8c6db"}`}
-          featurekey="rootContainer"
         >
           <g fillRule="evenodd" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -275,7 +281,6 @@ export default function AnimatedLogo({ name_class }) {
       <g
         transform="matrix(.21294 0 0 .21294 37.886 115.68)"
         fill={`${darkTheme ? "#111" : "#b8c6db"}`}
-        featurekey="sloganFeature-0"
       >
         <path d="m11.035 20-1.1523-3.2227h-6.1719l-1.1523 3.2227h-2.0215l5.0879-13.809h2.3438l5.0879 13.809h-2.0215zm-6.7186-4.9219h4.9609l-2.4805-6.9629zm28.696-2.3047c1.6309 0.41016 2.7246 1.5332 2.7246 3.457 0 2.2168-1.5039 3.7695-3.9844 3.7695h-5.4297v-13.809h4.2383c2.5488 0 4.1602 1.4844 4.1602 3.6719 0 1.3086-0.5957 2.3828-1.709 2.9102zm-0.1075-2.7834c0-1.1914-0.85938-2.1191-2.3535-2.1191h-2.3438v4.2969h2.6465c1.25 0 2.0508-0.97656 2.0508-2.1777zm-1.4843 8.301c1.5723 0 2.4219-1.0547 2.4219-2.2559 0-1.2695-0.88867-2.2852-2.5391-2.2852h-3.0957v4.541h3.2129zm26.831-12.1h1.9434v13.809h-1.9434v-6.0547h-6.7871v6.0547h-1.9629v-13.809h1.9629v6.0254h6.7871v-6.0254zm16.782 13.809v-13.809h1.9434v13.809h-1.9434zm26.088-13.809h1.9336v13.809h-2.0996l-7.2168-10.957v10.957h-1.9238v-13.809h2.0801l7.2266 10.908v-10.908zm25.698 13.809-1.1523-3.2227h-6.1719l-1.1523 3.2227h-2.0215l5.0879-13.809h2.3438l5.0879 13.809h-2.0215zm-6.7186-4.9219h4.9609l-2.4805-6.9629zm31.352-8.8871-4.541 7.2266v6.582h-1.9629v-6.5723l-4.5508-7.2363h2.207l3.3203 5.4785 3.3301-5.4785h2.1973zm36.924 13.809-4.8438-6.2988h-1.1914v6.2988h-1.9434v-13.809h1.9434v5.7715h1.1719l4.707-5.7715h2.3828l-5.4102 6.582 5.6738 7.2266h-2.4902zm24.458-13.809h1.9434v13.809h-1.9434v-6.0547h-6.7871v6.0547h-1.9629v-13.809h1.9629v6.0254h6.7871v-6.0254zm25.717 13.809-1.1523-3.2227h-6.1719l-1.1523 3.2227h-2.0215l5.0879-13.809h2.3438l5.0879 13.809h-2.0215zm-6.7186-4.9219h4.9609l-2.4805-6.9629zm23.95 3.1641h4.7168v1.7578h-6.6602v-13.809h1.9434v12.051zm26.919 1.7578-1.1523-3.2227h-6.1719l-1.1523 3.2227h-2.0215l5.0879-13.809h2.3438l5.0879 13.809h-2.0215zm-6.7186-4.9219h4.9609l-2.4805-6.9629zm29.36-8.8871v1.748h-3.4961v12.061h-1.9238v-12.061h-3.5059v-1.748h8.9258zm21.235 13.809-4.8438-6.2988h-1.1914v6.2988h-1.9434v-13.809h1.9434v5.7715h1.1719l4.707-5.7715h2.3828l-5.4102 6.582 5.6738 7.2266h-2.4902zm24.643 0-1.1523-3.2227h-6.1719l-1.1523 3.2227h-2.0215l5.0879-13.809h2.3438l5.0879 13.809h-2.0215zm-6.7186-4.9219h4.9609l-2.4805-6.9629zm29.458 4.9219-3.5742-6.2109h-1.9336v6.2109h-1.9434v-13.809h4.6484c2.8906 0 4.209 1.7676 4.209 3.9355 0 1.9238-1.1328 3.2617-3.0273 3.584l3.8965 6.2891h-2.2754zm-5.5078-12.129v4.4336h2.4414c1.7969 0 2.6074-0.89844 2.6074-2.207 0-1.2891-0.81055-2.2266-2.6074-2.2266h-2.4414z" />
       </g>

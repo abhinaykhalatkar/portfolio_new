@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { PageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
+import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import "./VerticalProgressNav.scss";
 
 // let isOnMainPageP = true;
@@ -12,17 +12,26 @@ export const projectsNavData = [
   { Name: "02", Address: "/projects/project-2" },
   { Name: "01", Address: "/projects/project-1" },
 ];
-export function VerticalProgressNav({ setEndPosition, endPosition }) {
+
+type VerticalProgressNavProps = {
+  setEndPosition: React.Dispatch<React.SetStateAction<string>>;
+  endPosition: string;
+};
+
+export function VerticalProgressNav({
+  setEndPosition,
+  endPosition,
+}: VerticalProgressNavProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const [squash, setSquash] = useState(false);
   const [prevIndex, setPrevIndex] = useState(
     projectsNavData.findIndex((item) => item.Address === location.pathname)
   );
-  const activeNavLinkRef = useRef(null);
+  const activeNavLinkRef = useRef<HTMLSpanElement | null>(null);
   const [activeVerLinkWidth, setActiveVerLinkWidth] = useState(0);
   const { setActiveProjectIndex, setHorizontalScrollDirection, isOnMainPage } =
-    useContext(PageAnimationContext);
+    usePageAnimationContext();
 
   useEffect(() => {
     const lavalampElement = document.querySelector(".lavalamp1");
@@ -38,13 +47,13 @@ export function VerticalProgressNav({ setEndPosition, endPosition }) {
     }
   }, [isOnMainPage]);
 
-  const handleSquash = (e) => {
-    let curAddress = e.target.getAttribute("address");
+  const handleSquash = (e: React.MouseEvent<HTMLSpanElement>) => {
+    const curAddress = e.currentTarget.getAttribute("data-address") || "";
     const index = projectsNavData.findIndex(
       (item) => item.Address === curAddress
     );
     setActiveProjectIndex(index);
-    navigate(curAddress);
+    if (curAddress) navigate(curAddress);
     if (index !== -1) {
       setHorizontalScrollDirection(prevIndex >= index ? 0 : 1);
       setPrevIndex(index);
@@ -101,7 +110,7 @@ export function VerticalProgressNav({ setEndPosition, endPosition }) {
               className={`NavLink ${
                 location.pathname === el.Address ? "NavActive" : ""
               }`}
-              address={el.Address}
+              data-address={el.Address}
               onClick={handleSquash}
               ref={location.pathname === el.Address ? activeNavLinkRef : null}
             >

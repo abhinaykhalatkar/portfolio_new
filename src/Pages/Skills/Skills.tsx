@@ -1,15 +1,15 @@
 import "./Skills.scss";
-import React, { useContext } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { ThemeContext } from "../../Context/ThemeContext/ThemeContext";
-import { PageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
+import { useThemeContext } from "../../Context/ThemeContext/ThemeContext";
+import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import BouncyText from "../../Components/Bouncy-text/BouncyText";
 import SkillIconSection from "../../Components/Skills-icons-section/Skills-icons-section";
 
 export default function SkillsPage() {
-  const { darkTheme } = useContext(ThemeContext);
+  const { darkTheme } = useThemeContext();
   const { pageVariants, pageTransition, contentVariants } =
-    useContext(PageAnimationContext);
+    usePageAnimationContext();
 
   return (
     <motion.div

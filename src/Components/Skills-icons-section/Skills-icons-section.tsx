@@ -1,7 +1,7 @@
 import "./Skills-icons-section.scss";
-import React, { useContext } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { PageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
+import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import dockerIcon from "../../Assets/skills-icons/docker.svg";
 import figmaIcon from "../../Assets/skills-icons/figma.svg";
 import gitIcon from "../../Assets/skills-icons/git.svg";
@@ -18,7 +18,7 @@ import firebaseIcon from "../../Assets/skills-icons/firebase.svg";
 import mongodbIcon from "../../Assets/skills-icons/mongodb.svg";
 
 export default function SkillIconSection() {
-  const { contentVariants } = useContext(PageAnimationContext);
+  const { contentVariants } = usePageAnimationContext();
   const iconsArray = [
     { icon: javascriptIcon, title: "JavaScript" },
     { icon: reactIcon, title: "React" },

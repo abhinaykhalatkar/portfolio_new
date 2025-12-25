@@ -1,15 +1,34 @@
 import "./Buttons.scss";
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ThemeContext } from "../../Context/ThemeContext/ThemeContext";
+import { useThemeContext } from "../../Context/ThemeContext/ThemeContext";
+
+type ButtonPath = string | 0 | null | undefined;
+
+type PrimaryBtnProps = {
+  text: string;
+  path?: ButtonPath;
+  icon?: React.ReactNode;
+};
+
+type SecondaryBtnProps = {
+  text: string;
+  path?: ButtonPath;
+  on_Click?: (() => void) | null;
+};
+
+type DangerBtnProps = {
+  text: string;
+  path?: ButtonPath;
+};
 
 function useSharedFunctionality() {
-  const { darkTheme } = useContext(ThemeContext);
+  const { darkTheme } = useThemeContext();
   const navigate = useNavigate();
 
-  const handleButtonClick = (path) => {
-    if (path) {
+  const handleButtonClick = (path: ButtonPath) => {
+    if (typeof path === "string" && path.length) {
       navigate(path);
     }
   };
@@ -18,7 +37,7 @@ function useSharedFunctionality() {
     handleButtonClick,
   };
 }
-export function PrimeryBtn({ text, path = 0, icon = null }) {
+export function PrimeryBtn({ text, path = 0, icon }: PrimaryBtnProps) {
   const { darkTheme, handleButtonClick } = useSharedFunctionality();
   return (
     <motion.button
@@ -34,7 +53,7 @@ export function PrimeryBtn({ text, path = 0, icon = null }) {
     </motion.button>
   );
 }
-export function SecondaryBtn({ text, path = 0, on_Click = null }) {
+export function SecondaryBtn({ text, path = 0, on_Click = null }: SecondaryBtnProps) {
   const { darkTheme, handleButtonClick } = useSharedFunctionality();
   return (
     <motion.button
@@ -43,16 +62,14 @@ export function SecondaryBtn({ text, path = 0, on_Click = null }) {
       whileTap={{ scale: 0.98 }}
       onClick={() => {
         handleButtonClick(path);
-        if (on_Click) {
-          on_Click();
-        }
+        on_Click?.();
       }}
     >
       {text}
     </motion.button>
   );
 }
-export function DangerBtn({ text, path = 0 }) {
+export function DangerBtn({ text, path = 0 }: DangerBtnProps) {
   const { darkTheme, handleButtonClick } = useSharedFunctionality();
   return (
     <motion.button

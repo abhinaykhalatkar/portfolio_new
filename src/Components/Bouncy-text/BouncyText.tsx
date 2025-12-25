@@ -1,9 +1,19 @@
 import "./BouncyText.scss";
-import React, { useContext } from "react";
-import { ThemeContext } from "../../Context/ThemeContext/ThemeContext";
+import React from "react";
+import { useThemeContext } from "../../Context/ThemeContext/ThemeContext";
 
-export default function BouncyText({ name_class = "", text, font_size = "" }) {
-  const { darkTheme } = useContext(ThemeContext);
+type BouncyTextProps = {
+  name_class?: string;
+  text: string;
+  font_size?: string;
+};
+
+export default function BouncyText({
+  name_class = "",
+  text,
+  font_size = "",
+}: BouncyTextProps) {
+  const { darkTheme } = useThemeContext();
 
   return (
     <div

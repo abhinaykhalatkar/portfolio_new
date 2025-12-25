@@ -1,8 +1,8 @@
 import { styled } from "@mui/material/styles";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
-import { ThemeContext } from "../../Context/ThemeContext/ThemeContext";
-import React, { useContext } from "react";
+import React from "react";
+import { useThemeContext } from "../../Context/ThemeContext/ThemeContext";
 import "./Switch.scss";
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
@@ -53,13 +53,13 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 export function Switch1() {
-  const darkTheme = useContext(ThemeContext);
+  const { toggleTheme, darkTheme } = useThemeContext();
   return (
     <FormControlLabel
-      onClick={darkTheme.toggleTheme}
-      className={`${darkTheme.darkTheme ? "switch-dark" : "switch-white"}`}
+      onClick={toggleTheme}
+      className={`${darkTheme ? "switch-dark" : "switch-white"}`}
       control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
-      label={darkTheme.darkTheme?"Night Mode":"Light Mode"}
+      label={darkTheme ? "Night Mode" : "Light Mode"}
     />
   );
 }

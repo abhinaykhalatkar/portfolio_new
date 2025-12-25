@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { PageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
+import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import "./ProgressNav.scss";
 import ScrollBtn from "./ScrollBtn";
 // import { TfiLayoutSlider } from "react-icons/tfi";
@@ -16,21 +16,26 @@ export const navsData = [
   { Name: "03", Address: "/projects" },
   { Name: "04", Address: "/contact" },
 ];
-export function ProgressNav({ endPosition }) {
+
+type ProgressNavProps = {
+  endPosition: string;
+};
+
+export function ProgressNav({ endPosition }: ProgressNavProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const [squash, setSquash] = useState(false);
   const [prevIndex, setPrevIndex] = useState(
     navsData.findIndex((item) => item.Address === location.pathname)
   );
-  const activeNavLinkRef = useRef(null);
+  const activeNavLinkRef = useRef<HTMLSpanElement | null>(null);
   const [activeLinkWidth, setActiveLinkWidth] = useState(0);
   const {
     handleSetScrollDirection,
     setActiveIndex,
     isOnMainPage,
     isVerProgressBarOpen,
-  } = useContext(PageAnimationContext);
+  } = usePageAnimationContext();
 
   useEffect(() => {
     const lavalampElement = document.querySelector(".lavalamp");
@@ -46,11 +51,11 @@ export function ProgressNav({ endPosition }) {
     }
   }, [isOnMainPage]);
 
-  const handleSquash = (e) => {
-    let curAddress = e.target.getAttribute("address");
+  const handleSquash = (e: React.MouseEvent<HTMLSpanElement>) => {
+    const curAddress = e.currentTarget.getAttribute("data-address") || "";
     const index = navsData.findIndex((item) => item.Address === curAddress);
     setActiveIndex(index);
-    navigate(curAddress);
+    if (curAddress) navigate(curAddress);
     if (index !== -1) {
       handleSetScrollDirection(prevIndex >= index ? 1 : 0);
       setPrevIndex(index);
@@ -90,7 +95,7 @@ export function ProgressNav({ endPosition }) {
               className={`NavLink ${
                 location.pathname === el.Address ? "NavActive" : ""
               }`}
-              address={el.Address}
+              data-address={el.Address}
               onClick={handleSquash}
               ref={location.pathname === el.Address ? activeNavLinkRef : null}
             >

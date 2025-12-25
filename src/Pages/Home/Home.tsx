@@ -1,16 +1,16 @@
 import "./Home.scss";
-import React, { useContext } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { ThemeContext } from "../../Context/ThemeContext/ThemeContext";
-import { PageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
+import { useThemeContext } from "../../Context/ThemeContext/ThemeContext";
+import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import AnimatedLogo from "../../Components/logoAnimated/AnimatedLogo";
 import BouncyText from "../../Components/Bouncy-text/BouncyText";
 import { FaChevronDown } from "react-icons/fa";
 // import MyTimeline from "../../Components/MyTimeLine/MyTimeline";
 
 export default function HomePage() {
-  const { darkTheme } = useContext(ThemeContext);
+  const { darkTheme } = useThemeContext();
   const {
     pageVariants,
     pageTransition,
@@ -18,7 +18,7 @@ export default function HomePage() {
     screenSize,
     setActiveIndex,
     handleSetScrollDirection,
-  } = useContext(PageAnimationContext);
+  } = usePageAnimationContext();
   const navigate = useNavigate();
 
   return (

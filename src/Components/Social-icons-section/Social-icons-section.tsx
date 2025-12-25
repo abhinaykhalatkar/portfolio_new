@@ -1,14 +1,14 @@
 import "./Social-icons-section.scss";
-import React, { useContext } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { ThemeContext } from "../../Context/ThemeContext/ThemeContext";
-import { PageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
+import { useThemeContext } from "../../Context/ThemeContext/ThemeContext";
+import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import { BsGit, BsLinkedin, BsWhatsapp, BsInstagram } from "react-icons/bs";
 import BouncyText from "../Bouncy-text/BouncyText";
 
 export default function SocialIconsSection() {
-  const { darkTheme } = useContext(ThemeContext);
-  const { contentVariants2 } = useContext(PageAnimationContext);
+  const { darkTheme } = useThemeContext();
+  const { contentVariants2 } = usePageAnimationContext();
   const contactBtnData = [
     {
       name: "Git",

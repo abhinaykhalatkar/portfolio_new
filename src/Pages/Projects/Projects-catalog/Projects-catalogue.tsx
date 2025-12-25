@@ -1,21 +1,28 @@
-import "./Project2.scss";
-import React, { useContext } from "react";
+import "./Projects-catalogue.scss";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-// import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AiOutlineRight } from "react-icons/ai";
-import { ThemeContext } from "../../../../Context/ThemeContext/ThemeContext";
-import { PageAnimationContext } from "../../../../Context/PageAnimationContext/PageAnimationContext";
-import BouncyText from "../../../../Components/Bouncy-text/BouncyText";
+import { useThemeContext } from "../../../Context/ThemeContext/ThemeContext";
+import { usePageAnimationContext } from "../../../Context/PageAnimationContext/PageAnimationContext";
+import BouncyText from "../../../Components/Bouncy-text/BouncyText";
 
-export default function Project2() {
-  const { darkTheme } = useContext(ThemeContext);
+export default function ProjectscataloguePage() {
+  const { darkTheme } = useThemeContext();
   const {
+    setIsVerProgressBarOpen,
     pageVariants,
     subPageVariants,
     contentVariants,
-    // setHorizontalScrollDirection,
-  } = useContext(PageAnimationContext);
+    isOnMainPage,
+    setHorizontalScrollDirection,
+    setActiveProjectIndex,
+  } = usePageAnimationContext();
+  //0-down 1-up
 
+  useEffect(() => {
+    setIsVerProgressBarOpen(!isOnMainPage);
+  }, [setIsVerProgressBarOpen, isOnMainPage]);
   return (
     <motion.div
       className={`p-Project-catalogue ${darkTheme ? "" : "light"}`}
@@ -34,7 +41,7 @@ export default function Project2() {
           custom={0.2}
           variants={contentVariants}
         >
-          <BouncyText name_class="heading" text="PROJECT 2" />
+          <BouncyText name_class="heading" text="Catalogue Coming" />
         </motion.div>
 
         <motion.div
@@ -79,16 +86,17 @@ export default function Project2() {
           custom={0.8}
           variants={contentVariants}
         >
-          {/* <NavLink to="/projects" className="catalogue-link">
+          <NavLink to="/projects" className="catalogue-link">
             <div
               onClick={() => {
+                setActiveProjectIndex(4);
                 setHorizontalScrollDirection(1);
               }}
             >
               <div>Back to Projects</div>
               <AiOutlineRight />
             </div>
-          </NavLink> */}
+          </NavLink>
         </motion.div>
       </div>
     </motion.div>
