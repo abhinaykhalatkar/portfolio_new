@@ -152,7 +152,9 @@ function ChildApp1() {
   }, []);
 
   function getIsSidebarOpen(val: boolean) {
-    setIsSidebarOpen(!val);
+    // SideBar passes the *next* open state. Keep it as-is (no inversion),
+    // otherwise the page-content margin can get stuck and leave a blank gap.
+    setIsSidebarOpen(val);
   }
 
   const minSwipeDistance = 50;

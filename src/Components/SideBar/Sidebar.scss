@@ -1,7 +1,8 @@
 @import '../../Styles/variables';
 
 .c-sidebar {
-  width: 0;
+  /* This component is fixed-position; it shouldn't reserve layout space */
+  width: auto;
 
   .s-color-white {
     color: $white;
@@ -47,10 +48,14 @@
     overflow: hidden;
     padding-top: 80px;
     transition: transform 0.3s ease-in-out;
+
+    /* When closed (translated off-screen), don't trap clicks or cause odd overlays */
+    pointer-events: none;
   }
 
   .sidebar.open {
     transform: translateX(0);
+    pointer-events: auto;
   }
 
   .Nav {
