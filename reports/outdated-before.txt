@@ -1,0 +1,20 @@
+﻿Package                             Current   Wanted   Latest  Location                                        Depended by    Package Type  Homepage
+@emotion/react                      11.11.1  11.14.0  11.14.0  node_modules/@emotion/react                     portfolio_new  dependencies  https://github.com/emotion-js/emotion/tree/main#readme
+@emotion/styled                     11.11.0  11.14.1  11.14.1  node_modules/@emotion/styled                    portfolio_new  dependencies  https://github.com/emotion-js/emotion/tree/main#readme
+@mui/icons-material                  5.13.7   5.18.0    7.3.8  node_modules/@mui/icons-material                portfolio_new  dependencies  https://mui.com/material-ui/material-icons/
+@mui/material                        5.13.7   5.18.0    7.3.8  node_modules/@mui/material                      portfolio_new  dependencies  https://mui.com/material-ui/
+@testing-library/jest-dom            5.16.5   5.17.0    6.9.1  node_modules/@testing-library/jest-dom          portfolio_new  dependencies  https://github.com/testing-library/jest-dom#readme
+@testing-library/react               13.4.0   13.4.0   16.3.2  node_modules/@testing-library/react             portfolio_new  dependencies  https://github.com/testing-library/react-testing-library#readme
+@testing-library/user-event          13.5.0   13.5.0   14.6.1  node_modules/@testing-library/user-event        portfolio_new  dependencies  https://github.com/testing-library/user-event#readme
+axios                                 1.5.0   1.13.6   1.13.6  node_modules/axios                              portfolio_new  dependencies  https://axios-http.com
+firebase                             10.4.0  10.14.1  12.10.0  node_modules/firebase                           portfolio_new  dependencies  https://firebase.google.com/
+framer-motion                      10.12.18  10.18.0  12.34.5  node_modules/framer-motion                      portfolio_new  dependencies  https://github.com/motiondivision/motion#readme
+react                                18.2.0   18.3.1   19.2.4  node_modules/react                              portfolio_new  dependencies  https://react.dev/
+react-dom                            18.2.0   18.3.1   19.2.4  node_modules/react-dom                          portfolio_new  dependencies  https://react.dev/
+react-icons                          4.10.1   4.12.0    5.6.0  node_modules/react-icons                        portfolio_new  dependencies  https://github.com/react-icons/react-icons#readme
+react-router-dom                     6.14.0   6.30.3   7.13.1  node_modules/react-router-dom                   portfolio_new  dependencies  https://github.com/remix-run/react-router#readme
+react-vertical-timeline-component     3.6.0    3.6.0    4.0.0  node_modules/react-vertical-timeline-component  portfolio_new  dependencies
+sass                                 1.63.3   1.97.3   1.97.3  node_modules/sass                               portfolio_new  dependencies  https://github.com/sass/dart-sass
+styled-components                    5.3.10   5.3.11   6.3.11  node_modules/styled-components                  portfolio_new  dependencies  https://styled-components.com
+web-vitals                            2.1.4    2.1.4    5.1.0  node_modules/web-vitals                         portfolio_new  dependencies  https://github.com/GoogleChrome/web-vitals#readme
+

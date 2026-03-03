@@ -1,0 +1,5 @@
+﻿
+> portfolio_new@0.1.0 test
+> react-scripts test --watchAll=false
+
+

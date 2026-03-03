@@ -71,7 +71,7 @@ export default function ProjectscataloguePage() {
               className="gitLink"
               href="https://github.com/abhinaykhalatkar?tab=repositories"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               GitHub profile
             </a>

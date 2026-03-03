@@ -7,7 +7,7 @@ export function ThemeProvider(props) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   function toggleTheme() {
-    setDarkTheme(!darkTheme);
+    setDarkTheme((current) => !current);
   }
 
   return (

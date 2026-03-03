@@ -17,24 +17,25 @@ import bootStrapIcon from "../../Assets/skills-icons/bootstrap.svg";
 import firebaseIcon from "../../Assets/skills-icons/firebase.svg";
 import mongodbIcon from "../../Assets/skills-icons/mongodb.svg";
 
+const iconsArray = [
+  { icon: javascriptIcon, title: "JavaScript" },
+  { icon: reactIcon, title: "React" },
+  { icon: nodejsIcon, title: "Node.js" },
+  { icon: vueIcon, title: "Vue" },
+  { icon: gitIcon, title: "Git" },
+  { icon: mongodbIcon, title: "Mongo DB" },
+  { icon: firebaseIcon, title: "Firebase" },
+  { icon: sassIcon, title: "Sass" },
+  { icon: bootStrapIcon, title: "Bootstrap" },
+  { icon: dockerIcon, title: "Docker" },
+  { icon: figmaIcon, title: "Figma" },
+  { icon: googleIcon, title: "How to Google" },
+  { icon: mysqlIcon, title: "mySql" },
+  { icon: vscodeIcon, title: "VS Code" },
+];
+
 export default function SkillIconSection() {
   const { contentVariants } = useContext(PageAnimationContext);
-  const iconsArray = [
-    { icon: javascriptIcon, title: "JavaScript" },
-    { icon: reactIcon, title: "React" },
-    { icon: nodejsIcon, title: "Node.js" },
-    { icon: vueIcon, title: "Vue" },
-    { icon: gitIcon, title: "Git" },
-    { icon: mongodbIcon, title: "Mongo DB" },
-    { icon: firebaseIcon, title: "Firebase" },
-    { icon: sassIcon, title: "Sass" },
-    { icon: bootStrapIcon, title: "Bootstrap" },
-    { icon: dockerIcon, title: "Docker" },
-    { icon: figmaIcon, title: "Figma" },
-    { icon: googleIcon, title: "How to Google" },
-    { icon: mysqlIcon, title: "mySql" },
-    { icon: vscodeIcon, title: "VS Code" },
-  ];
 
   return (
     <div className="skills-icons-section">
@@ -49,7 +50,7 @@ export default function SkillIconSection() {
             variants={contentVariants}
             key={ind}
           >
-            <img className="icons" src={el.icon} alt="github" />
+            <img className="icons" src={el.icon} alt={el.title} />
             <p>{el.title}</p>
           </motion.div>
         );

@@ -83,7 +83,7 @@ export default function SkillsPage() {
             className="linkedInLink"
             href="https://www.linkedin.com/in/abhinay-khalatkar/"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             LinkedIn
           </a>{" "}

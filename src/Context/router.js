@@ -1,71 +1,67 @@
 import { Route, Routes, useLocation } from "react-router-dom";
-import { useContext, useEffect, useMemo } from "react";
-import HomePage from "../Pages/Home/Home";
-import AboutPage from "../Pages/About/About";
-import SkillsPage from "../Pages/Skills/Skills";
-import RenderProjectsRoutes from "../Pages/Projects/project-router";
-import ContactPage from "../Pages/Contact/Contact";
-import NotFound404 from "../Pages/NotFound404/NotFound404";
+import { Suspense, lazy, useContext, useEffect } from "react";
 import { PageAnimationContext } from "./PageAnimationContext/PageAnimationContext";
+
+const HomePage = lazy(() => import("../Pages/Home/Home"));
+const AboutPage = lazy(() => import("../Pages/About/About"));
+const SkillsPage = lazy(() => import("../Pages/Skills/Skills"));
+const RenderProjectsRoutes = lazy(() => import("../Pages/Projects/project-router"));
+const ContactPage = lazy(() => import("../Pages/Contact/Contact"));
+const NotFound404 = lazy(() => import("../Pages/NotFound404/NotFound404"));
+
+const routesData = [
+  {
+    path: "/",
+    element: <HomePage />,
+  },
+  {
+    path: "/about",
+    element: <AboutPage />,
+  },
+  {
+    path: "/skills",
+    element: <SkillsPage />,
+  },
+  {
+    path: "/projects",
+    hasChildRoute: true,
+  },
+  {
+    path: "/projects/*",
+    element: <RenderProjectsRoutes />,
+  },
+  {
+    path: "/contact",
+    element: <ContactPage />,
+  },
+  {
+    path: "*",
+    element: <NotFound404 />,
+  },
+];
 
 const RenderRoutes = () => {
   const location = useLocation();
-
-  const routesData = useMemo(
-    () => [
-      {
-        path: "/",
-        element: <HomePage />,
-      },
-      {
-        path: "/about",
-        element: <AboutPage />,
-      },
-      {
-        path: "/skills",
-        element: <SkillsPage />,
-      },
-      {
-        path: "/projects",
-        hasChildRoute: true,
-      },
-      {
-        path: "/projects/*",
-        element: <RenderProjectsRoutes />,
-      },
-      {
-        path: "/contact",
-        element: <ContactPage />,
-      },
-      {
-        path: "*",
-        element: <NotFound404 />,
-      },
-    ],
-    []
-  );
-  const { setIsOnMainPage, isOnMainPage } = useContext(PageAnimationContext);
+  const { setIsOnMainPage } = useContext(PageAnimationContext);
 
   useEffect(() => {
-    let curVal = false;
-    routesData.map((el) => {
-      if (el.path === location.pathname) curVal = true;
-      return null;
-    });
-    setIsOnMainPage(curVal);
-  }, [location.pathname, setIsOnMainPage, routesData, isOnMainPage]);
+    const isMainPage = routesData.some((route) => route.path === location.pathname);
+    setIsOnMainPage(isMainPage);
+  }, [location.pathname, setIsOnMainPage]);
 
   return (
-    <Routes>
-      {routesData.map((el, ind) => {
-        if (!el.hasChildRoute) {
-          return (
-            <Route key={`route${ind}`} path={el.path} element={el.element} />
-          );
-        }
-        return null;
-      })}
-    </Routes>
+    <Suspense fallback={null}>
+      <Routes>
+        {routesData.map((el, ind) => {
+          if (!el.hasChildRoute) {
+            return (
+              <Route key={`route${ind}`} path={el.path} element={el.element} />
+            );
+          }
+          return null;
+        })}
+      </Routes>
+    </Suspense>
   );
 };
 

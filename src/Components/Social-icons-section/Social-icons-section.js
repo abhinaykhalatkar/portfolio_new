@@ -6,31 +6,32 @@ import { PageAnimationContext } from "../../Context/PageAnimationContext/PageAni
 import { BsGit, BsLinkedin, BsWhatsapp, BsInstagram } from "react-icons/bs";
 import BouncyText from "../Bouncy-text/BouncyText";
 
+const contactBtnData = [
+  {
+    name: "Git",
+    icon: <BsGit className="fa fa-Git" />,
+    link: "https://github.com/abhinaykhalatkar",
+  },
+  {
+    name: "LinkedIn",
+    icon: <BsLinkedin className="fa fa-LinkedIn" />,
+    link: "https://www.linkedin.com/in/abhinay-khalatkar/",
+  },
+  {
+    name: "Whatsapp",
+    icon: <BsWhatsapp className="fa fa-Whatsapp" />,
+    link: "https://wa.me/+4917677947889",
+  },
+  {
+    name: "Instagram",
+    icon: <BsInstagram className="fa fa-Instagram" />,
+    link: "https://www.instagram.com/abhinaykhalatkar/",
+  },
+];
+
 export default function SocialIconsSection() {
   const { darkTheme } = useContext(ThemeContext);
   const { contentVariants2 } = useContext(PageAnimationContext);
-  const contactBtnData = [
-    {
-      name: "Git",
-      icon: <BsGit className={`fa fa-Git`} />,
-      link: "https://github.com/abhinaykhalatkar",
-    },
-    {
-      name: "LinkedIn",
-      icon: <BsLinkedin className={`fa fa-LinkedIn`} />,
-      link: "https://www.linkedin.com/in/abhinay-khalatkar/",
-    },
-    {
-      name: "Whatsapp",
-      icon: <BsWhatsapp className={`fa fa-Whatsapp`} />,
-      link: "https://wa.me/+4917677947889",
-    },
-    {
-      name: "Instagram",
-      icon: <BsInstagram className={`fa fa-Instagram`} />,
-      link: "https://www.instagram.com/abhinaykhalatkar/",
-    },
-  ];
 
   return (
     <div className={`contact-btn-section ${darkTheme ? "" : "light"}`}>
@@ -50,7 +51,7 @@ export default function SocialIconsSection() {
                   className={`${el.name} ${darkTheme ? "" : "light"}`}
                   href={el.link}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                 >
                   <span></span>
                   <span></span>

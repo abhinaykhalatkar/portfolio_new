@@ -33,12 +33,10 @@ export function ProgressNav({ endPosition }) {
   } = useContext(PageAnimationContext);
 
   useEffect(() => {
-    const lavalampElement = document.querySelector(".lavalamp");
-    const lavalampWidth = lavalampElement ? 90 : 0;
-    if (activeNavLinkRef.current && lavalampElement) {
-      setActiveLinkWidth(lavalampWidth);
+    if (activeNavLinkRef.current) {
+      setActiveLinkWidth(activeNavLinkRef.current.offsetWidth);
     }
-  }, [location.pathname, activeLinkWidth, isOnMainPage]);
+  }, [location.pathname, isOnMainPage]);
 
   useEffect(() => {
     if (isOnMainPage) {
@@ -47,7 +45,11 @@ export function ProgressNav({ endPosition }) {
   }, [isOnMainPage]);
 
   const handleSquash = (e) => {
-    let curAddress = e.target.getAttribute("address");
+    const curAddress = e.currentTarget.dataset.address;
+    if (!curAddress) {
+      return;
+    }
+
     const index = navsData.findIndex((item) => item.Address === curAddress);
     setActiveIndex(index);
     navigate(curAddress);
@@ -90,7 +92,7 @@ export function ProgressNav({ endPosition }) {
               className={`NavLink ${
                 location.pathname === el.Address ? "NavActive" : ""
               }`}
-              address={el.Address}
+              data-address={el.Address}
               onClick={handleSquash}
               ref={location.pathname === el.Address ? activeNavLinkRef : null}
             >

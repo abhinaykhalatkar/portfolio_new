@@ -53,13 +53,19 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 export function Switch1() {
-  const darkTheme = useContext(ThemeContext);
+  const { darkTheme, toggleTheme } = useContext(ThemeContext);
+
   return (
     <FormControlLabel
-      onClick={darkTheme.toggleTheme}
-      className={`${darkTheme.darkTheme ? "switch-dark" : "switch-white"}`}
-      control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
-      label={darkTheme.darkTheme?"Night Mode":"Light Mode"}
+      className={`${darkTheme ? "switch-dark" : "switch-white"}`}
+      control={
+        <MaterialUISwitch
+          sx={{ m: 1 }}
+          checked={darkTheme}
+          onChange={toggleTheme}
+        />
+      }
+      label={darkTheme ? "Night Mode" : "Light Mode"}
     />
   );
 }

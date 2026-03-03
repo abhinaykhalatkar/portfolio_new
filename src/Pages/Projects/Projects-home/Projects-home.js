@@ -52,7 +52,7 @@ export default function ProjectsHome() {
             className="gitLink"
             href="https://github.com/abhinaykhalatkar"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             GitHub profile
           </a>

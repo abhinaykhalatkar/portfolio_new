@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useCallback } from "react";
+import React, { useState, useContext, useEffect, useCallback, useRef } from "react";
 import "./App.scss";
 import githubDay from "./Assets/github-icon/github-day.svg";
 import githubNight from "./Assets/github-icon/github-night.svg";
@@ -18,9 +18,10 @@ import {
 function ChildApp1() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { darkTheme } = useContext(ThemeContext);
-  const [isScrolling, setIsScrolling] = useState(false);
-  const [touchStart, setTouchStart] = useState(null);
-  const [touchEnd, setTouchEnd] = useState(null);
+  const isScrollingRef = useRef(false);
+  const scrollResetTimerRef = useRef(null);
+  const touchStartRef = useRef(null);
+  const touchEndRef = useRef(null);
   const [endPosition, setEndPosition] = useState("67vw");
   const navigate = useNavigate();
   const location = useLocation();
@@ -39,10 +40,16 @@ function ChildApp1() {
   };
   const handleMouseWheel = useCallback(
     (e, swipe = 0) => {
-      if (isScrolling) return;
-      setIsScrolling(true);
-      setTimeout(() => setIsScrolling(false), 400);
-      if (activeIndex <= navsData.length && activeIndex >= 0) {
+      if (isScrollingRef.current) return;
+      isScrollingRef.current = true;
+      if (scrollResetTimerRef.current) {
+        clearTimeout(scrollResetTimerRef.current);
+      }
+      scrollResetTimerRef.current = setTimeout(() => {
+        isScrollingRef.current = false;
+      }, 400);
+
+      if (activeIndex < navsData.length && activeIndex >= 0) {
         let newIndex;
         if (swipe === "L" || e.deltaY > 0) {
           if (isOnMainPage) {
@@ -84,15 +91,18 @@ function ChildApp1() {
       isOnMainPage,
       activeIndex,
       handleSetScrollDirection,
-      isScrolling,
       navigate,
       setActiveIndex,
     ]
   );
+
   useEffect(() => {
     window.addEventListener("wheel", handleMouseWheel);
     return () => {
       window.removeEventListener("wheel", handleMouseWheel);
+      if (scrollResetTimerRef.current) {
+        clearTimeout(scrollResetTimerRef.current);
+      }
     };
   }, [handleMouseWheel]);
 
@@ -103,13 +113,15 @@ function ChildApp1() {
   const minSwipeDistance = 50;
 
   const onTouchStart = (e) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
+    touchEndRef.current = null;
+    touchStartRef.current = e.targetTouches[0].clientX;
   };
-  const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
+  const onTouchMove = (e) => {
+    touchEndRef.current = e.targetTouches[0].clientX;
+  };
   const onTouchEnd = (e) => {
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
+    if (touchStartRef.current === null || touchEndRef.current === null) return;
+    const distance = touchStartRef.current - touchEndRef.current;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
     if (isLeftSwipe) {
@@ -163,7 +175,7 @@ function ChildApp1() {
                   className="gitIcon"
                   href="https://github.com/abhinaykhalatkar"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}

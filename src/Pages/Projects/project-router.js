@@ -1,12 +1,13 @@
 import { Route, Routes } from "react-router-dom";
-import ProjectsHome from "./Projects-home/Projects-home";
-import ProjectsCataloguePage from "./Projects-catalog/Projects-catalogue";
-import Project1 from "./Projects-catalog/Project1/Project1";
-import Project2 from "./Projects-catalog/Project2/Project2";
-import Project3 from "./Projects-catalog/Project3/Project3";
-import Project4 from "./Projects-catalog/Project4/Project4";
+import { Suspense, lazy } from "react";
 
-import NotFound404 from "../NotFound404/NotFound404";
+const ProjectsHome = lazy(() => import("./Projects-home/Projects-home"));
+const ProjectsCataloguePage = lazy(() => import("./Projects-catalog/Projects-catalogue"));
+const Project1 = lazy(() => import("./Projects-catalog/Project1/Project1"));
+const Project2 = lazy(() => import("./Projects-catalog/Project2/Project2"));
+const Project3 = lazy(() => import("./Projects-catalog/Project3/Project3"));
+const Project4 = lazy(() => import("./Projects-catalog/Project4/Project4"));
+const NotFound404 = lazy(() => import("../NotFound404/NotFound404"));
 
 export const projectsRoutesData = [
   {
@@ -45,16 +46,18 @@ export const projectsRoutesData = [
 
 export default function RenderProjectsRoutes() {
   return (
-    <Routes>
-      {projectsRoutesData.map((el, ind) => {
-        return (
-          <Route
-            key={`route-projects${ind}`}
-            path={el.path}
-            element={el.element}
-          />
-        );
-      })}
-    </Routes>
+    <Suspense fallback={null}>
+      <Routes>
+        {projectsRoutesData.map((el, ind) => {
+          return (
+            <Route
+              key={`route-projects${ind}`}
+              path={el.path}
+              element={el.element}
+            />
+          );
+        })}
+      </Routes>
+    </Suspense>
   );
 }
