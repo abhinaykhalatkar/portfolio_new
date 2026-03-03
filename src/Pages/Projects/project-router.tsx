@@ -10,35 +10,36 @@ import NotFound404 from "../NotFound404/NotFound404";
 
 export const projectsRoutesData = [
   {
-    path: "/",
+    // index route for `/projects`
+    path: "",
     element: <ProjectsHome />,
   },
   {
-    path: "/project-1",
+    path: "project-1",
     element: <Project1 />,
   },
   {
-    path: "/project-2",
+    path: "project-2",
     element: <Project2 />,
   },
   {
-    path: "/project-3",
+    path: "project-3",
     element: <Project3 />,
   },
   {
-    path: "/project-4",
+    path: "project-4",
     element: <Project4 />,
   },
   {
-    path: "/project-5",
+    path: "project-5",
     element: <ProjectsCataloguePage />,
   },
   {
-    path: "/project-catalogue",
+    path: "project-catalogue",
     element: <ProjectsCataloguePage />,
   },
   {
-    path: "/*",
+    path: "*",
     element: <NotFound404 />,
   },
 ];
