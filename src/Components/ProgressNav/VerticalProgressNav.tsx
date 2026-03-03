@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import "./VerticalProgressNav.scss";
 
-// let isOnMainPageP = true;
+export const PROJECTS_CATALOGUE_ALIAS = "/projects/project-catalogue";
+
 export const projectsNavData = [
   { Name: "05", Address: "/projects/project-5" },
   { Name: "04", Address: "/projects/project-4" },
@@ -12,6 +13,19 @@ export const projectsNavData = [
   { Name: "02", Address: "/projects/project-2" },
   { Name: "01", Address: "/projects/project-1" },
 ];
+
+export function resolveProjectNavIndex(pathname: string): number {
+  const directIndex = projectsNavData.findIndex((item) => item.Address === pathname);
+  if (directIndex !== -1) {
+    return directIndex;
+  }
+
+  if (pathname === PROJECTS_CATALOGUE_ALIAS) {
+    return 0;
+  }
+
+  return -1;
+}
 
 type VerticalProgressNavProps = {
   setEndPosition: React.Dispatch<React.SetStateAction<string>>;
@@ -25,49 +39,64 @@ export function VerticalProgressNav({
   const location = useLocation();
   const navigate = useNavigate();
   const [squash, setSquash] = useState(false);
-  const [prevIndex, setPrevIndex] = useState(
-    projectsNavData.findIndex((item) => item.Address === location.pathname)
-  );
+  const currentIndex = resolveProjectNavIndex(location.pathname);
+
+  const [prevIndex, setPrevIndex] = useState(currentIndex);
   const activeNavLinkRef = useRef<HTMLSpanElement | null>(null);
+  const squashTimerRef = useRef<number | null>(null);
   const [activeVerLinkWidth, setActiveVerLinkWidth] = useState(0);
+
   const { setActiveProjectIndex, setHorizontalScrollDirection, isOnMainPage } =
     usePageAnimationContext();
 
   useEffect(() => {
-    const lavalampElement = document.querySelector(".lavalamp1");
-    const lavalampWidth = lavalampElement ? 90 : 0;
-    if (activeNavLinkRef.current && lavalampElement) {
-      setActiveVerLinkWidth(lavalampWidth);
+    if (activeNavLinkRef.current) {
+      setActiveVerLinkWidth(activeNavLinkRef.current.offsetWidth);
     }
-  }, [location.pathname, activeVerLinkWidth, isOnMainPage]);
+  }, [currentIndex, isOnMainPage]);
 
   useEffect(() => {
     if (!isOnMainPage) {
-      setSquash(!isOnMainPage);
+      setSquash(true);
     }
   }, [isOnMainPage]);
 
-  const handleSquash = (e: React.MouseEvent<HTMLSpanElement>) => {
-    const curAddress = e.currentTarget.getAttribute("data-address") || "";
-    const index = projectsNavData.findIndex(
-      (item) => item.Address === curAddress
-    );
-    setActiveProjectIndex(index);
-    if (curAddress) navigate(curAddress);
-    if (index !== -1) {
-      setHorizontalScrollDirection(prevIndex >= index ? 0 : 1);
-      setPrevIndex(index);
+  useEffect(() => {
+    return () => {
+      if (squashTimerRef.current !== null) {
+        window.clearTimeout(squashTimerRef.current);
+      }
+    };
+  }, []);
+
+  const handleSquash = (event: React.MouseEvent<HTMLSpanElement>) => {
+    const currentAddress = event.currentTarget.getAttribute("data-address") || "";
+    const index = resolveProjectNavIndex(currentAddress);
+
+    if (!currentAddress || index === -1) {
+      return;
     }
+
+    setActiveProjectIndex(index);
+    navigate(currentAddress);
+
+    setHorizontalScrollDirection(prevIndex >= index ? 0 : 1);
+    setPrevIndex(index);
+
     setSquash(true);
-    setTimeout(() => {
+    if (squashTimerRef.current !== null) {
+      window.clearTimeout(squashTimerRef.current);
+    }
+    squashTimerRef.current = window.setTimeout(() => {
       setSquash(false);
+      squashTimerRef.current = null;
     }, 1000);
   };
 
   useEffect(() => {
     const handleResize = () => {
-      let windowWidth = window.innerWidth;
-      let xPositionVal =
+      const windowWidth = window.innerWidth;
+      const xPositionValue =
         windowWidth < 1000
           ? 67
           : windowWidth < 1200
@@ -77,7 +106,7 @@ export function VerticalProgressNav({
           : windowWidth < 2500
           ? 57
           : 53;
-      setEndPosition(`${xPositionVal}vw`);
+      setEndPosition(`${xPositionValue}vw`);
     };
 
     window.addEventListener("resize", handleResize);
@@ -103,18 +132,17 @@ export function VerticalProgressNav({
           transform: "translateX(-50%)",
         }}
       >
-        {projectsNavData.map((el, ind) => {
+        {projectsNavData.map((item, index) => {
+          const isActive = currentIndex === index;
           return (
             <span
-              key={`sideNav ${ind}`}
-              className={`NavLink ${
-                location.pathname === el.Address ? "NavActive" : ""
-              }`}
-              data-address={el.Address}
+              key={`project-nav-${index}`}
+              className={`NavLink ${isActive ? "NavActive" : ""}`}
+              data-address={item.Address}
               onClick={handleSquash}
-              ref={location.pathname === el.Address ? activeNavLinkRef : null}
+              ref={isActive ? activeNavLinkRef : null}
             >
-              {el.Name}
+              {item.Name}
             </span>
           );
         })}
@@ -123,12 +151,11 @@ export function VerticalProgressNav({
           className={`lavalamp1 ${squash ? "squash" : ""}`}
           animate={{
             x:
-              projectsNavData.findIndex(
-                (el) => el.Address === location.pathname
-              ) *
-                activeVerLinkWidth -
-              activeVerLinkWidth * 2,
+              currentIndex === -1
+                ? 0
+                : currentIndex * activeVerLinkWidth - activeVerLinkWidth * 2,
             width: activeVerLinkWidth,
+            opacity: currentIndex === -1 ? 0 : 1,
           }}
           transition={{ ease: "easeOut", duration: 0.3 }}
         />

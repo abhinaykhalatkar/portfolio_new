@@ -3,9 +3,9 @@
 .p-Project-home {
     min-width: 70vw;
     min-height: 100vh;
-    /* allow content to fit on small screens without clipping */
-    overflow-x: hidden;
-    overflow-y: auto;
+    height: 100vh;
+    overflow: hidden;
+    overscroll-behavior: none;
     padding: 0 50px;
     // background-color: $darkBlack;
     // background-image: linear-gradient(135deg, $black 38%, $darkBlack ),
@@ -74,6 +74,8 @@
                 padding: 8px;
                 border-radius: 14px;
                 flex: 1;
+                overscroll-behavior-x: contain;
+                touch-action: pan-x;
 
                 /* hide scrollbar while keeping scrollability */
                 -ms-overflow-style: none;
@@ -117,21 +119,6 @@
             }
         }
 
-        &.light {
-            .projects-toolbar {
-                .toolbar-btn { color: $black; }
-                .toolbar-item {
-                    border: 1px solid rgba($black, 0.12);
-                    background: rgba($white, 0.35);
-                    color: $black;
-                    &.active {
-                        border-color: rgba($heighlightBlue, 0.8);
-                        background: rgba($white, 0.55);
-                    }
-                }
-            }
-        }
-
         .para-content {
             align-self: center;
             width: min(920px, 100%);
@@ -152,11 +139,18 @@
 
         }
 
+        .projects-entry-cta {
+            align-self: center;
+            margin-bottom: 1.2rem;
+        }
+
         .projects-slider {
             position: relative;
             width: min(920px, 100%);
             align-self: center;
             margin: 12px 0 22px;
+            overscroll-behavior-x: contain;
+            touch-action: pan-x;
         }
 
         .project-card {
@@ -368,6 +362,11 @@
             }
         }
 
+        @media only screen and (max-width:900px), only screen and (max-height: 780px) {
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
         @media only screen and (min-width: 480px) and (max-width:768px) {
 
             .heading {
@@ -400,4 +399,20 @@
         }
     }
 
+    &.light {
+        .project-page-content {
+            .projects-toolbar {
+                .toolbar-btn { color: $black; }
+                .toolbar-item {
+                    border: 1px solid rgba($black, 0.12);
+                    background: rgba($white, 0.35);
+                    color: $black;
+                    &.active {
+                        border-color: rgba($heighlightBlue, 0.8);
+                        background: rgba($white, 0.55);
+                    }
+                }
+            }
+        }
+    }
 }

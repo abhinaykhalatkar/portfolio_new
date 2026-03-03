@@ -1,31 +1,14 @@
 import "./Projects-home.scss";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useCallback, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useThemeContext } from "../../../Context/ThemeContext/ThemeContext";
 import { usePageAnimationContext } from "../../../Context/PageAnimationContext/PageAnimationContext";
+import { SecondaryBtn } from "../../../Components/Buttons/Buttons";
 import BouncyText from "../../../Components/Bouncy-text/BouncyText";
 import { AiOutlineRight } from "react-icons/ai";
-
-type GithubRepo = {
-  id: number;
-  name: string;
-  full_name: string;
-  html_url: string;
-  description: string | null;
-  language: string | null;
-  stargazers_count: number;
-  forks_count: number;
-  updated_at: string;
-  archived: boolean;
-  fork: boolean;
-  private: boolean;
-};
-
-type RepoLoadState =
-  | { status: "idle" | "loading"; repos: GithubRepo[] }
-  | { status: "success"; repos: GithubRepo[] }
-  | { status: "error"; repos: GithubRepo[]; message: string };
+import { projectsNavData } from "../../../Components/ProgressNav/VerticalProgressNav";
+import { getGithubUsername, useGithubRepos } from "../shared/githubRepos";
 
 function techClassName(tech: string): string {
   return `tech-${tech
@@ -44,58 +27,12 @@ export default function ProjectsHome() {
     pageVariants,
     pageTransition,
     contentVariants,
+    setActiveProjectIndex,
   } = usePageAnimationContext();
 
-  const githubUsername = useMemo(() => {
-    const configured = import.meta.env.VITE_GITHUB_USERNAME;
-    return typeof configured === "string" && configured.trim().length > 0
-      ? configured.trim()
-      : "abhinaykhalatkar";
-  }, []);
-
-  const [repoState, setRepoState] = useState<RepoLoadState>({
-    status: "idle",
-    repos: [],
-  });
-
-  useEffect(() => {
-    const controller = new AbortController();
-    setRepoState({ status: "loading", repos: [] });
-
-    const url = `https://api.github.com/users/${encodeURIComponent(
-      githubUsername
-    )}/repos?per_page=100&sort=updated`;
-
-    void fetch(url, {
-      signal: controller.signal,
-      headers: {
-        Accept: "application/vnd.github+json",
-      },
-    })
-      .then(async (res) => {
-        if (!res.ok) {
-          throw new Error(`GitHub API error: ${res.status} ${res.statusText}`);
-        }
-        const data: unknown = await res.json();
-        if (!Array.isArray(data)) {
-          throw new Error("Unexpected GitHub API response");
-        }
-        return data as GithubRepo[];
-      })
-      .then((repos) => {
-        const safeRepos = repos
-          .filter((r) => !r.private)
-          .sort((a, b) => b.updated_at.localeCompare(a.updated_at));
-        setRepoState({ status: "success", repos: safeRepos });
-      })
-      .catch((err: unknown) => {
-        if (controller.signal.aborted) return;
-        const message = err instanceof Error ? err.message : "Failed to load repos";
-        setRepoState({ status: "error", repos: [], message });
-      });
-
-    return () => controller.abort();
-  }, [githubUsername]);
+  const navigate = useNavigate();
+  const githubUsername = getGithubUsername();
+  const repoState = useGithubRepos(githubUsername);
 
   const [activeSlide, setActiveSlide] = useState(0);
   const [slideDirection, setSlideDirection] = useState<1 | -1>(1);
@@ -108,9 +45,9 @@ export default function ProjectsHome() {
   }, [slideCount]);
 
   const formatUpdated = useCallback((iso: string): string => {
-    const d = new Date(iso);
-    if (Number.isNaN(d.getTime())) return "";
-    return d.toLocaleDateString(undefined, {
+    const parsed = new Date(iso);
+    if (Number.isNaN(parsed.getTime())) return "";
+    return parsed.toLocaleDateString(undefined, {
       year: "numeric",
       month: "short",
     });
@@ -119,8 +56,8 @@ export default function ProjectsHome() {
   const clampIndex = useCallback(
     (next: number) => {
       if (slideCount <= 0) return 0;
-      const m = next % slideCount;
-      return m < 0 ? m + slideCount : m;
+      const modulo = next % slideCount;
+      return modulo < 0 ? modulo + slideCount : modulo;
     },
     [slideCount]
   );
@@ -139,14 +76,21 @@ export default function ProjectsHome() {
   const goNext = useCallback(() => {
     if (slideCount <= 0) return;
     setSlideDirection(1);
-    setActiveSlide((prev) => clampIndex(prev + 1));
+    setActiveSlide((previous) => clampIndex(previous + 1));
   }, [clampIndex, slideCount]);
 
   const goPrev = useCallback(() => {
     if (slideCount <= 0) return;
     setSlideDirection(-1);
-    setActiveSlide((prev) => clampIndex(prev - 1));
+    setActiveSlide((previous) => clampIndex(previous - 1));
   }, [clampIndex, slideCount]);
+
+  const enterProjectSections = useCallback(() => {
+    const entryIndex = projectsNavData.length - 1;
+    setHorizontalScrollDirection(1);
+    setActiveProjectIndex(entryIndex);
+    navigate(projectsNavData[entryIndex].Address);
+  }, [navigate, setActiveProjectIndex, setHorizontalScrollDirection]);
 
   useEffect(() => {
     setHorizontalScrollDirection(2);
@@ -184,6 +128,7 @@ export default function ProjectsHome() {
     >
       <div className="project-page-content">
         <BouncyText name_class="heading" text="Projects" />
+
         <motion.div
           className="projects-toolbar"
           initial="hidden"
@@ -203,21 +148,21 @@ export default function ProjectsHome() {
             ‹
           </button>
           <div className="toolbar-track" role="tablist" aria-label="Projects">
-            {repos.map((r, idx) => {
-              const isActive = idx === activeSlide;
+            {repos.map((repo, index) => {
+              const isActive = index === activeSlide;
               return (
                 <button
-                  key={r.id}
+                  key={repo.id}
                   type="button"
                   role="tab"
                   aria-selected={isActive}
                   className={`toolbar-item ${isActive ? "active" : ""}`}
-                  onClick={() => goTo(idx)}
+                  onClick={() => goTo(index)}
                 >
                   <div className="toolbar-time">
-                    Updated {formatUpdated(r.updated_at)}
+                    Updated {formatUpdated(repo.updated_at)}
                   </div>
-                  <div className="toolbar-title">{r.name}</div>
+                  <div className="toolbar-title">{repo.name}</div>
                 </button>
               );
             })}
@@ -251,11 +196,21 @@ export default function ProjectsHome() {
           >
             GitHub profile
           </a>
-          . If you want to collaborate, feel free to
-          <Link className="contactLink" to={"/contact"}>
-            {" "}
-            reach out and Connect !
+          . You can jump into section-based project browsing anytime, or{" "}
+          <Link className="contactLink" to="/contact">
+            reach out and connect.
           </Link>
+        </motion.div>
+
+        <motion.div
+          className="projects-entry-cta"
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          custom={0.62}
+          variants={contentVariants}
+        >
+          <SecondaryBtn text="Open Project Sections" on_Click={enterProjectSections} />
         </motion.div>
 
         <motion.div
@@ -263,10 +218,10 @@ export default function ProjectsHome() {
           initial="hidden"
           animate="visible"
           exit="exit"
-          custom={0.7}
+          custom={0.72}
           variants={contentVariants}
         >
-          {repoState.status === "loading" ? (
+          {repoState.status === "loading" || repoState.status === "idle" ? (
             <div className={`project-card ${darkTheme ? "" : "light"}`}>
               <div className="project-card-title">Loading repositories…</div>
               <div className="project-card-summary">

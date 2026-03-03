@@ -1,0 +1,122 @@
+@import '../../../Styles/variables';
+
+.p-Project-catalogue {
+  min-width: 70vw;
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  overscroll-behavior: none;
+  padding: 0 50px;
+  background-image: linear-gradient(135deg, $darkGray 38%, $darkBlue),
+    linear-gradient(315deg, $darkBlack 10%, $black 74%);
+
+  &.light {
+    background: #e0eafc;
+    background: -webkit-linear-gradient(to right, #cfdef3, #e0eafc);
+    background: linear-gradient(to right, #cfdef3, #e0eafc);
+  }
+
+  .project-page-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    text-align: center;
+    padding: 110px 0 36px;
+
+    .heading-div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .heading {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 560px;
+      font-size: 3.5rem;
+      align-self: center;
+      font-weight: 500;
+      justify-content: center;
+      margin: 0;
+    }
+
+    .project-section-subtitle {
+      align-self: center;
+      width: min(920px, 100%);
+      margin: 12px auto 16px;
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    .project-section-carousel {
+      align-self: center;
+      width: min(920px, 100%);
+      margin: 4px auto 0;
+    }
+
+    .catalogue-link-div {
+      display: flex;
+      justify-content: center;
+      margin-top: 14px;
+
+      .catalogue-link {
+        display: flex;
+        justify-content: center;
+        text-decoration: none;
+
+        & > div {
+          display: flex;
+          color: darken($heighlightBlue, 20%);
+          transition: color 0.3s ease;
+
+          div {
+            margin-right: 7px;
+          }
+
+          svg {
+            align-self: center;
+            transition: transform 0.3s ease;
+          }
+
+          &:hover {
+            color: darken($heighlightBlue, 0%);
+
+            svg {
+              transform: rotate(-90deg);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 900px), only screen and (max-height: 780px) {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+    .project-page-content {
+      padding-top: 90px;
+
+      .heading {
+        max-width: 420px;
+        font-size: 2.4rem;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    min-width: 320px;
+    padding: 0 18px;
+
+    .project-page-content {
+      .heading {
+        max-width: 315px;
+        font-size: 2rem;
+      }
+
+      .project-section-subtitle {
+        font-size: 0.92rem;
+      }
+    }
+  }
+}

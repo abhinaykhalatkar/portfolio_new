@@ -14,6 +14,7 @@
 .c-app {
   font-size: 1.1rem;
   line-height: 1.5;
+  height: 100vh;
 
   .p-app {
     display: flex;
@@ -53,12 +54,15 @@
   background-size: cover;
   background-repeat: no-repeat;
   overflow: hidden;
+  overscroll-behavior: none;
 
   .page-content {
     transition: margin 0.3s ease-in-out;
     height: 100vh;
+    height: 100dvh;
     width: 100vw;
     overflow: hidden;
+    overscroll-behavior: contain;
   }
 
   .page-content-collapsed {

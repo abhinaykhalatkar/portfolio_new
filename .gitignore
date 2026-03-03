@@ -12,6 +12,7 @@ Cred/
 
 # production
 /build
+build-deploy.zip
 
 # misc
 .DS_Store

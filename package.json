@@ -46,7 +46,11 @@
     "stop": "taskkill -F -IM node.exe",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "audit": "npm audit",
+    "audit:prod": "npm audit --omit=dev",
+    "package:deploy": "npm run build && (cd build && zip -r ../build-deploy.zip .)"
   },
   "eslintConfig": {
     "extends": [

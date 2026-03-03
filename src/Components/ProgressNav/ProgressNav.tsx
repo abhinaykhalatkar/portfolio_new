@@ -4,11 +4,7 @@ import { motion } from "framer-motion";
 import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import "./ProgressNav.scss";
 import ScrollBtn from "./ScrollBtn";
-// import { TfiLayoutSlider } from "react-icons/tfi";
-// import { AiOutlineLeft } from "react-icons/ai";
-// import { VerticalProgressNav } from "./VerticalProgressNav";
 
-// let isOnMainPageP = true;
 export const navsData = [
   { Name: "00", Address: "/" },
   { Name: "01", Address: "/about" },
@@ -24,12 +20,16 @@ type ProgressNavProps = {
 export function ProgressNav({ endPosition }: ProgressNavProps) {
   const location = useLocation();
   const navigate = useNavigate();
+
   const [squash, setSquash] = useState(false);
   const [prevIndex, setPrevIndex] = useState(
     navsData.findIndex((item) => item.Address === location.pathname)
   );
+
   const activeNavLinkRef = useRef<HTMLSpanElement | null>(null);
+  const squashTimerRef = useRef<number | null>(null);
   const [activeLinkWidth, setActiveLinkWidth] = useState(0);
+
   const {
     handleSetScrollDirection,
     setActiveIndex,
@@ -38,31 +38,47 @@ export function ProgressNav({ endPosition }: ProgressNavProps) {
   } = usePageAnimationContext();
 
   useEffect(() => {
-    const lavalampElement = document.querySelector(".lavalamp");
-    const lavalampWidth = lavalampElement ? 90 : 0;
-    if (activeNavLinkRef.current && lavalampElement) {
-      setActiveLinkWidth(lavalampWidth);
+    if (activeNavLinkRef.current) {
+      setActiveLinkWidth(activeNavLinkRef.current.offsetWidth);
     }
-  }, [location.pathname, activeLinkWidth, isOnMainPage]);
+  }, [isOnMainPage, location.pathname]);
 
   useEffect(() => {
     if (isOnMainPage) {
-      setSquash(isOnMainPage);
+      setSquash(true);
     }
   }, [isOnMainPage]);
 
-  const handleSquash = (e: React.MouseEvent<HTMLSpanElement>) => {
-    const curAddress = e.currentTarget.getAttribute("data-address") || "";
-    const index = navsData.findIndex((item) => item.Address === curAddress);
-    setActiveIndex(index);
-    if (curAddress) navigate(curAddress);
-    if (index !== -1) {
-      handleSetScrollDirection(prevIndex >= index ? 1 : 0);
-      setPrevIndex(index);
+  useEffect(() => {
+    return () => {
+      if (squashTimerRef.current !== null) {
+        window.clearTimeout(squashTimerRef.current);
+      }
+    };
+  }, []);
+
+  const handleSquash = (event: React.MouseEvent<HTMLSpanElement>) => {
+    const currentAddress = event.currentTarget.getAttribute("data-address") || "";
+    const index = navsData.findIndex((item) => item.Address === currentAddress);
+
+    if (!currentAddress || index === -1) {
+      return;
     }
+
+    setActiveIndex(index);
+    navigate(currentAddress);
+
+    handleSetScrollDirection(prevIndex >= index ? 1 : 0);
+    setPrevIndex(index);
+
     setSquash(true);
-    setTimeout(() => {
+    if (squashTimerRef.current !== null) {
+      window.clearTimeout(squashTimerRef.current);
+    }
+
+    squashTimerRef.current = window.setTimeout(() => {
       setSquash(false);
+      squashTimerRef.current = null;
     }, 1000);
   };
 
@@ -88,18 +104,17 @@ export function ProgressNav({ endPosition }: ProgressNavProps) {
           position: "fixed",
         }}
       >
-        {navsData.map((el, ind) => {
+        {navsData.map((item, index) => {
+          const isActive = location.pathname === item.Address;
           return (
             <span
-              key={`sideNav ${ind}`}
-              className={`NavLink ${
-                location.pathname === el.Address ? "NavActive" : ""
-              }`}
-              data-address={el.Address}
+              key={`main-nav-${index}`}
+              className={`NavLink ${isActive ? "NavActive" : ""}`}
+              data-address={item.Address}
               onClick={handleSquash}
-              ref={location.pathname === el.Address ? activeNavLinkRef : null}
+              ref={isActive ? activeNavLinkRef : null}
             >
-              {el.Name}
+              {item.Name}
             </span>
           );
         })}
@@ -108,7 +123,7 @@ export function ProgressNav({ endPosition }: ProgressNavProps) {
           className={`lavalamp ${squash ? "squash" : ""}`}
           animate={{
             x:
-              navsData.findIndex((el) => el.Address === location.pathname) *
+              navsData.findIndex((item) => item.Address === location.pathname) *
                 activeLinkWidth -
               activeLinkWidth * 2,
             width: activeLinkWidth,

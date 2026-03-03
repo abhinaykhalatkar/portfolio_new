@@ -1,6 +1,11 @@
 # Portfolio (Vite + React + TypeScript)
 
-This project uses **Vite** for dev/build and deploys as a static SPA.
+Portfolio single-page application built with Vite and React, with animated route transitions and GitHub-backed project sections.
+
+## Requirements
+
+- Node.js `20+`
+- npm `10+`
 
 ## Scripts
 
@@ -8,52 +13,24 @@ This project uses **Vite** for dev/build and deploys as a static SPA.
 - `npm run build` - build production assets into `build/`
 - `npm run preview` - preview the production build locally
 - `npm test` - run unit tests (Vitest)
+- `npm run test:watch` - run tests in watch mode
+- `npm run audit` - run dependency audit
+- `npm run audit:prod` - run production-only dependency audit
+- `npm run package:deploy` - build and create `build-deploy.zip`
 
-## Deploy to Firebase Hosting (free plan)
+## Environment
 
-### 1) Install Firebase CLI
+Copy `.env.example` to `.env` if you need custom values:
 
-```zsh
-npm i -g firebase-tools
-```
+- `VITE_BASE_PATH` (default `/`) for sub-path deployments
+- `VITE_GITHUB_USERNAME` to override the GitHub account used in project carousels
 
-### 2) Initialize Firebase Hosting
+## Deployment
 
-Run this once in the repo root:
+### Hetzner Webhosting S
 
-```zsh
-firebase login
-firebase init hosting
-```
+Use the manual deployment guide in [DEPLOY_HETZNER.md](DEPLOY_HETZNER.md).
 
-Important settings:
+### Firebase Hosting
 
-- **Public directory**: `build`
-- **Configure as a single-page app (rewrite all urls to /index.html)**: **Yes**
-
-This repo already includes a `firebase.json` with the correct SPA rewrite:
-
-```json
-{
-	"hosting": {
-		"public": "build",
-		"rewrites": [{ "source": "**", "destination": "/index.html" }]
-	}
-}
-```
-
-### 3) Set your Firebase project id
-
-Update `.firebaserc` and replace the placeholder `REPLACE_WITH_YOUR_FIREBASE_PROJECT_ID`.
-
-### 4) Build and deploy
-
-```zsh
-npm run build
-firebase deploy
-```
-
-## Routing note (React Router)
-
-Because this is an SPA using client-side routing, Firebase must rewrite all routes to `index.html`.
-That’s handled by the `rewrites` rule in `firebase.json`.
+If you deploy to Firebase, keep SPA rewrites enabled so all routes resolve to `index.html`.

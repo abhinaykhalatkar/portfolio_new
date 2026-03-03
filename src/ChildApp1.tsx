@@ -13,19 +13,25 @@ import { SecondaryBtn } from "./Components/Buttons/Buttons";
 import {
   VerticalProgressNav,
   projectsNavData,
+  resolveProjectNavIndex,
 } from "./Components/ProgressNav/VerticalProgressNav";
 
-type SwipeDirection = "L" | "R";
+type Direction = "next" | "prev";
+
+const PROJECTS_HOME_PATH = "/projects";
 
 function ChildApp1() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { darkTheme } = useThemeContext();
-  // Use refs for throttling so we don't re-render on every wheel event.
-  const isScrollingRef = useRef(false);
-  const scrollUnlockTimerRef = useRef<number | null>(null);
+
+  const wheelAccumulatorRef = useRef(0);
+  const lastWheelEventAtRef = useRef(0);
+  const wheelCooldownUntilRef = useRef(0);
+
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [endPosition, setEndPosition] = useState("67vw");
+
   const navigate = useNavigate();
   const location = useLocation();
   const {
@@ -41,93 +47,106 @@ function ChildApp1() {
   const contactBtnHandler = () => {
     setActiveIndex(4);
   };
-  const unlockScroll = useCallback(() => {
-    isScrollingRef.current = false;
-    if (scrollUnlockTimerRef.current !== null) {
-      window.clearTimeout(scrollUnlockTimerRef.current);
-      scrollUnlockTimerRef.current = null;
+
+  useEffect(() => {
+    const mainRouteIndex = navsData.findIndex(
+      (item) => item.Address === location.pathname
+    );
+    if (mainRouteIndex !== -1 && mainRouteIndex !== activeIndex) {
+      setActiveIndex(mainRouteIndex);
     }
+
+    const projectRouteIndex = resolveProjectNavIndex(location.pathname);
+    if (projectRouteIndex !== -1 && projectRouteIndex !== activeProjectIndex) {
+      setActiveProjectIndex(projectRouteIndex);
+    }
+  }, [
+    activeIndex,
+    activeProjectIndex,
+    location.pathname,
+    setActiveIndex,
+    setActiveProjectIndex,
+  ]);
+
+  const resetWheelAccumulator = useCallback(() => {
+    wheelAccumulatorRef.current = 0;
+    lastWheelEventAtRef.current = 0;
   }, []);
 
-  const scheduleUnlock = useCallback(() => {
-    if (scrollUnlockTimerRef.current !== null) {
-      window.clearTimeout(scrollUnlockTimerRef.current);
-    }
-    scrollUnlockTimerRef.current = window.setTimeout(unlockScroll, 450);
-  }, [unlockScroll]);
-
-  const handleWheelOrSwipe = useCallback(
-    (e: WheelEvent | React.TouchEvent, swipe?: SwipeDirection) => {
-      if (isScrollingRef.current) return;
-
-      const deltaY = "deltaY" in e ? (e as WheelEvent).deltaY : 0;
-      const deltaX = "deltaX" in e ? (e as WheelEvent).deltaX : 0;
-
-      // Ignore tiny trackpad noise so we don't "bounce back".
-      const MIN_DELTA = 18;
-      const hasSwipe = swipe === "L" || swipe === "R";
-      const meaningfulWheel =
-        Math.abs(deltaY) > MIN_DELTA || Math.abs(deltaX) > MIN_DELTA;
-      if (!hasSwipe && !meaningfulWheel) return;
-
-      // Determine intent:
-      // - On main pages: vertical wheel.
-      // - On project pages: horizontal wheel (deltaX) is preferred, but we still allow deltaY.
-      let direction: "next" | "prev" | null = null;
-
-      if (swipe === "L") direction = "next";
-      if (swipe === "R") direction = "prev";
-
-      if (!direction) {
-        // Prefer deltaX when it dominates (trackpad horizontal).
-        const preferX = Math.abs(deltaX) > Math.abs(deltaY) * 1.2;
-        const effective = preferX ? deltaX : deltaY;
-        if (effective > 0) direction = "next";
-        if (effective < 0) direction = "prev";
-      }
-
-      if (!direction) return;
-
-      isScrollingRef.current = true;
-      scheduleUnlock();
-
+  const navigateByDirection = useCallback(
+    (direction: Direction) => {
       if (isOnMainPage) {
-        const cur = Math.min(Math.max(activeIndex, 0), navsData.length - 1);
+        if (location.pathname === PROJECTS_HOME_PATH && direction === "next") {
+          const entryProjectIndex = projectsNavData.length - 1;
+          setHorizontalScrollDirection(1);
+          setActiveProjectIndex(entryProjectIndex);
+          navigate(projectsNavData[entryProjectIndex].Address);
+          return true;
+        }
+
+        const routeIndex = navsData.findIndex(
+          (item) => item.Address === location.pathname
+        );
+        const currentIndex =
+          routeIndex !== -1
+            ? routeIndex
+            : Math.min(Math.max(activeIndex, 0), navsData.length - 1);
+
         const nextIndex =
           direction === "next"
-            ? Math.min(cur + 1, navsData.length - 1)
-            : Math.max(cur - 1, 0);
+            ? Math.min(currentIndex + 1, navsData.length - 1)
+            : Math.max(currentIndex - 1, 0);
 
-        // Animation direction: 0 = forward/down, 1 = back/up (existing app convention)
+        if (nextIndex === currentIndex) {
+          return false;
+        }
+
         handleSetScrollDirection(direction === "next" ? 0 : 1);
         setActiveIndex(nextIndex);
         navigate(navsData[nextIndex].Address);
-      } else {
-        const cur = Math.min(
-          Math.max(activeProjectIndex, 0),
-          projectsNavData.length - 1
-        );
-        const nextIndex =
-          direction === "next"
-            ? Math.max(cur - 1, 0)
-            : Math.min(cur + 1, projectsNavData.length - 1);
-
-        // Project pages render vertically but represent horizontal navigation.
-        // Keep existing direction semantics:
-        //  - 1 means "down" in the current animation, which corresponds to going to a lower index.
-        //  - 0 means "up".
-        setHorizontalScrollDirection(direction === "next" ? 1 : 0);
-        setActiveProjectIndex(nextIndex);
-        navigate(projectsNavData[nextIndex].Address);
+        return true;
       }
+
+      const routeProjectIndex = resolveProjectNavIndex(location.pathname);
+      const currentProjectIndex =
+        routeProjectIndex !== -1
+          ? routeProjectIndex
+          : Math.min(Math.max(activeProjectIndex, 0), projectsNavData.length - 1);
+
+      const firstProjectIndex = projectsNavData.length - 1;
+      if (currentProjectIndex === firstProjectIndex && direction === "prev") {
+        const projectsMainIndex = navsData.findIndex(
+          (item) => item.Address === PROJECTS_HOME_PATH
+        );
+        setHorizontalScrollDirection(0);
+        if (projectsMainIndex !== -1) {
+          setActiveIndex(projectsMainIndex);
+        }
+        navigate(PROJECTS_HOME_PATH);
+        return true;
+      }
+
+      const nextProjectIndex =
+        direction === "next"
+          ? Math.max(currentProjectIndex - 1, 0)
+          : Math.min(currentProjectIndex + 1, projectsNavData.length - 1);
+
+      if (nextProjectIndex === currentProjectIndex) {
+        return false;
+      }
+
+      setHorizontalScrollDirection(direction === "next" ? 1 : 0);
+      setActiveProjectIndex(nextProjectIndex);
+      navigate(projectsNavData[nextProjectIndex].Address);
+      return true;
     },
     [
-      activeProjectIndex,
-      isOnMainPage,
       activeIndex,
+      activeProjectIndex,
       handleSetScrollDirection,
+      isOnMainPage,
+      location.pathname,
       navigate,
-      scheduleUnlock,
       setActiveIndex,
       setActiveProjectIndex,
       setHorizontalScrollDirection,
@@ -135,45 +154,104 @@ function ChildApp1() {
   );
 
   useEffect(() => {
-    const listener = (e: WheelEvent) => handleWheelOrSwipe(e);
-    window.addEventListener("wheel", listener, { passive: true });
+    const MIN_NOISE_DELTA = 4;
+    const TRIGGER_DELTA = 68;
+    const ACCUMULATOR_RESET_MS = 180;
+    const NAVIGATION_COOLDOWN_MS = 420;
+
+    const listener = (event: WheelEvent) => {
+      const now = Date.now();
+
+      if (now < wheelCooldownUntilRef.current) {
+        return;
+      }
+
+      const absX = Math.abs(event.deltaX);
+      const absY = Math.abs(event.deltaY);
+
+      let effectiveDelta = 0;
+      if (isOnMainPage) {
+        const useVertical = absY >= absX * 1.1;
+        effectiveDelta = useVertical ? event.deltaY : event.deltaY + event.deltaX * 0.45;
+      } else {
+        const preferX = absX > absY * 1.2;
+        effectiveDelta = preferX ? event.deltaX : event.deltaY;
+      }
+
+      if (Math.abs(effectiveDelta) < MIN_NOISE_DELTA) {
+        return;
+      }
+
+      if (now - lastWheelEventAtRef.current > ACCUMULATOR_RESET_MS) {
+        wheelAccumulatorRef.current = 0;
+      }
+
+      lastWheelEventAtRef.current = now;
+
+      if (
+        wheelAccumulatorRef.current !== 0 &&
+        Math.sign(wheelAccumulatorRef.current) !== Math.sign(effectiveDelta)
+      ) {
+        wheelAccumulatorRef.current = 0;
+      }
+
+      wheelAccumulatorRef.current += effectiveDelta;
+
+      if (Math.abs(wheelAccumulatorRef.current) < TRIGGER_DELTA) {
+        return;
+      }
+
+      const direction: Direction =
+        wheelAccumulatorRef.current > 0 ? "next" : "prev";
+
+      resetWheelAccumulator();
+
+      const didNavigate = navigateByDirection(direction);
+      if (didNavigate) {
+        wheelCooldownUntilRef.current = now + NAVIGATION_COOLDOWN_MS;
+        event.preventDefault();
+      }
+    };
+
+    window.addEventListener("wheel", listener, { passive: false });
     return () => {
       window.removeEventListener("wheel", listener);
     };
-  }, [handleWheelOrSwipe]);
+  }, [isOnMainPage, navigateByDirection, resetWheelAccumulator]);
 
-  // Cleanup any pending timers.
   useEffect(() => {
     return () => {
-      if (scrollUnlockTimerRef.current !== null) {
-        window.clearTimeout(scrollUnlockTimerRef.current);
-      }
+      resetWheelAccumulator();
+      wheelCooldownUntilRef.current = 0;
     };
-  }, []);
+  }, [resetWheelAccumulator]);
 
-  function getIsSidebarOpen(val: boolean) {
-    // SideBar passes the *next* open state. Keep it as-is (no inversion),
-    // otherwise the page-content margin can get stuck and leave a blank gap.
-    setIsSidebarOpen(val);
+  function getIsSidebarOpen(value: boolean) {
+    setIsSidebarOpen(value);
   }
 
   const minSwipeDistance = 50;
 
-  const onTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+  const onTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
     setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
+    setTouchStart(event.targetTouches[0].clientX);
   };
-  const onTouchMove = (e: React.TouchEvent<HTMLDivElement>) =>
-    setTouchEnd(e.targetTouches[0].clientX);
-  const onTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (!touchStart || !touchEnd) return;
+
+  const onTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+    setTouchEnd(event.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (touchStart === null || touchEnd === null) return;
+
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
+
     if (isLeftSwipe) {
-      handleWheelOrSwipe(e, "L");
+      navigateByDirection("next");
     } else if (isRightSwipe) {
-      handleWheelOrSwipe(e, "R");
+      navigateByDirection("prev");
     }
   };
 
@@ -199,6 +277,7 @@ function ChildApp1() {
               >
                 <SecondaryBtn
                   text="Contact"
+                  path="/contact"
                   on_Click={contactBtnHandler}
                 />
               </motion.div>
@@ -228,6 +307,7 @@ function ChildApp1() {
                   <img src={darkTheme ? githubNight : githubDay} alt="github" />
                 </motion.a>
               )}
+
             {isOnMainPage ? (
               <ProgressNav endPosition={endPosition} />
             ) : (
@@ -242,4 +322,5 @@ function ChildApp1() {
     </div>
   );
 }
+
 export default ChildApp1;
