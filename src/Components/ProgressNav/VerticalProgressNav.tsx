@@ -1,99 +1,183 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import "./VerticalProgressNav.scss";
 
 export const PROJECTS_CATALOGUE_ALIAS = "/projects/project-catalogue";
+export const MIN_PROJECT_SECTIONS = 5;
+const FULL_DOT_LIST_MAX = 14;
+const WINDOW_RADIUS = 3;
 
-export const projectsNavData = [
-  { Name: "05", Address: "/projects/project-5" },
-  { Name: "04", Address: "/projects/project-4" },
-  { Name: "03", Address: "/projects/project-3" },
-  { Name: "02", Address: "/projects/project-2" },
-  { Name: "01", Address: "/projects/project-1" },
-];
+export type ProjectNavItem = {
+  Name: string;
+  Address: string;
+};
 
-export function resolveProjectNavIndex(pathname: string): number {
-  const directIndex = projectsNavData.findIndex((item) => item.Address === pathname);
-  if (directIndex !== -1) {
-    return directIndex;
+export function normalizeProjectSectionCount(rawCount: number): number {
+  if (!Number.isFinite(rawCount)) {
+    return MIN_PROJECT_SECTIONS;
   }
 
+  return Math.max(MIN_PROJECT_SECTIONS, Math.floor(rawCount));
+}
+
+export function getProjectsNavData(sectionCount: number): ProjectNavItem[] {
+  const totalSections = normalizeProjectSectionCount(sectionCount);
+  return Array.from({ length: totalSections }, (_, index) => {
+    const sectionNumber = index + 1;
+    return {
+      Name: String(sectionNumber).padStart(2, "0"),
+      Address: `/projects/project-${sectionNumber}`,
+    };
+  });
+}
+
+export function getProjectAddressByIndex(
+  index: number,
+  sectionCount: number
+): string {
+  const navData = getProjectsNavData(sectionCount);
+  const safeIndex = Math.min(Math.max(index, 0), navData.length - 1);
+  return navData[safeIndex].Address;
+}
+
+export function parseProjectSectionFromPathname(pathname: string): number | null {
+  const match = pathname.match(/^\/projects\/project-(\d+)$/);
+  if (!match) {
+    return null;
+  }
+
+  const sectionNumber = Number(match[1]);
+  if (!Number.isFinite(sectionNumber)) {
+    return null;
+  }
+
+  return Math.floor(sectionNumber);
+}
+
+export function parseProjectSlug(slug: string | undefined): number | null {
+  if (!slug) {
+    return null;
+  }
+
+  const match = slug.match(/^project-(\d+)$/);
+  if (!match) {
+    return null;
+  }
+
+  const sectionNumber = Number(match[1]);
+  if (!Number.isFinite(sectionNumber)) {
+    return null;
+  }
+
+  const normalized = Math.floor(sectionNumber);
+  if (normalized < 1) {
+    return null;
+  }
+
+  return normalized;
+}
+
+export function resolveProjectNavIndex(
+  pathname: string,
+  sectionCount: number
+): number {
+  const totalSections = normalizeProjectSectionCount(sectionCount);
   if (pathname === PROJECTS_CATALOGUE_ALIAS) {
-    return 0;
+    return totalSections - 1;
   }
 
-  return -1;
+  const sectionNumber = parseProjectSectionFromPathname(pathname);
+  if (sectionNumber === null) {
+    return -1;
+  }
+
+  if (sectionNumber < 1 || sectionNumber > totalSections) {
+    return -1;
+  }
+
+  return sectionNumber - 1;
 }
 
 type VerticalProgressNavProps = {
-  setEndPosition: React.Dispatch<React.SetStateAction<string>>;
-  endPosition: string;
+  setEndPosition?: React.Dispatch<React.SetStateAction<string>>;
+  endPosition?: string;
 };
 
 export function VerticalProgressNav({
   setEndPosition,
-  endPosition,
+  endPosition = "67vw",
 }: VerticalProgressNavProps) {
   const location = useLocation();
   const navigate = useNavigate();
-  const [squash, setSquash] = useState(false);
-  const currentIndex = resolveProjectNavIndex(location.pathname);
 
-  const [prevIndex, setPrevIndex] = useState(currentIndex);
-  const activeNavLinkRef = useRef<HTMLSpanElement | null>(null);
-  const squashTimerRef = useRef<number | null>(null);
-  const [activeVerLinkWidth, setActiveVerLinkWidth] = useState(0);
+  const {
+    setActiveProjectIndex,
+    setHorizontalScrollDirection,
+    isOnMainPage,
+    projectSectionCount,
+  } = usePageAnimationContext();
 
-  const { setActiveProjectIndex, setHorizontalScrollDirection, isOnMainPage } =
-    usePageAnimationContext();
+  const parsedSectionFromPath = parseProjectSectionFromPathname(location.pathname);
+  const totalSections = normalizeProjectSectionCount(
+    Math.max(projectSectionCount, parsedSectionFromPath ?? projectSectionCount)
+  );
+  const navData = useMemo(() => getProjectsNavData(totalSections), [totalSections]);
+  const currentIndex = resolveProjectNavIndex(location.pathname, totalSections);
+  const [isInteracting, setIsInteracting] = useState(false);
+  const interactionTimerRef = useRef<number | null>(null);
 
-  useEffect(() => {
-    if (activeNavLinkRef.current) {
-      setActiveVerLinkWidth(activeNavLinkRef.current.offsetWidth);
+  const safeIndex =
+    currentIndex === -1
+      ? Math.min(Math.max(totalSections - 1, 0), totalSections - 1)
+      : currentIndex;
+  const activeProgress = totalSections <= 1 ? 0 : safeIndex / (totalSections - 1);
+  const topLabel = "00";
+  const bottomLabel = String(Math.max(totalSections - 1, 0)).padStart(2, "0");
+  const activeDisplayLabel = String(safeIndex).padStart(2, "0");
+
+  const visibleDotIndices = useMemo(() => {
+    if (totalSections <= FULL_DOT_LIST_MAX) {
+      return Array.from({ length: totalSections }, (_, index) => index);
     }
-  }, [currentIndex, isOnMainPage]);
 
-  useEffect(() => {
-    if (!isOnMainPage) {
-      setSquash(true);
+    const visible = new Set<number>();
+    visible.add(0);
+    visible.add(totalSections - 1);
+
+    const minWindow = Math.max(0, safeIndex - WINDOW_RADIUS);
+    const maxWindow = Math.min(totalSections - 1, safeIndex + WINDOW_RADIUS);
+    for (let index = minWindow; index <= maxWindow; index += 1) {
+      visible.add(index);
     }
-  }, [isOnMainPage]);
 
-  useEffect(() => {
+    return Array.from(visible).sort((a, b) => a - b);
+  }, [safeIndex, totalSections]);
+
+  const pulseInteraction = () => {
+    setIsInteracting(true);
+    if (interactionTimerRef.current !== null) {
+      window.clearTimeout(interactionTimerRef.current);
+    }
+    interactionTimerRef.current = window.setTimeout(() => {
+      setIsInteracting(false);
+      interactionTimerRef.current = null;
+    }, 320);
+  };
+
+  React.useEffect(() => {
     return () => {
-      if (squashTimerRef.current !== null) {
-        window.clearTimeout(squashTimerRef.current);
+      if (interactionTimerRef.current !== null) {
+        window.clearTimeout(interactionTimerRef.current);
       }
     };
   }, []);
 
-  const handleSquash = (event: React.MouseEvent<HTMLSpanElement>) => {
-    const currentAddress = event.currentTarget.getAttribute("data-address") || "";
-    const index = resolveProjectNavIndex(currentAddress);
-
-    if (!currentAddress || index === -1) {
+  React.useEffect(() => {
+    if (!setEndPosition) {
       return;
     }
-
-    setActiveProjectIndex(index);
-    navigate(currentAddress);
-
-    setHorizontalScrollDirection(prevIndex >= index ? 0 : 1);
-    setPrevIndex(index);
-
-    setSquash(true);
-    if (squashTimerRef.current !== null) {
-      window.clearTimeout(squashTimerRef.current);
-    }
-    squashTimerRef.current = window.setTimeout(() => {
-      setSquash(false);
-      squashTimerRef.current = null;
-    }, 1000);
-  };
-
-  useEffect(() => {
     const handleResize = () => {
       const windowWidth = window.innerWidth;
       const xPositionValue =
@@ -115,51 +199,74 @@ export function VerticalProgressNav({
     return () => window.removeEventListener("resize", handleResize);
   }, [setEndPosition]);
 
-  return (
-    <div>
-      <motion.div
-        className="Vernavigation-progress"
-        initial={{ x: "50%", y: "90vh", rotate: 0 }}
-        animate={{ x: `${endPosition}`, y: "50vh", rotate: -90 }}
-        transition={{
-          ease: "easeOut",
-          duration: 0.5,
-        }}
-        style={{
-          position: "fixed",
-          bottom: "95vh",
-          right: "50%",
-          transform: "translateX(-50%)",
-        }}
-      >
-        {projectsNavData.map((item, index) => {
-          const isActive = currentIndex === index;
-          return (
-            <span
-              key={`project-nav-${index}`}
-              className={`NavLink ${isActive ? "NavActive" : ""}`}
-              data-address={item.Address}
-              onClick={handleSquash}
-              ref={isActive ? activeNavLinkRef : null}
-            >
-              {item.Name}
-            </span>
-          );
-        })}
+  const goToIndex = (nextIndex: number) => {
+    if (nextIndex < 0 || nextIndex >= navData.length) {
+      return;
+    }
 
-        <motion.div
-          className={`lavalamp1 ${squash ? "squash" : ""}`}
-          animate={{
-            x:
-              currentIndex === -1
-                ? 0
-                : currentIndex * activeVerLinkWidth - activeVerLinkWidth * 2,
-            width: activeVerLinkWidth,
-            opacity: currentIndex === -1 ? 0 : 1,
-          }}
-          transition={{ ease: "easeOut", duration: 0.3 }}
-        />
-      </motion.div>
-    </div>
+    const nextPath = navData[nextIndex].Address;
+    setActiveProjectIndex(nextIndex);
+    setHorizontalScrollDirection(nextIndex > safeIndex ? 1 : 0);
+    pulseInteraction();
+    navigate(nextPath);
+  };
+
+  return (
+    <motion.aside
+      className={`project-rail ${isOnMainPage ? "" : "visible"}`}
+      initial={{ opacity: 0, x: 24 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 24 }}
+      transition={{ ease: "easeOut", duration: 0.35 }}
+      style={{ "--project-rail-end-position": endPosition } as React.CSSProperties}
+      aria-label="Projects vertical rail"
+    >
+      <div className="project-rail-track">
+        <button
+          type="button"
+          className="project-rail-anchor top"
+          onClick={() => goToIndex(0)}
+          aria-label="Go to first project section"
+        >
+          {topLabel}
+        </button>
+
+        <div className="project-rail-markers" role="tablist" aria-orientation="vertical">
+          {visibleDotIndices.map((dotIndex) => {
+            const dotProgress = totalSections <= 1 ? 0 : dotIndex / (totalSections - 1);
+            const isActive = dotIndex === safeIndex;
+            return (
+              <button
+                key={`rail-dot-${dotIndex}`}
+                type="button"
+                className={`project-rail-dot ${isActive ? "active" : ""}`}
+                style={{ top: `${dotProgress * 100}%` }}
+                role="tab"
+                aria-selected={isActive}
+                aria-label={`Go to project ${dotIndex}`}
+                onClick={() => goToIndex(dotIndex)}
+              />
+            );
+          })}
+
+          <motion.div
+            className={`project-rail-current ${isInteracting ? "pulse" : ""}`}
+            animate={{ top: `${activeProgress * 100}%` }}
+            transition={{ type: "spring", stiffness: 300, damping: 28, mass: 0.65 }}
+          >
+            {activeDisplayLabel}
+          </motion.div>
+        </div>
+
+        <button
+          type="button"
+          className="project-rail-anchor bottom"
+          onClick={() => goToIndex(totalSections - 1)}
+          aria-label="Go to last project section"
+        >
+          {bottomLabel}
+        </button>
+      </div>
+    </motion.aside>
   );
 }

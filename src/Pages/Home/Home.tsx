@@ -4,10 +4,9 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useThemeContext } from "../../Context/ThemeContext/ThemeContext";
 import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
-import AnimatedLogo from "../../Components/logoAnimated/AnimatedLogo";
 import BouncyText from "../../Components/Bouncy-text/BouncyText";
 import { FaChevronDown } from "react-icons/fa";
-// import MyTimeline from "../../Components/MyTimeLine/MyTimeline";
+import HomeTimeline from "./components/HomeTimeline";
 
 export default function HomePage() {
   const { darkTheme } = useThemeContext();
@@ -73,17 +72,7 @@ export default function HomePage() {
           </motion.div>
         )}
       </motion.div>
-      {/* <motion.div
-        className="TimeLineblock"
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-        custom={0.5}
-        variants={contentVariants}
-      >
-        <MyTimeline/>
-      </motion.div> */}
-      {screenSize < 768 ? null : <AnimatedLogo name_class="logoBack" />}
+      <HomeTimeline darkTheme={darkTheme} />
     </motion.div>
   );
 }

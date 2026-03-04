@@ -1,0 +1,51 @@
+{
+  "items": [
+    {
+      "id": "exp-full-stack",
+      "type": "experience",
+      "title": "Full-Stack Developer",
+      "organization": "Independent / Portfolio Projects",
+      "start": "2023-01",
+      "end": "Present",
+      "location": "Pune, India",
+      "description": "Building end-to-end web applications using React, TypeScript, Node.js, APIs, and database-first architecture.",
+      "link": "https://www.linkedin.com/in/abhinay-khalatkar/",
+      "skills": ["React", "TypeScript", "Node.js", "REST APIs", "MySQL"]
+    },
+    {
+      "id": "exp-frontend",
+      "type": "experience",
+      "title": "Frontend Development Focus",
+      "organization": "Product and Personal Builds",
+      "start": "2022-01",
+      "end": "2022-12",
+      "location": "Remote",
+      "description": "Designed and implemented responsive UI flows with animation, reusable components, and route-driven interactions.",
+      "link": "https://github.com/abhinaykhalatkar",
+      "skills": ["React", "Sass", "Framer Motion", "UX"]
+    },
+    {
+      "id": "edu-cs",
+      "type": "education",
+      "title": "Computer Science Program",
+      "organization": "University Coursework",
+      "start": "2018-01",
+      "end": "2022-01",
+      "location": "India",
+      "description": "Completed core subjects including data structures, algorithms, database systems, networking, and software engineering.",
+      "skills": ["Data Structures", "Algorithms", "DBMS", "Networking"]
+    },
+    {
+      "id": "edu-self-learning",
+      "type": "education",
+      "title": "Continuous Professional Learning",
+      "organization": "Open Source and Online Platforms",
+      "start": "2020-01",
+      "end": "Present",
+      "location": "Online",
+      "description": "Continuously learning modern JavaScript, backend development, cloud workflows, and deployment practices.",
+      "link": "https://www.linkedin.com/in/abhinay-khalatkar/",
+      "skills": ["JavaScript", "Backend", "Deployment", "Git"]
+    }
+  ]
+}

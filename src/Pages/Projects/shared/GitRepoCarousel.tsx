@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { AiOutlineRight } from "react-icons/ai";
 import type { RepoLoadState } from "./githubRepos";
@@ -32,6 +32,7 @@ export default function GitRepoCarousel({
 
   const [activeSlide, setActiveSlide] = useState(0);
   const [slideDirection, setSlideDirection] = useState<1 | -1>(1);
+  const chipRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   const clampIndex = useCallback(
     (next: number) => {
@@ -84,15 +85,18 @@ export default function GitRepoCarousel({
 
   const currentRepo = slideCount > 0 ? repos[activeSlide] : null;
 
-  const previewIndexes = useMemo(() => {
-    if (slideCount <= 0) return [] as number[];
-    const maxPreview = Math.min(slideCount, 8);
-    const result: number[] = [];
-    for (let index = 0; index < maxPreview; index += 1) {
-      result.push(index);
-    }
-    return result;
-  }, [slideCount]);
+  useEffect(() => {
+    if (slideCount <= 1) return;
+
+    const activeChip = chipRefs.current[activeSlide];
+    if (!activeChip) return;
+
+    activeChip.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }, [activeSlide, slideCount]);
 
   const slideVariants = {
     enter: (direction: 1 | -1) => ({
@@ -253,9 +257,14 @@ export default function GitRepoCarousel({
       )}
 
       {slideCount > 1 ? (
-        <div className="repo-carousel-track" role="tablist" aria-label="Repository quick select">
-          {previewIndexes.map((index) => {
-            const repo = repos[index];
+        <div
+          className="repo-carousel-track"
+          role="tablist"
+          aria-label="Repository quick select"
+          data-wheel-lock="true"
+          data-wheel-axis="x"
+        >
+          {repos.map((repo, index) => {
             const isActive = index === activeSlide;
             return (
               <button
@@ -263,6 +272,9 @@ export default function GitRepoCarousel({
                 type="button"
                 className={`repo-carousel-chip ${isActive ? "active" : ""}`}
                 onClick={() => goTo(index)}
+                ref={(el) => {
+                  chipRefs.current[index] = el;
+                }}
                 role="tab"
                 aria-selected={isActive}
               >

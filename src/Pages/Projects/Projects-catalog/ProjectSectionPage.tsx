@@ -4,16 +4,17 @@ import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import { AiOutlineRight } from "react-icons/ai";
 import BouncyText from "../../../Components/Bouncy-text/BouncyText";
+import { SecondaryBtn } from "../../../Components/Buttons/Buttons";
 import { useThemeContext } from "../../../Context/ThemeContext/ThemeContext";
 import { usePageAnimationContext } from "../../../Context/PageAnimationContext/PageAnimationContext";
 import {
-  projectsNavData,
+  normalizeProjectSectionCount,
 } from "../../../Components/ProgressNav/VerticalProgressNav";
 import GitRepoCarousel from "../shared/GitRepoCarousel";
 import { getGithubUsername, useGithubRepos } from "../shared/githubRepos";
 
 type ProjectSectionPageProps = {
-  sectionNumber: 1 | 2 | 3 | 4 | 5;
+  sectionNumber: number;
 };
 
 export default function ProjectSectionPage({
@@ -26,6 +27,8 @@ export default function ProjectSectionPage({
     subPageVariants,
     contentVariants,
     isOnMainPage,
+    projectSectionCount,
+    setProjectSectionCount,
     setHorizontalScrollDirection,
     setActiveProjectIndex,
   } = usePageAnimationContext();
@@ -36,6 +39,29 @@ export default function ProjectSectionPage({
 
   const githubUsername = getGithubUsername();
   const repoState = useGithubRepos(githubUsername);
+  const totalSections = normalizeProjectSectionCount(
+    Math.max(projectSectionCount, sectionNumber)
+  );
+  const normalizedSectionNumber = Math.min(
+    Math.max(sectionNumber, 1),
+    totalSections
+  );
+
+  useEffect(() => {
+    if (sectionNumber > projectSectionCount) {
+      setProjectSectionCount((previous) =>
+        normalizeProjectSectionCount(Math.max(previous, sectionNumber))
+      );
+    }
+  }, [projectSectionCount, sectionNumber, setProjectSectionCount]);
+
+  useEffect(() => {
+    if (repoState.status !== "success") return;
+
+    setProjectSectionCount((previous) =>
+      Math.max(previous, normalizeProjectSectionCount(repoState.repos.length))
+    );
+  }, [repoState, setProjectSectionCount]);
 
   return (
     <motion.div
@@ -57,7 +83,7 @@ export default function ProjectSectionPage({
         >
           <BouncyText
             name_class="heading"
-            text={`PROJECT ${String(sectionNumber).padStart(2, "0")}`}
+            text={`PROJECT ${String(normalizedSectionNumber).padStart(2, "0")}`}
           />
         </motion.div>
 
@@ -85,23 +111,24 @@ export default function ProjectSectionPage({
             repoState={repoState}
             githubUsername={githubUsername}
             darkTheme={darkTheme}
-            initialIndex={sectionNumber - 1}
-            sectionLabel={`Section ${sectionNumber}`}
+            initialIndex={normalizedSectionNumber - 1}
+            sectionLabel={`Section ${normalizedSectionNumber}`}
           />
         </motion.div>
 
         <motion.div
-          className="catalogue-link-div"
+          className="project-section-actions"
           initial="hidden"
           animate="visible"
           exit="exit"
           custom={0.75}
           variants={contentVariants}
         >
+          <SecondaryBtn text="Contact Me" path="/contact" />
           <NavLink to="/projects" className="catalogue-link">
             <div
               onClick={() => {
-                setActiveProjectIndex(projectsNavData.length - 1);
+                setActiveProjectIndex(0);
                 setHorizontalScrollDirection(0);
               }}
             >

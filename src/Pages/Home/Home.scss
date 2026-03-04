@@ -2,6 +2,7 @@
 
 .p-Home {
     display: flex;
+    position: relative;
     height: 100vh;
     overflow: hidden;
     padding: 0 4rem;
@@ -13,16 +14,6 @@
         background-image: linear-gradient(315deg, #b8c6db 0%, #faf3f3 74%)
     }
 
-    .logoBack {
-        position: fixed;
-        top: -14vh;
-        left: 87vw;
-        transform: translateX(87vw);
-        z-index: -1;
-        height: 130vh;
-        transform: rotate(340deg);
-    }
-
     .content-block {
         letter-spacing: 1.2px;
         margin-left: 5rem;
@@ -30,7 +21,8 @@
         height: 70vh;
         top: 15%;
         transform: translateY(-15%);
-        max-width: 580px;
+        max-width: min(580px, 48vw);
+        z-index: 1;
 
         .home-heading {
             font-size: 3.5rem;
@@ -74,7 +66,8 @@
         }
 
         @media only screen and (min-width: 480px) and (max-width:768px) {
-            min-width: 580px;
+            min-width: 0;
+            max-width: 540px;
             margin-left: 0;
 
             .home-heading {
@@ -93,10 +86,9 @@
             margin-left: 0;
             max-width: 310px;
             min-width: 310px;
-            top: 20%;
-            transform: translateY(-20%);
-            left: 10%;
-            transform: translateX(-10%);
+            top: 0;
+            left: 0;
+            transform: none;
 
             .home-heading {
                 color: $yellow;
@@ -110,8 +102,22 @@
             }
         }
     }
-    .TimeLineblock{
 
+    @media only screen and (max-width: 900px) {
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+        display: block;
+        padding: 0 2rem 2rem;
+
+        .content-block {
+            margin-left: 0;
+            top: 0;
+            transform: none;
+            height: auto;
+            max-width: 680px;
+            padding-top: 96px;
+        }
     }
 
     @media only screen and (max-width: 480px) {

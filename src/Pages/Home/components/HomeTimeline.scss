@@ -1,0 +1,246 @@
+@import "../../../Styles/variables";
+
+.home-timeline {
+  position: absolute;
+  left: 70%;
+  top: 8vh;
+  bottom: 8vh;
+  width: min(30vw, 430px);
+  border-radius: 24px;
+  border: 1px solid rgba($white, 0.12);
+  background: linear-gradient(
+    180deg,
+    rgba($black, 0.22) 0%,
+    rgba($darkBlue, 0.2) 100%
+  );
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 2;
+
+  .timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 18px 10px 18px;
+    border-bottom: 1px solid rgba($white, 0.08);
+  }
+
+  .timeline-heading {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.78rem;
+    opacity: 0.8;
+  }
+
+  .timeline-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.86rem;
+    text-decoration: none;
+    color: darken($heighlightBlue, 3%);
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: darken($heighlightBlue, 0%);
+    }
+  }
+
+  .timeline-rail {
+    position: absolute;
+    left: 12px;
+    top: 64px;
+    bottom: 16px;
+    width: 28px;
+    pointer-events: none;
+  }
+
+  .timeline-axis {
+    position: absolute;
+    left: 14px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    border-radius: 999px;
+    background: linear-gradient(
+      180deg,
+      rgba($heighlightBlue, 0.9) 0%,
+      rgba($YInMnBlue, 0.44) 100%
+    );
+    transform-origin: top;
+  }
+
+  .timeline-focus {
+    position: absolute;
+    left: 7px;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border-radius: 999px;
+    border: 1px solid rgba($heighlightBlue, 0.9);
+    background: rgba($heighlightBlue, 0.18);
+    box-shadow: 0 0 0 7px rgba($heighlightBlue, 0.15);
+  }
+
+  .timeline-scroll {
+    margin-left: 24px;
+    height: 100%;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    scroll-behavior: smooth;
+    padding: 14px 16px 18px 10px;
+    display: grid;
+    gap: 12px;
+    scrollbar-width: thin;
+  }
+
+  .timeline-state {
+    font-size: 0.92rem;
+    line-height: 1.4;
+    opacity: 0.9;
+    padding: 8px 6px;
+  }
+
+  .timeline-error-message {
+    margin-top: 8px;
+    font-size: 0.82rem;
+    opacity: 0.76;
+    word-break: break-word;
+  }
+
+  .timeline-card {
+    border-radius: 14px;
+    border: 1px solid rgba($white, 0.12);
+    background: rgba($black, 0.24);
+    padding: 10px 12px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+
+    &.active {
+      border-color: rgba($heighlightBlue, 0.6);
+      transform: translateX(2px);
+    }
+  }
+
+  .timeline-card-type {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.68rem;
+    opacity: 0.8;
+    margin-bottom: 6px;
+  }
+
+  .timeline-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  .timeline-card-org {
+    margin-top: 2px;
+    font-size: 0.9rem;
+    opacity: 0.88;
+  }
+
+  .timeline-card-meta {
+    margin-top: 7px;
+    font-size: 0.74rem;
+    letter-spacing: 0.02em;
+    opacity: 0.75;
+  }
+
+  .timeline-card-desc {
+    margin: 8px 0 0;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    opacity: 0.92;
+  }
+
+  .timeline-tags {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .timeline-tag {
+    border-radius: 999px;
+    border: 1px solid rgba($white, 0.16);
+    background: rgba($black, 0.22);
+    padding: 2px 8px;
+    font-size: 0.68rem;
+    opacity: 0.95;
+  }
+
+  .timeline-card-link {
+    margin-top: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    font-size: 0.82rem;
+    color: darken($heighlightBlue, 2%);
+
+    &:hover {
+      color: darken($heighlightBlue, 0%);
+    }
+  }
+
+  &.light {
+    border-color: rgba($black, 0.12);
+    background: rgba($white, 0.62);
+
+    .timeline-header {
+      border-bottom-color: rgba($black, 0.08);
+    }
+
+    .timeline-axis {
+      background: linear-gradient(
+        180deg,
+        rgba($YInMnBlue, 0.82) 0%,
+        rgba($YInMnBlue, 0.36) 100%
+      );
+    }
+
+    .timeline-focus {
+      border-color: rgba($YInMnBlue, 0.75);
+      background: rgba($YInMnBlue, 0.16);
+      box-shadow: 0 0 0 7px rgba($YInMnBlue, 0.18);
+    }
+
+    .timeline-card {
+      border-color: rgba($black, 0.12);
+      background: rgba($white, 0.7);
+    }
+
+    .timeline-tag {
+      border-color: rgba($black, 0.16);
+      background: rgba($white, 0.94);
+    }
+  }
+
+  @media only screen and (min-width: 901px) and (max-width: 1280px) {
+    left: 67%;
+    width: min(31vw, 390px);
+  }
+
+  @media only screen and (max-width: 900px) {
+    position: relative;
+    left: auto;
+    top: auto;
+    bottom: auto;
+    width: 100%;
+    max-width: 680px;
+    height: min(54vh, 480px);
+    margin: 18px auto 0;
+  }
+
+  @media only screen and (max-width: 480px) {
+    height: min(58vh, 460px);
+
+    .timeline-card {
+      padding: 10px;
+    }
+  }
+}

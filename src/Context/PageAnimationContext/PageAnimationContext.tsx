@@ -8,7 +8,8 @@ import React, {
 } from "react";
 
 import type { Variants } from "framer-motion";
-import { projectsNavData } from "../../Components/ProgressNav/VerticalProgressNav";
+
+const DEFAULT_PROJECT_SECTION_COUNT = 5;
 
 export type PageAnimationContextValue = {
   // navigation / page state
@@ -24,6 +25,8 @@ export type PageAnimationContextValue = {
 
   activeProjectIndex: number;
   setActiveProjectIndex: React.Dispatch<React.SetStateAction<number>>;
+  projectSectionCount: number;
+  setProjectSectionCount: React.Dispatch<React.SetStateAction<number>>;
 
   screenSize: number;
 
@@ -64,8 +67,9 @@ export function PageAnimationProvider(props: { children?: ReactNode }) {
   const [scrollDirection, setScrollDirection] = useState(0);
   const [horizontalScrollDirection, setHorizontalScrollDirection] = useState(2);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [activeProjectIndex, setActiveProjectIndex] = useState(
-    projectsNavData.length - 1
+  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+  const [projectSectionCount, setProjectSectionCount] = useState(
+    DEFAULT_PROJECT_SECTION_COUNT
   );
   const [screenSize, setScreenSize] = useState(1000);
   const [isVerProgressBarOpen, setIsVerProgressBarOpen] = useState(false);
@@ -179,6 +183,8 @@ export function PageAnimationProvider(props: { children?: ReactNode }) {
       setActiveIndex,
       activeProjectIndex,
       setActiveProjectIndex,
+      projectSectionCount,
+      setProjectSectionCount,
       screenSize,
       isVerProgressBarOpen,
       setIsVerProgressBarOpen,
@@ -203,6 +209,7 @@ export function PageAnimationProvider(props: { children?: ReactNode }) {
       isVerProgressBarOpen,
       pageTransition,
       pageVariants,
+      projectSectionCount,
       screenSize,
       scrollDirection,
       subPageVariants,

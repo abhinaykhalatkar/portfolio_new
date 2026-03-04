@@ -164,6 +164,12 @@
     scrollbar-width: thin;
     overscroll-behavior-x: contain;
     touch-action: pan-x;
+    scroll-snap-type: x proximity;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .repo-carousel-chip {
@@ -175,6 +181,8 @@
     font-size: 0.78rem;
     cursor: pointer;
     white-space: nowrap;
+    flex: 0 0 auto;
+    scroll-snap-align: center;
 
     &.active {
       border-color: rgba($heighlightBlue, 0.8);

@@ -12,13 +12,75 @@ import { ProgressNav, navsData } from "./Components/ProgressNav/ProgressNav";
 import { SecondaryBtn } from "./Components/Buttons/Buttons";
 import {
   VerticalProgressNav,
-  projectsNavData,
+  getProjectAddressByIndex,
+  normalizeProjectSectionCount,
+  parseProjectSectionFromPathname,
   resolveProjectNavIndex,
 } from "./Components/ProgressNav/VerticalProgressNav";
 
 type Direction = "next" | "prev";
 
 const PROJECTS_HOME_PATH = "/projects";
+const WHEEL_GUARD_TOLERANCE = 1;
+
+function canScrollVertically(node: HTMLElement, deltaY: number): boolean {
+  if (Math.abs(deltaY) < WHEEL_GUARD_TOLERANCE) {
+    return false;
+  }
+  if (node.scrollHeight <= node.clientHeight + WHEEL_GUARD_TOLERANCE) {
+    return false;
+  }
+  if (deltaY > 0) {
+    return node.scrollTop + node.clientHeight < node.scrollHeight - WHEEL_GUARD_TOLERANCE;
+  }
+  return node.scrollTop > WHEEL_GUARD_TOLERANCE;
+}
+
+function canScrollHorizontally(node: HTMLElement, deltaX: number): boolean {
+  if (Math.abs(deltaX) < WHEEL_GUARD_TOLERANCE) {
+    return false;
+  }
+  if (node.scrollWidth <= node.clientWidth + WHEEL_GUARD_TOLERANCE) {
+    return false;
+  }
+  if (deltaX > 0) {
+    return node.scrollLeft + node.clientWidth < node.scrollWidth - WHEEL_GUARD_TOLERANCE;
+  }
+  return node.scrollLeft > WHEEL_GUARD_TOLERANCE;
+}
+
+function shouldBypassGlobalRouteWheel(event: WheelEvent): boolean {
+  const eventTarget = event.target;
+  if (!(eventTarget instanceof HTMLElement)) {
+    return false;
+  }
+
+  const lockNode = eventTarget.closest<HTMLElement>("[data-wheel-lock='true']");
+  if (!lockNode) {
+    return false;
+  }
+
+  const axis = lockNode.dataset.wheelAxis ?? "both";
+  const primaryIsVertical = Math.abs(event.deltaY) >= Math.abs(event.deltaX);
+
+  if (axis === "y") {
+    return canScrollVertically(lockNode, event.deltaY);
+  }
+  if (axis === "x") {
+    return canScrollHorizontally(lockNode, event.deltaX);
+  }
+
+  if (primaryIsVertical && canScrollVertically(lockNode, event.deltaY)) {
+    return true;
+  }
+  if (!primaryIsVertical && canScrollHorizontally(lockNode, event.deltaX)) {
+    return true;
+  }
+  if (canScrollVertically(lockNode, event.deltaY)) {
+    return true;
+  }
+  return canScrollHorizontally(lockNode, event.deltaX);
+}
 
 function ChildApp1() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -40,6 +102,7 @@ function ChildApp1() {
     setActiveIndex,
     activeProjectIndex,
     setActiveProjectIndex,
+    projectSectionCount,
     isOnMainPage,
     setHorizontalScrollDirection,
   } = usePageAnimationContext();
@@ -49,6 +112,11 @@ function ChildApp1() {
   };
 
   useEffect(() => {
+    const inferredSectionFromPath = parseProjectSectionFromPathname(location.pathname);
+    const routeAwareSectionCount = normalizeProjectSectionCount(
+      Math.max(projectSectionCount, inferredSectionFromPath ?? projectSectionCount)
+    );
+
     const mainRouteIndex = navsData.findIndex(
       (item) => item.Address === location.pathname
     );
@@ -56,7 +124,10 @@ function ChildApp1() {
       setActiveIndex(mainRouteIndex);
     }
 
-    const projectRouteIndex = resolveProjectNavIndex(location.pathname);
+    const projectRouteIndex = resolveProjectNavIndex(
+      location.pathname,
+      routeAwareSectionCount
+    );
     if (projectRouteIndex !== -1 && projectRouteIndex !== activeProjectIndex) {
       setActiveProjectIndex(projectRouteIndex);
     }
@@ -64,6 +135,7 @@ function ChildApp1() {
     activeIndex,
     activeProjectIndex,
     location.pathname,
+    projectSectionCount,
     setActiveIndex,
     setActiveProjectIndex,
   ]);
@@ -75,12 +147,17 @@ function ChildApp1() {
 
   const navigateByDirection = useCallback(
     (direction: Direction) => {
+      const inferredSectionFromPath = parseProjectSectionFromPathname(location.pathname);
+      const totalProjectSections = normalizeProjectSectionCount(
+        Math.max(projectSectionCount, inferredSectionFromPath ?? projectSectionCount)
+      );
+
       if (isOnMainPage) {
         if (location.pathname === PROJECTS_HOME_PATH && direction === "next") {
-          const entryProjectIndex = projectsNavData.length - 1;
+          const entryProjectIndex = 0;
           setHorizontalScrollDirection(1);
           setActiveProjectIndex(entryProjectIndex);
-          navigate(projectsNavData[entryProjectIndex].Address);
+          navigate(getProjectAddressByIndex(entryProjectIndex, totalProjectSections));
           return true;
         }
 
@@ -107,13 +184,16 @@ function ChildApp1() {
         return true;
       }
 
-      const routeProjectIndex = resolveProjectNavIndex(location.pathname);
+      const routeProjectIndex = resolveProjectNavIndex(
+        location.pathname,
+        totalProjectSections
+      );
       const currentProjectIndex =
         routeProjectIndex !== -1
           ? routeProjectIndex
-          : Math.min(Math.max(activeProjectIndex, 0), projectsNavData.length - 1);
+          : Math.min(Math.max(activeProjectIndex, 0), totalProjectSections - 1);
 
-      const firstProjectIndex = projectsNavData.length - 1;
+      const firstProjectIndex = 0;
       if (currentProjectIndex === firstProjectIndex && direction === "prev") {
         const projectsMainIndex = navsData.findIndex(
           (item) => item.Address === PROJECTS_HOME_PATH
@@ -128,8 +208,8 @@ function ChildApp1() {
 
       const nextProjectIndex =
         direction === "next"
-          ? Math.max(currentProjectIndex - 1, 0)
-          : Math.min(currentProjectIndex + 1, projectsNavData.length - 1);
+          ? Math.min(currentProjectIndex + 1, totalProjectSections - 1)
+          : Math.max(currentProjectIndex - 1, 0);
 
       if (nextProjectIndex === currentProjectIndex) {
         return false;
@@ -137,7 +217,7 @@ function ChildApp1() {
 
       setHorizontalScrollDirection(direction === "next" ? 1 : 0);
       setActiveProjectIndex(nextProjectIndex);
-      navigate(projectsNavData[nextProjectIndex].Address);
+      navigate(getProjectAddressByIndex(nextProjectIndex, totalProjectSections));
       return true;
     },
     [
@@ -147,6 +227,7 @@ function ChildApp1() {
       isOnMainPage,
       location.pathname,
       navigate,
+      projectSectionCount,
       setActiveIndex,
       setActiveProjectIndex,
       setHorizontalScrollDirection,
@@ -163,6 +244,9 @@ function ChildApp1() {
       const now = Date.now();
 
       if (now < wheelCooldownUntilRef.current) {
+        return;
+      }
+      if (shouldBypassGlobalRouteWheel(event)) {
         return;
       }
 

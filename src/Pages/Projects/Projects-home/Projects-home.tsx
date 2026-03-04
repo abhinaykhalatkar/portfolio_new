@@ -7,7 +7,10 @@ import { usePageAnimationContext } from "../../../Context/PageAnimationContext/P
 import { SecondaryBtn } from "../../../Components/Buttons/Buttons";
 import BouncyText from "../../../Components/Bouncy-text/BouncyText";
 import { AiOutlineRight } from "react-icons/ai";
-import { projectsNavData } from "../../../Components/ProgressNav/VerticalProgressNav";
+import {
+  getProjectAddressByIndex,
+  normalizeProjectSectionCount,
+} from "../../../Components/ProgressNav/VerticalProgressNav";
 import { getGithubUsername, useGithubRepos } from "../shared/githubRepos";
 
 function techClassName(tech: string): string {
@@ -27,6 +30,8 @@ export default function ProjectsHome() {
     pageVariants,
     pageTransition,
     contentVariants,
+    projectSectionCount,
+    setProjectSectionCount,
     setActiveProjectIndex,
   } = usePageAnimationContext();
 
@@ -39,6 +44,14 @@ export default function ProjectsHome() {
 
   const repos = repoState.repos;
   const slideCount = repos.length;
+
+  useEffect(() => {
+    if (repoState.status !== "success") return;
+
+    setProjectSectionCount((previous) =>
+      Math.max(previous, normalizeProjectSectionCount(repoState.repos.length))
+    );
+  }, [repoState, setProjectSectionCount]);
 
   useEffect(() => {
     setActiveSlide(0);
@@ -86,11 +99,17 @@ export default function ProjectsHome() {
   }, [clampIndex, slideCount]);
 
   const enterProjectSections = useCallback(() => {
-    const entryIndex = projectsNavData.length - 1;
+    const totalProjectSections = normalizeProjectSectionCount(projectSectionCount);
+    const entryIndex = 0;
     setHorizontalScrollDirection(1);
     setActiveProjectIndex(entryIndex);
-    navigate(projectsNavData[entryIndex].Address);
-  }, [navigate, setActiveProjectIndex, setHorizontalScrollDirection]);
+    navigate(getProjectAddressByIndex(entryIndex, totalProjectSections));
+  }, [
+    navigate,
+    projectSectionCount,
+    setActiveProjectIndex,
+    setHorizontalScrollDirection,
+  ]);
 
   useEffect(() => {
     setHorizontalScrollDirection(2);
@@ -147,7 +166,13 @@ export default function ProjectsHome() {
           >
             ‹
           </button>
-          <div className="toolbar-track" role="tablist" aria-label="Projects">
+          <div
+            className="toolbar-track"
+            role="tablist"
+            aria-label="Projects"
+            data-wheel-lock="true"
+            data-wheel-axis="x"
+          >
             {repos.map((repo, index) => {
               const isActive = index === activeSlide;
               return (
