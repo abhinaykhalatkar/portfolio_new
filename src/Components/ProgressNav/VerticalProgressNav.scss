@@ -3,8 +3,10 @@
 .project-rail {
   position: fixed;
   right: clamp(20px, 3.4vw, 48px);
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
   z-index: 8;
   pointer-events: none;
   opacity: 0;
@@ -24,8 +26,9 @@
 }
 
 .project-rail-track {
-  width: 70px;
-  height: min(72vh, 620px);
+  width: 66px;
+  height: min(62dvh, 520px);
+  max-height: calc(100dvh - 140px);
   padding: 6px 0;
   border-radius: 999px;
   border: 1px solid rgba($YInMnBlue, 0.5);

@@ -133,30 +133,31 @@ export default function GitRepoCarousel({
     >
       <div className="repo-carousel-header">
         <div className="repo-carousel-title">{sectionLabel}</div>
-        <div className="repo-carousel-count">
-          {slideCount > 0 ? `${activeSlide + 1} / ${slideCount}` : "0 / 0"}
+        <div className="repo-carousel-header-right">
+          <div className="repo-carousel-count">
+            {slideCount > 0 ? `${activeSlide + 1} / ${slideCount}` : "0 / 0"}
+          </div>
+          <div className="repo-carousel-controls">
+            <button
+              type="button"
+              className="repo-carousel-btn"
+              onClick={goPrev}
+              aria-label="Previous repository"
+              disabled={slideCount <= 0}
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              className="repo-carousel-btn"
+              onClick={goNext}
+              aria-label="Next repository"
+              disabled={slideCount <= 0}
+            >
+              ›
+            </button>
+          </div>
         </div>
-      </div>
-
-      <div className="repo-carousel-controls">
-        <button
-          type="button"
-          className="repo-carousel-btn"
-          onClick={goPrev}
-          aria-label="Previous repository"
-          disabled={slideCount <= 0}
-        >
-          ‹
-        </button>
-        <button
-          type="button"
-          className="repo-carousel-btn"
-          onClick={goNext}
-          aria-label="Next repository"
-          disabled={slideCount <= 0}
-        >
-          ›
-        </button>
       </div>
 
       {repoState.status === "loading" || repoState.status === "idle" ? (

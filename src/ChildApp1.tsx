@@ -352,7 +352,9 @@ function ChildApp1() {
             animate={{ marginLeft: isSidebarOpen ? 250 : 0 }}
             transition={{ duration: 0.3 }}
           >
-            {activeIndex !== navsData.length - 1 && isOnMainPage ? (
+            {activeIndex !== navsData.length - 1 &&
+            isOnMainPage &&
+            location.pathname !== "/" ? (
               <motion.div
                 className="button-contact"
                 initial={{ opacity: 0 }}

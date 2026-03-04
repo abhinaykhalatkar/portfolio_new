@@ -101,7 +101,7 @@ export default function HomeTimeline({ darkTheme }: HomeTimelineProps) {
       aria-label="Experience timeline"
     >
       <div className="timeline-header">
-        <div className="timeline-heading">Timeline</div>
+        <div className="timeline-heading">Experience & Education</div>
         <a
           className="timeline-link"
           href="https://www.linkedin.com/in/abhinay-khalatkar/"
@@ -143,9 +143,10 @@ export default function HomeTimeline({ darkTheme }: HomeTimelineProps) {
           </div>
         ) : items.length === 0 ? (
           <div className="timeline-state">
-            No entries in the timeline feed yet.
+            No timeline entries available.
             <div className="timeline-error-message">
-              Add items to `public/data/linkedin-timeline.json`.
+              LinkedIn profile pages cannot be parsed directly in-browser.
+              Add your entries in `public/data/linkedin-timeline.json`.
             </div>
           </div>
         ) : (

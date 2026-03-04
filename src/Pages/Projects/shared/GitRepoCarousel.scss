@@ -10,7 +10,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 12px;
     margin-bottom: 8px;
+  }
+
+  .repo-carousel-header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 98px;
+    justify-content: flex-end;
   }
 
   .repo-carousel-title {
@@ -23,13 +32,13 @@
   .repo-carousel-count {
     font-size: 0.82rem;
     opacity: 0.7;
+    min-width: 42px;
+    text-align: right;
   }
 
   .repo-carousel-controls {
-    position: absolute;
-    top: 0;
-    right: 0;
     display: flex;
+    align-items: center;
     gap: 8px;
   }
 
@@ -51,6 +60,23 @@
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    .repo-carousel-header {
+      align-items: flex-start;
+    }
+
+    .repo-carousel-header-right {
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-end;
+      min-width: 72px;
+    }
+
+    .repo-carousel-controls {
+      gap: 6px;
     }
   }
 

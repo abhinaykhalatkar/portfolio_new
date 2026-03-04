@@ -1,51 +1,63 @@
 {
   "items": [
     {
-      "id": "exp-full-stack",
+      "id": "exp-scribble-associate-software-developer",
       "type": "experience",
-      "title": "Full-Stack Developer",
-      "organization": "Independent / Portfolio Projects",
-      "start": "2023-01",
+      "title": "Associate Software Developer",
+      "organization": "scribble Werbeagentur GmbH",
+      "start": "2024-04",
       "end": "Present",
-      "location": "Pune, India",
-      "description": "Building end-to-end web applications using React, TypeScript, Node.js, APIs, and database-first architecture.",
+      "location": "Geilenkirchen, North Rhine-Westphalia, Germany (Hybrid)",
+      "description": "Architected and maintained reusable React and Craft CMS boilerplates with a streamlined Git workflow. Engineered high-performance Next.js applications with optimized SSR/CSR, developed mobile-first UIs with SCSS and Bootstrap, integrated Craft CMS with custom API endpoints, and led end-to-end delivery from requirements to deployment.",
       "link": "https://www.linkedin.com/in/abhinay-khalatkar/",
-      "skills": ["React", "TypeScript", "Node.js", "REST APIs", "MySQL"]
+      "skills": ["React.js", "Next.js", "Node.js", "TypeScript", "Craft CMS", "PHP", "MySQL", "Software Architecture", "Front-End Development", "Git"]
     },
     {
-      "id": "exp-frontend",
+      "id": "exp-wob-software-developer",
       "type": "experience",
-      "title": "Frontend Development Focus",
-      "organization": "Product and Personal Builds",
-      "start": "2022-01",
-      "end": "2022-12",
-      "location": "Remote",
-      "description": "Designed and implemented responsive UI flows with animation, reusable components, and route-driven interactions.",
-      "link": "https://github.com/abhinaykhalatkar",
-      "skills": ["React", "Sass", "Framer Motion", "UX"]
+      "title": "Software Developer",
+      "organization": "wob AG (Work Study)",
+      "start": "2022-03",
+      "end": "2023-09",
+      "location": "Viernheim, Hesse, Germany (Hybrid)",
+      "description": "Built interactive React components and optimized multipage architecture for performance and server efficiency. Created structured responsive pages using HTML/SCSS and Bootstrap, enhanced UX with JavaScript libraries including Barba.js and Three.js, integrated PIMCORE CMS endpoints, and managed Salesforce customer journey workflows and data extensions.",
+      "link": "https://www.linkedin.com/in/abhinay-khalatkar/",
+      "skills": ["React.js", "JavaScript", "Web Development", "SASS", "ES6", "PHP", "Docker", "Bootstrap", "MUI", "PIMCORE CMS"]
     },
     {
-      "id": "edu-cs",
-      "type": "education",
-      "title": "Computer Science Program",
-      "organization": "University Coursework",
+      "id": "exp-ak-jr-frontend-internship",
+      "type": "experience",
+      "title": "Jr. Frontend Developer (Internship)",
+      "organization": "AK Advertising",
       "start": "2018-01",
-      "end": "2022-01",
-      "location": "India",
-      "description": "Completed core subjects including data structures, algorithms, database systems, networking, and software engineering.",
-      "skills": ["Data Structures", "Algorithms", "DBMS", "Networking"]
+      "end": "2018-03",
+      "location": "Nagpur, Maharashtra, India (On-site)",
+      "description": "Implemented a client shop system, developed a React SPA to improve loading performance, integrated Firebase-backed dynamic data instead of static datasets, and implemented RESTful client-server communication.",
+      "link": "https://www.linkedin.com/in/abhinay-khalatkar/",
+      "skills": ["Front-End Development", "React.js", "JavaScript", "TypeScript", "Node.js", "REST APIs", "HTML5", "CSS", "SCSS", "MUI", "Docker"]
     },
     {
-      "id": "edu-self-learning",
+      "id": "edu-srh-masters",
       "type": "education",
-      "title": "Continuous Professional Learning",
-      "organization": "Open Source and Online Platforms",
-      "start": "2020-01",
-      "end": "Present",
-      "location": "Online",
-      "description": "Continuously learning modern JavaScript, backend development, cloud workflows, and deployment practices.",
+      "title": "Masters in Applied Computer Science",
+      "organization": "SRH Hochschule Heidelberg",
+      "start": "2021-09",
+      "end": "2023-09",
+      "location": "Heidelberg, Germany",
+      "description": "Focused on advanced databases, software architecture, cybersecurity, and UX engineering with practical projects in Angular, Vue, and React.",
+      "skills": ["Software Architecture", "Advanced Databases", "UX Engineering", "Cyber Security"]
+    },
+    {
+      "id": "edu-bca",
+      "type": "education",
+      "title": "Bachelor of Computer Application",
+      "organization": "Nagpur University",
+      "start": "2018-08",
+      "end": "2021-08",
+      "location": "Nagpur, India",
+      "description": "Studied Linux OS, data structures, software testing, computer networks, SQL/PLSQL, Java, C++, and web development fundamentals.",
       "link": "https://www.linkedin.com/in/abhinay-khalatkar/",
-      "skills": ["JavaScript", "Backend", "Deployment", "Git"]
+      "skills": ["Data Structures", "SQL", "Java", "C++", "Software Testing", "Networks"]
     }
   ]
 }
