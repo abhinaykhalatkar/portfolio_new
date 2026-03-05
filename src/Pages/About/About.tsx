@@ -21,6 +21,7 @@ export default function AboutPage() {
       transition={pageTransition}
     >
       <div className="about-content">
+        <h1 className="sr-only">About Abhinay Khalatkar</h1>
         <motion.div
           className="content-block-heading"
           initial="hidden"
@@ -39,8 +40,8 @@ export default function AboutPage() {
             />
           </div>
           <div className={`heading-foot-text ${darkTheme ? "" : "light"}`}>
-            Full-Stack Jedi / JavaScript Sorcerer / API Composer and React
-            Fanboy
+            Senior Full-Stack Engineer / System Design Practitioner / Craft CMS
+            and React Specialist
           </div>
         </motion.div>
         <motion.div
@@ -52,19 +53,19 @@ export default function AboutPage() {
           variants={contentVariants2}
         >
           <div>
-            Passionate about web development and also a bit into culinary arts,
-            I excel in unraveling complex backend challenges and sculpting
-            elegant frontend designs.
+            I design and deliver production-ready web systems from architecture
+            to deployment, balancing business outcomes with clean engineering
+            execution.
           </div>
           <div>
-            Crafting seamless user experiences is my forte, guided by the mantra
-            "In code we trust." This philosophy propels me toward ambitious
-            projects, where each line of code becomes purposeful brushstrokes in
-            a digital canvas.{" "}
+            My core focus is scalable system design, maintainable full-stack
+            implementation, and high-quality delivery through testing discipline
+            and stable CI-ready workflows.
           </div>
           <div>
-            Just as flavors harmonize in cooking, ideas converge in code,
-            transforming concepts into vibrant realities.
+            I actively use agentic AI tools like Copilot and Codex to accelerate
+            delivery while keeping strong engineering standards, code quality,
+            and long-term maintainability.
           </div>
         </motion.div>
       </div>

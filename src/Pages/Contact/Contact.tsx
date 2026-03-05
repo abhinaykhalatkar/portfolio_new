@@ -21,6 +21,7 @@ export default function ContactPage() {
       transition={pageTransition}
     >
       <div className="contact-container-Out">
+        <h1 className="sr-only">Contact Abhinay Khalatkar</h1>
         <BouncyText name_class="contact-heading" text={"Contact"} />
         <div className="contact-container">
           <motion.div
@@ -31,9 +32,9 @@ export default function ContactPage() {
             custom={1}
             variants={contentVariants}
           >
-            Got questions or a project idea? With a software developer at your
-            fingertips, I'm here to assist. Let's connect and explore
-            possibilities. contact at
+            Need help with a senior full-stack build, architecture decision, or
+            delivery acceleration using AI-assisted workflows? Let&apos;s connect.
+            Contact me at{" "}
             <a href="mailto:abhinaykhalatkar@gmail.com">
               abhinaykhalatkar@gmail.com
             </a>

@@ -106,7 +106,7 @@ export default function HomeTimeline({ darkTheme }: HomeTimelineProps) {
           className="timeline-link"
           href="https://www.linkedin.com/in/abhinay-khalatkar/"
           target="_blank"
-          rel="noreferrer"
+          rel="noreferrer noopener"
         >
           LinkedIn
           <AiOutlineRight />
@@ -181,7 +181,12 @@ export default function HomeTimeline({ darkTheme }: HomeTimelineProps) {
                   </div>
                 ) : null}
                 {entry.link ? (
-                  <a className="timeline-card-link" href={entry.link} target="_blank" rel="noreferrer">
+                  <a
+                    className="timeline-card-link"
+                    href={entry.link}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
                     Learn more
                     <AiOutlineRight />
                   </a>

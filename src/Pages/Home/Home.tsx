@@ -37,8 +37,9 @@ export default function HomePage() {
         custom={0.5}
         variants={contentVariants}
       >
-        <BouncyText name_class="home-heading" text="Full-Stack  Software" />
-        <BouncyText name_class="home-heading home-heading2" text="Developer" />
+        <h1 className="sr-only">Senior Full-Stack Software Developer</h1>
+        <BouncyText name_class="home-heading" text="Senior Full-Stack" />
+        <BouncyText name_class="home-heading home-heading2" text="Software Developer" />
         <motion.div
           className="heading-para"
           initial="hidden"
@@ -47,11 +48,11 @@ export default function HomePage() {
           custom={0.5}
           variants={contentVariants}
         >
-          Crafting Complete Web Solutions with Expertise, Integrating Design to
-          Create Seamless Experiences, Ensuring Data Integrity in Database
-          Management, Efficiently Developing and Maintaining APIs, Creating
-          User-Friendly Interfaces with Mastery ,Implementing Back-End Logic for
-          Robust Applications
+          Senior engineer with 10+ years of experience designing and shipping
+          scalable web platforms. I build React and Next.js applications with
+          Craft CMS, TypeScript, and robust backend APIs, combining system
+          design rigor, test-driven development, and agentic AI workflows with
+          Copilot and Codex.
         </motion.div>
         {screenSize < 480 ? null : (
           <motion.div

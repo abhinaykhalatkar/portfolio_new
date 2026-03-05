@@ -10,6 +10,7 @@ import { useThemeContext } from "./Context/ThemeContext/ThemeContext";
 import { usePageAnimationContext } from "./Context/PageAnimationContext/PageAnimationContext";
 import { ProgressNav, navsData } from "./Components/ProgressNav/ProgressNav";
 import { SecondaryBtn } from "./Components/Buttons/Buttons";
+import SeoHead from "./seo/SeoHead";
 import {
   VerticalProgressNav,
   getProjectAddressByIndex,
@@ -104,6 +105,7 @@ function ChildApp1() {
     setActiveProjectIndex,
     projectSectionCount,
     isOnMainPage,
+    isOnNotFound404Page,
     setHorizontalScrollDirection,
   } = usePageAnimationContext();
 
@@ -352,6 +354,7 @@ function ChildApp1() {
             animate={{ marginLeft: isSidebarOpen ? 250 : 0 }}
             transition={{ duration: 0.3 }}
           >
+            <SeoHead isNotFoundPage={isOnNotFound404Page} />
             {activeIndex !== navsData.length - 1 &&
             isOnMainPage &&
             location.pathname !== "/" ? (
@@ -369,13 +372,14 @@ function ChildApp1() {
               </motion.div>
             ) : null}
 
-            <div
+            <main
+              className="route-main"
               onTouchStart={onTouchStart}
               onTouchMove={onTouchMove}
               onTouchEnd={onTouchEnd}
             >
               <RenderRoutes />
-            </div>
+            </main>
 
             {activeIndex !== 3 &&
               location.pathname !== "/projects/project-catalogue" &&
@@ -385,7 +389,7 @@ function ChildApp1() {
                   className="gitIcon"
                   href="https://github.com/abhinaykhalatkar"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noreferrer noopener"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}

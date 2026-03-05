@@ -12,6 +12,7 @@ import {
   normalizeProjectSectionCount,
 } from "../../../Components/ProgressNav/VerticalProgressNav";
 import { getGithubUsername, useGithubRepos } from "../shared/githubRepos";
+import { getCaseStudyTitles } from "../../../content/portfolioCaseStudies";
 
 function techClassName(tech: string): string {
   return `tech-${tech
@@ -44,6 +45,7 @@ export default function ProjectsHome() {
 
   const repos = repoState.repos;
   const slideCount = repos.length;
+  const caseStudyTitles = getCaseStudyTitles().join(" • ");
 
   useEffect(() => {
     if (repoState.status !== "success") return;
@@ -146,6 +148,7 @@ export default function ProjectsHome() {
       transition={pageTransition}
     >
       <div className="project-page-content">
+        <h1 className="sr-only">Projects and Engineering Case Studies</h1>
         <BouncyText name_class="heading" text="Projects" />
 
         <motion.div
@@ -211,17 +214,20 @@ export default function ProjectsHome() {
           custom={0.5}
           variants={contentVariants}
         >
-          Browse all my public GitHub repositories using the slider below. You
-          can also explore more on my{" "}
+          This portfolio includes anonymized architecture case studies from
+          enterprise delivery work: {caseStudyTitles}. The implementations focus
+          on frontend-backend boundaries, secure GraphQL proxying, CI/CD safety,
+          and multi-environment deployment orchestration with agentic
+          engineering workflows. Browse all public repositories below, visit my{" "}
           <a
             className="gitLink"
             href={`https://github.com/${githubUsername}`}
             target="_blank"
-            rel="noreferrer"
+            rel="noreferrer noopener"
           >
             GitHub profile
           </a>
-          . You can jump into section-based project browsing anytime, or{" "}
+          , jump into section-based browsing, or{" "}
           <Link className="contactLink" to="/contact">
             reach out and connect.
           </Link>

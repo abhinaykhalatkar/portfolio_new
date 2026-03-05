@@ -8,9 +8,9 @@
       "start": "2024-04",
       "end": "Present",
       "location": "Geilenkirchen, North Rhine-Westphalia, Germany (Hybrid)",
-      "description": "Architected and maintained reusable React and Craft CMS boilerplates with a streamlined Git workflow. Engineered high-performance Next.js applications with optimized SSR/CSR, developed mobile-first UIs with SCSS and Bootstrap, integrated Craft CMS with custom API endpoints, and led end-to-end delivery from requirements to deployment.",
+      "description": "Architected and maintained reusable React and Craft CMS boilerplates with a streamlined Git workflow. Engineered high-performance Next.js applications with optimized SSR/CSR, integrated Craft CMS APIs, and led end-to-end delivery from requirements to deployment. Accelerated implementation using Copilot and Codex within test-driven delivery workflows.",
       "link": "https://www.linkedin.com/in/abhinay-khalatkar/",
-      "skills": ["React.js", "Next.js", "Node.js", "TypeScript", "Craft CMS", "PHP", "MySQL", "Software Architecture", "Front-End Development", "Git"]
+      "skills": ["React.js", "Next.js", "TypeScript", "Node.js", "Craft CMS", "PHP", "MySQL", "Software Architecture", "Agentic Workflows", "GitHub Copilot", "OpenAI Codex", "Git"]
     },
     {
       "id": "exp-wob-software-developer",
@@ -20,9 +20,9 @@
       "start": "2022-03",
       "end": "2023-09",
       "location": "Viernheim, Hesse, Germany (Hybrid)",
-      "description": "Built interactive React components and optimized multipage architecture for performance and server efficiency. Created structured responsive pages using HTML/SCSS and Bootstrap, enhanced UX with JavaScript libraries including Barba.js and Three.js, integrated PIMCORE CMS endpoints, and managed Salesforce customer journey workflows and data extensions.",
+      "description": "Built interactive React components and optimized multipage architecture for performance and server efficiency. Created structured responsive pages with Bootstrap-based styling systems, integrated PIMCORE CMS endpoints, and improved customer-journey workflows in Salesforce-based operations.",
       "link": "https://www.linkedin.com/in/abhinay-khalatkar/",
-      "skills": ["React.js", "JavaScript", "Web Development", "SASS", "ES6", "PHP", "Docker", "Bootstrap", "MUI", "PIMCORE CMS"]
+      "skills": ["React.js", "TypeScript", "Web Development", "Bootstrap", "MUI", "PHP", "Docker", "PIMCORE CMS", "Performance Optimization"]
     },
     {
       "id": "exp-ak-jr-frontend-internship",
@@ -34,7 +34,7 @@
       "location": "Nagpur, Maharashtra, India (On-site)",
       "description": "Implemented a client shop system, developed a React SPA to improve loading performance, integrated Firebase-backed dynamic data instead of static datasets, and implemented RESTful client-server communication.",
       "link": "https://www.linkedin.com/in/abhinay-khalatkar/",
-      "skills": ["Front-End Development", "React.js", "JavaScript", "TypeScript", "Node.js", "REST APIs", "HTML5", "CSS", "SCSS", "MUI", "Docker"]
+      "skills": ["Front-End Development", "React.js", "TypeScript", "Node.js", "REST APIs", "HTML5", "CSS", "MUI", "Docker", "Firebase"]
     },
     {
       "id": "edu-srh-masters",
@@ -44,7 +44,7 @@
       "start": "2021-09",
       "end": "2023-09",
       "location": "Heidelberg, Germany",
-      "description": "Focused on advanced databases, software architecture, cybersecurity, and UX engineering with practical projects in Angular, Vue, and React.",
+      "description": "Focused on advanced databases, software architecture, cybersecurity, and UX engineering with practical projects in modern component-based frontend systems and React.",
       "skills": ["Software Architecture", "Advanced Databases", "UX Engineering", "Cyber Security"]
     },
     {

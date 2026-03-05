@@ -20,6 +20,14 @@
 
         .icons {
             height: 50px;
+            width: 50px;
+            margin: 0 auto;
+        }
+
+        .icon-glyph {
+            height: auto;
+            font-size: 50px;
+            color: #7eb6f3;
         }
     }
 
@@ -42,11 +50,17 @@
         .icon-container {
             .icons {
                 height: 60px;
+                width: 60px;
                 transition: transform 0.3s ease;
 
                 &:hover {
                     transform: scale(1.2, 1.2);
                 }
+            }
+
+            .icon-glyph {
+                height: auto;
+                font-size: 60px;
             }
         }
     }
@@ -61,6 +75,12 @@
 
             .icons {
                 height: 40px;
+                width: 40px;
+            }
+
+            .icon-glyph {
+                height: auto;
+                font-size: 40px;
             }
         }
     }
@@ -72,6 +92,12 @@
     column-gap: 0.1rem;
         .icons {
             height: 40px;
+            width: 40px;
+        }
+
+        .icon-glyph {
+            height: auto;
+            font-size: 40px;
         }
     }
     
@@ -92,6 +118,12 @@
 
             .icons {
                 height: 40px;
+                width: 40px;
+            }
+
+            .icon-glyph {
+                height: auto;
+                font-size: 40px;
             }
         }
 

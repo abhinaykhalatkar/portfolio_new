@@ -12,6 +12,7 @@ import {
 } from "../../../Components/ProgressNav/VerticalProgressNav";
 import GitRepoCarousel from "../shared/GitRepoCarousel";
 import { getGithubUsername, useGithubRepos } from "../shared/githubRepos";
+import { getCaseStudyBySection } from "../../../content/portfolioCaseStudies";
 
 type ProjectSectionPageProps = {
   sectionNumber: number;
@@ -46,6 +47,10 @@ export default function ProjectSectionPage({
     Math.max(sectionNumber, 1),
     totalSections
   );
+  const caseStudy = getCaseStudyBySection(normalizedSectionNumber);
+  const subtitleText = caseStudy
+    ? `Case Study: ${caseStudy.title}. ${caseStudy.architecture} ${caseStudy.deliveryModel} ${caseStudy.outcomeFocus}`
+    : "Additional architecture implementation section covering full-stack platform design, infrastructure hardening, and delivery governance patterns.";
 
   useEffect(() => {
     if (sectionNumber > projectSectionCount) {
@@ -73,6 +78,9 @@ export default function ProjectSectionPage({
       transition={pageVariants}
     >
       <div className="project-page-content">
+        <h1 className="sr-only">
+          Project Section {String(normalizedSectionNumber).padStart(2, "0")}
+        </h1>
         <motion.div
           className="heading-div"
           initial="hidden"
@@ -95,8 +103,7 @@ export default function ProjectSectionPage({
           custom={0.4}
           variants={contentVariants}
         >
-          Discover live GitHub repositories in an infinite carousel. Scroll to
-          move between project sections.
+          {subtitleText}
         </motion.div>
 
         <motion.div

@@ -21,6 +21,7 @@ export default function SkillsPage() {
       transition={pageTransition}
     >
       <div className="container">
+        <h1 className="sr-only">Skills and Experience</h1>
         <motion.div
           className="top-quote"
           initial="hidden"
@@ -29,7 +30,7 @@ export default function SkillsPage() {
           custom={0.1}
           variants={contentVariants}
         >
-          Transforming Challenges into Pathways for Achievement
+          Engineering Scalable Products with Delivery Rigor
         </motion.div>
         <motion.div
           className="Skills-heading"
@@ -52,8 +53,8 @@ export default function SkillsPage() {
           custom={0.3}
           variants={contentVariants}
         >
-          My primary domain of expertise lies in front-end development, the
-          dynamic client side of the web.
+          I lead end-to-end delivery across frontend, backend, and platform
+          layers with a system-design-first mindset and production ownership.
         </motion.div>
         <motion.div
           className="skill-para-content"
@@ -63,12 +64,12 @@ export default function SkillsPage() {
           custom={0.4}
           variants={contentVariants}
         >
-          Proficient in JavaScript, I specialize in crafting responsive,
-          user-friendly web applications using Vue or React. My expertise
-          extends to building custom plugins, dynamic features, engaging
-          animations, and coding interactive layouts. Adding to this, my skill
-          set also includes backend development experience in node.js, and I
-          have experience with the open-source CMS, Pimcore.
+          My stack centers on TypeScript, React, Node.js, Tailwind CSS, Craft
+          CMS, and infrastructure-aware delivery across Hetzner and AWS
+          environments. I have shifted from search-first debugging to LLM-first
+          engineering with GitHub Copilot, Codex, and agentic workflows, while
+          keeping test-driven development and delivery reliability as hard
+          constraints.
         </motion.div>
         <motion.div
           className="linkedInPara"
@@ -83,7 +84,7 @@ export default function SkillsPage() {
             className="linkedInLink"
             href="https://www.linkedin.com/in/abhinay-khalatkar/"
             target="_blank"
-            rel="noreferrer"
+            rel="noreferrer noopener"
           >
             LinkedIn
           </a>{" "}

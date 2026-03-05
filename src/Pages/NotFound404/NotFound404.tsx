@@ -21,6 +21,7 @@ export default function NotFound404() {
       variants={pageVariants}
       transition={pageTransition}
     >
+      <h1 className="sr-only">Page Not Found</h1>
       <div className="wrapper">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
           <title>404</title>
