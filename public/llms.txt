@@ -1,0 +1,24 @@
+Name: Abhinay Khalatkar
+Role: Senior Full-Stack Software Developer
+Canonical: https://abhinay-portfolio.web.app/
+Summary: Senior engineer with 10+ years of experience in system design, scalable web architecture, and deployment reliability. Works across React/TypeScript, Craft CMS, API integration, and agentic AI workflows (Copilot + Codex) with test-driven delivery discipline.
+
+Primary Links:
+- Website: https://abhinay-portfolio.web.app/
+- LinkedIn: https://www.linkedin.com/in/abhinay-khalatkar/
+- GitHub: https://github.com/abhinaykhalatkar
+- Contact: mailto:abhinaykhalatkar@gmail.com
+- Resume: https://abhinay-portfolio.web.app/RESUME-Abhinay_Khalatkar.pdf
+
+Capabilities:
+- System design and scalable architecture
+- Full-stack React/Next.js + TypeScript development
+- Craft CMS and API integrations
+- TDD and production delivery workflows
+- AI-assisted engineering with Copilot and Codex
+
+Anonymized Case Study Themes:
+- Hybrid CMS + SPA architecture with secure GraphQL proxy boundaries
+- Multi-language routing and canonical URL validation at scale
+- Security-first deployment orchestration with observable release streams
+- Reusable boilerplate systems for multi-environment project delivery

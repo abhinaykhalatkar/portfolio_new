@@ -1,0 +1,53 @@
+Name: Abhinay Khalatkar
+Canonical: https://abhinay-portfolio.web.app/
+Current Positioning: Senior Full-Stack Software Developer (10+ years experience)
+
+Professional Summary:
+Abhinay Khalatkar is a senior full-stack engineer focused on scalable web product delivery. His work spans frontend architecture, backend API design, CMS integration, and system design decisions for long-term maintainability. He works with modern JavaScript/TypeScript stacks and combines test-driven engineering discipline with agentic AI workflows to accelerate delivery quality and speed.
+
+Core Expertise:
+- Scalable system design and software architecture
+- React, Next.js, TypeScript, Node.js
+- Craft CMS and custom API endpoint integrations
+- Performance-focused, responsive UI engineering
+- CI-ready workflows, test-driven development, production hardening
+- AI-assisted engineering with GitHub Copilot and OpenAI Codex
+
+Anonymized Architecture Case Studies:
+- Enterprise Commerce Platform:
+  Hybrid Craft CMS + React SPA architecture with secure GraphQL proxying, multilingual route resolution, and canonical URL validation.
+- Secure Deployment Orchestration Service:
+  Authenticated deployment control plane with SSE observability, guarded command execution, rollback safety, and staged promotion.
+- Modular Content Platform:
+  Custom Craft module architecture with structured configuration and maintainable frontend asset pipeline boundaries.
+- Reusable Full-Stack Boilerplate System:
+  Standardized TypeScript + React + Craft foundation enabling faster setup, upgrade-safe merges, and environment-aware delivery.
+
+Selected Experience:
+- Associate Software Developer, scribble Werbeagentur GmbH (Apr 2024 - Present)
+  Architected reusable React + Craft CMS boilerplates, engineered Next.js apps, integrated CMS APIs, and led end-to-end project execution.
+- Software Developer (Work Study), wob AG (Mar 2022 - Sep 2023)
+  Built interactive React components, optimized multipage architecture, integrated PIMCORE CMS and Salesforce workflows.
+- Jr. Frontend Developer (Internship), AK Advertising (Jan 2018 - Mar 2018)
+  Implemented SPA improvements, Firebase-backed dynamic data flows, and REST API client integrations.
+
+Education:
+- Masters in Applied Computer Science, SRH Hochschule Heidelberg
+- Bachelor of Computer Application, Nagpur University
+
+Public Routes:
+- Home: https://abhinay-portfolio.web.app/
+- About: https://abhinay-portfolio.web.app/about
+- Skills: https://abhinay-portfolio.web.app/skills
+- Projects: https://abhinay-portfolio.web.app/projects
+- Contact: https://abhinay-portfolio.web.app/contact
+
+Project Indexing Policy:
+- Dynamic project section routes `/projects/project-*` are crawlable but intentionally marked noindex.
+
+External Profiles:
+- LinkedIn: https://www.linkedin.com/in/abhinay-khalatkar/
+- GitHub: https://github.com/abhinaykhalatkar
+- Instagram: https://www.instagram.com/abhinaykhalatkar/
+- Contact Email: mailto:abhinaykhalatkar@gmail.com
+- Resume PDF: https://abhinay-portfolio.web.app/RESUME-Abhinay_Khalatkar.pdf
