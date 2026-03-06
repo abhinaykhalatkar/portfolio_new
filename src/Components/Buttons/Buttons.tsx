@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useThemeContext } from "../../Context/ThemeContext/ThemeContext";
 import { useLocaleContext } from "../../i18n/LocaleContext";
+import { isLocalizablePath } from "../../i18n/localeRoutes";
 
 type ButtonPath = string | 0 | null | undefined;
 
@@ -31,7 +32,12 @@ function useSharedFunctionality() {
 
   const handleButtonClick = (path: ButtonPath) => {
     if (typeof path === "string" && path.length) {
-      navigate(localizePath(path));
+      if (isLocalizablePath(path)) {
+        navigate(localizePath(path));
+        return;
+      }
+
+      window.open(path, "_blank", "noopener,noreferrer");
     }
   };
   return {
