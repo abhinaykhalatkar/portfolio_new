@@ -5,6 +5,9 @@ DirectoryIndex index.html
   RewriteEngine On
   RewriteBase /
 
+  RewriteCond %{HTTP_HOST} ^www\.abhinaykhalatkar\.de$ [NC]
+  RewriteRule ^ https://abhinaykhalatkar.de%{REQUEST_URI} [R=301,L]
+
   RewriteRule ^index\.html$ - [L]
 
   RewriteCond %{REQUEST_FILENAME} -f [OR]
