@@ -2,6 +2,12 @@ import React, { useMemo, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
+import { useLocaleContext } from "../../i18n/LocaleContext";
+import {
+  stripLocalePrefix,
+  toLocalizedPath,
+  type Locale,
+} from "../../i18n/localeRoutes";
 import "./VerticalProgressNav.scss";
 
 export const PROJECTS_CATALOGUE_ALIAS = "/projects/project-catalogue";
@@ -35,15 +41,18 @@ export function getProjectsNavData(sectionCount: number): ProjectNavItem[] {
 
 export function getProjectAddressByIndex(
   index: number,
-  sectionCount: number
+  sectionCount: number,
+  locale?: Locale
 ): string {
   const navData = getProjectsNavData(sectionCount);
   const safeIndex = Math.min(Math.max(index, 0), navData.length - 1);
-  return navData[safeIndex].Address;
+  const address = navData[safeIndex].Address;
+  return locale ? toLocalizedPath(address, locale) : address;
 }
 
 export function parseProjectSectionFromPathname(pathname: string): number | null {
-  const match = pathname.match(/^\/projects\/project-(\d+)$/);
+  const basePath = stripLocalePrefix(pathname);
+  const match = basePath.match(/^\/projects\/project-(\d+)$/);
   if (!match) {
     return null;
   }
@@ -83,12 +92,13 @@ export function resolveProjectNavIndex(
   pathname: string,
   sectionCount: number
 ): number {
+  const basePath = stripLocalePrefix(pathname);
   const totalSections = normalizeProjectSectionCount(sectionCount);
-  if (pathname === PROJECTS_CATALOGUE_ALIAS) {
+  if (basePath === PROJECTS_CATALOGUE_ALIAS) {
     return totalSections - 1;
   }
 
-  const sectionNumber = parseProjectSectionFromPathname(pathname);
+  const sectionNumber = parseProjectSectionFromPathname(basePath);
   if (sectionNumber === null) {
     return -1;
   }
@@ -111,6 +121,7 @@ export function VerticalProgressNav({
 }: VerticalProgressNavProps) {
   const location = useLocation();
   const navigate = useNavigate();
+  const { locale, t } = useLocaleContext();
 
   const {
     setActiveProjectIndex,
@@ -204,7 +215,7 @@ export function VerticalProgressNav({
       return;
     }
 
-    const nextPath = navData[nextIndex].Address;
+    const nextPath = getProjectAddressByIndex(nextIndex, totalSections, locale);
     setActiveProjectIndex(nextIndex);
     setHorizontalScrollDirection(nextIndex > safeIndex ? 1 : 0);
     pulseInteraction();
@@ -219,14 +230,14 @@ export function VerticalProgressNav({
       exit={{ opacity: 0, x: 24 }}
       transition={{ ease: "easeOut", duration: 0.35 }}
       style={{ "--project-rail-end-position": endPosition } as React.CSSProperties}
-      aria-label="Projects vertical rail"
+      aria-label={t("projectRail.aria")}
     >
       <div className="project-rail-track">
         <button
           type="button"
           className="project-rail-anchor top"
           onClick={() => goToIndex(0)}
-          aria-label="Go to first project section"
+          aria-label={t("projectRail.first")}
         >
           {topLabel}
         </button>
@@ -243,7 +254,7 @@ export function VerticalProgressNav({
                 style={{ top: `${dotProgress * 100}%` }}
                 role="tab"
                 aria-selected={isActive}
-                aria-label={`Go to project ${dotIndex}`}
+                aria-label={`${t("projectRail.goTo")} ${dotIndex + 1}`}
                 onClick={() => goToIndex(dotIndex)}
               />
             );
@@ -262,7 +273,7 @@ export function VerticalProgressNav({
           type="button"
           className="project-rail-anchor bottom"
           onClick={() => goToIndex(totalSections - 1)}
-          aria-label="Go to last project section"
+          aria-label={t("projectRail.last")}
         >
           {bottomLabel}
         </button>

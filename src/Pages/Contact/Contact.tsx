@@ -5,9 +5,11 @@ import { useThemeContext } from "../../Context/ThemeContext/ThemeContext";
 import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import BouncyText from "../../Components/Bouncy-text/BouncyText";
 import SocialIconsSection from "../../Components/Social-icons-section/Social-icons-section";
+import { useLocaleContext } from "../../i18n/LocaleContext";
 
 export default function ContactPage() {
   const { darkTheme } = useThemeContext();
+  const { t } = useLocaleContext();
   const { pageVariants, pageTransition, contentVariants } =
     usePageAnimationContext();
 
@@ -21,8 +23,8 @@ export default function ContactPage() {
       transition={pageTransition}
     >
       <div className="contact-container-Out">
-        <h1 className="sr-only">Contact Abhinay Khalatkar</h1>
-        <BouncyText name_class="contact-heading" text={"Contact"} />
+        <h1 className="sr-only">{t("contact.heading")}</h1>
+        <BouncyText name_class="contact-heading" text={t("contact.heading")} />
         <div className="contact-container">
           <motion.div
             className="contact-content"
@@ -32,9 +34,7 @@ export default function ContactPage() {
             custom={1}
             variants={contentVariants}
           >
-            Need help with a senior full-stack build, architecture decision, or
-            delivery acceleration using AI-assisted workflows? Let&apos;s connect.
-            Contact me at{" "}
+            {t("contact.body")}{" "}
             <a href="mailto:abhinaykhalatkar@gmail.com">
               abhinaykhalatkar@gmail.com
             </a>

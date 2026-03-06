@@ -7,9 +7,11 @@ import { usePageAnimationContext } from "../../Context/PageAnimationContext/Page
 import BouncyText from "../../Components/Bouncy-text/BouncyText";
 import { FaChevronDown } from "react-icons/fa";
 import HomeTimeline from "./components/HomeTimeline";
+import { useLocaleContext } from "../../i18n/LocaleContext";
 
 export default function HomePage() {
   const { darkTheme } = useThemeContext();
+  const { localizePath, t } = useLocaleContext();
   const {
     pageVariants,
     pageTransition,
@@ -37,9 +39,14 @@ export default function HomePage() {
         custom={0.5}
         variants={contentVariants}
       >
-        <h1 className="sr-only">Senior Full-Stack Software Developer</h1>
-        <BouncyText name_class="home-heading" text="Senior Full-Stack" />
-        <BouncyText name_class="home-heading home-heading2" text="Software Developer" />
+        <h1 className="sr-only">
+          {`${t("home.heading.line1")} ${t("home.heading.line2")}`}
+        </h1>
+        <BouncyText name_class="home-heading" text={t("home.heading.line1")} />
+        <BouncyText
+          name_class="home-heading home-heading2"
+          text={t("home.heading.line2")}
+        />
         <motion.div
           className="heading-para"
           initial="hidden"
@@ -48,11 +55,7 @@ export default function HomePage() {
           custom={0.5}
           variants={contentVariants}
         >
-          Senior engineer with 10+ years of experience designing and shipping
-          scalable web platforms. I build React and Next.js applications with
-          Craft CMS, TypeScript, and robust backend APIs, combining system
-          design rigor, test-driven development, and agentic AI workflows with
-          Copilot and Codex.
+          {t("home.intro")}
         </motion.div>
         {screenSize < 480 ? null : (
           <motion.div
@@ -64,11 +67,11 @@ export default function HomePage() {
             variants={contentVariants}
             onClick={() => {
               handleSetScrollDirection(0);
-              navigate("/about");
+              navigate(localizePath("/about"));
               setActiveIndex(1);
             }}
           >
-            <div>About me</div>
+            <div>{t("buttons.aboutMe")}</div>
             <FaChevronDown />
           </motion.div>
         )}

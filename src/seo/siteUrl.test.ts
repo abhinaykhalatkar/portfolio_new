@@ -32,9 +32,9 @@ describe("siteUrl utilities", () => {
 
   it("builds absolute urls from path and site", () => {
     const siteUrl = "https://portfolio.example/";
-    expect(toAbsoluteUrl("/", siteUrl)).toBe("https://portfolio.example/");
-    expect(toAbsoluteUrl("/about", siteUrl)).toBe(
-      "https://portfolio.example/about"
+    expect(toAbsoluteUrl("/en", siteUrl)).toBe("https://portfolio.example/en");
+    expect(toAbsoluteUrl("/de/about", siteUrl)).toBe(
+      "https://portfolio.example/de/about"
     );
   });
 });

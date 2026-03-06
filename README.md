@@ -11,7 +11,7 @@ Portfolio single-page application built with Vite and React, with animated route
 
 - `npm run dev` - start local dev server
 - `npm run build` - build production assets into `build/`
-- `npm run build:prerender` - build and prerender core routes (`/`, `/about`, `/skills`, `/projects`, `/contact`)
+- `npm run build:prerender` - build and prerender localized core routes (`/en/*` and `/de/*`)
 - `npm run preview` - preview the production build locally
 - `npm test` - run unit tests (Vitest)
 - `npm run test:watch` - run tests in watch mode
@@ -34,7 +34,7 @@ Copy `.env.example` to `.env` if you need custom values:
 Public crawl and AI-discovery artifacts are served from `public/`:
 
 - `robots.txt` with crawl directives and sitemap declaration
-- `sitemap.xml` with core indexable routes
+- `sitemap.xml` with localized core indexable routes (`/en/*` and `/de/*`)
 - `llms.txt` and `llms-full.txt` for agent-oriented discoverability
 - route-level metadata + JSON-LD at runtime via `react-helmet-async` (includes `noindex,follow` for dynamic project section routes)
 
@@ -95,4 +95,6 @@ Notes:
 
 - Canonical URLs are built from `VITE_SITE_URL`.
 - If not set, fallback canonical root is `https://abhinay-portfolio.web.app/`.
+- The public site is served with locale-prefixed routes: `/en/*` and `/de/*`.
+- Bare legacy routes such as `/about` or `/projects/project-2` redirect to the preferred locale, defaulting to `/en/*`.
 - Dynamic project section routes (`/projects/project-*` and `/projects/project-catalogue`) are crawlable but intentionally marked `noindex,follow`.

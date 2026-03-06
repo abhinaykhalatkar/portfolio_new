@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
+import { useLocaleContext } from "../../i18n/LocaleContext";
+import { stripLocalePrefix } from "../../i18n/localeRoutes";
 import "./ProgressNav.scss";
 import ScrollBtn from "./ScrollBtn";
 
@@ -20,10 +22,12 @@ type ProgressNavProps = {
 export function ProgressNav({ endPosition }: ProgressNavProps) {
   const location = useLocation();
   const navigate = useNavigate();
+  const { localizePath } = useLocaleContext();
+  const basePath = stripLocalePrefix(location.pathname);
 
   const [squash, setSquash] = useState(false);
   const [prevIndex, setPrevIndex] = useState(
-    navsData.findIndex((item) => item.Address === location.pathname)
+    navsData.findIndex((item) => item.Address === basePath)
   );
 
   const activeNavLinkRef = useRef<HTMLSpanElement | null>(null);
@@ -41,7 +45,7 @@ export function ProgressNav({ endPosition }: ProgressNavProps) {
     if (activeNavLinkRef.current) {
       setActiveLinkWidth(activeNavLinkRef.current.offsetWidth);
     }
-  }, [isOnMainPage, location.pathname]);
+  }, [isOnMainPage, basePath]);
 
   useEffect(() => {
     if (isOnMainPage) {
@@ -66,7 +70,7 @@ export function ProgressNav({ endPosition }: ProgressNavProps) {
     }
 
     setActiveIndex(index);
-    navigate(currentAddress);
+    navigate(localizePath(currentAddress));
 
     handleSetScrollDirection(prevIndex >= index ? 1 : 0);
     setPrevIndex(index);
@@ -105,7 +109,7 @@ export function ProgressNav({ endPosition }: ProgressNavProps) {
         }}
       >
         {navsData.map((item, index) => {
-          const isActive = location.pathname === item.Address;
+          const isActive = basePath === item.Address;
           return (
             <span
               key={`main-nav-${index}`}
@@ -123,7 +127,7 @@ export function ProgressNav({ endPosition }: ProgressNavProps) {
           className={`lavalamp ${squash ? "squash" : ""}`}
           animate={{
             x:
-              navsData.findIndex((item) => item.Address === location.pathname) *
+              navsData.findIndex((item) => item.Address === basePath) *
                 activeLinkWidth -
               activeLinkWidth * 2,
             width: activeLinkWidth,

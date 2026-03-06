@@ -3,61 +3,185 @@
     {
       "id": "exp-scribble-associate-software-developer",
       "type": "experience",
-      "title": "Associate Software Developer",
+      "title": {
+        "en": "Associate Software Developer",
+        "de": "Associate Software Developer"
+      },
       "organization": "scribble Werbeagentur GmbH",
       "start": "2024-04",
-      "end": "Present",
-      "location": "Geilenkirchen, North Rhine-Westphalia, Germany (Hybrid)",
-      "description": "Architected and maintained reusable React and Craft CMS boilerplates with a streamlined Git workflow. Engineered high-performance Next.js applications with optimized SSR/CSR, integrated Craft CMS APIs, and led end-to-end delivery from requirements to deployment. Accelerated implementation using Copilot and Codex within test-driven delivery workflows.",
+      "end": "present",
+      "location": {
+        "en": "Geilenkirchen, North Rhine-Westphalia, Germany (Hybrid)",
+        "de": "Geilenkirchen, Nordrhein-Westfalen, Deutschland (Hybrid)"
+      },
+      "description": {
+        "en": "Architected and maintained reusable React and Craft CMS boilerplates with a streamlined Git workflow. Engineered high-performance Next.js applications with optimized SSR and CSR, integrated Craft CMS APIs, and led end-to-end delivery from requirements to deployment. Accelerated implementation with Copilot and Codex inside test-driven delivery workflows.",
+        "de": "Konzipierte und pflegte wiederverwendbare React- und Craft-CMS-Boilerplates mit einem schlanken Git-Workflow. Entwickelte performante Next.js-Anwendungen mit optimiertem SSR und CSR, integrierte Craft-CMS-APIs und verantwortete die End-to-End-Auslieferung von der Anforderungsaufnahme bis zum Deployment. Beschleunigte die Umsetzung mit Copilot und Codex innerhalb testgetriebener Delivery-Workflows."
+      },
       "link": "https://www.linkedin.com/in/abhinay-khalatkar/",
-      "skills": ["React.js", "Next.js", "TypeScript", "Node.js", "Craft CMS", "PHP", "MySQL", "Software Architecture", "Agentic Workflows", "GitHub Copilot", "OpenAI Codex", "Git"]
+      "skills": [
+        "React.js",
+        "Next.js",
+        "TypeScript",
+        "Node.js",
+        "Craft CMS",
+        "PHP",
+        "MySQL",
+        {
+          "en": "Software Architecture",
+          "de": "Softwarearchitektur"
+        },
+        {
+          "en": "Agentic Workflows",
+          "de": "Agentische Workflows"
+        },
+        "GitHub Copilot",
+        "OpenAI Codex",
+        "Git"
+      ]
     },
     {
       "id": "exp-wob-software-developer",
       "type": "experience",
-      "title": "Software Developer",
+      "title": {
+        "en": "Software Developer",
+        "de": "Software Developer"
+      },
       "organization": "wob AG (Work Study)",
       "start": "2022-03",
       "end": "2023-09",
-      "location": "Viernheim, Hesse, Germany (Hybrid)",
-      "description": "Built interactive React components and optimized multipage architecture for performance and server efficiency. Created structured responsive pages with Bootstrap-based styling systems, integrated PIMCORE CMS endpoints, and improved customer-journey workflows in Salesforce-based operations.",
+      "location": {
+        "en": "Viernheim, Hesse, Germany (Hybrid)",
+        "de": "Viernheim, Hessen, Deutschland (Hybrid)"
+      },
+      "description": {
+        "en": "Built interactive React components and optimized multipage architecture for performance and server efficiency. Created structured responsive pages with Bootstrap-based styling systems, integrated PIMCORE CMS endpoints, and improved customer-journey workflows in Salesforce-based operations.",
+        "de": "Entwickelte interaktive React-Komponenten und optimierte eine Multipage-Architektur für Performance und Servereffizienz. Erstellte strukturierte responsive Seiten mit Bootstrap-basierten Styling-Systemen, integrierte PIMCORE-CMS-Endpunkte und verbesserte Customer-Journey-Workflows in Salesforce-basierten Prozessen."
+      },
       "link": "https://www.linkedin.com/in/abhinay-khalatkar/",
-      "skills": ["React.js", "TypeScript", "Web Development", "Bootstrap", "MUI", "PHP", "Docker", "PIMCORE CMS", "Performance Optimization"]
+      "skills": [
+        "React.js",
+        "TypeScript",
+        {
+          "en": "Web Development",
+          "de": "Webentwicklung"
+        },
+        "Bootstrap",
+        "MUI",
+        "PHP",
+        "Docker",
+        "PIMCORE CMS",
+        {
+          "en": "Performance Optimization",
+          "de": "Performance-Optimierung"
+        }
+      ]
     },
     {
       "id": "exp-ak-jr-frontend-internship",
       "type": "experience",
-      "title": "Jr. Frontend Developer (Internship)",
+      "title": {
+        "en": "Jr. Frontend Developer (Internship)",
+        "de": "Junior Frontend Developer (Praktikum)"
+      },
       "organization": "AK Advertising",
       "start": "2018-01",
       "end": "2018-03",
-      "location": "Nagpur, Maharashtra, India (On-site)",
-      "description": "Implemented a client shop system, developed a React SPA to improve loading performance, integrated Firebase-backed dynamic data instead of static datasets, and implemented RESTful client-server communication.",
+      "location": {
+        "en": "Nagpur, Maharashtra, India (On-site)",
+        "de": "Nagpur, Maharashtra, Indien (vor Ort)"
+      },
+      "description": {
+        "en": "Implemented a client shop system, developed a React SPA to improve loading performance, integrated Firebase-backed dynamic data instead of static datasets, and implemented RESTful client-server communication.",
+        "de": "Implementierte ein Shop-System für einen Kunden, entwickelte eine React-SPA zur Verbesserung der Ladeperformance, integrierte Firebase-gestützte dynamische Daten anstelle statischer Datensätze und setzte eine REST-basierte Client-Server-Kommunikation um."
+      },
       "link": "https://www.linkedin.com/in/abhinay-khalatkar/",
-      "skills": ["Front-End Development", "React.js", "TypeScript", "Node.js", "REST APIs", "HTML5", "CSS", "MUI", "Docker", "Firebase"]
+      "skills": [
+        {
+          "en": "Front-End Development",
+          "de": "Frontend-Entwicklung"
+        },
+        "React.js",
+        "TypeScript",
+        "Node.js",
+        "REST APIs",
+        "HTML5",
+        "CSS",
+        "MUI",
+        "Docker",
+        "Firebase"
+      ]
     },
     {
       "id": "edu-srh-masters",
       "type": "education",
-      "title": "Masters in Applied Computer Science",
+      "title": {
+        "en": "Masters in Applied Computer Science",
+        "de": "Master in Applied Computer Science"
+      },
       "organization": "SRH Hochschule Heidelberg",
       "start": "2021-09",
       "end": "2023-09",
-      "location": "Heidelberg, Germany",
-      "description": "Focused on advanced databases, software architecture, cybersecurity, and UX engineering with practical projects in modern component-based frontend systems and React.",
-      "skills": ["Software Architecture", "Advanced Databases", "UX Engineering", "Cyber Security"]
+      "location": {
+        "en": "Heidelberg, Germany",
+        "de": "Heidelberg, Deutschland"
+      },
+      "description": {
+        "en": "Focused on advanced databases, software architecture, cybersecurity, and UX engineering with practical projects in modern component-based frontend systems and React.",
+        "de": "Schwerpunkt auf fortgeschrittenen Datenbanken, Softwarearchitektur, Cybersecurity und UX Engineering mit Praxisprojekten in modernen komponentenbasierten Frontend-Systemen und React."
+      },
+      "skills": [
+        {
+          "en": "Software Architecture",
+          "de": "Softwarearchitektur"
+        },
+        {
+          "en": "Advanced Databases",
+          "de": "Fortgeschrittene Datenbanken"
+        },
+        "UX Engineering",
+        {
+          "en": "Cyber Security",
+          "de": "Cybersicherheit"
+        }
+      ]
     },
     {
       "id": "edu-bca",
       "type": "education",
-      "title": "Bachelor of Computer Application",
+      "title": {
+        "en": "Bachelor of Computer Application",
+        "de": "Bachelor of Computer Application"
+      },
       "organization": "Nagpur University",
       "start": "2018-08",
       "end": "2021-08",
-      "location": "Nagpur, India",
-      "description": "Studied Linux OS, data structures, software testing, computer networks, SQL/PLSQL, Java, C++, and web development fundamentals.",
+      "location": {
+        "en": "Nagpur, India",
+        "de": "Nagpur, Indien"
+      },
+      "description": {
+        "en": "Studied Linux OS, data structures, software testing, computer networks, SQL/PLSQL, Java, C++, and web development fundamentals.",
+        "de": "Beschäftigte mich mit Linux, Datenstrukturen, Softwaretests, Rechnernetzen, SQL/PLSQL, Java, C++ und Grundlagen der Webentwicklung."
+      },
       "link": "https://www.linkedin.com/in/abhinay-khalatkar/",
-      "skills": ["Data Structures", "SQL", "Java", "C++", "Software Testing", "Networks"]
+      "skills": [
+        {
+          "en": "Data Structures",
+          "de": "Datenstrukturen"
+        },
+        "SQL",
+        "Java",
+        "C++",
+        {
+          "en": "Software Testing",
+          "de": "Softwaretests"
+        },
+        {
+          "en": "Networks",
+          "de": "Rechnernetze"
+        }
+      ]
     }
   ]
 }

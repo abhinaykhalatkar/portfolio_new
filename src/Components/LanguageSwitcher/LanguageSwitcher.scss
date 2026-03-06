@@ -1,0 +1,59 @@
+@import "../../Styles/variables";
+
+.language-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px;
+  border-radius: 999px;
+  border: 1px solid rgba($white, 0.16);
+  background: rgba($black, 0.22);
+  backdrop-filter: blur(4px);
+
+  .language-switcher-btn {
+    min-width: 44px;
+    border: none;
+    border-radius: 999px;
+    background: transparent;
+    color: rgba($white, 0.74);
+    padding: 10px 12px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: color 0.2s ease, background-color 0.2s ease;
+
+    &.active {
+      background: rgba($heighlightBlue, 0.2);
+      color: $white;
+      box-shadow: inset 0 0 0 1px rgba($heighlightBlue, 0.6);
+    }
+  }
+
+  &.compact {
+    padding: 3px;
+    gap: 4px;
+
+    .language-switcher-btn {
+      min-width: 38px;
+      padding: 8px 10px;
+      font-size: 0.74rem;
+    }
+  }
+}
+
+.white-theme {
+  .language-switcher {
+    border-color: rgba($black, 0.12);
+    background: rgba($white, 0.75);
+
+    .language-switcher-btn {
+      color: rgba($black, 0.68);
+
+      &.active {
+        background: rgba($heighlightBlue, 0.12);
+        color: $black;
+      }
+    }
+  }
+}

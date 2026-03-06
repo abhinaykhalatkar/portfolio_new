@@ -6,10 +6,12 @@ import { motion } from "framer-motion";
 import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import { useThemeContext } from "../../Context/ThemeContext/ThemeContext";
 import { navsData } from "./ProgressNav";
+import { useLocaleContext } from "../../i18n/LocaleContext";
 
 export default function ScrollBtn() {
   const navigate = useNavigate();
   const { darkTheme } = useThemeContext();
+  const { localizePath, t } = useLocaleContext();
   const {
     handleSetScrollDirection,
     activeIndex,
@@ -21,11 +23,11 @@ export default function ScrollBtn() {
     if (activeIndex >= 0 && activeIndex <= navsData.length) {
       if (activeIndex >= 4) {
         handleSetScrollDirection(1);
-        navigate("/");
+        navigate(localizePath("/"));
         setActiveIndex(0);
       } else {
         handleSetScrollDirection(0);
-        navigate(navsData[activeIndex + 1].Address);
+        navigate(localizePath(navsData[activeIndex + 1].Address));
         setActiveIndex(activeIndex + 1);
       }
     }
@@ -37,13 +39,13 @@ export default function ScrollBtn() {
     >
       {activeIndex < navsData.length - 1 && !isOnNotFound404Page ? (
         <div>
-          <div>Scroll To Next</div>
+          <div>{t("scroll.next")}</div>
           <AiOutlineRight />
         </div>
       ) : (
         <div>
           <AiOutlineDoubleLeft />
-          <div>{isOnNotFound404Page ? "Back To Home" : "Back To Start"} </div>
+          <div>{isOnNotFound404Page ? t("scroll.backHome") : t("scroll.backStart")} </div>
         </div>
       )}
     </motion.div>

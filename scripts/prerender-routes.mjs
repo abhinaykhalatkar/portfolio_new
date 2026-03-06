@@ -10,7 +10,18 @@ const BUILD_DIR = path.join(ROOT_DIR, "build");
 const HOST = "127.0.0.1";
 const PORT = Number(process.env.PRERENDER_PORT || 4173);
 const BASE_URL = `http://${HOST}:${PORT}`;
-const ROUTES = ["/", "/about", "/skills", "/projects", "/contact"];
+const ROUTES = [
+  "/en",
+  "/en/about",
+  "/en/skills",
+  "/en/projects",
+  "/en/contact",
+  "/de",
+  "/de/about",
+  "/de/skills",
+  "/de/projects",
+  "/de/contact",
+];
 
 function getNpmCommand() {
   return process.platform === "win32" ? "npm.cmd" : "npm";

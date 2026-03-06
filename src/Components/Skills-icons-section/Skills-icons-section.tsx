@@ -20,6 +20,7 @@ import nodejsIcon from "../../Assets/skills-icons/node-js.svg";
 import reactIcon from "../../Assets/skills-icons/react.svg";
 import bootStrapIcon from "../../Assets/skills-icons/bootstrap.svg";
 import mongodbIcon from "../../Assets/skills-icons/mongodb.svg";
+import { useLocaleContext } from "../../i18n/LocaleContext";
 
 type SkillIconEntry = {
   title: string;
@@ -29,6 +30,7 @@ type SkillIconEntry = {
 
 export default function SkillIconSection() {
   const { contentVariants } = usePageAnimationContext();
+  const { t } = useLocaleContext();
   const iconsArray: SkillIconEntry[] = [
     { Icon: SiTypescript, title: "TypeScript" },
     { iconSrc: reactIcon, title: "React" },
@@ -42,8 +44,8 @@ export default function SkillIconSection() {
     { Icon: FaAws, title: "AWS" },
     { Icon: SiHetzner, title: "Hetzner" },
     { Icon: RiCopilotLine, title: "GitHub Copilot" },
-    { Icon: SiOpenai, title: "Agentic Workflows" },
-    { iconSrc: googleIcon, title: "From Search to LLMs" },
+    { Icon: SiOpenai, title: t("skills.icon.agentic") },
+    { iconSrc: googleIcon, title: t("skills.icon.searchToLlm") },
     { iconSrc: mysqlIcon, title: "MySQL" },
   ];
 

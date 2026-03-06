@@ -5,9 +5,11 @@ import { useThemeContext } from "../../Context/ThemeContext/ThemeContext";
 import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import BouncyText from "../../Components/Bouncy-text/BouncyText";
 import SkillIconSection from "../../Components/Skills-icons-section/Skills-icons-section";
+import { useLocaleContext } from "../../i18n/LocaleContext";
 
 export default function SkillsPage() {
   const { darkTheme } = useThemeContext();
+  const { t } = useLocaleContext();
   const { pageVariants, pageTransition, contentVariants } =
     usePageAnimationContext();
 
@@ -21,7 +23,7 @@ export default function SkillsPage() {
       transition={pageTransition}
     >
       <div className="container">
-        <h1 className="sr-only">Skills and Experience</h1>
+        <h1 className="sr-only">{t("skills.heading")}</h1>
         <motion.div
           className="top-quote"
           initial="hidden"
@@ -30,7 +32,7 @@ export default function SkillsPage() {
           custom={0.1}
           variants={contentVariants}
         >
-          Engineering Scalable Products with Delivery Rigor
+          {t("skills.topQuote")}
         </motion.div>
         <motion.div
           className="Skills-heading"
@@ -41,7 +43,7 @@ export default function SkillsPage() {
           variants={contentVariants}
         > 
         <div className="Skills-heading1">
-        <BouncyText text="Skills & Experience" />
+        <BouncyText text={t("skills.heading")} />
         </div>
           
         </motion.div>
@@ -53,8 +55,7 @@ export default function SkillsPage() {
           custom={0.3}
           variants={contentVariants}
         >
-          I lead end-to-end delivery across frontend, backend, and platform
-          layers with a system-design-first mindset and production ownership.
+          {t("skills.body.1")}
         </motion.div>
         <motion.div
           className="skill-para-content"
@@ -64,12 +65,7 @@ export default function SkillsPage() {
           custom={0.4}
           variants={contentVariants}
         >
-          My stack centers on TypeScript, React, Node.js, Tailwind CSS, Craft
-          CMS, and infrastructure-aware delivery across Hetzner and AWS
-          environments. I have shifted from search-first debugging to LLM-first
-          engineering with GitHub Copilot, Codex, and agentic workflows, while
-          keeping test-driven development and delivery reliability as hard
-          constraints.
+          {t("skills.body.2")}
         </motion.div>
         <motion.div
           className="linkedInPara"
@@ -79,16 +75,16 @@ export default function SkillsPage() {
           custom={3}
           variants={contentVariants}
         >
-          Feel free to explore my{" "}
+          {t("skills.linkedin.prefix")}{" "}
           <a
             className="linkedInLink"
             href="https://www.linkedin.com/in/abhinay-khalatkar/"
             target="_blank"
             rel="noreferrer noopener"
           >
-            LinkedIn
+            {t("buttons.linkedin")}
           </a>{" "}
-          for a more comprehensive overview of my skills and experiences.
+          {t("skills.linkedin.suffix")}
         </motion.div>
         <SkillIconSection />
       </div>

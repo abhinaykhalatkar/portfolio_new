@@ -11,6 +11,7 @@ import { usePageAnimationContext } from "./Context/PageAnimationContext/PageAnim
 import { ProgressNav, navsData } from "./Components/ProgressNav/ProgressNav";
 import { SecondaryBtn } from "./Components/Buttons/Buttons";
 import SeoHead from "./seo/SeoHead";
+import { useLocaleContext } from "./i18n/LocaleContext";
 import {
   VerticalProgressNav,
   getProjectAddressByIndex,
@@ -18,6 +19,7 @@ import {
   parseProjectSectionFromPathname,
   resolveProjectNavIndex,
 } from "./Components/ProgressNav/VerticalProgressNav";
+import { stripLocalePrefix, toLocalizedPath } from "./i18n/localeRoutes";
 
 type Direction = "next" | "prev";
 
@@ -86,6 +88,7 @@ function shouldBypassGlobalRouteWheel(event: WheelEvent): boolean {
 function ChildApp1() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { darkTheme } = useThemeContext();
+  const { locale, t } = useLocaleContext();
 
   const wheelAccumulatorRef = useRef(0);
   const lastWheelEventAtRef = useRef(0);
@@ -97,6 +100,7 @@ function ChildApp1() {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const basePath = stripLocalePrefix(location.pathname);
   const {
     handleSetScrollDirection,
     activeIndex,
@@ -120,7 +124,7 @@ function ChildApp1() {
     );
 
     const mainRouteIndex = navsData.findIndex(
-      (item) => item.Address === location.pathname
+      (item) => item.Address === basePath
     );
     if (mainRouteIndex !== -1 && mainRouteIndex !== activeIndex) {
       setActiveIndex(mainRouteIndex);
@@ -136,6 +140,7 @@ function ChildApp1() {
   }, [
     activeIndex,
     activeProjectIndex,
+    basePath,
     location.pathname,
     projectSectionCount,
     setActiveIndex,
@@ -155,16 +160,16 @@ function ChildApp1() {
       );
 
       if (isOnMainPage) {
-        if (location.pathname === PROJECTS_HOME_PATH && direction === "next") {
+        if (basePath === PROJECTS_HOME_PATH && direction === "next") {
           const entryProjectIndex = 0;
           setHorizontalScrollDirection(1);
           setActiveProjectIndex(entryProjectIndex);
-          navigate(getProjectAddressByIndex(entryProjectIndex, totalProjectSections));
+          navigate(getProjectAddressByIndex(entryProjectIndex, totalProjectSections, locale));
           return true;
         }
 
         const routeIndex = navsData.findIndex(
-          (item) => item.Address === location.pathname
+          (item) => item.Address === basePath
         );
         const currentIndex =
           routeIndex !== -1
@@ -182,7 +187,7 @@ function ChildApp1() {
 
         handleSetScrollDirection(direction === "next" ? 0 : 1);
         setActiveIndex(nextIndex);
-        navigate(navsData[nextIndex].Address);
+        navigate(toLocalizedPath(navsData[nextIndex].Address, locale));
         return true;
       }
 
@@ -204,7 +209,7 @@ function ChildApp1() {
         if (projectsMainIndex !== -1) {
           setActiveIndex(projectsMainIndex);
         }
-        navigate(PROJECTS_HOME_PATH);
+        navigate(toLocalizedPath(PROJECTS_HOME_PATH, locale));
         return true;
       }
 
@@ -219,15 +224,16 @@ function ChildApp1() {
 
       setHorizontalScrollDirection(direction === "next" ? 1 : 0);
       setActiveProjectIndex(nextProjectIndex);
-      navigate(getProjectAddressByIndex(nextProjectIndex, totalProjectSections));
+      navigate(getProjectAddressByIndex(nextProjectIndex, totalProjectSections, locale));
       return true;
     },
     [
       activeIndex,
       activeProjectIndex,
+      basePath,
       handleSetScrollDirection,
       isOnMainPage,
-      location.pathname,
+      locale,
       navigate,
       projectSectionCount,
       setActiveIndex,
@@ -355,22 +361,24 @@ function ChildApp1() {
             transition={{ duration: 0.3 }}
           >
             <SeoHead isNotFoundPage={isOnNotFound404Page} />
-            {activeIndex !== navsData.length - 1 &&
-            isOnMainPage &&
-            location.pathname !== "/" ? (
-              <motion.div
-                className="button-contact"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <SecondaryBtn
-                  text="Contact"
-                  path="/contact"
-                  on_Click={contactBtnHandler}
-                />
-              </motion.div>
-            ) : null}
+            <motion.div
+              className="top-actions"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {activeIndex !== navsData.length - 1 &&
+              isOnMainPage &&
+              basePath !== "/" ? (
+                <div className="button-contact">
+                  <SecondaryBtn
+                    text={t("buttons.contact")}
+                    path="/contact"
+                    on_Click={contactBtnHandler}
+                  />
+                </div>
+              ) : null}
+            </motion.div>
 
             <main
               className="route-main"
@@ -382,7 +390,7 @@ function ChildApp1() {
             </main>
 
             {activeIndex !== 3 &&
-              location.pathname !== "/projects/project-catalogue" &&
+              basePath !== "/projects/project-catalogue" &&
               !isSidebarOpen &&
               isOnMainPage && (
                 <motion.a

@@ -3,7 +3,18 @@ import path from "node:path";
 import process from "node:process";
 
 const ROOT_DIR = process.cwd();
-const CORE_ROUTES = ["/", "/about", "/skills", "/projects", "/contact"];
+const CORE_ROUTES = [
+  "/en",
+  "/en/about",
+  "/en/skills",
+  "/en/projects",
+  "/en/contact",
+  "/de",
+  "/de/about",
+  "/de/skills",
+  "/de/projects",
+  "/de/contact",
+];
 
 function normalizeSiteUrl(url) {
   const fallback = "https://abhinay-portfolio.web.app/";
@@ -61,7 +72,7 @@ async function validate() {
     "llms.txt must include a canonical reference."
   );
   assert(
-    llmsTxt.includes(siteUrl.replace(/\/$/, "")),
+    llmsTxt.includes(`${siteUrl.replace(/\/$/, "")}/en`),
     "llms.txt canonical value does not match configured site URL."
   );
   assert(

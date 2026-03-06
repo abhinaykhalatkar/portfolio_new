@@ -3,6 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useThemeContext } from "../../Context/ThemeContext/ThemeContext";
+import { useLocaleContext } from "../../i18n/LocaleContext";
 
 type ButtonPath = string | 0 | null | undefined;
 
@@ -25,11 +26,12 @@ type DangerBtnProps = {
 
 function useSharedFunctionality() {
   const { darkTheme } = useThemeContext();
+  const { localizePath } = useLocaleContext();
   const navigate = useNavigate();
 
   const handleButtonClick = (path: ButtonPath) => {
     if (typeof path === "string" && path.length) {
-      navigate(path);
+      navigate(localizePath(path));
     }
   };
   return {

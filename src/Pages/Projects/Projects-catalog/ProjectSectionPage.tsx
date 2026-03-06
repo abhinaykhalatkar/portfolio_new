@@ -12,7 +12,7 @@ import {
 } from "../../../Components/ProgressNav/VerticalProgressNav";
 import GitRepoCarousel from "../shared/GitRepoCarousel";
 import { getGithubUsername, useGithubRepos } from "../shared/githubRepos";
-import { getCaseStudyBySection } from "../../../content/portfolioCaseStudies";
+import { useLocaleContext } from "../../../i18n/LocaleContext";
 
 type ProjectSectionPageProps = {
   sectionNumber: number;
@@ -22,6 +22,7 @@ export default function ProjectSectionPage({
   sectionNumber,
 }: ProjectSectionPageProps) {
   const { darkTheme } = useThemeContext();
+  const { localizePath, t } = useLocaleContext();
   const {
     setIsVerProgressBarOpen,
     pageVariants,
@@ -47,10 +48,6 @@ export default function ProjectSectionPage({
     Math.max(sectionNumber, 1),
     totalSections
   );
-  const caseStudy = getCaseStudyBySection(normalizedSectionNumber);
-  const subtitleText = caseStudy
-    ? `Case Study: ${caseStudy.title}. ${caseStudy.architecture} ${caseStudy.deliveryModel} ${caseStudy.outcomeFocus}`
-    : "Additional architecture implementation section covering full-stack platform design, infrastructure hardening, and delivery governance patterns.";
 
   useEffect(() => {
     if (sectionNumber > projectSectionCount) {
@@ -79,7 +76,7 @@ export default function ProjectSectionPage({
     >
       <div className="project-page-content">
         <h1 className="sr-only">
-          Project Section {String(normalizedSectionNumber).padStart(2, "0")}
+          {`${t("projectSection.headingPrefix")} ${String(normalizedSectionNumber).padStart(2, "0")}`}
         </h1>
         <motion.div
           className="heading-div"
@@ -91,19 +88,20 @@ export default function ProjectSectionPage({
         >
           <BouncyText
             name_class="heading"
-            text={`PROJECT ${String(normalizedSectionNumber).padStart(2, "0")}`}
+            text={`${t("projectSection.headingPrefix")} ${String(normalizedSectionNumber).padStart(2, "0")}`}
           />
         </motion.div>
 
         <motion.div
-          className="project-section-subtitle"
+          className="project-section-helper"
           initial="hidden"
           animate="visible"
           exit="exit"
           custom={0.4}
           variants={contentVariants}
         >
-          {subtitleText}
+          <p>{t("projectSection.helper")}</p>
+          <p>{t("projectSection.helperSecondary")}</p>
         </motion.div>
 
         <motion.div
@@ -119,7 +117,7 @@ export default function ProjectSectionPage({
             githubUsername={githubUsername}
             darkTheme={darkTheme}
             initialIndex={normalizedSectionNumber - 1}
-            sectionLabel={`Section ${normalizedSectionNumber}`}
+            sectionLabel={`${t("projects.section")} ${normalizedSectionNumber}`}
           />
         </motion.div>
 
@@ -131,15 +129,15 @@ export default function ProjectSectionPage({
           custom={0.75}
           variants={contentVariants}
         >
-          <SecondaryBtn text="Contact Me" path="/contact" />
-          <NavLink to="/projects" className="catalogue-link">
+          <SecondaryBtn text={t("buttons.contactMe")} path="/contact" />
+          <NavLink to={localizePath("/projects")} className="catalogue-link">
             <div
               onClick={() => {
                 setActiveProjectIndex(0);
                 setHorizontalScrollDirection(0);
               }}
             >
-              <div>Back to Projects</div>
+              <div>{t("buttons.backToProjects")}</div>
               <AiOutlineRight />
             </div>
           </NavLink>

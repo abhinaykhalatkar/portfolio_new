@@ -1,24 +1,76 @@
-import { useEffect, useState } from "react";
-import type { TimelineEntry, TimelineEntryType, TimelineLoadState } from "./timelineTypes";
+import { useEffect, useMemo, useState } from "react";
+import type { Locale } from "../../../i18n/localeRoutes";
+import {
+  resolveLocalizedText,
+  type LocalizedText,
+  type TimelineEntry,
+  type TimelineEntryRecord,
+  type TimelineEntryType,
+  type TimelineLoadState,
+} from "./timelineTypes";
 
-const timelineCache = new Map<string, TimelineEntry[]>();
-const inflightTimeline = new Map<string, Promise<TimelineEntry[]>>();
+const timelineCache = new Map<string, TimelineEntryRecord[]>();
+const inflightTimeline = new Map<string, Promise<TimelineEntryRecord[]>>();
 
 function isTimelineEntryType(value: unknown): value is TimelineEntryType {
   return value === "experience" || value === "education";
 }
 
-function normalizeTimelineEntry(value: unknown, fallbackIndex: number): TimelineEntry | null {
+function isLocalizedObject(value: unknown): value is { en: string; de: string } {
+  if (!value || typeof value !== "object") {
+    return false;
+  }
+
+  const candidate = value as Record<string, unknown>;
+  return typeof candidate.en === "string" && typeof candidate.de === "string";
+}
+
+function normalizeLocalizedText(value: unknown): LocalizedText | null {
+  if (typeof value === "string" && value.trim().length > 0) {
+    return value.trim();
+  }
+
+  if (isLocalizedObject(value)) {
+    return {
+      en: value.en.trim(),
+      de: value.de.trim(),
+    };
+  }
+
+  return null;
+}
+
+function normalizeLocalizedSkillList(value: unknown): LocalizedText[] | undefined {
+  if (!Array.isArray(value)) {
+    return undefined;
+  }
+
+  const skills = value
+    .map((entry) => normalizeLocalizedText(entry))
+    .filter((entry): entry is LocalizedText => entry !== null);
+
+  return skills.length > 0 ? skills : undefined;
+}
+
+function normalizeTimelineEntry(
+  value: unknown,
+  fallbackIndex: number
+): TimelineEntryRecord | null {
   if (!value || typeof value !== "object") {
     return null;
   }
 
-  const candidate = value as Partial<TimelineEntry>;
+  const candidate = value as Partial<Record<keyof TimelineEntryRecord, unknown>>;
+  const title = normalizeLocalizedText(candidate.title);
+  const organization = normalizeLocalizedText(candidate.organization);
+  const description = normalizeLocalizedText(candidate.description);
+
   if (
-    typeof candidate.title !== "string" ||
-    typeof candidate.organization !== "string" ||
+    title === null ||
+    organization === null ||
+    description === null ||
     typeof candidate.start !== "string" ||
-    typeof candidate.description !== "string"
+    candidate.start.trim().length === 0
   ) {
     return null;
   }
@@ -32,31 +84,46 @@ function normalizeTimelineEntry(value: unknown, fallbackIndex: number): Timeline
       : `timeline-${fallbackIndex}`;
   const end =
     typeof candidate.end === "string" && candidate.end.trim().length > 0
-      ? candidate.end.trim()
-      : "Present";
-  const location =
-    typeof candidate.location === "string" && candidate.location.trim().length > 0
-      ? candidate.location.trim()
-      : undefined;
+      ? candidate.end.trim().toLowerCase()
+      : "present";
+  const location = normalizeLocalizedText(candidate.location);
   const link =
     typeof candidate.link === "string" && candidate.link.trim().length > 0
       ? candidate.link.trim()
       : undefined;
-  const skills = Array.isArray(candidate.skills)
-    ? candidate.skills.filter((entry): entry is string => typeof entry === "string")
-    : undefined;
+  const skills = normalizeLocalizedSkillList(candidate.skills);
 
   return {
     id,
     type,
-    title: candidate.title.trim(),
-    organization: candidate.organization.trim(),
+    title,
+    organization,
     start: candidate.start.trim(),
     end,
-    location,
-    description: candidate.description.trim(),
+    location: location ?? undefined,
+    description,
     link,
-    skills: skills && skills.length > 0 ? skills : undefined,
+    skills,
+  };
+}
+
+function resolveTimelineEntry(
+  entry: TimelineEntryRecord,
+  locale: Locale
+): TimelineEntry {
+  return {
+    id: entry.id,
+    type: entry.type,
+    title: resolveLocalizedText(entry.title, locale),
+    organization: resolveLocalizedText(entry.organization, locale),
+    start: entry.start,
+    end: entry.end,
+    location: entry.location
+      ? resolveLocalizedText(entry.location, locale)
+      : undefined,
+    description: resolveLocalizedText(entry.description, locale),
+    link: entry.link,
+    skills: entry.skills?.map((skill) => resolveLocalizedText(skill, locale)),
   };
 }
 
@@ -72,7 +139,7 @@ function getSortableDateValue(raw: string): number {
   return Number(yearMatch[0]) * 10_000;
 }
 
-async function fetchTimelineItems(sourceUrl: string): Promise<TimelineEntry[]> {
+async function fetchTimelineItems(sourceUrl: string): Promise<TimelineEntryRecord[]> {
   const response = await fetch(sourceUrl, {
     headers: {
       Accept: "application/json",
@@ -86,23 +153,25 @@ async function fetchTimelineItems(sourceUrl: string): Promise<TimelineEntry[]> {
   const rawItems = Array.isArray(raw)
     ? raw
     : raw && typeof raw === "object" && Array.isArray((raw as { items?: unknown }).items)
-    ? ((raw as { items: unknown[] }).items as unknown[])
-    : [];
+      ? ((raw as { items: unknown[] }).items as unknown[])
+      : [];
 
-  const items = rawItems
+  return rawItems
     .map((entry, index) => normalizeTimelineEntry(entry, index))
-    .filter((entry): entry is TimelineEntry => entry !== null)
+    .filter((entry): entry is TimelineEntryRecord => entry !== null)
     .sort((first, second) => getSortableDateValue(second.start) - getSortableDateValue(first.start));
-
-  return items;
 }
 
-function getCachedState(sourceUrl: string): TimelineLoadState {
+function getCachedState(sourceUrl: string, locale: Locale): TimelineLoadState {
   const cached = timelineCache.get(sourceUrl);
   if (!cached) {
     return { status: "idle", items: [] };
   }
-  return { status: "success", items: cached };
+
+  return {
+    status: "success",
+    items: cached.map((entry) => resolveTimelineEntry(entry, locale)),
+  };
 }
 
 export function getTimelineSourceUrl(): string {
@@ -114,14 +183,20 @@ export function getTimelineSourceUrl(): string {
 }
 
 export function useTimelineFeed(
-  sourceUrl: string = getTimelineSourceUrl()
+  sourceUrl: string = getTimelineSourceUrl(),
+  locale: Locale = "en"
 ): TimelineLoadState {
-  const [state, setState] = useState<TimelineLoadState>(() => getCachedState(sourceUrl));
+  const [state, setState] = useState<TimelineLoadState>(() =>
+    getCachedState(sourceUrl, locale)
+  );
 
   useEffect(() => {
     const cached = timelineCache.get(sourceUrl);
     if (cached) {
-      setState({ status: "success", items: cached });
+      setState({
+        status: "success",
+        items: cached.map((entry) => resolveTimelineEntry(entry, locale)),
+      });
       return;
     }
 
@@ -142,7 +217,10 @@ export function useTimelineFeed(
         if (!isMounted) {
           return;
         }
-        setState({ status: "success", items });
+        setState({
+          status: "success",
+          items: items.map((entry) => resolveTimelineEntry(entry, locale)),
+        });
       })
       .catch((error: unknown) => {
         if (!isMounted) {
@@ -161,7 +239,7 @@ export function useTimelineFeed(
     return () => {
       isMounted = false;
     };
-  }, [sourceUrl]);
+  }, [locale, sourceUrl]);
 
-  return state;
+  return useMemo(() => state, [state]);
 }

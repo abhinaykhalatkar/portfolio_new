@@ -7,6 +7,8 @@ import { useThemeContext } from "../../Context/ThemeContext/ThemeContext";
 import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import { PrimeryBtn } from "../Buttons/Buttons";
 import { MdFileDownload } from "react-icons/md";
+import { useLocaleContext } from "../../i18n/LocaleContext";
+import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 
 type SideBarProps = {
   passIsSidebarOpen: (isOpen: boolean) => void;
@@ -16,12 +18,13 @@ const SideBar = ({ passIsSidebarOpen }: SideBarProps) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { darkTheme } = useThemeContext();
   const { setActiveIndex } = usePageAnimationContext();
+  const { localizePath, t } = useLocaleContext();
   const navLinksData = [
-    { name: "HOME", link: "/" },
-    { name: "ABOUT", link: "/about" },
-    { name: "SKILLS", link: "/skills" },
-    { name: "PROJECTS", link: "/projects" },
-    { name: "CONTACT", link: "/contact" },
+    { name: t("nav.home"), link: "/" },
+    { name: t("nav.about"), link: "/about" },
+    { name: t("nav.skills"), link: "/skills" },
+    { name: t("nav.projects"), link: "/projects" },
+    { name: t("nav.contact"), link: "/contact" },
   ];
   const handleSidebarToggle = () => {
     setIsSidebarOpen((prev) => {
@@ -60,7 +63,7 @@ const SideBar = ({ passIsSidebarOpen }: SideBarProps) => {
                   className={`NavLink ${
                     darkTheme ? "s-color-white" : "s-color-black"
                   }`}
-                  to={el.link}
+                  to={localizePath(el.link)}
                   onClick={() => {
                     handleSidebarToggle();
                     setActiveIndex(ind);
@@ -72,10 +75,13 @@ const SideBar = ({ passIsSidebarOpen }: SideBarProps) => {
             })}
           </div>
           <PrimeryBtn
-            text="My Resume"
+            text={t("buttons.myResume")}
             path="/RESUME-Abhinay_Khalatkar.pdf"
             icon={<MdFileDownload />}
           />
+          <div className="sidebar-language-switcher">
+            <LanguageSwitcher compact />
+          </div>
           <Switch1 />
         </nav>
       </motion.div>

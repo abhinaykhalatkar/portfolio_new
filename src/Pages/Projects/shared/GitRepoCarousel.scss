@@ -87,7 +87,7 @@
     padding: 18px 18px 14px;
     text-align: left;
     user-select: none;
-    min-height: 280px;
+    min-height: clamp(220px, 30vh, 280px);
 
     .repo-card-meta {
       display: flex;
@@ -187,13 +187,15 @@
     overflow-x: auto;
     margin-top: 12px;
     padding-bottom: 4px;
-    scrollbar-width: thin;
+    scrollbar-width: none;
     overscroll-behavior-x: contain;
     touch-action: pan-x;
     scroll-snap-type: x proximity;
     -ms-overflow-style: none;
 
     &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
       display: none;
     }
   }

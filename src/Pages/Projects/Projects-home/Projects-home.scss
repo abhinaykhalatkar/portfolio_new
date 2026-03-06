@@ -1,418 +1,192 @@
-@import '../../../Styles/variables';
+@import "../../../Styles/variables";
 
 .p-Project-home {
-    min-width: 70vw;
-    min-height: 100vh;
-    height: 100vh;
-    overflow: hidden;
-    overscroll-behavior: none;
-    padding: 0 50px;
-    // background-color: $darkBlack;
-    // background-image: linear-gradient(135deg, $black 38%, $darkBlack ),
-    //     linear-gradient(315deg, $black 18%, $pitchBlack 74%);
-    background-image: linear-gradient(135deg, $darkGray 38%, $darkBlue ),
-        linear-gradient(315deg, $darkBlack 10%, $black 74%);
+  min-width: 70vw;
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  overscroll-behavior: none;
+  padding: 0 50px;
+  background-image: linear-gradient(135deg, $darkGray 38%, $darkBlue),
+    linear-gradient(315deg, $darkBlack 10%, $black 74%);
 
-    &.light {
-        background: #E0EAFC;
-        background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);
-        background: linear-gradient(to right, #CFDEF3, #E0EAFC);
+  &.light {
+    background: linear-gradient(to right, #cfdef3, #e0eafc);
+  }
+
+  .project-page-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    height: 100%;
+    justify-content: center;
+    text-align: center;
+    padding: clamp(84px, 10vh, 104px) 0 clamp(16px, 2.4vh, 32px);
+
+    .heading {
+      flex-wrap: wrap;
+      max-width: 560px;
+      font-size: clamp(2.6rem, 4.8vw, 3.5rem);
+      align-self: center;
+      font-weight: 500;
+      justify-content: center;
+      margin-bottom: clamp(8px, 1.4vh, 14px);
     }
+
+    .projects-overview {
+      width: min(960px, 100%);
+      align-self: center;
+      margin-bottom: clamp(14px, 2vh, 22px);
+      display: grid;
+      gap: 10px;
+    }
+
+    .projects-overview-intro,
+    .projects-overview-body {
+      margin: 0;
+      font-size: clamp(0.95rem, 1vw, 1.05rem);
+      line-height: 1.6;
+      opacity: 0.94;
+    }
+
+    .projects-entry-cta {
+      align-self: center;
+      margin-bottom: clamp(14px, 2vh, 22px);
+      display: grid;
+      justify-items: center;
+      gap: 10px;
+    }
+
+    .projects-catalog-note {
+      font-size: 0.85rem;
+      max-width: 680px;
+      line-height: 1.45;
+      opacity: 0.72;
+    }
+
+    .case-studies-grid {
+      width: min(1080px, 100%);
+      align-self: center;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(12px, 1.4vw, 18px);
+      align-content: center;
+    }
+
+    .case-study-card {
+      border-radius: 18px;
+      border: 1px solid rgba($white, 0.14);
+      background: rgba($black, 0.26);
+      padding: 16px 18px;
+      text-align: left;
+      display: grid;
+      gap: 12px;
+      min-height: 0;
+      box-shadow: 0 18px 40px rgba($black, 0.12);
+    }
+
+    .case-study-card-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.7rem;
+      opacity: 0.72;
+    }
+
+    .case-study-card-title {
+      margin: 0;
+      font-size: clamp(1.2rem, 1.55vw, 1.45rem);
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .case-study-card-details {
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .case-study-row {
+      display: grid;
+      gap: 4px;
+
+      dt {
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.68rem;
+        opacity: 0.7;
+      }
+
+      dd {
+        margin: 0;
+        font-size: 0.84rem;
+        line-height: 1.52;
+        opacity: 0.95;
+      }
+    }
+  }
+
+  &.light {
+    .case-study-card {
+      border-color: rgba($black, 0.12);
+      background: rgba($white, 0.7);
+      box-shadow: 0 18px 40px rgba($black, 0.08);
+    }
+  }
+
+  @media only screen and (max-width: 1100px) {
+    .project-page-content {
+      padding-top: clamp(82px, 8.5vh, 94px);
+
+      .case-studies-grid {
+        gap: 12px;
+      }
+
+      .case-study-card {
+        padding: 14px 16px;
+      }
+
+      .case-study-row dd {
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 
     .project-page-content {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        text-align: center;
-        position: relative;
-        top: 0;
-        left: 0;
-        transform: none;
-        padding: 110px 0 40px;
+      height: auto;
+      min-height: 100%;
+      justify-content: flex-start;
+      padding-top: 92px;
+      padding-bottom: 120px;
 
-        .heading {
-            flex-wrap: wrap;
-            max-width: 560px;
-            
-            font-size: 3.5rem;
-            align-self: center;
-            font-weight: 500;
-            justify-content: center;
-        }
-        .heading1{
-            margin-bottom: 2rem;
-        }
-
-        .projects-toolbar {
-            display: flex;
-            align-items: stretch;
-            justify-content: center;
-            gap: 10px;
-            width: min(920px, 100%);
-            align-self: center;
-            margin: 16px 0 18px;
-
-            .toolbar-btn {
-                border: none;
-                background: transparent;
-                color: $white;
-                font-size: 22px;
-                width: 38px;
-                cursor: pointer;
-                opacity: 0.9;
-                transition: opacity 0.2s ease;
-
-                &:hover {
-                    opacity: 1;
-                }
-            }
-
-            .toolbar-track {
-                display: flex;
-                gap: 10px;
-                overflow: auto;
-                padding: 8px;
-                border-radius: 14px;
-                flex: 1;
-                overscroll-behavior-x: contain;
-                touch-action: pan-x;
-
-                /* hide scrollbar while keeping scrollability */
-                -ms-overflow-style: none;
-                scrollbar-width: none;
-                &::-webkit-scrollbar { display: none; }
-            }
-
-            .toolbar-item {
-                border: 1px solid rgba($white, 0.18);
-                background: rgba($black, 0.20);
-                color: $white;
-                min-width: 220px;
-                text-align: left;
-                padding: 10px 12px;
-                border-radius: 12px;
-                cursor: pointer;
-                transition: border-color 0.2s ease, background 0.2s ease;
-
-                .toolbar-time {
-                    font-size: 12px;
-                    opacity: 0.8;
-                    margin-bottom: 4px;
-                }
-
-                .toolbar-title {
-                    font-size: 14px;
-                    font-weight: 500;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                }
-
-                &:hover {
-                    border-color: rgba($white, 0.30);
-                }
-
-                &.active {
-                    border-color: rgba($heighlightBlue, 0.8);
-                    background: rgba($darkBlue, 0.25);
-                }
-            }
-        }
-
-        .para-content {
-            align-self: center;
-            width: min(920px, 100%);
-            max-width: 920px;
-            margin-bottom: 3rem;
-
-            .gitLink,
-            .contactLink {
-                text-decoration: none;
-                color: $orange;
-                transition: color 0.3s ease;
-
-                &:hover {
-                    color: $blue;
-                }
-            }
-
-
-        }
-
-        .projects-entry-cta {
-            align-self: center;
-            margin-bottom: 1.2rem;
-        }
-
-        .projects-slider {
-            position: relative;
-            width: min(920px, 100%);
-            align-self: center;
-            margin: 12px 0 22px;
-            overscroll-behavior-x: contain;
-            touch-action: pan-x;
-        }
-
-        .project-card {
-            border-radius: 18px;
-            border: 1px solid rgba($white, 0.14);
-            background: rgba($black, 0.25);
-            padding: 18px 18px 14px;
-            text-align: left;
-            user-select: none;
-
-            .project-card-top {
-                margin-bottom: 12px;
-            }
-
-            .project-card-meta {
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 8px;
-            }
-
-            .project-card-badges {
-                display: inline-flex;
-                gap: 8px;
-                justify-content: flex-end;
-                align-items: center;
-                flex-wrap: wrap;
-            }
-
-            .project-card-time {
-                font-size: 12px;
-                opacity: 0.8;
-            }
-
-            .project-card-title {
-                font-size: 20px;
-                font-weight: 600;
-                margin-bottom: 8px;
-                word-break: break-word;
-            }
-
-            .project-card-summary {
-                font-size: 14px;
-                opacity: 0.92;
-                line-height: 1.4;
-            }
-
-            .project-card-section-title {
-                margin-top: 12px;
-                margin-bottom: 8px;
-                font-size: 12px;
-                text-transform: uppercase;
-                letter-spacing: 0.08em;
-                opacity: 0.75;
-            }
-
-            .project-card-highlights,
-            .project-card-tech {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-
-            .pill {
-                padding: 6px 10px;
-                border-radius: 999px;
-                border: 1px solid rgba($white, 0.18);
-                background: rgba($black, 0.20);
-                font-size: 12px;
-                opacity: 0.95;
-
-                &.subtle {
-                    opacity: 0.85;
-                }
-            }
-
-            .project-card-footer {
-                display: flex;
-                justify-content: flex-end;
-                align-items: center;
-                gap: 14px;
-                margin-top: 14px;
-            }
-
-            .details-cta {
-                display: inline-flex;
-                align-items: center;
-                gap: 6px;
-                text-decoration: none;
-                color: $orange;
-                transition: color 0.2s ease;
-
-                &:hover {
-                    color: $heighlightBlue;
-                }
-            }
-
-            .github-cta {
-                display: inline-flex;
-                align-items: center;
-                gap: 6px;
-                text-decoration: none;
-                color: darken($heighlightBlue, 10%);
-                transition: color 0.2s ease;
-
-                &:hover {
-                    color: darken($heighlightBlue, 0%);
-                }
-            }
-
-            &.light {
-                border: 1px solid rgba($black, 0.12);
-                background: rgba($white, 0.55);
-
-                .pill {
-                    border: 1px solid rgba($black, 0.10);
-                    background: rgba($white, 0.60);
-                }
-            }
-        }
-
-        /* Tech badges (use existing theme tokens; no new colors) */
-        .tech-pill {
-            border-color: rgba($white, 0.22);
-        }
-
-        .project-card.light .tech-pill {
-            border-color: rgba($black, 0.12);
-        }
-
-        .tech-react { background: rgba($heighlightBlue, 0.18); }
-        .tech-typescript { background: rgba($YInMnBlue, 0.20); }
-        .tech-vite { background: rgba($yellow, 0.18); }
-        .tech-framer-motion { background: rgba($orange, 0.18); }
-        .tech-sass { background: rgba($gray, 0.18); }
-        .tech-node-js { background: rgba($blue, 0.16); }
-        .tech-mongodb { background: rgba($darkOrange, 0.16); }
-        .tech-mysql { background: rgba($heighlightBlue, 0.14); }
-        .tech-firebase { background: rgba($yellow, 0.16); }
-        .tech-git { background: rgba($gray, 0.16); }
-        .tech-github { background: rgba($darkGray, 0.25); }
-
-        /* Common GitHub repo languages */
-        .tech-javascript { background: rgba($yellow, 0.18); }
-        .tech-typescriptreact { background: rgba($YInMnBlue, 0.18); }
-        .tech-javascriptreact { background: rgba($yellow, 0.16); }
-        .tech-python { background: rgba($heighlightBlue, 0.16); }
-        .tech-java { background: rgba($darkOrange, 0.16); }
-        .tech-go { background: rgba($heighlightBlue, 0.14); }
-        .tech-rust { background: rgba($orange, 0.16); }
-        .tech-html { background: rgba($darkOrange, 0.14); }
-        .tech-css { background: rgba($blue, 0.14); }
-        .tech-c { background: rgba($gray, 0.18); }
-        .tech-cplusplus { background: rgba($gray, 0.20); }
-        .tech-unknown { background: rgba($darkGray, 0.25); }
-
-        .projects-bottom-gradient {
-            pointer-events: none;
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -10px;
-            height: 90px;
-            border-radius: 18px;
-            background: linear-gradient(
-                180deg,
-                rgba($darkBlack, 0) 0%,
-                rgba($darkBlack, 0.55) 55%,
-                rgba($darkBlack, 0.85) 100%
-            );
-        }
-
-        &.light {
-            .projects-bottom-gradient {
-                background: linear-gradient(
-                    180deg,
-                    rgba($white, 0) 0%,
-                    rgba($white, 0.65) 55%,
-                    rgba($white, 0.92) 100%
-                );
-            }
-        }
-
-        .catalogue-link {
-            align-self: center;
-            text-decoration: none;
-
-            &>div {
-                display: flex;
-                color: darken($heighlightBlue, 20%);
-                transition: color 0.3s ease;
-
-
-                div {
-                    margin-right: 7px;
-                }
-
-                svg {
-                    align-self: center;
-                    transition: transform 0.3s ease;
-                }
-
-                &:hover {
-                    color: darken($heighlightBlue, 0%);
-
-                    svg {
-                        transform: rotate(90deg);
-                    }
-                }
-            }
-        }
-
-        @media only screen and (max-width:900px), only screen and (max-height: 780px) {
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        @media only screen and (min-width: 480px) and (max-width:768px) {
-
-            .heading {
-                max-width: 420px;
-                font-size: 2.5rem;
-            }
-
-            .para-content {
-                width: min(920px, 100%);
-            }
-        }
-
-        @media only screen and (max-width: 480px) {
-            min-width: 340px;
-
-            .heading {
-                max-width: 315px;
-                font-size: 2rem;
-            }
-
-            .para-content {
-                width: 100%;
-            }
-
-            .projects-toolbar {
-                gap: 6px;
-                .toolbar-btn { width: 32px; }
-                .toolbar-item { min-width: 180px; }
-            }
-        }
+      .case-studies-grid {
+        grid-template-columns: 1fr;
+      }
     }
+  }
 
-    &.light {
-        .project-page-content {
-            .projects-toolbar {
-                .toolbar-btn { color: $black; }
-                .toolbar-item {
-                    border: 1px solid rgba($black, 0.12);
-                    background: rgba($white, 0.35);
-                    color: $black;
-                    &.active {
-                        border-color: rgba($heighlightBlue, 0.8);
-                        background: rgba($white, 0.55);
-                    }
-                }
-            }
-        }
+  @media only screen and (max-width: 480px) {
+    min-width: 320px;
+    padding: 0 18px;
+
+    .project-page-content {
+      .heading {
+        max-width: 315px;
+        font-size: 2rem;
+      }
+
+      .projects-overview-intro,
+      .projects-overview-body {
+        font-size: 0.92rem;
+      }
+
+      .case-study-card {
+        padding: 14px;
+      }
     }
+  }
 }

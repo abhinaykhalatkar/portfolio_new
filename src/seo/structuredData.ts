@@ -1,19 +1,24 @@
+import { getCaseStudyTitles } from "../content/portfolioCaseStudies";
+import type { Locale } from "../i18n/localeRoutes";
 import type { SeoRouteConfig } from "./seoConfig";
 import { toAbsoluteUrl } from "./siteUrl";
-import { getCaseStudyTitles } from "../content/portfolioCaseStudies";
 
 export type StructuredDataPayload = {
   metadata: SeoRouteConfig;
   canonicalUrl: string;
   siteUrl: string;
+  locale: Locale;
 };
 
-function buildPersonSchema(siteUrl: string) {
+function buildPersonSchema(siteUrl: string, locale: Locale) {
   return {
     "@type": "Person",
     "@id": `${siteUrl}#person`,
     name: "Abhinay Khalatkar",
-    jobTitle: "Senior Full-Stack Software Developer",
+    jobTitle:
+      locale === "de"
+        ? "Senior Full-Stack Softwareentwickler"
+        : "Senior Full-Stack Software Developer",
     url: siteUrl,
     email: "mailto:abhinaykhalatkar@gmail.com",
     image: toAbsoluteUrl("/favicon.ico", siteUrl),
@@ -47,27 +52,36 @@ function buildPersonSchema(siteUrl: string) {
       "API Engineering",
     ],
     description:
-      "Senior full-stack engineer with 10+ years of experience delivering scalable web systems, architecture-led execution, and reliability-focused deployment workflows with AI-assisted engineering.",
+      locale === "de"
+        ? "Senior Full-Stack Engineer mit über 10 Jahren Erfahrung in skalierbaren Web-Systemen, architekturgetriebener Umsetzung und verlässlichen Deployment-Workflows mit KI-gestütztem Engineering."
+        : "Senior full-stack engineer with 10+ years of experience delivering scalable web systems, architecture-led execution, and reliability-focused deployment workflows with AI-assisted engineering.",
   };
 }
 
-function buildWebSiteSchema(siteUrl: string) {
+function buildWebSiteSchema(siteUrl: string, locale: Locale) {
   return {
     "@type": "WebSite",
     "@id": `${siteUrl}#website`,
     url: siteUrl,
     name: "Abhinay Khalatkar Portfolio",
     description:
-      "Senior full-stack portfolio focused on anonymized architecture case studies, scalable web systems, Craft CMS workflows, and AI-assisted engineering delivery.",
-    inLanguage: "en",
+      locale === "de"
+        ? "Senior-Full-Stack-Portfolio mit anonymisierten Architektur-Case-Studies, skalierbaren Web-Systemen, Craft-CMS-Workflows und KI-gestützter Engineering-Delivery."
+        : "Senior full-stack portfolio focused on anonymized architecture case studies, scalable web systems, Craft CMS workflows, and AI-assisted engineering delivery.",
+    inLanguage: ["en", "de"],
     publisher: {
       "@id": `${siteUrl}#person`,
     },
   };
 }
 
-function buildPageSchema({ metadata, canonicalUrl, siteUrl }: StructuredDataPayload) {
-  const caseStudyTitles = getCaseStudyTitles();
+function buildPageSchema({
+  metadata,
+  canonicalUrl,
+  siteUrl,
+  locale,
+}: StructuredDataPayload) {
+  const caseStudyTitles = getCaseStudyTitles(locale);
 
   if (metadata.kind === "home") {
     return {
@@ -76,6 +90,7 @@ function buildPageSchema({ metadata, canonicalUrl, siteUrl }: StructuredDataPayl
       url: canonicalUrl,
       name: metadata.title,
       description: metadata.description,
+      inLanguage: locale,
       mainEntity: {
         "@id": `${siteUrl}#person`,
       },
@@ -92,15 +107,22 @@ function buildPageSchema({ metadata, canonicalUrl, siteUrl }: StructuredDataPayl
       url: canonicalUrl,
       name: metadata.title,
       description: metadata.description,
+      inLanguage: locale,
       isPartOf: {
         "@id": `${siteUrl}#website`,
       },
       about: [
-        "Anonymized architecture case studies",
-        "Frontend-backend integration",
+        locale === "de"
+          ? "Anonymisierte Architektur Case Studies"
+          : "Anonymized architecture case studies",
+        locale === "de"
+          ? "Frontend-Backend-Integration"
+          : "Frontend-backend integration",
         "GraphQL proxy architecture",
         "Deployment reliability",
-        "Agentic engineering workflows",
+        locale === "de"
+          ? "Agentische KI-Workflows"
+          : "Agentic engineering workflows",
         ...caseStudyTitles,
       ],
     };
@@ -113,6 +135,7 @@ function buildPageSchema({ metadata, canonicalUrl, siteUrl }: StructuredDataPayl
       url: canonicalUrl,
       name: metadata.title,
       description: metadata.description,
+      inLanguage: locale,
       isPartOf: {
         "@id": `${siteUrl}#website`,
       },
@@ -125,6 +148,7 @@ function buildPageSchema({ metadata, canonicalUrl, siteUrl }: StructuredDataPayl
     url: canonicalUrl,
     name: metadata.title,
     description: metadata.description,
+    inLanguage: locale,
     isPartOf: {
       "@id": `${siteUrl}#website`,
     },
@@ -134,9 +158,9 @@ function buildPageSchema({ metadata, canonicalUrl, siteUrl }: StructuredDataPayl
 export function buildStructuredDataGraph(
   payload: StructuredDataPayload
 ): Record<string, unknown> {
-  const { siteUrl } = payload;
-  const person = buildPersonSchema(siteUrl);
-  const website = buildWebSiteSchema(siteUrl);
+  const { siteUrl, locale } = payload;
+  const person = buildPersonSchema(siteUrl, locale);
+  const website = buildWebSiteSchema(siteUrl, locale);
   const page = buildPageSchema(payload);
 
   return {

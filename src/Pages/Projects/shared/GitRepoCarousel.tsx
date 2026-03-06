@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { AiOutlineRight } from "react-icons/ai";
 import type { RepoLoadState } from "./githubRepos";
+import { useLocaleContext } from "../../../i18n/LocaleContext";
+import { getIntlLocale } from "../../../i18n/localeRoutes";
 import "./GitRepoCarousel.scss";
 
 function techClassName(tech: string): string {
@@ -27,6 +29,7 @@ export default function GitRepoCarousel({
   initialIndex = 0,
   sectionLabel = "Projects",
 }: GitRepoCarouselProps) {
+  const { locale, t } = useLocaleContext();
   const repos = repoState.repos;
   const slideCount = repos.length;
 
@@ -54,11 +57,11 @@ export default function GitRepoCarousel({
   const formatUpdated = useCallback((iso: string): string => {
     const parsed = new Date(iso);
     if (Number.isNaN(parsed.getTime())) return "";
-    return parsed.toLocaleDateString(undefined, {
+    return parsed.toLocaleDateString(getIntlLocale(locale), {
       year: "numeric",
       month: "short",
     });
-  }, []);
+  }, [locale]);
 
   const goNext = useCallback(() => {
     if (slideCount <= 0) return;
@@ -129,7 +132,7 @@ export default function GitRepoCarousel({
           goNext();
         }
       }}
-      aria-label={`${sectionLabel} repository carousel`}
+      aria-label={`${sectionLabel} ${t("projects.repositoryCarousel")}`}
     >
       <div className="repo-carousel-header">
         <div className="repo-carousel-title">{sectionLabel}</div>
@@ -142,7 +145,7 @@ export default function GitRepoCarousel({
               type="button"
               className="repo-carousel-btn"
               onClick={goPrev}
-              aria-label="Previous repository"
+              aria-label={t("projects.previousRepository")}
               disabled={slideCount <= 0}
             >
               ‹
@@ -151,7 +154,7 @@ export default function GitRepoCarousel({
               type="button"
               className="repo-carousel-btn"
               onClick={goNext}
-              aria-label="Next repository"
+              aria-label={t("projects.nextRepository")}
               disabled={slideCount <= 0}
             >
               ›
@@ -162,12 +165,12 @@ export default function GitRepoCarousel({
 
       {repoState.status === "loading" || repoState.status === "idle" ? (
         <div className={`repo-card ${darkTheme ? "" : "light"}`}>
-          <div className="repo-card-title">Loading repositories…</div>
-          <div className="repo-card-summary">Fetching the latest repos from GitHub.</div>
+          <div className="repo-card-title">{t("projects.loadingTitle")}</div>
+          <div className="repo-card-summary">{t("projects.loadingBody")}</div>
         </div>
       ) : repoState.status === "error" ? (
         <div className={`repo-card ${darkTheme ? "" : "light"}`}>
-          <div className="repo-card-title">Couldn’t load repositories</div>
+          <div className="repo-card-title">{t("projects.errorTitle")}</div>
           <div className="repo-card-summary">{repoState.message}</div>
           <div className="repo-card-footer">
             <a
@@ -176,16 +179,16 @@ export default function GitRepoCarousel({
               target="_blank"
               rel="noreferrer"
             >
-              View on GitHub
+              {t("buttons.viewOnGitHub")}
               <AiOutlineRight />
             </a>
           </div>
         </div>
       ) : slideCount <= 0 || !currentRepo ? (
         <div className={`repo-card ${darkTheme ? "" : "light"}`}>
-          <div className="repo-card-title">No repositories found</div>
+          <div className="repo-card-title">{t("projects.emptyTitle")}</div>
           <div className="repo-card-summary">
-            This user doesn’t have any public repositories.
+            {t("projects.emptyBody")}
           </div>
         </div>
       ) : (
@@ -212,31 +215,35 @@ export default function GitRepoCarousel({
           >
             <div className="repo-card-meta">
               <div className="repo-card-time">
-                Updated {formatUpdated(currentRepo.updated_at)}
+                {t("projects.updated")} {formatUpdated(currentRepo.updated_at)}
               </div>
               <div className="repo-card-badges">
-                {currentRepo.archived ? <div className="pill subtle">Archived</div> : null}
-                {currentRepo.fork ? <div className="pill subtle">Fork</div> : null}
+                {currentRepo.archived ? (
+                  <div className="pill subtle">{t("projects.archived")}</div>
+                ) : null}
+                {currentRepo.fork ? (
+                  <div className="pill subtle">{t("projects.fork")}</div>
+                ) : null}
               </div>
             </div>
 
             <div className="repo-card-title">{currentRepo.name}</div>
             <div className="repo-card-summary">
-              {currentRepo.description ?? "No description provided."}
+              {currentRepo.description ?? t("projects.repoDescriptionFallback")}
             </div>
 
-            <div className="repo-card-section-title">Language</div>
+            <div className="repo-card-section-title">{t("projects.language")}</div>
             <div className="repo-card-tech">
               <div
                 className={`pill subtle tech-pill ${techClassName(
                   currentRepo.language ?? "Unknown"
                 )}`}
               >
-                {currentRepo.language ?? "Unknown"}
+                {currentRepo.language ?? (locale === "de" ? "Unbekannt" : "Unknown")}
               </div>
             </div>
 
-            <div className="repo-card-section-title">Stats</div>
+            <div className="repo-card-section-title">{t("projects.stats")}</div>
             <div className="repo-card-highlights">
               <div className="pill">★ {currentRepo.stargazers_count}</div>
               <div className="pill">⑂ {currentRepo.forks_count}</div>
@@ -249,7 +256,7 @@ export default function GitRepoCarousel({
                 target="_blank"
                 rel="noreferrer"
               >
-                View on GitHub
+                {t("buttons.viewOnGitHub")}
                 <AiOutlineRight />
               </a>
             </div>
@@ -261,7 +268,7 @@ export default function GitRepoCarousel({
         <div
           className="repo-carousel-track"
           role="tablist"
-          aria-label="Repository quick select"
+          aria-label={t("projects.repoQuickSelect")}
           data-wheel-lock="true"
           data-wheel-axis="x"
         >
