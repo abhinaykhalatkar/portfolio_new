@@ -1,9 +1,10 @@
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import ProjectsHome from "./Projects-home/Projects-home";
-import ProjectsCataloguePage from "./Projects-catalog/Projects-catalogue";
-import ProjectDynamic from "./Projects-catalog/ProjectDynamic";
 
-import NotFound404 from "../NotFound404/NotFound404";
+const ProjectsHome = lazy(() => import("./Projects-home/Projects-home"));
+const ProjectsCataloguePage = lazy(() => import("./Projects-catalog/Projects-catalogue"));
+const ProjectDynamic = lazy(() => import("./Projects-catalog/ProjectDynamic"));
+const NotFound404 = lazy(() => import("../NotFound404/NotFound404"));
 
 export const projectsRoutesData = [
   {
@@ -27,16 +28,18 @@ export const projectsRoutesData = [
 
 export default function RenderProjectsRoutes() {
   return (
-    <Routes>
-      {projectsRoutesData.map((el, ind) => {
-        return (
-          <Route
-            key={`route-projects${ind}`}
-            path={el.path}
-            element={el.element}
-          />
-        );
-      })}
-    </Routes>
+    <Suspense fallback={null}>
+      <Routes>
+        {projectsRoutesData.map((el, ind) => {
+          return (
+            <Route
+              key={`route-projects${ind}`}
+              path={el.path}
+              element={el.element}
+            />
+          );
+        })}
+      </Routes>
+    </Suspense>
   );
 }

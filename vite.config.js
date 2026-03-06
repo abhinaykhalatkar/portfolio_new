@@ -36,6 +36,40 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: "build",
       emptyOutDir: true,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (!id.includes("node_modules")) {
+              return undefined;
+            }
+
+            if (
+              id.includes("@mui/") ||
+              id.includes("@emotion/") ||
+              id.includes("@popperjs/")
+            ) {
+              return "mui";
+            }
+
+            if (id.includes("framer-motion")) {
+              return "motion";
+            }
+
+            if (id.includes("react-icons")) {
+              return "icons";
+            }
+
+            if (
+              id.includes("react-router") ||
+              id.includes("@remix-run/router")
+            ) {
+              return "router";
+            }
+
+            return "vendor";
+          },
+        },
+      },
     },
     server: {
       port: 3000,
