@@ -135,6 +135,12 @@ export function getCaseStudies(
   return portfolioCaseStudies.map((study) => resolveCaseStudy(study, locale));
 }
 
+export function getProfessionalProjects(
+  locale: Locale = "en"
+): ResolvedCaseStudySummary[] {
+  return getCaseStudies(locale);
+}
+
 export function getCaseStudyBySection(
   sectionNumber: number,
   locale: Locale = "en"

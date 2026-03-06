@@ -66,8 +66,8 @@ function buildWebSiteSchema(siteUrl: string, locale: Locale) {
     name: "Abhinay Khalatkar Portfolio",
     description:
       locale === "de"
-        ? "Senior-Full-Stack-Portfolio mit anonymisierten Architektur-Case-Studies, skalierbaren Web-Systemen, Craft-CMS-Workflows und KI-gestützter Engineering-Delivery."
-        : "Senior full-stack portfolio focused on anonymized architecture case studies, scalable web systems, Craft CMS workflows, and AI-assisted engineering delivery.",
+        ? "Senior-Full-Stack-Portfolio mit professionellen Projekt-Highlights, skalierbaren Web-Systemen, Craft-CMS-Workflows und KI-gestützter Engineering-Delivery."
+        : "Senior full-stack portfolio focused on professional project highlights, scalable web systems, Craft CMS workflows, and AI-assisted engineering delivery.",
     inLanguage: ["en", "de"],
     publisher: {
       "@id": `${siteUrl}#person`,
@@ -113,8 +113,8 @@ function buildPageSchema({
       },
       about: [
         locale === "de"
-          ? "Anonymisierte Architektur Case Studies"
-          : "Anonymized architecture case studies",
+          ? "Professionelle Full-Stack-Projekt-Highlights"
+          : "Professional full-stack project highlights",
         locale === "de"
           ? "Frontend-Backend-Integration"
           : "Frontend-backend integration",

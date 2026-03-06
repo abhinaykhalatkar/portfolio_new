@@ -1,13 +1,16 @@
 import "./Home.scss";
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineCalendar } from "react-icons/ai";
+import { FaChevronDown } from "react-icons/fa";
 import { useThemeContext } from "../../Context/ThemeContext/ThemeContext";
 import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import BouncyText from "../../Components/Bouncy-text/BouncyText";
-import { FaChevronDown } from "react-icons/fa";
 import HomeTimeline from "./components/HomeTimeline";
 import { useLocaleContext } from "../../i18n/LocaleContext";
+
+const MOBILE_TIMELINE_BREAKPOINT = 900;
 
 export default function HomePage() {
   const { darkTheme } = useThemeContext();
@@ -21,6 +24,41 @@ export default function HomePage() {
     handleSetScrollDirection,
   } = usePageAnimationContext();
   const navigate = useNavigate();
+
+  const [isTimelineOpen, setIsTimelineOpen] = useState(false);
+  const isMobileTimeline = screenSize <= MOBILE_TIMELINE_BREAKPOINT;
+
+  useEffect(() => {
+    if (!isMobileTimeline) {
+      setIsTimelineOpen(false);
+    }
+  }, [isMobileTimeline]);
+
+  useEffect(() => {
+    if (!isTimelineOpen) {
+      return;
+    }
+
+    const onEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsTimelineOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", onEscape);
+    return () => {
+      window.removeEventListener("keydown", onEscape);
+    };
+  }, [isTimelineOpen]);
+
+  useEffect(() => {
+    if (!isTimelineOpen) {
+      return;
+    }
+
+    const panel = window.document.getElementById("home-timeline-drawer");
+    panel?.focus();
+  }, [isTimelineOpen]);
 
   return (
     <motion.div
@@ -76,7 +114,43 @@ export default function HomePage() {
           </motion.div>
         )}
       </motion.div>
-      <HomeTimeline darkTheme={darkTheme} />
+
+      {isMobileTimeline ? (
+        <>
+          <button
+            type="button"
+            className="timeline-toggle-btn"
+            aria-controls="home-timeline-drawer"
+            aria-expanded={isTimelineOpen}
+            onClick={() => setIsTimelineOpen((previous) => !previous)}
+          >
+            <AiOutlineCalendar />
+            {t("timeline.drawerToggle")}
+          </button>
+
+          <AnimatePresence>
+            {isTimelineOpen ? (
+              <motion.div
+                className="timeline-drawer-backdrop"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.24, ease: "easeOut" }}
+                onClick={() => setIsTimelineOpen(false)}
+              >
+                <HomeTimeline
+                  darkTheme={darkTheme}
+                  variant="drawer"
+                  panelId="home-timeline-drawer"
+                  onClose={() => setIsTimelineOpen(false)}
+                />
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
+        </>
+      ) : (
+        <HomeTimeline darkTheme={darkTheme} />
+      )}
     </motion.div>
   );
 }

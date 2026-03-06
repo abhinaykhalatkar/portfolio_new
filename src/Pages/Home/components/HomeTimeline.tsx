@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { AiOutlineRight } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineRight } from "react-icons/ai";
 import { getIntlLocale } from "../../../i18n/localeRoutes";
 import { getTimelineSourceUrl, useTimelineFeed } from "../data/useTimelineFeed";
 import { useLocaleContext } from "../../../i18n/LocaleContext";
@@ -8,6 +8,9 @@ import "./HomeTimeline.scss";
 
 type HomeTimelineProps = {
   darkTheme: boolean;
+  variant?: "desktop" | "drawer";
+  panelId?: string;
+  onClose?: () => void;
 };
 
 function parseTimelineDate(raw: string): Date | null {
@@ -58,7 +61,12 @@ function formatPeriod(
   )}`;
 }
 
-export default function HomeTimeline({ darkTheme }: HomeTimelineProps) {
+export default function HomeTimeline({
+  darkTheme,
+  variant = "desktop",
+  panelId,
+  onClose,
+}: HomeTimelineProps) {
   const { locale, t } = useLocaleContext();
   const timelineState = useTimelineFeed(getTimelineSourceUrl(), locale);
   const items = timelineState.items;
@@ -74,6 +82,7 @@ export default function HomeTimeline({ darkTheme }: HomeTimelineProps) {
   const rafRef = useRef<number | null>(null);
   const localeTag = getIntlLocale(locale);
   const presentLabel = t("timeline.present");
+  const isDrawer = variant === "drawer";
 
   const refreshTimelineState = useCallback(() => {
     const scroller = scrollerRef.current;
@@ -172,26 +181,47 @@ export default function HomeTimeline({ darkTheme }: HomeTimelineProps) {
 
   return (
     <motion.aside
-      className={`home-timeline ${darkTheme ? "" : "light"}`}
-      initial={{ opacity: 0, x: 26, y: -16 }}
-      animate={{ opacity: 1, x: 0, y: 0 }}
-      exit={{ opacity: 0, x: 26, y: -16 }}
-      transition={{ duration: 0.48, ease: "easeOut" }}
+      id={panelId}
+      className={`home-timeline ${isDrawer ? "drawer" : "desktop"} ${darkTheme ? "" : "light"}`}
+      initial={isDrawer ? { opacity: 0, x: "110%" } : { opacity: 0, x: 26, y: -16 }}
+      animate={isDrawer ? { opacity: 1, x: 0 } : { opacity: 1, x: 0, y: 0 }}
+      exit={isDrawer ? { opacity: 0, x: "110%" } : { opacity: 0, x: 26, y: -16 }}
+      transition={{ duration: 0.38, ease: "easeOut" }}
       data-wheel-lock="true"
       data-wheel-axis="y"
       aria-label={t("timeline.aria")}
+      role={isDrawer ? "dialog" : undefined}
+      aria-modal={isDrawer ? true : undefined}
+      tabIndex={isDrawer ? -1 : undefined}
+      onClick={(event) => {
+        if (isDrawer) {
+          event.stopPropagation();
+        }
+      }}
     >
       <div className="timeline-header">
         <div className="timeline-heading">{t("timeline.heading")}</div>
-        <a
-          className="timeline-link"
-          href="https://www.linkedin.com/in/abhinay-khalatkar/"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          {t("timeline.linkedIn")}
-          <AiOutlineRight />
-        </a>
+        <div className="timeline-header-actions">
+          <a
+            className="timeline-link"
+            href="https://www.linkedin.com/in/abhinay-khalatkar/"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            {t("timeline.linkedIn")}
+            <AiOutlineRight />
+          </a>
+          {isDrawer ? (
+            <button
+              type="button"
+              className="timeline-close-btn"
+              onClick={onClose}
+              aria-label={t("timeline.drawerClose")}
+            >
+              <AiOutlineClose />
+            </button>
+          ) : null}
+        </div>
       </div>
 
       <div className="timeline-body">

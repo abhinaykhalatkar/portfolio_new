@@ -102,14 +102,14 @@ function getIndexableRouteConfig(
         kind: "projects" as const,
         title: "Projects | Abhinay Khalatkar",
         description:
-          `Explore anonymized full-stack case studies and GitHub projects by Abhinay Khalatkar, including ${caseStudyTitles.join(
+          `Explore professional full-stack project highlights by Abhinay Khalatkar, including ${caseStudyTitles.join(
             ", "
           )}. Covers architecture ownership, GraphQL integration, secure deployment orchestration, and reliability-first delivery patterns.`,
         keywords: [
           "Developer Portfolio Projects",
-          "Anonymized Architecture Case Studies",
+          "Professional Full Stack Projects",
           "GitHub Projects",
-          "Full Stack Case Studies",
+          "Architecture Project Highlights",
           ...caseStudyTitles,
           "React Portfolio",
           "API Development",
@@ -197,14 +197,14 @@ function getIndexableRouteConfig(
         kind: "projects" as const,
         title: "Projekte | Abhinay Khalatkar",
         description:
-          `Entdecken Sie anonymisierte Full-Stack-Case-Studies von Abhinay Khalatkar, darunter ${caseStudyTitles.join(
+          `Entdecken Sie professionelle Full-Stack-Projekt-Highlights von Abhinay Khalatkar, darunter ${caseStudyTitles.join(
             ", "
           )}. Schwerpunkte sind Architekturverantwortung, GraphQL-Integration, sichere Deployment-Orchestrierung und zuverlässige Delivery-Muster. Öffentliche GitHub-Repositories sind in den Projektkatalog-Bereichen verfügbar.`,
         keywords: [
           "Portfolio Projekte",
-          "Anonymisierte Architektur Case Studies",
+          "Professionelle Full-Stack-Projekte",
           "GitHub Projekte",
-          "Full-Stack Case Studies",
+          "Architektur-Projekt-Highlights",
           ...caseStudyTitles,
           "React Portfolio",
           "API Entwicklung",
