@@ -1,4 +1,4 @@
-export const DEFAULT_SITE_URL = "https://abhinay-portfolio.web.app/";
+export const DEFAULT_SITE_URL = "https://abhinaykhalatkar.de/";
 
 function ensureProtocol(value: string): string {
   if (/^https?:\/\//i.test(value)) {

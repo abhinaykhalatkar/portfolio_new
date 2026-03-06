@@ -11,7 +11,7 @@ Portfolio single-page application built with Vite and React, with animated route
 
 - `npm run dev` - start local dev server
 - `npm run build` - build production assets into `build/`
-- `npm run build:prerender` - build and prerender localized core routes (`/en/*` and `/de/*`)
+- `npm run build:prerender` - build and prerender localized core routes plus public project section routes for static hosting
 - `npm run preview` - preview the production build locally
 - `npm test` - run unit tests (Vitest)
 - `npm run test:watch` - run tests in watch mode
@@ -26,7 +26,7 @@ Copy `.env.example` to `.env` if you need custom values:
 
 - `VITE_BASE_PATH` (default `/`) for sub-path deployments
 - `VITE_GITHUB_USERNAME` to override the GitHub account used in project carousels
-- `VITE_SITE_URL` (default `https://abhinay-portfolio.web.app/`) used for canonical URLs, Open Graph URLs, and JSON-LD
+- `VITE_SITE_URL` (default `https://abhinaykhalatkar.de/`) used for canonical URLs, Open Graph URLs, and JSON-LD
 - `VITE_TIMELINE_SOURCE_URL` (default `/data/linkedin-timeline.json`) to configure the Home page timeline feed
 
 ## SEO / GEO Artifacts
@@ -51,6 +51,7 @@ Runtime JSON-LD includes:
 ### Hetzner Webhosting S
 
 Use the manual deployment guide in [DEPLOY_HETZNER.md](DEPLOY_HETZNER.md).
+For Hetzner static hosting, deploy the output of `npm run build:prerender`, not plain `npm run build`.
 
 ### Firebase Hosting
 
@@ -94,7 +95,7 @@ Notes:
 ## Canonical Strategy
 
 - Canonical URLs are built from `VITE_SITE_URL`.
-- If not set, fallback canonical root is `https://abhinay-portfolio.web.app/`.
+- If not set, fallback canonical root is `https://abhinaykhalatkar.de/`.
 - The public site is served with locale-prefixed routes: `/en/*` and `/de/*`.
 - Bare legacy routes such as `/about` or `/projects/project-2` redirect to the preferred locale, defaulting to `/en/*`.
 - Dynamic project section routes (`/projects/project-*` and `/projects/project-catalogue`) are crawlable but intentionally marked `noindex,follow`.

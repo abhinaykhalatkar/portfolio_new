@@ -1,5 +1,5 @@
 Name: Abhinay Khalatkar
-Canonical: https://abhinay-portfolio.web.app/en
+Canonical: https://abhinaykhalatkar.de/en
 Current Positioning: Senior Full-Stack Software Developer (10+ years experience)
 
 Professional Summary:
@@ -36,16 +36,16 @@ Education:
 - Bachelor of Computer Application, Nagpur University
 
 Public Routes:
-- English Home: https://abhinay-portfolio.web.app/en
-- English About: https://abhinay-portfolio.web.app/en/about
-- English Skills: https://abhinay-portfolio.web.app/en/skills
-- English Projects: https://abhinay-portfolio.web.app/en/projects
-- English Contact: https://abhinay-portfolio.web.app/en/contact
-- German Home: https://abhinay-portfolio.web.app/de
-- German About: https://abhinay-portfolio.web.app/de/about
-- German Skills: https://abhinay-portfolio.web.app/de/skills
-- German Projects: https://abhinay-portfolio.web.app/de/projects
-- German Contact: https://abhinay-portfolio.web.app/de/contact
+- English Home: https://abhinaykhalatkar.de/en
+- English About: https://abhinaykhalatkar.de/en/about
+- English Skills: https://abhinaykhalatkar.de/en/skills
+- English Projects: https://abhinaykhalatkar.de/en/projects
+- English Contact: https://abhinaykhalatkar.de/en/contact
+- German Home: https://abhinaykhalatkar.de/de
+- German About: https://abhinaykhalatkar.de/de/about
+- German Skills: https://abhinaykhalatkar.de/de/skills
+- German Projects: https://abhinaykhalatkar.de/de/projects
+- German Contact: https://abhinaykhalatkar.de/de/contact
 
 Project Indexing Policy:
 - Dynamic project section routes under `/en/projects/project-*` and `/de/projects/project-*` are crawlable but intentionally marked noindex.
@@ -55,4 +55,4 @@ External Profiles:
 - GitHub: https://github.com/abhinaykhalatkar
 - Instagram: https://www.instagram.com/abhinaykhalatkar/
 - Contact Email: mailto:abhinaykhalatkar@gmail.com
-- Resume PDF: https://abhinay-portfolio.web.app/RESUME-Abhinay_Khalatkar.pdf
+- Resume PDF: https://abhinaykhalatkar.de/RESUME-Abhinay_Khalatkar.pdf

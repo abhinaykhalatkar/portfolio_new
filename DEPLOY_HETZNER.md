@@ -4,7 +4,8 @@
 
 - Build locally, upload static files only.
 - Domain remains configured to your server subdirectory document root.
-- App routes remain root-style (`/about`, `/projects`, etc.).
+- Public localized routes are served from clean URLs such as `/en/about` and `/de/projects`.
+- Project catalog routes such as `/en/projects/project-1` are prerendered into the deploy artifact.
 
 ## Prerequisites
 
@@ -21,8 +22,9 @@
 2. Run verification:
    ```bash
    npm test
-   npm run build
+   npm run build:prerender
    npm run audit:prod
+   npm run seo:validate
    ```
 3. Optional: create compressed deploy archive:
    ```bash
@@ -39,7 +41,15 @@
 4. Confirm these files exist in target:
    - `index.html`
    - `.htaccess`
-   - `assets/*`
+    - `assets/*`
+   - `en/index.html`
+   - `en/about/index.html`
+   - `en/projects/index.html`
+   - `en/projects/project-1/index.html`
+   - `en/projects/project-catalogue/index.html`
+   - `de/index.html`
+   - `de/about/index.html`
+   - `de/projects/project-1/index.html`
    - `favicon.ico`, `manifest.json`, `robots.txt`, `RESUME-Abhinay_Khalatkar.pdf`
 
 ## Post-deploy checks
@@ -47,11 +57,24 @@
 Open each path directly in browser and refresh:
 
 - `/`
-- `/about`
-- `/skills`
-- `/projects`
-- `/contact`
+- `/en`
+- `/en/about`
+- `/en/skills`
+- `/en/projects`
+- `/en/contact`
+- `/en/projects/project-1`
+- `/en/projects/project-2`
+- `/en/projects/project-catalogue`
+- `/de`
+- `/de/about`
+- `/de/projects/project-1`
 - invalid route (should show custom 404 page)
+
+Confirm the response is `200 OK` and not Apache `404 Not Found`. If localized deep links fail, verify that:
+
+- the contents of local `build/` were uploaded, not the `build` directory itself
+- `.htaccess` exists in the effective document root
+- the prerendered localized directories exist on the server
 
 ## Rollback
 

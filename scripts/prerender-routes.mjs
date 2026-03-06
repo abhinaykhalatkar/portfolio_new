@@ -4,24 +4,14 @@ import path from "node:path";
 import { setTimeout as wait } from "node:timers/promises";
 import process from "node:process";
 import puppeteer from "puppeteer";
+import { ALL_PRERENDER_ROUTES } from "./shared/prerenderRouteManifest.mjs";
 
 const ROOT_DIR = process.cwd();
 const BUILD_DIR = path.join(ROOT_DIR, "build");
 const HOST = "127.0.0.1";
 const PORT = Number(process.env.PRERENDER_PORT || 4173);
 const BASE_URL = `http://${HOST}:${PORT}`;
-const ROUTES = [
-  "/en",
-  "/en/about",
-  "/en/skills",
-  "/en/projects",
-  "/en/contact",
-  "/de",
-  "/de/about",
-  "/de/skills",
-  "/de/projects",
-  "/de/contact",
-];
+const ROUTES = ALL_PRERENDER_ROUTES;
 
 function getNpmCommand() {
   return process.platform === "win32" ? "npm.cmd" : "npm";
