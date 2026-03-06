@@ -1,4 +1,4 @@
- @import '../../Styles/variables';
+ @use '../../Styles/variables' as *;
 
  .p-NotFound404 {
    svg {

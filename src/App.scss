@@ -1,4 +1,4 @@
-@import './Styles/variables';
+@use './Styles/variables' as *;
 
 .white-theme {
   color: $black ;
@@ -29,7 +29,7 @@
         transition: color 0.4s ease, transform 0.4s ease;
 
         &:hover {
-          color: darken(#80afe5, 20%);
+          color: darken-by(#80afe5, 20%);
           transform: scale(1.2);
         }
       }

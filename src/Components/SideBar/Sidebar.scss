@@ -1,4 +1,4 @@
-@import '../../Styles/variables';
+@use '../../Styles/variables' as *;
 
 .c-sidebar {
   /* This component is fixed-position; it shouldn't reserve layout space */

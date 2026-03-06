@@ -1,4 +1,4 @@
-@import '../../Styles/variables';
+@use '../../Styles/variables' as *;
 
 .p-Home {
     display: flex;
@@ -42,7 +42,7 @@
         .next-page {
             padding: 10px 0;
             cursor: pointer;
-            color: darken($heighlightBlue, 20%);
+            color: darken-by($heighlightBlue, 20%);
             transition: color 0.3s ease;
 
             display: flex;

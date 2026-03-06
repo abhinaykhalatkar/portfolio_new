@@ -1,4 +1,4 @@
-@import '../../Styles/variables';
+@use '../../Styles/variables' as *;
 
 .p-Skills {
     min-width: 100vw;
@@ -58,7 +58,7 @@
             margin-bottom: 3rem;
             .linkedInLink{
                 text-decoration: none;
-                color: darken($color: $heighlightBlue, $amount: 15%);
+                color: darken-by($heighlightBlue, 15%);
                 font-size: larger;
                 font-weight: 500;
                 transition: color 0.4s ease;

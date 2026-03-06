@@ -1,4 +1,4 @@
-@import "../../Styles/variables";
+@use "../../Styles/variables" as *;
 
 .project-rail {
   position: fixed;
@@ -50,7 +50,7 @@
     transition: color 0.2s ease, transform 0.2s ease;
 
     &:hover {
-      color: darken($heighlightBlue, 2%);
+      color: darken-by($heighlightBlue, 2%);
       transform: scale(1.06);
     }
   }
