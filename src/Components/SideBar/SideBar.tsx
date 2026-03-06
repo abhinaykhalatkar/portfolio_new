@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Sidebar.scss";
@@ -26,6 +26,12 @@ const SideBar = ({ passIsSidebarOpen }: SideBarProps) => {
     { name: t("nav.projects"), link: "/projects" },
     { name: t("nav.contact"), link: "/contact" },
   ];
+
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+    passIsSidebarOpen(false);
+  };
+
   const handleSidebarToggle = () => {
     setIsSidebarOpen((prev) => {
       const next = !prev;
@@ -33,6 +39,21 @@ const SideBar = ({ passIsSidebarOpen }: SideBarProps) => {
       return next;
     });
   };
+
+  useEffect(() => {
+    if (!isSidebarOpen) {
+      return;
+    }
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeSidebar();
+      }
+    };
+
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [isSidebarOpen]);
 
   return (
     <div className="c-sidebar">
@@ -46,6 +67,14 @@ const SideBar = ({ passIsSidebarOpen }: SideBarProps) => {
           ☰
         </button>
       </div>
+      {isSidebarOpen ? (
+        <button
+          type="button"
+          className="sidebar-backdrop"
+          aria-label="Close sidebar"
+          onClick={closeSidebar}
+        />
+      ) : null}
       <motion.div
         className={`sidebar ${isSidebarOpen ? "open" : ""} ${
           darkTheme ? "s-back-color-b" : "s-color-white s-back-color"
@@ -65,7 +94,7 @@ const SideBar = ({ passIsSidebarOpen }: SideBarProps) => {
                   }`}
                   to={localizePath(el.link)}
                   onClick={() => {
-                    handleSidebarToggle();
+                    closeSidebar();
                     setActiveIndex(ind);
                   }}
                 >

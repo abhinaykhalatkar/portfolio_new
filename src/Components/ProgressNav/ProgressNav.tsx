@@ -87,56 +87,58 @@ export function ProgressNav({ endPosition }: ProgressNavProps) {
   };
 
   return (
-    <div>
-      <motion.div
-        className="navigation-progress"
-        initial={{
-          x: `${!isVerProgressBarOpen ? "50%" : `${endPosition}`}`,
-          y: `${!isVerProgressBarOpen ? "90vh" : "50vh"}`,
-          rotate: `${!isVerProgressBarOpen ? 0 : -90}`,
-        }}
-        animate={{ x: "50%", y: "90vh", rotate: 0 }}
-        transition={{
-          ease: "easeOut",
-          duration: 0.5,
-          delay: 0,
-        }}
-        style={{
-          bottom: "95vh",
-          right: "50%",
-          transform: "translateX(50%)",
-          position: "fixed",
-        }}
-      >
-        {navsData.map((item, index) => {
-          const isActive = basePath === item.Address;
-          return (
-            <span
-              key={`main-nav-${index}`}
-              className={`NavLink ${isActive ? "NavActive" : ""}`}
-              data-address={item.Address}
-              onClick={handleSquash}
-              ref={isActive ? activeNavLinkRef : null}
-            >
-              {item.Name}
-            </span>
-          );
-        })}
-
+    <>
+      <div className="progress-nav-wrapper">
         <motion.div
-          className={`lavalamp ${squash ? "squash" : ""}`}
-          animate={{
-            x:
-              navsData.findIndex((item) => item.Address === basePath) *
-                activeLinkWidth -
-              activeLinkWidth * 2,
-            width: activeLinkWidth,
+          className="navigation-progress"
+          initial={{
+            x: `${!isVerProgressBarOpen ? "50%" : `${endPosition}`}`,
+            y: `${!isVerProgressBarOpen ? "90vh" : "50vh"}`,
+            rotate: `${!isVerProgressBarOpen ? 0 : -90}`,
           }}
-          transition={{ ease: "easeOut", duration: 0.3 }}
-        />
-      </motion.div>
+          animate={{ x: "50%", y: "90vh", rotate: 0 }}
+          transition={{
+            ease: "easeOut",
+            duration: 0.5,
+            delay: 0,
+          }}
+          style={{
+            bottom: "95vh",
+            right: "50%",
+            transform: "translateX(50%)",
+            position: "fixed",
+          }}
+        >
+          {navsData.map((item, index) => {
+            const isActive = basePath === item.Address;
+            return (
+              <span
+                key={`main-nav-${index}`}
+                className={`NavLink ${isActive ? "NavActive" : ""}`}
+                data-address={item.Address}
+                onClick={handleSquash}
+                ref={isActive ? activeNavLinkRef : null}
+              >
+                {item.Name}
+              </span>
+            );
+          })}
+
+          <motion.div
+            className={`lavalamp ${squash ? "squash" : ""}`}
+            animate={{
+              x:
+                navsData.findIndex((item) => item.Address === basePath) *
+                  activeLinkWidth -
+                activeLinkWidth * 2,
+              width: activeLinkWidth,
+            }}
+            transition={{ ease: "easeOut", duration: 0.3 }}
+          />
+        </motion.div>
+      </div>
 
       <ScrollBtn />
-    </div>
+    </>
   );
 }
