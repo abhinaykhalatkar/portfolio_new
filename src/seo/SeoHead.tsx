@@ -10,7 +10,11 @@ import {
 } from "../i18n/localeRoutes";
 import { resolveSeoConfig } from "./seoConfig";
 import { buildStructuredDataGraph } from "./structuredData";
-import { getSiteUrl, toAbsoluteUrl } from "./siteUrl";
+import {
+  getSiteUrl,
+  toCanonicalRouteAbsoluteUrl,
+  toAbsoluteUrl,
+} from "./siteUrl";
 
 type SeoHeadProps = {
   isNotFoundPage: boolean;
@@ -26,9 +30,15 @@ export default function SeoHead({ isNotFoundPage }: SeoHeadProps) {
   );
 
   const siteUrl = getSiteUrl();
-  const canonicalUrl = toAbsoluteUrl(metadata.canonicalPath, siteUrl);
-  const alternateEnglishUrl = toAbsoluteUrl(toLocalizedPath(basePath, "en"), siteUrl);
-  const alternateGermanUrl = toAbsoluteUrl(toLocalizedPath(basePath, "de"), siteUrl);
+  const canonicalUrl = toCanonicalRouteAbsoluteUrl(metadata.canonicalPath, siteUrl);
+  const alternateEnglishUrl = toCanonicalRouteAbsoluteUrl(
+    toLocalizedPath(basePath, "en"),
+    siteUrl
+  );
+  const alternateGermanUrl = toCanonicalRouteAbsoluteUrl(
+    toLocalizedPath(basePath, "de"),
+    siteUrl
+  );
   const xDefaultUrl = alternateEnglishUrl;
   const ogImageUrl = toAbsoluteUrl("/favicon.ico", siteUrl);
   const structuredData = buildStructuredDataGraph({

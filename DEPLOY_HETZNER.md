@@ -4,8 +4,8 @@
 
 - Build locally, upload static files only.
 - Domain remains configured to your server subdirectory document root.
-- Public localized routes are served from clean URLs such as `/en/about` and `/de/projects`.
-- Project catalog routes such as `/en/projects/project-1` are prerendered into the deploy artifact.
+- Public localized routes are canonicalized to trailing-slash URLs such as `/en/about/` and `/de/projects/`.
+- Project catalog routes such as `/en/projects/project-1/` are prerendered into the deploy artifact.
 
 ## Prerequisites
 
@@ -57,23 +57,24 @@
 Open each path directly in browser and refresh:
 
 - `/`
-- `/en`
-- `/en/about`
-- `/en/skills`
-- `/en/projects`
-- `/en/contact`
-- `/en/projects/project-1`
-- `/en/projects/project-2`
-- `/en/projects/project-catalogue`
-- `/de`
-- `/de/about`
-- `/de/projects/project-1`
+- `/en/`
+- `/en/about/`
+- `/en/skills/`
+- `/en/projects/`
+- `/en/contact/`
+- `/en/projects/project-1/`
+- `/en/projects/project-2/`
+- `/en/projects/project-catalogue/`
+- `/de/`
+- `/de/about/`
+- `/de/projects/project-1/`
 - invalid route (should show custom 404 page)
 
 Confirm the response is `200 OK` and not Apache `404 Not Found`. If localized deep links fail, verify that:
 
 - the contents of local `build/` were uploaded, not the `build` directory itself
 - `.htaccess` exists in the effective document root
+- `.htaccess` overrides are enabled (`AllowOverride` supports rewrite/header rules)
 - the prerendered localized directories exist on the server
 
 ## Rollback

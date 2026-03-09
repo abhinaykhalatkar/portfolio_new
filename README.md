@@ -97,5 +97,7 @@ Notes:
 - Canonical URLs are built from `VITE_SITE_URL`.
 - If not set, fallback canonical root is `https://abhinaykhalatkar.de/`.
 - The public site is served with locale-prefixed routes: `/en/*` and `/de/*`.
+- Canonical localized URLs use trailing slashes (for example `/en/about/` and `/de/contact/`).
+- Root `/` canonicalizes to `/en/`.
 - Bare legacy routes such as `/about` or `/projects/project-2` redirect to the preferred locale, defaulting to `/en/*`.
 - Dynamic project section routes (`/projects/project-*` and `/projects/project-catalogue`) are crawlable but intentionally marked `noindex,follow`.

@@ -1,11 +1,11 @@
 Name: Abhinay Khalatkar
 Role: Senior Full-Stack Software Developer
-Canonical: https://abhinaykhalatkar.de/en
+Canonical: https://abhinaykhalatkar.de/en/
 Summary: Senior engineer with 10+ years of experience in system design, scalable web architecture, and deployment reliability. Works across React/TypeScript, Craft CMS, API integration, and agentic AI workflows (Copilot + Codex) with test-driven delivery discipline. The portfolio is available in English and German.
 
 Primary Links:
-- Website EN: https://abhinaykhalatkar.de/en
-- Website DE: https://abhinaykhalatkar.de/de
+- Website EN: https://abhinaykhalatkar.de/en/
+- Website DE: https://abhinaykhalatkar.de/de/
 - LinkedIn: https://www.linkedin.com/in/abhinay-khalatkar/
 - GitHub: https://github.com/abhinaykhalatkar
 - Contact: mailto:abhinaykhalatkar@gmail.com

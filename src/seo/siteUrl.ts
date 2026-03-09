@@ -64,11 +64,34 @@ export function normalizeCanonicalPath(pathname: string): string {
   return collapsed;
 }
 
+function looksLikeFilePath(pathname: string): boolean {
+  const lastSegment = pathname.split("/").pop() ?? "";
+  return lastSegment.includes(".") && !lastSegment.endsWith(".");
+}
+
+export function normalizeCanonicalRoutePath(pathname: string): string {
+  const normalizedPath = normalizeCanonicalPath(pathname);
+  if (normalizedPath === "/" || looksLikeFilePath(normalizedPath)) {
+    return normalizedPath;
+  }
+
+  return `${normalizedPath}/`;
+}
+
 export function toAbsoluteUrl(
   pathname: string,
   siteUrl: string = getSiteUrl()
 ): string {
   const normalizedPath = normalizeCanonicalPath(pathname);
+  const absolute = new URL(normalizedPath, normalizeSiteUrl(siteUrl));
+  return absolute.toString();
+}
+
+export function toCanonicalRouteAbsoluteUrl(
+  pathname: string,
+  siteUrl: string = getSiteUrl()
+): string {
+  const normalizedPath = normalizeCanonicalRoutePath(pathname);
   const absolute = new URL(normalizedPath, normalizeSiteUrl(siteUrl));
   return absolute.toString();
 }

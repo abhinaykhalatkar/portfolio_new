@@ -5,10 +5,14 @@ DirectoryIndex index.html
   RewriteEngine On
   RewriteBase /
 
+  RewriteCond %{HTTPS} !=on [OR]
   RewriteCond %{HTTP_HOST} ^www\.abhinaykhalatkar\.de$ [NC]
   RewriteRule ^ https://abhinaykhalatkar.de%{REQUEST_URI} [R=301,L]
 
-  RewriteRule ^index\.html$ - [L]
+  RewriteRule ^$ /en/ [R=301,L]
+
+  RewriteRule ^index\.html$ /en/ [R=301,L]
+  RewriteRule ^(.+)/index\.html$ /$1/ [R=301,L]
 
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
