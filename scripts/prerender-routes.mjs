@@ -21,7 +21,8 @@ function routeToOutputPath(route) {
   if (route === "/") {
     return path.join(BUILD_DIR, "index.html");
   }
-  return path.join(BUILD_DIR, route.replace(/^\//, ""), "index.html");
+  const stripped = route.replace(/^\//, "").replace(/\/$/, "");
+  return path.join(BUILD_DIR, stripped, "index.html");
 }
 
 async function waitForPreviewServer() {

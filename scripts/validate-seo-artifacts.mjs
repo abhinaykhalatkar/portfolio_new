@@ -44,7 +44,8 @@ function routeToBuildPath(route) {
     return path.join(ROOT_DIR, "build", "index.html");
   }
 
-  return path.join(ROOT_DIR, "build", route.replace(/^\//, ""), "index.html");
+  const stripped = route.replace(/^\//, "").replace(/\/$/, "");
+  return path.join(ROOT_DIR, "build", stripped, "index.html");
 }
 
 function toTrailingSlashRoute(route) {
@@ -160,9 +161,10 @@ async function validate() {
         continue;
       }
 
+      const bareRoute = localizedRoute.replace(/\/+$/, "");
       assert(
-        !html.includes(`href="${localizedRoute}"`),
-        `Prerendered HTML contains non-canonical localized href without trailing slash: ${localizedRoute} in ${outputPath}`
+        !html.includes(`href="${bareRoute}"`),
+        `Prerendered HTML contains non-canonical localized href without trailing slash: ${bareRoute} in ${outputPath}`
       );
     }
   }
