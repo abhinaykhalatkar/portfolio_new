@@ -35,16 +35,10 @@
  },
  "scripts": {
   "start": "vite",
-  "dev": "vite",
-  "stop": "taskkill -F -IM node.exe",
   "build": "vite build",
   "build:prerender": "npm run build && node scripts/prerender-routes.mjs",
-  "preview": "vite preview",
   "test": "vitest run",
-  "test:watch": "vitest",
   "seo:validate": "node scripts/validate-seo-artifacts.mjs",
-  "audit": "npm audit",
-  "audit:prod": "npm audit --omit=dev",
   "package:deploy": "npm run build:prerender && (cd build && zip -r ../build-deploy.zip .)"
  },
  "eslintConfig": {

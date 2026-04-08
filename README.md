@@ -1,71 +1,120 @@
 # Portfolio (Vite + React + TypeScript)
 
-Portfolio single-page application built with Vite and React, with animated route transitions, GitHub-backed project sections, and production-grade SEO/GEO hardening.
+Abhinay Khalatkar's bilingual portfolio is a client-rendered React SPA built with Vite. It combines animated localized routing, route-aware SEO metadata, a static timeline feed, and a GitHub-backed project catalog for static hosting.
 
 ## Requirements
 
-- Node.js `20+`
+- Node.js `>=20 <25`
 - npm `10+`
+
+## Architecture
+
+- Frontend-only monolith. There is no in-repo backend service.
+- Canonical public routes are locale-prefixed: `/en/*` and `/de/*`.
+- Bare routes such as `/about` redirect to the preferred localized route.
+- SEO metadata is generated per route with `react-helmet-async` and captured into prerendered HTML for deployment.
+- Timeline content is loaded from local JSON in `public/data/linkedin-timeline.json`.
+- Project pages combine:
+  - curated static case-study copy from `src/content/portfolioCaseStudies.ts`
+  - live public repository data from the GitHub REST API
 
 ## Scripts
 
-- `npm run dev` - start local dev server
-- `npm run build` - build production assets into `build/`
-- `npm run build:prerender` - build and prerender localized core routes plus public project section routes for static hosting
-- `npm run preview` - preview the production build locally
-- `npm test` - run unit tests (Vitest)
-- `npm run test:watch` - run tests in watch mode
-- `npm run seo:validate` - validate `robots.txt`, `sitemap.xml`, and `llms` artifacts
-- `npm run audit` - run dependency audit
-- `npm run audit:prod` - run production-only dependency audit
-- `npm run package:deploy` - build and create `build-deploy.zip`
+- `npm run dev` - start the Vite development server on port `3000`
+- `npm run start` - backward-compatible alias for the dev server
+- `npm run build` - create the production bundle in `build/`
+- `npm run preview` - serve the built artifact locally with Vite preview
+- `npm run build:prerender` - build the app, start preview, and prerender localized deployment routes into `build/`
+- `npm test` - run the Vitest suite
+- `npm run seo:validate` - validate `robots.txt`, `sitemap.xml`, `llms` artifacts, `.htaccess`, and prerendered canonicals
+- `npm run package:deploy` - generate `build-deploy.zip` from the finished deploy artifact
 
 ## Environment
 
-Copy `.env.example` to `.env` if you need custom values:
+Copy `.env.example` to `.env` only when you need overrides:
 
-- `VITE_BASE_PATH` (default `/`) for sub-path deployments
-- `VITE_GITHUB_USERNAME` to override the GitHub account used in project carousels
-- `VITE_SITE_URL` (default `https://abhinaykhalatkar.de/`) used for canonical URLs, Open Graph URLs, and JSON-LD
-- `VITE_TIMELINE_SOURCE_URL` (default `/data/linkedin-timeline.json`) to configure the Home page timeline feed
+- `VITE_BASE_PATH` - optional Vite base path for subdirectory deployments; current root-domain production assumes `/`
+- `VITE_GITHUB_USERNAME` - optional GitHub username override for project catalog repo fetching
+- `VITE_SITE_URL` - canonical site URL for canonical tags, Open Graph URLs, JSON-LD, and sitemap validation
+- `VITE_TIMELINE_SOURCE_URL` - optional timeline feed URL override for the Home page
 
-## SEO / GEO Artifacts
+## Build and Deployment
 
-Public crawl and AI-discovery artifacts are served from `public/`:
+### Local Development
 
-- `robots.txt` with crawl directives and sitemap declaration
-- `sitemap.xml` with localized core indexable routes (`/en/*` and `/de/*`)
-- `llms.txt` and `llms-full.txt` for agent-oriented discoverability
-- route-level metadata + JSON-LD at runtime via `react-helmet-async` (includes `noindex,follow` for dynamic project section routes)
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the dev server:
+   ```bash
+   npm run dev
+   ```
+3. Optional: preview the built production artifact locally:
+   ```bash
+   npm run build
+   npm run preview
+   ```
 
-## Structured Data
+### Production Artifact
 
-Runtime JSON-LD includes:
+Use the prerendered artifact for static deployment:
 
-- `Person`
-- `WebSite`
-- route-aware page schema (`ProfilePage`, `CollectionPage`, `ContactPage`, `WebPage`)
+```bash
+npm test
+npm run build:prerender
+npm run seo:validate
+```
 
-## Deployment
+This produces a deployable `build/` directory containing:
+
+- Vite production assets
+- prerendered localized HTML routes
+- static SEO artifacts from `public/`
+- `.htaccess` copied from `public/.htaccess`
 
 ### Hetzner Webhosting S
 
-Use the manual deployment guide in [DEPLOY_HETZNER.md](DEPLOY_HETZNER.md).
-For Hetzner static hosting, deploy the output of `npm run build:prerender`, not plain `npm run build`.
+Use the manual deployment guide in [DEPLOY_HETZNER.md](DEPLOY_HETZNER.md). Upload the contents of `build/`, not the `build` folder itself.
 
-### Firebase Hosting
+## SEO / GEO Artifacts
 
-If you deploy to Firebase, keep SPA rewrites enabled so all routes resolve to `index.html`.
+The app serves crawl and AI-discovery artifacts from `public/`:
+
+- `robots.txt`
+- `sitemap.xml`
+- `llms.txt`
+- `llms-full.txt`
+- route-level meta tags and JSON-LD emitted at runtime and captured by prerendering
+
+Structured data includes:
+
+- `Person`
+- `WebSite`
+- route-aware page schema such as `ProfilePage`, `CollectionPage`, `ContactPage`, and `WebPage`
 
 ## Timeline Feed Schema
 
-The Home page reads timeline data from JSON and renders it dynamically with animations.
-
-Default path:
+Default source:
 
 - `public/data/linkedin-timeline.json`
 
-Supported format:
+Supported shapes:
+
+- a top-level object with `items`
+- a top-level array of timeline entries
+
+Supported localized fields:
+
+- `title`
+- `organization`
+- `location`
+- `description`
+- `skills[]`
+
+Each localized field may be either a string or an object shaped like `{ "en": "...", "de": "..." }`.
+
+Example:
 
 ```json
 {
@@ -73,14 +122,29 @@ Supported format:
     {
       "id": "exp-1",
       "type": "experience",
-      "title": "Role Title",
+      "title": {
+        "en": "Role Title",
+        "de": "Rollenbezeichnung"
+      },
       "organization": "Company Name",
       "start": "2023-01",
-      "end": "Present",
-      "location": "City, Country",
-      "description": "What you worked on.",
+      "end": "present",
+      "location": {
+        "en": "City, Country",
+        "de": "Stadt, Land"
+      },
+      "description": {
+        "en": "What you worked on.",
+        "de": "Woran Sie gearbeitet haben."
+      },
       "link": "https://example.com",
-      "skills": ["React", "TypeScript"]
+      "skills": [
+        "React",
+        {
+          "en": "System Design",
+          "de": "Systemdesign"
+        }
+      ]
     }
   ]
 }
@@ -89,15 +153,14 @@ Supported format:
 Notes:
 
 - `type` must be `experience` or `education`
-- `id`, `title`, `organization`, `start`, and `description` are required
-- You can also provide a top-level array instead of `{ "items": [] }`
+- `start` must be a non-empty string
+- `id`, `title`, `organization`, and `description` are required for valid entries
+- invalid entries are dropped during normalization
 
-## Canonical Strategy
+## Canonical URL Strategy
 
-- Canonical URLs are built from `VITE_SITE_URL`.
-- If not set, fallback canonical root is `https://abhinaykhalatkar.de/`.
-- The public site is served with locale-prefixed routes: `/en/*` and `/de/*`.
-- Canonical localized URLs use trailing slashes (for example `/en/about/` and `/de/contact/`).
-- Root `/` canonicalizes to `/en/`.
-- Bare legacy routes such as `/about` or `/projects/project-2` redirect to the preferred locale, defaulting to `/en/*`.
-- Dynamic project section routes (`/projects/project-*` and `/projects/project-catalogue`) are crawlable but intentionally marked `noindex,follow`.
+- Canonical URLs are built from `VITE_SITE_URL` and fall back to `https://abhinaykhalatkar.de/`
+- Localized canonical routes use trailing slashes, for example `/en/about/`
+- Root `/` redirects to `/en/`
+- Bare routes are redirect-only, not canonical
+- Dynamic project section routes and `/projects/project-catalogue` remain crawlable but intentionally use `noindex,follow`
