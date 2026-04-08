@@ -25,6 +25,11 @@ Abhinay Khalatkar's bilingual portfolio is a client-rendered React SPA built wit
 - `npm run build` - create the production bundle in `build/`
 - `npm run preview` - serve the built artifact locally with Vite preview
 - `npm run build:prerender` - build the app, start preview, and prerender localized deployment routes into `build/`
+- `npm run verify:prod` - run the full production verification chain: tests, prerender build, and SEO validation
+- `npm run build:prod` - run the project-specific production build pipeline from `util/build.js`
+- `npm run release:prod` - copy the verified `build/` artifact into `dist/release/site` with a release manifest
+- `npm run deploy:prod:dry-run` - print the resolved FTP deploy config for this project without uploading
+- `npm run deploy:prod` - run verification, assemble the release, and upload `dist/release/site` to Hetzner via FTPS
 - `npm test` - run the Vitest suite
 - `npm run seo:validate` - validate `robots.txt`, `sitemap.xml`, `llms` artifacts, `.htaccess`, and prerendered canonicals
 - `npm run package:deploy` - generate `build-deploy.zip` from the finished deploy artifact
@@ -37,6 +42,7 @@ Copy `.env.example` to `.env` only when you need overrides:
 - `VITE_GITHUB_USERNAME` - optional GitHub username override for project catalog repo fetching
 - `VITE_SITE_URL` - canonical site URL for canonical tags, Open Graph URLs, JSON-LD, and sitemap validation
 - `VITE_TIMELINE_SOURCE_URL` - optional timeline feed URL override for the Home page
+- `PORTFOLIO_FTP_*` - project-scoped Hetzner FTPS deployment settings used only by this repository's `util/deploy-prod.js`
 
 ## Build and Deployment
 
@@ -61,9 +67,7 @@ Copy `.env.example` to `.env` only when you need overrides:
 Use the prerendered artifact for static deployment:
 
 ```bash
-npm test
-npm run build:prerender
-npm run seo:validate
+npm run verify:prod
 ```
 
 This produces a deployable `build/` directory containing:
@@ -75,7 +79,22 @@ This produces a deployable `build/` directory containing:
 
 ### Hetzner Webhosting S
 
-Use the manual deployment guide in [DEPLOY_HETZNER.md](DEPLOY_HETZNER.md). Upload the contents of `build/`, not the `build` folder itself.
+This repo now includes a project-local FTP deployment pipeline under `util/`.
+
+Recommended flow:
+
+```bash
+npm run deploy:prod:dry-run
+npm run deploy:prod
+```
+
+What it does:
+
+- verifies the app with tests, prerender build, and SEO checks
+- assembles a single-site release in `dist/release/site`
+- uploads that release to `PORTFOLIO_FTP_REMOTE_ROOT` over FTPS
+
+Use the detailed guide in [DEPLOY_HETZNER.md](DEPLOY_HETZNER.md). Manual upload of `build/` remains available as a fallback, but the intended path for this project is the FTPS deploy script.
 
 ## SEO / GEO Artifacts
 

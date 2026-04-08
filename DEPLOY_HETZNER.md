@@ -1,35 +1,65 @@
-# Hetzner Webhosting S Deployment (Manual Upload)
+# Hetzner Webhosting S Deployment
 
 ## Deployment model
 
-- Build locally, upload static files only.
-- Deploy the output of `npm run build:prerender`, not plain `npm run build`.
+- This project now deploys through a project-local FTPS pipeline in `util/`.
+- The deploy script builds locally, assembles a release, and uploads static files only.
+- Deploy the verified prerendered artifact, not plain `npm run build`.
 - Public localized routes are canonicalized to trailing-slash URLs such as `/en/about/` and `/de/projects/`.
 - Project catalog routes such as `/en/projects/project-1/` are prerendered into the deploy artifact.
 
 ## Prerequisites
 
 - Local Node.js `>=20 <25` and npm installed.
-- Hosting access via Hetzner File Manager or SFTP.
+- Hetzner FTPS credentials for the portfolio docroot.
 - Rewrite rules enabled via `.htaccess`, sourced from `public/.htaccess` and copied into `build/.htaccess` by Vite.
+- `.env` filled with the `PORTFOLIO_FTP_*` values from `.env.example`.
 
-## Build and package
+## Automated FTPS deployment
 
 1. Install dependencies:
    ```bash
    npm install
    ```
-2. Run verification:
+2. Fill the deploy env values in `.env`:
+   - `PORTFOLIO_FTP_HOST`
+   - `PORTFOLIO_FTP_PORT`
+   - `PORTFOLIO_FTP_USER`
+   - `PORTFOLIO_FTP_PASSWORD`
+   - `PORTFOLIO_FTP_REMOTE_ROOT`
+3. Run a dry-run first:
    ```bash
-   npm test
-   npm run build:prerender
-   npm run seo:validate
+   npm run deploy:prod:dry-run
    ```
-3. Optional: create compressed deploy archive:
+   This prints the resolved FTP target, safety flags, and whether a prepared release already exists.
+4. Run the real deploy:
    ```bash
-   npm run package:deploy
+   npm run deploy:prod
    ```
-   This generates `build-deploy.zip`.
+   The script will:
+   - run `npm run build:prod`
+   - run `npm run release:prod`
+   - connect to Hetzner over FTPS
+   - upload all files from `dist/release/site` into `PORTFOLIO_FTP_REMOTE_ROOT`
+
+## Project-specific FTPS env behavior
+
+- `PORTFOLIO_FTP_REMOTE_ROOT` must point to the dedicated remote directory for this portfolio project.
+- Use `PORTFOLIO_FTP_REMOTE_ROOT=/` only when the FTP account root is already this portfolio's docroot.
+- `PORTFOLIO_FTP_CLEAN_REMOTE=true` will fully clear the remote target directory before upload.
+- Keep `PORTFOLIO_FTP_CLEAN_REMOTE=false` unless the target directory is dedicated to this project and safe to replace.
+- The uploader uses FTPS plus `EPSV` mode, matching the working Hetzner behavior from the reference project.
+
+## Manual fallback
+
+If you need to deploy manually, use the verified static artifact:
+
+```bash
+npm run verify:prod
+npm run package:deploy
+```
+
+or upload the contents of local `build/` directly.
 
 ## Upload steps
 
