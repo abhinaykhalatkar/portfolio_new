@@ -66,6 +66,9 @@ async function validate() {
   );
 
   const sitemapXml = await readPublicFile("sitemap.xml");
+  const expectedLocalizedLocs = new Set(
+    CORE_LOCALIZED_ROUTES.map((route) => `${siteOrigin}${toTrailingSlashRoute(route)}`)
+  );
   for (const route of CORE_LOCALIZED_ROUTES) {
     const expectedLoc = `${siteOrigin}${toTrailingSlashRoute(route)}`;
     assert(
@@ -86,12 +89,24 @@ async function validate() {
     sitemapXml.matchAll(/<loc>\s*([^<]+?)\s*<\/loc>/gi),
     (match) => match[1]
   );
+  const localizedSitemapLocs = sitemapLocEntries.filter((loc) => {
+    const parsed = new URL(loc);
+    return /^\/(en|de)(\/|$)/.test(parsed.pathname);
+  });
+  assert(
+    localizedSitemapLocs.length === expectedLocalizedLocs.size,
+    `sitemap.xml contains unexpected localized route count: expected ${expectedLocalizedLocs.size}, received ${localizedSitemapLocs.length}`
+  );
   for (const loc of sitemapLocEntries) {
     const parsed = new URL(loc);
     if (/^\/(en|de)(\/|$)/.test(parsed.pathname)) {
       assert(
         parsed.pathname.endsWith("/"),
         `Localized sitemap URL must use trailing slash: ${loc}`
+      );
+      assert(
+        expectedLocalizedLocs.has(loc),
+        `sitemap.xml contains non-indexable or unexpected localized route: ${loc}`
       );
     }
   }
@@ -137,6 +152,17 @@ async function validate() {
       assert(
         canonicalUrl.pathname.endsWith("/"),
         `Canonical URL must use trailing slash for localized route: ${outputPath}`
+      );
+    }
+
+    for (const localizedRoute of CORE_LOCALIZED_ROUTES) {
+      if (localizedRoute === "/") {
+        continue;
+      }
+
+      assert(
+        !html.includes(`href="${localizedRoute}"`),
+        `Prerendered HTML contains non-canonical localized href without trailing slash: ${localizedRoute} in ${outputPath}`
       );
     }
   }

@@ -5,6 +5,8 @@ import {
   stripLocalePrefix,
   switchLocaleForCurrentPath,
   toLocalizedPath,
+  toPublicLocalizedPath,
+  toPublicRoutePath,
 } from "./localeRoutes";
 
 describe("locale route helpers", () => {
@@ -23,7 +25,13 @@ describe("locale route helpers", () => {
   it("builds localized paths and switches locales", () => {
     expect(toLocalizedPath("/", "en")).toBe("/en");
     expect(toLocalizedPath("/projects/project-4", "de")).toBe("/de/projects/project-4");
-    expect(switchLocaleForCurrentPath("/en/contact", "de")).toBe("/de/contact");
+    expect(toPublicRoutePath("/en/about")).toBe("/en/about/");
+    expect(toPublicLocalizedPath("/", "en")).toBe("/en/");
+    expect(toPublicLocalizedPath("/projects/project-4", "de")).toBe(
+      "/de/projects/project-4/"
+    );
+    expect(switchLocaleForCurrentPath("/en/contact", "de")).toBe("/de/contact/");
+    expect(switchLocaleForCurrentPath("/en/contact/", "de")).toBe("/de/contact/");
   });
 
   it("marks only app routes as localizable", () => {

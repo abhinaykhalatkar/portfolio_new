@@ -25,7 +25,7 @@ describe("VerticalProgressNav helpers", () => {
     expect(getProjectAddressByIndex(0, sectionCount)).toBe("/projects/project-1");
     expect(getProjectAddressByIndex(4, sectionCount)).toBe("/projects/project-5");
     expect(getProjectAddressByIndex(1, sectionCount, "de")).toBe(
-      "/de/projects/project-2"
+      "/de/projects/project-2/"
     );
     expect(resolveProjectNavIndex("/projects/project-1", sectionCount)).toBe(0);
     expect(resolveProjectNavIndex("/projects/project-5", sectionCount)).toBe(4);

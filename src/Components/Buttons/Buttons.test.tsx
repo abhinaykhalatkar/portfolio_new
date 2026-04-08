@@ -40,7 +40,7 @@ vi.mock("../../Context/ThemeContext/ThemeContext", () => ({
 
 vi.mock("../../i18n/LocaleContext", () => ({
   useLocaleContext: () => ({
-    localizePath: (path: string) => `/en${path === "/" ? "" : path}`,
+    localizePath: (path: string) => `/en${path === "/" ? "/" : `${path}/`}`,
   }),
 }));
 
@@ -73,7 +73,7 @@ describe("Buttons", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "Contact" }));
 
-    expect(navigateMock).toHaveBeenCalledWith("/en/contact");
+    expect(navigateMock).toHaveBeenCalledWith("/en/contact/");
     expect(windowOpenMock).not.toHaveBeenCalled();
   });
 });

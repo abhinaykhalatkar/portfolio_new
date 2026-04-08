@@ -5,7 +5,7 @@ import { usePageAnimationContext } from "../../Context/PageAnimationContext/Page
 import { useLocaleContext } from "../../i18n/LocaleContext";
 import {
   stripLocalePrefix,
-  toLocalizedPath,
+  toPublicLocalizedPath,
   type Locale,
 } from "../../i18n/localeRoutes";
 import "./VerticalProgressNav.scss";
@@ -47,7 +47,7 @@ export function getProjectAddressByIndex(
   const navData = getProjectsNavData(sectionCount);
   const safeIndex = Math.min(Math.max(index, 0), navData.length - 1);
   const address = navData[safeIndex].Address;
-  return locale ? toLocalizedPath(address, locale) : address;
+  return locale ? toPublicLocalizedPath(address, locale) : address;
 }
 
 export function parseProjectSectionFromPathname(pathname: string): number | null {

@@ -5,7 +5,7 @@ import {
   getPreferredLocale,
   MAIN_BASE_ROUTES,
   stripLocalePrefix,
-  toLocalizedPath,
+  toPublicLocalizedPath,
   type Locale,
 } from "../i18n/localeRoutes";
 
@@ -18,7 +18,12 @@ const NotFound404 = lazy(() => import("../Pages/NotFound404/NotFound404"));
 
 function LocalizedRedirect() {
   const location = useLocation();
-  return <Navigate replace to={toLocalizedPath(location.pathname, getPreferredLocale())} />;
+  return (
+    <Navigate
+      replace
+      to={toPublicLocalizedPath(location.pathname, getPreferredLocale())}
+    />
+  );
 }
 
 function createLocalizedRoutes(locale: Locale) {

@@ -8,7 +8,7 @@ import {
   parseLocaleFromPath,
   stripLocalePrefix,
   switchLocaleForCurrentPath,
-  toLocalizedPath,
+  toPublicLocalizedPath,
   type Locale,
   writeStoredLocale,
 } from "./localeRoutes";
@@ -55,7 +55,7 @@ export function LocaleProvider(props: { children?: React.ReactNode }) {
           return path;
         }
 
-        return toLocalizedPath(stripLocalePrefix(path), locale);
+        return toPublicLocalizedPath(stripLocalePrefix(path), locale);
       },
       t: (key: MessageKey) => dictionary[key],
     };

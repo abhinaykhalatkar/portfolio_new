@@ -53,11 +53,24 @@ export function toLocalizedPath(basePath: string, locale: Locale): string {
   return `/${locale}${normalizedBasePath}`;
 }
 
+export function toPublicRoutePath(pathname: string): string {
+  const normalizedPath = normalizeBasePath(pathname);
+  if (normalizedPath === "/") {
+    return "/";
+  }
+
+  return `${normalizedPath}/`;
+}
+
+export function toPublicLocalizedPath(basePath: string, locale: Locale): string {
+  return toPublicRoutePath(toLocalizedPath(basePath, locale));
+}
+
 export function switchLocaleForCurrentPath(
   pathname: string,
   nextLocale: Locale
 ): string {
-  return toLocalizedPath(stripLocalePrefix(pathname), nextLocale);
+  return toPublicLocalizedPath(stripLocalePrefix(pathname), nextLocale);
 }
 
 export function isMainBaseRoute(basePath: string): boolean {

@@ -19,7 +19,7 @@ import {
   parseProjectSectionFromPathname,
   resolveProjectNavIndex,
 } from "./Components/ProgressNav/VerticalProgressNav";
-import { stripLocalePrefix, toLocalizedPath } from "./i18n/localeRoutes";
+import { stripLocalePrefix, toPublicLocalizedPath } from "./i18n/localeRoutes";
 
 type Direction = "next" | "prev";
 
@@ -187,7 +187,7 @@ function ChildApp1() {
 
         handleSetScrollDirection(direction === "next" ? 0 : 1);
         setActiveIndex(nextIndex);
-        navigate(toLocalizedPath(navsData[nextIndex].Address, locale));
+        navigate(toPublicLocalizedPath(navsData[nextIndex].Address, locale));
         return true;
       }
 
@@ -209,7 +209,7 @@ function ChildApp1() {
         if (projectsMainIndex !== -1) {
           setActiveIndex(projectsMainIndex);
         }
-        navigate(toLocalizedPath(PROJECTS_HOME_PATH, locale));
+        navigate(toPublicLocalizedPath(PROJECTS_HOME_PATH, locale));
         return true;
       }
 
