@@ -170,3 +170,8 @@ projects/
 CLAUDE.md
 agent.json
 .claude/skills/
+temp/
+.env.example
+docs/route-policy.md
+.gitignore
+.gitignore
