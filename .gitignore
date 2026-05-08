@@ -173,5 +173,5 @@ agent.json
 temp/
 .env.example
 docs/route-policy.md
-.gitignore
-.gitignore
+AGENTS.md
+.claude/agent_scratch.md
