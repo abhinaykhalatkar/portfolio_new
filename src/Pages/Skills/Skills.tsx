@@ -47,7 +47,7 @@ export default function SkillsPage() {
         </div>
           
         </motion.div>
-        <motion.div
+        <motion.p
           className="skill-para-head"
           initial="hidden"
           animate="visible"
@@ -56,8 +56,8 @@ export default function SkillsPage() {
           variants={contentVariants}
         >
           {t("skills.body.1")}
-        </motion.div>
-        <motion.div
+        </motion.p>
+        <motion.p
           className="skill-para-content"
           initial="hidden"
           animate="visible"
@@ -66,7 +66,7 @@ export default function SkillsPage() {
           variants={contentVariants}
         >
           {t("skills.body.2")}
-        </motion.div>
+        </motion.p>
         <motion.div
           className="linkedInPara"
           initial="hidden"

@@ -85,7 +85,7 @@ export default function HomePage() {
           name_class="home-heading home-heading2"
           text={t("home.heading.line2")}
         />
-        <motion.div
+        <motion.p
           className="heading-para"
           initial="hidden"
           animate="visible"
@@ -94,7 +94,7 @@ export default function HomePage() {
           variants={contentVariants}
         >
           {t("home.intro")}
-        </motion.div>
+        </motion.p>
         {screenSize < 480 ? null : (
           <motion.div
             className="next-page"

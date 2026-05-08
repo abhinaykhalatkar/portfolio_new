@@ -39,6 +39,12 @@ async function readPublicFile(relativePath) {
   return readFile(fullPath, "utf8");
 }
 
+async function readBuildFile(relativePath) {
+  const fullPath = path.join(ROOT_DIR, "build", relativePath);
+  await access(fullPath);
+  return readFile(fullPath, "utf8");
+}
+
 function routeToBuildPath(route) {
   if (route === "/") {
     return path.join(ROOT_DIR, "build", "index.html");
@@ -66,7 +72,7 @@ async function validate() {
     "robots.txt must include an absolute sitemap declaration."
   );
 
-  const sitemapXml = await readPublicFile("sitemap.xml");
+  const sitemapXml = await readBuildFile("sitemap.xml");
   const expectedLocalizedLocs = new Set(
     CORE_LOCALIZED_ROUTES.map((route) => `${siteOrigin}${toTrailingSlashRoute(route)}`)
   );

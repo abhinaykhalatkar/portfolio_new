@@ -1,11 +1,9 @@
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { lazy, Suspense, useEffect, useMemo } from "react";
 import { usePageAnimationContext } from "./PageAnimationContext/PageAnimationContext";
 import {
-  getPreferredLocale,
   MAIN_BASE_ROUTES,
   stripLocalePrefix,
-  toPublicLocalizedPath,
   type Locale,
 } from "../i18n/localeRoutes";
 
@@ -15,16 +13,6 @@ const SkillsPage = lazy(() => import("../Pages/Skills/Skills"));
 const RenderProjectsRoutes = lazy(() => import("../Pages/Projects/project-router"));
 const ContactPage = lazy(() => import("../Pages/Contact/Contact"));
 const NotFound404 = lazy(() => import("../Pages/NotFound404/NotFound404"));
-
-function LocalizedRedirect() {
-  const location = useLocation();
-  return (
-    <Navigate
-      replace
-      to={toPublicLocalizedPath(location.pathname, getPreferredLocale())}
-    />
-  );
-}
 
 function createLocalizedRoutes(locale: Locale) {
   return [
@@ -74,11 +62,6 @@ const RenderRoutes = () => {
         {routesData.map((el, ind) => {
           return <Route key={`route${ind}`} path={el.path} element={el.element} />;
         })}
-        <Route path="/" element={<LocalizedRedirect />} />
-        <Route path="/about" element={<LocalizedRedirect />} />
-        <Route path="/skills" element={<LocalizedRedirect />} />
-        <Route path="/projects/*" element={<LocalizedRedirect />} />
-        <Route path="/contact" element={<LocalizedRedirect />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
     </Suspense>

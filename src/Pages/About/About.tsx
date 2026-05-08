@@ -49,9 +49,9 @@ export default function AboutPage() {
           custom={0.8}
           variants={contentVariants2}
         >
-          <div>{t("about.body.1")}</div>
-          <div>{t("about.body.2")}</div>
-          <div>{t("about.body.3")}</div>
+          <p>{t("about.body.1")}</p>
+          <p>{t("about.body.2")}</p>
+          <p>{t("about.body.3")}</p>
         </motion.div>
       </div>
       {screenSize < 768 ? null : <AnimatedLogo name_class="logoBack" />}

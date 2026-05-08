@@ -26,7 +26,7 @@ export default function ContactPage() {
         <h1 className="sr-only">{t("contact.heading")}</h1>
         <BouncyText name_class="contact-heading" text={t("contact.heading")} />
         <div className="contact-container">
-          <motion.div
+          <motion.p
             className="contact-content"
             initial="hidden"
             animate="visible"
@@ -38,7 +38,7 @@ export default function ContactPage() {
             <a href="mailto:abhinaykhalatkar@gmail.com">
               abhinaykhalatkar@gmail.com
             </a>
-          </motion.div>
+          </motion.p>
           <SocialIconsSection />
         </div>
       </div>

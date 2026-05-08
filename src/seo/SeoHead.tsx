@@ -40,7 +40,7 @@ export default function SeoHead({ isNotFoundPage }: SeoHeadProps) {
     siteUrl
   );
   const xDefaultUrl = alternateEnglishUrl;
-  const ogImageUrl = toAbsoluteUrl("/favicon.ico", siteUrl);
+  const ogImageUrl = toAbsoluteUrl("/og-image.png", siteUrl);
   const structuredData = buildStructuredDataGraph({
     metadata,
     canonicalUrl,
@@ -66,6 +66,10 @@ export default function SeoHead({ isNotFoundPage }: SeoHeadProps) {
       <meta property="og:type" content={metadata.ogType} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:image" content={ogImageUrl} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:alt" content="Abhinay Khalatkar — Senior Full-Stack Engineer" />
       <meta property="og:site_name" content="Abhinay Khalatkar Portfolio" />
       <meta property="og:locale" content={getOpenGraphLocale(locale)} />
 
