@@ -161,6 +161,12 @@ dist
 .pnp.*
 projects/
 
-# Local agent memory files
+# Claude / agent local state
+.claude/settings.local.json
+.claude/cache/
+.claude/.session/
+.runtime/
+
+CLAUDE.md
 agent.json
-agents.md
+.claude/skills/

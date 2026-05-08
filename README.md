@@ -2,6 +2,8 @@
 
 Abhinay Khalatkar's bilingual portfolio is a client-rendered React SPA built with Vite. It combines animated localized routing, route-aware SEO metadata, a static timeline feed, and a GitHub-backed project catalog for static hosting.
 
+> **Working with Claude / agents?** Start at [AGENTS.md](AGENTS.md) for the ownership matrix and handoff contract. See [docs/architecture.md](docs/architecture.md) for the deep architecture and [docs/route-policy.md](docs/route-policy.md) for the load-bearing 5-file URL contract.
+
 ## Requirements
 
 - Node.js `>=20 <25`

@@ -29,6 +29,7 @@
   "@vitest/ui": "^3.2.4",
   "basic-ftp": "^5.2.1",
   "dotenv": "^16.6.1",
+  "husky": "^9.1.7",
   "jsdom": "^25.0.1",
   "puppeteer": "^24.37.5",
   "typescript": "^5.7.3",
@@ -42,13 +43,15 @@
   "preview": "vite preview",
   "build:prerender": "npm run build && node scripts/prerender-routes.mjs",
   "verify:prod": "npm test && npm run build:prerender && npm run seo:validate",
+  "ci": "npm run verify:prod",
   "build:prod": "node util/build.js",
   "release:prod": "node util/assemble-release.js",
   "deploy:prod": "node util/deploy-prod.js",
   "deploy:prod:dry-run": "node util/deploy-prod.js --dry-run",
   "test": "vitest run",
   "seo:validate": "node scripts/validate-seo-artifacts.mjs",
-  "package:deploy": "npm run build:prerender && (cd build && zip -r ../build-deploy.zip .)"
+  "package:deploy": "npm run build:prerender && (cd build && zip -r ../build-deploy.zip .)",
+  "prepare": "husky"
  },
  "eslintConfig": {
   "extends": [
