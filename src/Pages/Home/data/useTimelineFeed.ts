@@ -139,11 +139,15 @@ function getSortableDateValue(raw: string): number {
   return Number(yearMatch[0]) * 10_000;
 }
 
-async function fetchTimelineItems(sourceUrl: string): Promise<TimelineEntryRecord[]> {
+async function fetchTimelineItems(
+  sourceUrl: string,
+  signal?: AbortSignal
+): Promise<TimelineEntryRecord[]> {
   const response = await fetch(sourceUrl, {
     headers: {
       Accept: "application/json",
     },
+    signal,
   });
   if (!response.ok) {
     throw new Error(`Timeline feed error: ${response.status} ${response.statusText}`);
@@ -204,9 +208,15 @@ export function useTimelineFeed(
       previous.status === "loading" ? previous : { status: "loading", items: previous.items }
     );
 
+    const controller =
+      typeof AbortController !== "undefined" ? new AbortController() : null;
+
     let request = inflightTimeline.get(sourceUrl);
     if (!request) {
-      request = fetchTimelineItems(sourceUrl);
+      // Only the first caller for a given URL gets to abort the underlying
+      // fetch; later mounters share the same in-flight promise and just stop
+      // listening when they unmount.
+      request = fetchTimelineItems(sourceUrl, controller?.signal);
       inflightTimeline.set(sourceUrl, request);
     }
 
@@ -226,6 +236,12 @@ export function useTimelineFeed(
         if (!isMounted) {
           return;
         }
+        if (
+          error instanceof DOMException &&
+          (error.name === "AbortError" || error.code === DOMException.ABORT_ERR)
+        ) {
+          return;
+        }
         const message =
           error instanceof Error ? error.message : "Failed to load timeline feed.";
         setState({ status: "error", items: [], message });
@@ -238,6 +254,10 @@ export function useTimelineFeed(
 
     return () => {
       isMounted = false;
+      if (controller && inflightTimeline.get(sourceUrl) === undefined) {
+        // Only abort if no other consumer is still waiting on this fetch.
+        controller.abort();
+      }
     };
   }, [locale, sourceUrl]);
 

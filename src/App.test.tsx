@@ -22,8 +22,9 @@ describe("App", () => {
   it("renders a navigation element", () => {
     render(<App />);
 
-    // The sidebar/navigation uses a <nav> element.
-    const nav = screen.getByRole("navigation");
-    expect(nav).not.toBeNull();
+    // Sidebar nav and the top progress-nav are both <nav> landmarks now.
+    // We just need at least one.
+    const navs = screen.getAllByRole("navigation");
+    expect(navs.length).toBeGreaterThan(0);
   });
 });

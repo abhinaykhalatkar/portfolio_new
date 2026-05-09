@@ -3,6 +3,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import React from "react";
 import { useThemeContext } from "../../Context/ThemeContext/ThemeContext";
+import { useLocaleContext } from "../../i18n/LocaleContext";
 import "./Switch.scss";
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
@@ -54,12 +55,13 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 export function Switch1() {
   const { toggleTheme, darkTheme } = useThemeContext();
+  const { t } = useLocaleContext();
   return (
     <FormControlLabel
       onClick={toggleTheme}
       className={`${darkTheme ? "switch-dark" : "switch-white"}`}
       control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
-      label={darkTheme ? "Night Mode" : "Light Mode"}
+      label={darkTheme ? t("theme.dark") : t("theme.light")}
     />
   );
 }

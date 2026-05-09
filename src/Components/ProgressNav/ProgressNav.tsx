@@ -35,7 +35,7 @@ type ProgressNavProps = {
 export function ProgressNav({ endPosition }: ProgressNavProps) {
   const location = useLocation();
   const navigate = useNavigate();
-  const { localizePath } = useLocaleContext();
+  const { localizePath, t } = useLocaleContext();
   const basePath = stripLocalePrefix(location.pathname);
 
   const [squash, setSquash] = useState(false);
@@ -74,8 +74,7 @@ export function ProgressNav({ endPosition }: ProgressNavProps) {
     };
   }, []);
 
-  const handleSquash = (event: React.MouseEvent<HTMLSpanElement>) => {
-    const currentAddress = event.currentTarget.getAttribute("data-address") || "";
+  const activateAddress = (currentAddress: string) => {
     const index = navsData.findIndex((item) => item.Address === currentAddress);
 
     if (!currentAddress || index === -1) {
@@ -99,9 +98,23 @@ export function ProgressNav({ endPosition }: ProgressNavProps) {
     }, 1000);
   };
 
+  const handleSquash = (event: React.MouseEvent<HTMLSpanElement>) => {
+    const currentAddress = event.currentTarget.getAttribute("data-address") || "";
+    activateAddress(currentAddress);
+  };
+
+  const handleNavKeyDown = (event: React.KeyboardEvent<HTMLSpanElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      const currentAddress =
+        event.currentTarget.getAttribute("data-address") || "";
+      activateAddress(currentAddress);
+    }
+  };
+
   return (
     <>
-      <div className="progress-nav-wrapper">
+      <nav className="progress-nav-wrapper" aria-label={t("nav.sectionAria")}>
         <motion.div
           className="navigation-progress"
           initial={{
@@ -129,7 +142,12 @@ export function ProgressNav({ endPosition }: ProgressNavProps) {
                 key={`main-nav-${index}`}
                 className={`NavLink ${isActive ? "NavActive" : ""}`}
                 data-address={item.Address}
+                role="button"
+                tabIndex={0}
+                aria-label={`${item.Name} — ${item.Address}`}
+                aria-current={isActive ? "page" : undefined}
                 onClick={handleSquash}
+                onKeyDown={handleNavKeyDown}
                 ref={isActive ? activeNavLinkRef : null}
               >
                 {item.Name}
@@ -150,7 +168,7 @@ export function ProgressNav({ endPosition }: ProgressNavProps) {
             transition={{ ease: "easeOut", duration: 0.3 }}
           />
         </motion.div>
-      </div>
+      </nav>
 
       <ScrollBtn />
     </>

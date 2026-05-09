@@ -3,12 +3,14 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useThemeContext } from "../../Context/ThemeContext/ThemeContext";
 import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
+import { useLocaleContext } from "../../i18n/LocaleContext";
 import { BsGit, BsLinkedin, BsWhatsapp, BsInstagram } from "react-icons/bs";
 import BouncyText from "../Bouncy-text/BouncyText";
 
 export default function SocialIconsSection() {
   const { darkTheme } = useThemeContext();
   const { contentVariants2 } = usePageAnimationContext();
+  const { t } = useLocaleContext();
   const contactBtnData = [
     {
       name: "Git",
@@ -50,7 +52,8 @@ export default function SocialIconsSection() {
                   className={`${el.name} ${darkTheme ? "" : "light"}`}
                   href={el.link}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
+                  aria-label={el.name}
                 >
                   <span></span>
                   <span></span>
@@ -73,7 +76,7 @@ export default function SocialIconsSection() {
       >
         <BouncyText
           name_class="exit-heading-contact"
-          text={"Let's Get Social"}
+          text={t("social.heading")}
         />
       </motion.div>
     </div>

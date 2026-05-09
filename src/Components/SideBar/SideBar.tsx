@@ -60,12 +60,16 @@ const SideBar = ({ passIsSidebarOpen }: SideBarProps) => {
     <div className="c-sidebar">
       <div className={`t-btn-container `}>
         <button
+          type="button"
           className={`sidebar-toggle-btn ${
             darkTheme ? "s-color-white" : "s-color-black"
           }`}
+          aria-label={t("nav.toggle")}
+          aria-expanded={isSidebarOpen}
+          aria-controls="primary-sidebar"
           onClick={handleSidebarToggle}
         >
-          ☰
+          <span aria-hidden="true">☰</span>
         </button>
       </div>
       {isSidebarOpen ? (
@@ -77,6 +81,7 @@ const SideBar = ({ passIsSidebarOpen }: SideBarProps) => {
         />
       ) : null}
       <motion.div
+        id="primary-sidebar"
         className={`sidebar ${isSidebarOpen ? "open" : ""} ${
           darkTheme ? "s-back-color-b" : "s-color-white s-back-color"
         }`}

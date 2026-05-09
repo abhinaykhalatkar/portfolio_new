@@ -95,12 +95,37 @@ function ChildApp1() {
   const wheelCooldownUntilRef = useRef(0);
 
   const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchStartY, setTouchStartY] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [touchEndY, setTouchEndY] = useState<number | null>(null);
   const [endPosition, setEndPosition] = useState("67vw");
+
+  // Track viewport >= 768px so the page-content margin shift only triggers
+  // on desktop. On mobile the sidebar overlays via fixed positioning, and a
+  // 250px margin would compress content to ~70vw.
+  const [isDesktopViewport, setIsDesktopViewport] = useState(() =>
+    typeof window === "undefined" ? true : window.innerWidth >= 768
+  );
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mql = window.matchMedia("(min-width: 768px)");
+    const handler = (event: MediaQueryListEvent) =>
+      setIsDesktopViewport(event.matches);
+    setIsDesktopViewport(mql.matches);
+    if (mql.addEventListener) {
+      mql.addEventListener("change", handler);
+      return () => mql.removeEventListener("change", handler);
+    }
+    // Safari < 14 fallback
+    mql.addListener(handler);
+    return () => mql.removeListener(handler);
+  }, []);
 
   const navigate = useNavigate();
   const location = useLocation();
   const basePath = stripLocalePrefix(location.pathname);
+  const mainRef = useRef<HTMLElement | null>(null);
   const {
     handleSetScrollDirection,
     activeIndex,
@@ -119,6 +144,37 @@ function ChildApp1() {
     );
     if (contactIndex !== -1) setActiveIndex(contactIndex);
   };
+
+  // Auto-close the sidebar on every navigation, regardless of trigger
+  // (link click, wheel, swipe, browser back/forward). Prevents the sidebar
+  // from staying open after wheel-nav or popstate.
+  useEffect(() => {
+    setIsSidebarOpen(false);
+  }, [location.pathname]);
+
+  // Move keyboard / screen-reader focus to <main> on route change so each
+  // navigation announces the new page heading instead of leaving focus on
+  // the body. tabIndex={-1} on the <main> keeps it programmatically focusable
+  // without polluting the regular tab order.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const id = window.setTimeout(() => {
+      mainRef.current?.focus({ preventScroll: true });
+    }, 0);
+    return () => window.clearTimeout(id);
+  }, [location.pathname]);
+
+  // Browser back/forward shouldn't be blocked by the wheel cooldown set by
+  // the previous wheel-driven nav.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const reset = () => {
+      wheelCooldownUntilRef.current = 0;
+      wheelAccumulatorRef.current = 0;
+    };
+    window.addEventListener("popstate", reset);
+    return () => window.removeEventListener("popstate", reset);
+  }, []);
 
   useEffect(() => {
     const inferredSectionFromPath = parseProjectSectionFromPathname(location.pathname);
@@ -329,17 +385,28 @@ function ChildApp1() {
 
   const onTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
     setTouchEnd(null);
+    setTouchEndY(null);
     setTouchStart(event.targetTouches[0].clientX);
+    setTouchStartY(event.targetTouches[0].clientY);
   };
 
   const onTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
     setTouchEnd(event.targetTouches[0].clientX);
+    setTouchEndY(event.targetTouches[0].clientY);
   };
 
   const onTouchEnd = () => {
     if (touchStart === null || touchEnd === null) return;
 
     const distance = touchStart - touchEnd;
+    // Require the horizontal swipe to dominate the vertical movement so
+    // diagonal-leaning vertical scrolls don't accidentally page-jump.
+    const verticalDistance =
+      touchStartY !== null && touchEndY !== null
+        ? Math.abs(touchStartY - touchEndY)
+        : 0;
+    if (Math.abs(distance) <= verticalDistance * 1.2) return;
+
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
 
@@ -352,6 +419,9 @@ function ChildApp1() {
 
   return (
     <div className={`c-app ${darkTheme ? "dark-theme" : "white-theme"}`}>
+      <a className="skip-link" href="#main-content">
+        {t("a11y.skipToContent")}
+      </a>
       <div className={`p-app  ${darkTheme ? "" : "b-white"}`}>
         <SideBar passIsSidebarOpen={getIsSidebarOpen} />
         <AnimatePresence mode="wait">
@@ -360,7 +430,9 @@ function ChildApp1() {
               isSidebarOpen ? "page-content-collapsed" : ""
             }`}
             initial={false}
-            animate={{ marginLeft: isSidebarOpen ? 250 : 0 }}
+            animate={{
+              marginLeft: isSidebarOpen && isDesktopViewport ? 250 : 0,
+            }}
             transition={{ duration: 0.3 }}
           >
             <SeoHead isNotFoundPage={isOnNotFound404Page} />
@@ -384,6 +456,9 @@ function ChildApp1() {
             </motion.div>
 
             <main
+              id="main-content"
+              ref={mainRef}
+              tabIndex={-1}
               className="route-main"
               onTouchStart={onTouchStart}
               onTouchMove={onTouchMove}

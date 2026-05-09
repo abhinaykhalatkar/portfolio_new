@@ -132,6 +132,7 @@ $wom-pad-side: clamp(16px, 4vw, 56px);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    max-width: 100%;
   }
 
   &__chromeAction {
@@ -242,6 +243,8 @@ $wom-pad-side: clamp(16px, 4vw, 56px);
     font-weight: 600;
     letter-spacing: 0.04em;
     padding: 0.65rem 1.15rem;
+    // Reach minimum touch hit-area without changing visible padding.
+    min-height: 44px;
     border-radius: 999px;
     text-decoration: none;
     display: inline-flex;

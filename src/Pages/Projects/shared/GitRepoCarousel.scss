@@ -188,6 +188,9 @@
     margin-top: 12px;
     padding-bottom: 4px;
     scrollbar-width: none;
+    // Reserve the scrollbar gutter so the carousel doesn't reflow when its
+    // scrollbar appears (Chromium 94+, Firefox 97+; gracefully ignored elsewhere).
+    scrollbar-gutter: stable;
     overscroll-behavior-x: contain;
     touch-action: pan-x;
     scroll-snap-type: x proximity;

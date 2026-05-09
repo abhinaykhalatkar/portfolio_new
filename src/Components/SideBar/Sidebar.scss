@@ -23,14 +23,23 @@
   .t-btn-container {
     >.sidebar-toggle-btn {
       position: fixed;
-      top: 1.5rem;
-      left: 1rem;
-      width: 2%;
+      top: max(1.5rem, env(safe-area-inset-top));
+      left: max(1rem, env(safe-area-inset-left));
+      // Visible glyph stays the same; we just give the button a real
+      // 44x44 hit-area for touch / pointer accuracy.
+      width: auto;
+      min-width: 44px;
+      min-height: 44px;
       height: auto;
+      padding: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       z-index: 120;
       background-color: transparent;
       border: none;
       font-size: 24px;
+      line-height: 1;
       cursor: pointer;
       outline: none;
     }
@@ -50,12 +59,13 @@
     top: 0;
     left: 0;
     height: 100vh;
+    height: 100dvh;
     width: 250px;
     border-left: 50px;
     color: $white;
     z-index: 110;
     overflow: hidden;
-    padding-top: 80px;
+    padding-top: max(80px, env(safe-area-inset-top));
     transition: transform 0.3s ease-in-out;
 
     /* When closed (translated off-screen), don't trap clicks or cause odd overlays */

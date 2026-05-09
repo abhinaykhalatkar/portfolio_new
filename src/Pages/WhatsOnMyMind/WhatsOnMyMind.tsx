@@ -41,6 +41,8 @@ export default function WhatsOnMyMindPage() {
   const [loaded, setLoaded] = useState(false);
   const [blocked, setBlocked] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
+  // Remember which element opened the dialog so we can restore focus on close.
+  const dialogTriggerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const initial = readConsent();
@@ -49,6 +51,22 @@ export default function WhatsOnMyMindPage() {
       setDialogOpen(true);
     }
   }, []);
+
+  // When the dialog closes, return focus to whatever opened it (or fall back
+  // to <main>). Only fires after a real open→close cycle, not on initial mount.
+  const wasOpenRef = useRef(false);
+  useEffect(() => {
+    if (dialogOpen) {
+      wasOpenRef.current = true;
+      return;
+    }
+    if (!wasOpenRef.current) return;
+    wasOpenRef.current = false;
+    const target =
+      dialogTriggerRef.current ??
+      (document.getElementById("main-content") as HTMLElement | null);
+    target?.focus({ preventScroll: true });
+  }, [dialogOpen]);
 
   useEffect(() => {
     if (consent !== "accepted") return;
@@ -73,7 +91,12 @@ export default function WhatsOnMyMindPage() {
     setDialogOpen(false);
   };
 
-  const reopenDialog = () => setDialogOpen(true);
+  const reopenDialog = (event?: React.MouseEvent<HTMLElement>) => {
+    if (event && event.currentTarget instanceof HTMLElement) {
+      dialogTriggerRef.current = event.currentTarget;
+    }
+    setDialogOpen(true);
+  };
 
   const showIframe = consent === "accepted" && !blocked;
   const showBlocked = consent === "accepted" && blocked;
@@ -285,15 +308,36 @@ function ConsentDialog({
   const titleId = useId();
   const bodyId = useId();
   const acceptRef = useRef<HTMLButtonElement | null>(null);
+  const declineRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     acceptRef.current?.focus();
   }, []);
 
+  // Trap Tab / Shift-Tab inside the dialog so keyboard users can't escape
+  // to the (visually obscured) page beneath the modal backdrop.
   useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         onDismiss();
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const accept = acceptRef.current;
+      const decline = declineRef.current;
+      if (!accept || !decline) return;
+
+      const active = document.activeElement;
+      if (event.shiftKey) {
+        if (active === accept || !active || (active !== decline && active !== accept)) {
+          event.preventDefault();
+          decline.focus();
+        }
+      } else {
+        if (active === decline || !active || (active !== accept && active !== decline)) {
+          event.preventDefault();
+          accept.focus();
+        }
       }
     };
     window.addEventListener("keydown", handleKey);
@@ -326,6 +370,7 @@ function ConsentDialog({
             {acceptLabel}
           </button>
           <button
+            ref={declineRef}
             type="button"
             className="p-WhatsOnMyMind__btn p-WhatsOnMyMind__btn--secondary"
             onClick={onDecline}

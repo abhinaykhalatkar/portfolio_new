@@ -7,7 +7,7 @@ import React, {
   type ReactNode,
 } from "react";
 
-import type { Variants } from "framer-motion";
+import { useReducedMotion, type Variants } from "framer-motion";
 
 const DEFAULT_PROJECT_SECTION_COUNT = 5;
 
@@ -91,47 +91,55 @@ export function PageAnimationProvider(props: { children?: ReactNode }) {
     };
   }, []);
 
+  // Respect the OS-level "Reduce motion" toggle. When the user has it on,
+  // we skip the slide / cross-fade transitions and keep just opacity so the
+  // app still has visible state changes without potentially-vestibular motion.
+  const prefersReducedMotion = useReducedMotion();
+  const motionDuration = prefersReducedMotion ? 0 : 0.5;
+  const slideOffset = (sign: 1 | -1) =>
+    prefersReducedMotion ? 0 : sign === 1 ? "100%" : "-100%";
+
   const pageVariants = {
     initial: {
       opacity: 0,
-      x: scrollDirection ? "100%" : "-100%",
+      x: slideOffset(scrollDirection ? 1 : -1),
     },
     animate: {
       opacity: 1,
       x: 0,
       transition: {
         ease: "easeOut",
-        duration: 0.5,
+        duration: motionDuration,
       },
     },
     exit: {
       opacity: 0,
-      x: scrollDirection ? "-100%" : "100%",
+      x: slideOffset(scrollDirection ? -1 : 1),
       transition: {
         ease: "easeIn",
-        duration: 0.5,
+        duration: motionDuration,
       },
     },
   };
   const subPageVariants = {
     initial: {
       opacity: 0,
-      y: horizontalScrollDirection === 0 ? "-100%" : "100%",
+      y: slideOffset(horizontalScrollDirection === 0 ? -1 : 1),
     },
     animate: {
       opacity: 1,
       y: 0,
       transition: {
         ease: "easeOut",
-        duration: 0.5,
+        duration: motionDuration,
       },
     },
     exit: {
       opacity: 0,
-      y: horizontalScrollDirection === 0 ? "100%" : "-100%",
+      y: slideOffset(horizontalScrollDirection === 0 ? 1 : -1),
       transition: {
         ease: "easeIn",
-        duration: 0.5,
+        duration: motionDuration,
       },
     },
   };
@@ -163,7 +171,7 @@ export function PageAnimationProvider(props: { children?: ReactNode }) {
   };
 
   const pageTransition = {
-    duration: 0.5,
+    duration: motionDuration,
     type: "tween",
     ease: "easeInOut",
   };

@@ -35,9 +35,15 @@
     gap: 4px;
 
     .language-switcher-btn {
-      min-width: 38px;
+      // Visible padding kept compact; min sizing ensures the touch target
+      // stays at 44x44 even though the rendered text-area is smaller.
+      min-width: 44px;
+      min-height: 44px;
       padding: 8px 10px;
       font-size: 0.74rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

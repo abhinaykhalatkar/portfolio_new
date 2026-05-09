@@ -74,6 +74,15 @@
     cursor: pointer;
     transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 
+    // Transparent pseudo-element grows the clickable area to ~24x24 without
+    // changing the visible 8x8 dot.
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -8px;
+      border-radius: 999px;
+    }
+
     &:hover {
       transform: translate(-50%, -50%) scale(1.14);
       border-color: rgba($heighlightBlue, 0.8);

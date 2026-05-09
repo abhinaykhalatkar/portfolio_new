@@ -4,6 +4,7 @@
     display: flex;
     position: relative;
     height: 100vh;
+    height: 100dvh;
     overflow: hidden;
     padding: 0 4rem;
     background-image: linear-gradient(135deg, $darkGray 38%, $darkBlue ),
@@ -145,6 +146,7 @@
     @media only screen and (max-width: 900px) {
         height: auto;
         min-height: 100vh;
+        min-height: 100dvh;
         overflow-y: auto;
         display: block;
         padding: 0 2rem 2rem;

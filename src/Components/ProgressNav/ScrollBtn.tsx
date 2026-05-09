@@ -32,19 +32,37 @@ export default function ScrollBtn() {
       }
     }
   }, [activeIndex, handleSetScrollDirection, localizePath, navigate, setActiveIndex]);
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      handlePageNavigation();
+    }
+  };
+
+  const label =
+    activeIndex < navsData.length - 1 && !isOnNotFound404Page
+      ? t("scroll.next")
+      : isOnNotFound404Page
+      ? t("scroll.backHome")
+      : t("scroll.backStart");
+
   return (
     <motion.div
       className={`c-ScrollBtn ${darkTheme ? "night" : ""}`}
+      role="button"
+      tabIndex={0}
+      aria-label={label}
       onClick={handlePageNavigation}
+      onKeyDown={handleKeyDown}
     >
       {activeIndex < navsData.length - 1 && !isOnNotFound404Page ? (
         <div>
           <div>{t("scroll.next")}</div>
-          <AiOutlineRight />
+          <AiOutlineRight aria-hidden="true" />
         </div>
       ) : (
         <div>
-          <AiOutlineDoubleLeft />
+          <AiOutlineDoubleLeft aria-hidden="true" />
           <div>{isOnNotFound404Page ? t("scroll.backHome") : t("scroll.backStart")} </div>
         </div>
       )}

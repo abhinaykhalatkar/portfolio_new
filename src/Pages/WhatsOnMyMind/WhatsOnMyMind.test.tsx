@@ -124,6 +124,37 @@ describe("WhatsOnMyMind consent gate", () => {
     expect(screen.getByText("whatsOnMyMind.placeholderTitle")).toBeInTheDocument();
   });
 
+  it("focuses the Accept button when the dialog opens", () => {
+    render(<WhatsOnMyMindPage />);
+    const accept = screen.getByRole("button", {
+      name: "whatsOnMyMind.consentAccept",
+    });
+    expect(document.activeElement).toBe(accept);
+  });
+
+  it("traps Tab focus inside the dialog (cycles between Accept and Decline)", () => {
+    render(<WhatsOnMyMindPage />);
+    const accept = screen.getByRole("button", {
+      name: "whatsOnMyMind.consentAccept",
+    });
+    const decline = screen.getByRole("button", {
+      name: "whatsOnMyMind.consentDecline",
+    });
+
+    expect(document.activeElement).toBe(accept);
+
+    fireEvent.keyDown(window, { key: "Tab" });
+    expect(document.activeElement).toBe(accept);
+
+    decline.focus();
+    fireEvent.keyDown(window, { key: "Tab" });
+    expect(document.activeElement).toBe(accept);
+
+    accept.focus();
+    fireEvent.keyDown(window, { key: "Tab", shiftKey: true });
+    expect(document.activeElement).toBe(decline);
+  });
+
   it("swaps to the blocked-fallback card when the iframe never finishes loading", () => {
     vi.useFakeTimers();
     window.localStorage.setItem(CONSENT_KEY, "accepted");
