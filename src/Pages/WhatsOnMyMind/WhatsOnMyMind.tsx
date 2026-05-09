@@ -89,56 +89,107 @@ export default function WhatsOnMyMindPage() {
       transition={pageTransition}
     >
       <h1 className="sr-only">{t("whatsOnMyMind.heading")}</h1>
-      <div
-        className="p-WhatsOnMyMind__frame"
-        data-wheel-lock="true"
-        data-wheel-axis="y"
-      >
-        {showIframe && (
-          <iframe
-            ref={iframeRef}
-            className="p-WhatsOnMyMind__iframe"
-            src={TARGET_URL}
-            title={t("whatsOnMyMind.iframeTitle")}
-            onLoad={() => setLoaded(true)}
-            referrerPolicy="no-referrer-when-downgrade"
-            sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-            loading="eager"
-            allow="clipboard-read; clipboard-write"
-          />
-        )}
-        {showBlocked && (
-          <Card
-            heading={t("whatsOnMyMind.blockedTitle")}
-            body={t("whatsOnMyMind.blockedBody")}
-            primaryAction={{
-              label: t("whatsOnMyMind.openInNewTab"),
-              href: TARGET_URL,
-            }}
-          />
-        )}
-        {showPlaceholder && (
-          <Card
-            heading={
-              consent === "declined"
-                ? t("whatsOnMyMind.placeholderTitle")
-                : t("whatsOnMyMind.heading")
-            }
-            body={
-              consent === "declined"
-                ? t("whatsOnMyMind.placeholderBody")
-                : t("whatsOnMyMind.lede")
-            }
-            primaryAction={{
-              label: t("whatsOnMyMind.reconsider"),
-              onClick: reopenDialog,
-            }}
-            secondaryAction={{
-              label: t("whatsOnMyMind.openInNewTab"),
-              href: TARGET_URL,
-            }}
-          />
-        )}
+      <div className="p-WhatsOnMyMind__stage">
+        <div className="p-WhatsOnMyMind__window" role="group" aria-label={t("whatsOnMyMind.iframeTitle")}>
+          <div className="p-WhatsOnMyMind__chrome">
+            <div className="p-WhatsOnMyMind__lights" aria-hidden="true">
+              <span className="p-WhatsOnMyMind__light p-WhatsOnMyMind__light--red" />
+              <span className="p-WhatsOnMyMind__light p-WhatsOnMyMind__light--yellow" />
+              <span className="p-WhatsOnMyMind__light p-WhatsOnMyMind__light--green" />
+            </div>
+            <div className="p-WhatsOnMyMind__address" aria-hidden="true">
+              <svg
+                className="p-WhatsOnMyMind__addressIcon"
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+              <span className="p-WhatsOnMyMind__addressText">{TARGET_HOSTNAME}</span>
+            </div>
+            <a
+              className="p-WhatsOnMyMind__chromeAction"
+              href={TARGET_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t("whatsOnMyMind.openInNewTab")}
+              title={t("whatsOnMyMind.openInNewTab")}
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M14 4h6v6" />
+                <path d="M10 14L20 4" />
+                <path d="M19 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6" />
+              </svg>
+            </a>
+          </div>
+          <div
+            className="p-WhatsOnMyMind__viewport"
+            data-wheel-lock="true"
+            data-wheel-axis="y"
+          >
+            {showIframe && (
+              <iframe
+                ref={iframeRef}
+                className="p-WhatsOnMyMind__iframe"
+                src={TARGET_URL}
+                title={t("whatsOnMyMind.iframeTitle")}
+                onLoad={() => setLoaded(true)}
+                referrerPolicy="no-referrer-when-downgrade"
+                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                loading="eager"
+                allow="clipboard-read; clipboard-write"
+              />
+            )}
+            {showBlocked && (
+              <Card
+                heading={t("whatsOnMyMind.blockedTitle")}
+                body={t("whatsOnMyMind.blockedBody")}
+                primaryAction={{
+                  label: t("whatsOnMyMind.openInNewTab"),
+                  href: TARGET_URL,
+                }}
+              />
+            )}
+            {showPlaceholder && (
+              <Card
+                heading={
+                  consent === "declined"
+                    ? t("whatsOnMyMind.placeholderTitle")
+                    : t("whatsOnMyMind.heading")
+                }
+                body={
+                  consent === "declined"
+                    ? t("whatsOnMyMind.placeholderBody")
+                    : t("whatsOnMyMind.lede")
+                }
+                primaryAction={{
+                  label: t("whatsOnMyMind.reconsider"),
+                  onClick: reopenDialog,
+                }}
+                secondaryAction={{
+                  label: t("whatsOnMyMind.openInNewTab"),
+                  href: TARGET_URL,
+                }}
+              />
+            )}
+          </div>
+        </div>
       </div>
 
       {dialogOpen && (

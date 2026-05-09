@@ -1,8 +1,9 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { lazy, Suspense, useEffect, useMemo } from "react";
 import { usePageAnimationContext } from "./PageAnimationContext/PageAnimationContext";
 import {
   MAIN_BASE_ROUTES,
+  getPreferredLocale,
   stripLocalePrefix,
   type Locale,
 } from "../i18n/localeRoutes";
@@ -16,6 +17,15 @@ const WhatsOnMyMindPage = lazy(
   () => import("../Pages/WhatsOnMyMind/WhatsOnMyMind")
 );
 const NotFound404 = lazy(() => import("../Pages/NotFound404/NotFound404"));
+
+// Server-side `.htaccess` is supposed to redirect `/` to `/en/` (or the persisted
+// locale). When that doesn't fire — e.g. Hetzner's Apache serves the SPA shell
+// for `/` directly — this component intercepts client-side and ships the user
+// to the correct localized home before the catchall 404 can render.
+function RootLocaleRedirect() {
+  const locale = getPreferredLocale();
+  return <Navigate to={`/${locale}/`} replace />;
+}
 
 function createLocalizedRoutes(locale: Locale) {
   return [
@@ -66,6 +76,7 @@ const RenderRoutes = () => {
   return (
     <Suspense fallback={null}>
       <Routes>
+        <Route path="/" element={<RootLocaleRedirect />} />
         {routesData.map((el, ind) => {
           return <Route key={`route${ind}`} path={el.path} element={el.element} />;
         })}
