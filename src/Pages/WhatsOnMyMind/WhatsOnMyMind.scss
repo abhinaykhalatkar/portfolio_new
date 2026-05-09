@@ -1,0 +1,203 @@
+@use "../../Styles/variables" as *;
+
+.p-WhatsOnMyMind {
+  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  width: 100%;
+  overflow: hidden;
+
+  background-image: linear-gradient(135deg, $darkGray 38%, $darkBlue),
+    linear-gradient(315deg, $darkBlack 10%, $black 74%);
+
+  &.light {
+    background-color: #b8c6db;
+    background-image: linear-gradient(315deg, #b8c6db 0%, #faf3f3 74%);
+  }
+
+  &__frame {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  &__iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    background: transparent;
+  }
+
+  &__card {
+    max-width: 640px;
+    width: min(92vw, 640px);
+    padding: 2rem 2.25rem;
+    border-radius: 16px;
+    backdrop-filter: blur(18px);
+    background: rgba(20, 20, 28, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+    color: #f4f4f6;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  &.light &__card {
+    background: rgba(255, 255, 255, 0.86);
+    color: #181820;
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+  }
+
+  &__cardTitle {
+    margin: 0;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+  }
+
+  &__cardBody {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.55;
+    opacity: 0.9;
+  }
+
+  &__cardActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+  }
+
+  &__btn {
+    appearance: none;
+    border: 0;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 0.7rem 1.2rem;
+    border-radius: 999px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+
+    &:focus-visible {
+      outline: 2px solid $yellow;
+      outline-offset: 2px;
+    }
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+
+    &--primary {
+      background: $yellow;
+      color: #161616;
+      box-shadow: 0 6px 16px rgba(229, 192, 30, 0.28);
+    }
+
+    &--secondary {
+      background: transparent;
+      color: inherit;
+      border: 1px solid currentColor;
+    }
+  }
+
+  &__dialogBackdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: rgba(8, 8, 12, 0.72);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+
+  &__dialog {
+    max-width: 520px;
+    width: 100%;
+    padding: 1.75rem 1.85rem 1.5rem;
+    border-radius: 18px;
+    background: #1a1a22;
+    color: #f4f4f6;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  &.light &__dialog {
+    background: #fdfdfe;
+    color: #181820;
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+
+  &__dialogTitle {
+    margin: 0;
+    font-size: 1.35rem;
+    line-height: 1.25;
+  }
+
+  &__dialogBody {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.55;
+    opacity: 0.9;
+  }
+
+  &__dialogHost {
+    margin: 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.92rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    align-self: flex-start;
+  }
+
+  &.light &__dialogHost {
+    background: rgba(0, 0, 0, 0.06);
+  }
+
+  &__dialogActions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  @media only screen and (max-width: 600px) {
+    &__card {
+      padding: 1.5rem 1.25rem;
+    }
+
+    &__cardTitle {
+      font-size: 1.35rem;
+    }
+
+    &__dialog {
+      padding: 1.4rem 1.25rem 1.2rem;
+    }
+
+    &__dialogActions {
+      justify-content: stretch;
+
+      .p-WhatsOnMyMind__btn {
+        flex: 1 1 0;
+      }
+    }
+  }
+}

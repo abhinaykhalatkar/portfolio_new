@@ -9,6 +9,7 @@ export type SeoKind =
   | "projects"
   | "projectSection"
   | "contact"
+  | "whatsOnMyMind"
   | "notFound"
   | "generic";
 
@@ -219,7 +220,7 @@ function getIndexableRouteConfig(
 }
 
 function getNonIndexableRouteConfig(
-  kind: "projectSection" | "notFound" | "generic",
+  kind: "projectSection" | "whatsOnMyMind" | "notFound" | "generic",
   locale: Locale
 ): RouteConfig {
   const configs = {
@@ -234,6 +235,21 @@ function getNonIndexableRouteConfig(
           "Portfolio Section",
           "Architecture Snapshot",
           "Engineering Delivery",
+        ],
+        robots: "noindex,follow" as const,
+        ogType: "website" as const,
+      },
+      whatsOnMyMind: {
+        kind: "whatsOnMyMind" as const,
+        title: "What's on my Mind — Live Experiments at doordarshi.de",
+        description:
+          "An embedded live view of doordarshi.de — my current side project — surfaced inside the portfolio. Loads only after explicit consent; not indexed because the embedded site is the canonical home for that content.",
+        keywords: [
+          "What's on my Mind",
+          "doordarshi",
+          "Side Project",
+          "Live Experiment",
+          "Embedded Demo",
         ],
         robots: "noindex,follow" as const,
         ogType: "website" as const,
@@ -272,6 +288,21 @@ function getNonIndexableRouteConfig(
           "Portfolio Bereich",
           "GitHub Repository Katalog",
           "Engineering Delivery",
+        ],
+        robots: "noindex,follow" as const,
+        ogType: "website" as const,
+      },
+      whatsOnMyMind: {
+        kind: "whatsOnMyMind" as const,
+        title: "Was mir im Kopf umgeht — Experimente auf doordarshi.de",
+        description:
+          "Eine eingebettete Live-Ansicht von doordarshi.de — meinem aktuellen Nebenprojekt — direkt im Portfolio. Wird erst nach ausdrücklicher Zustimmung geladen und ist nicht indexiert, da die eingebettete Seite die kanonische Quelle ist.",
+        keywords: [
+          "Was mir im Kopf umgeht",
+          "doordarshi",
+          "Nebenprojekt",
+          "Live-Experiment",
+          "Eingebettete Demo",
         ],
         robots: "noindex,follow" as const,
         ogType: "website" as const,
@@ -331,6 +362,11 @@ export function resolveSeoConfig(
       return { ...getIndexableRouteConfig("projects", locale), canonicalPath };
     case "/contact":
       return { ...getIndexableRouteConfig("contact", locale), canonicalPath };
+    case "/whats-on-my-mind":
+      return {
+        ...getNonIndexableRouteConfig("whatsOnMyMind", locale),
+        canonicalPath,
+      };
     default:
       return { ...getNonIndexableRouteConfig("generic", locale), canonicalPath };
   }

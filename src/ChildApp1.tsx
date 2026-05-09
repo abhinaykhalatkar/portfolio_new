@@ -114,7 +114,10 @@ function ChildApp1() {
   } = usePageAnimationContext();
 
   const contactBtnHandler = () => {
-    setActiveIndex(4);
+    const contactIndex = navsData.findIndex(
+      (item) => item.Address === "/contact"
+    );
+    if (contactIndex !== -1) setActiveIndex(contactIndex);
   };
 
   useEffect(() => {

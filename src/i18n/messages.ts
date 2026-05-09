@@ -6,6 +6,7 @@ const enMessages = {
   "nav.skills": "SKILLS",
   "nav.projects": "PROJECTS",
   "nav.contact": "CONTACT",
+  "nav.whatsOnMyMind": "WHAT'S ON MY MIND",
   "language.en": "EN",
   "language.de": "DE",
   "language.switcherAria": "Switch language",
@@ -105,6 +106,23 @@ const enMessages = {
   "timeline.type.experience": "Experience",
   "timeline.type.education": "Education",
   "timeline.linkedIn": "LinkedIn",
+  "whatsOnMyMind.heading": "What's on my Mind",
+  "whatsOnMyMind.lede":
+    "A live window into my current side project — doordarshi.de — embedded below once you accept third-party content.",
+  "whatsOnMyMind.iframeTitle": "Live experiments at doordarshi.de",
+  "whatsOnMyMind.consentTitle": "Load content from doordarshi.de?",
+  "whatsOnMyMind.consentBody":
+    "This page embeds doordarshi.de in a frame. To load it, your browser will contact that site and may share your IP address and user-agent. The site may also set its own cookies. Nothing is loaded until you accept.",
+  "whatsOnMyMind.consentAccept": "Accept and load",
+  "whatsOnMyMind.consentDecline": "Decline",
+  "whatsOnMyMind.placeholderTitle": "Embedded content not loaded",
+  "whatsOnMyMind.placeholderBody":
+    "doordarshi.de is not loaded yet. Accept to embed it here, or open it directly in a new tab.",
+  "whatsOnMyMind.reconsider": "Load content",
+  "whatsOnMyMind.blockedTitle": "Embedding blocked by the remote site",
+  "whatsOnMyMind.blockedBody":
+    "doordarshi.de did not allow inline embedding. Open it in a new tab to view it.",
+  "whatsOnMyMind.openInNewTab": "Open doordarshi.de",
 } as const;
 
 const deMessages: typeof enMessages = {
@@ -113,6 +131,7 @@ const deMessages: typeof enMessages = {
   "nav.skills": "SKILLS",
   "nav.projects": "PROJEKTE",
   "nav.contact": "KONTAKT",
+  "nav.whatsOnMyMind": "WAS MIR IM KOPF UMGEHT",
   "language.en": "EN",
   "language.de": "DE",
   "language.switcherAria": "Sprache wechseln",
@@ -211,6 +230,23 @@ const deMessages: typeof enMessages = {
   "timeline.type.experience": "Berufserfahrung",
   "timeline.type.education": "Ausbildung",
   "timeline.linkedIn": "LinkedIn",
+  "whatsOnMyMind.heading": "Was mir im Kopf umgeht",
+  "whatsOnMyMind.lede":
+    "Ein Live-Einblick in mein aktuelles Nebenprojekt — doordarshi.de — eingebettet, sobald Sie dem Laden externer Inhalte zustimmen.",
+  "whatsOnMyMind.iframeTitle": "Live-Experimente auf doordarshi.de",
+  "whatsOnMyMind.consentTitle": "Inhalte von doordarshi.de laden?",
+  "whatsOnMyMind.consentBody":
+    "Diese Seite bettet doordarshi.de in einem Frame ein. Beim Laden kontaktiert Ihr Browser diese Seite und überträgt ggf. Ihre IP-Adresse und User-Agent. Die Seite kann eigene Cookies setzen. Bis Sie zustimmen, wird nichts geladen.",
+  "whatsOnMyMind.consentAccept": "Akzeptieren und laden",
+  "whatsOnMyMind.consentDecline": "Ablehnen",
+  "whatsOnMyMind.placeholderTitle": "Eingebetteter Inhalt nicht geladen",
+  "whatsOnMyMind.placeholderBody":
+    "doordarshi.de wurde noch nicht geladen. Stimmen Sie zu, um es hier einzubetten, oder öffnen Sie es direkt in einem neuen Tab.",
+  "whatsOnMyMind.reconsider": "Inhalt laden",
+  "whatsOnMyMind.blockedTitle": "Einbettung von der Zielseite blockiert",
+  "whatsOnMyMind.blockedBody":
+    "doordarshi.de hat das Einbetten nicht erlaubt. Bitte in einem neuen Tab öffnen.",
+  "whatsOnMyMind.openInNewTab": "doordarshi.de öffnen",
 };
 
 export type MessageKey = keyof typeof enMessages;

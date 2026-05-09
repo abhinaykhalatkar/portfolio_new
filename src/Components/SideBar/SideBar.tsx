@@ -25,6 +25,7 @@ const SideBar = ({ passIsSidebarOpen }: SideBarProps) => {
     { name: t("nav.skills"), link: "/skills" },
     { name: t("nav.projects"), link: "/projects" },
     { name: t("nav.contact"), link: "/contact" },
+    { name: t("nav.whatsOnMyMind"), link: "/whats-on-my-mind" },
   ];
 
   const closeSidebar = () => {

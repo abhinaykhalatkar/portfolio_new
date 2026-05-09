@@ -13,7 +13,20 @@ export const navsData = [
   { Name: "02", Address: "/skills" },
   { Name: "03", Address: "/projects" },
   { Name: "04", Address: "/contact" },
+  { Name: "05", Address: "/whats-on-my-mind" },
 ];
+
+// Returns the x-translation that centres the lavalamp under the active item,
+// independent of total item count. Items are assumed to share `linkWidth`
+// (`.NavLink { width: 100px }` in ProgressNav.scss).
+export function getLavalampOffset(
+  index: number,
+  totalItems: number,
+  linkWidth: number
+): number {
+  if (index < 0 || totalItems <= 0) return 0;
+  return (index - (totalItems - 1) / 2) * linkWidth;
+}
 
 type ProgressNavProps = {
   endPosition: string;
@@ -127,10 +140,11 @@ export function ProgressNav({ endPosition }: ProgressNavProps) {
           <motion.div
             className={`lavalamp ${squash ? "squash" : ""}`}
             animate={{
-              x:
-                navsData.findIndex((item) => item.Address === basePath) *
-                  activeLinkWidth -
-                activeLinkWidth * 2,
+              x: getLavalampOffset(
+                navsData.findIndex((item) => item.Address === basePath),
+                navsData.length,
+                activeLinkWidth
+              ),
               width: activeLinkWidth,
             }}
             transition={{ ease: "easeOut", duration: 0.3 }}

@@ -10,6 +10,7 @@ export const MAIN_BASE_ROUTES = [
   "/skills",
   "/projects",
   "/contact",
+  "/whats-on-my-mind",
 ] as const;
 
 function normalizeBasePath(pathname: string): string {

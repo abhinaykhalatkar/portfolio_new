@@ -1,5 +1,8 @@
 const LOCALES = ["en", "de"];
-const CORE_ROUTE_SUFFIXES = ["/", "/about/", "/skills/", "/projects/", "/contact/"];
+const CORE_ROUTE_SUFFIXES = ["/", "/about/", "/skills/", "/projects/", "/contact/", "/whats-on-my-mind/"];
+// Routes that are prerendered + crawlable but should NOT appear in sitemap.xml
+// (they carry a `noindex,follow` robots policy in seoConfig.ts).
+const NOINDEX_CORE_ROUTE_SUFFIXES = new Set(["/whats-on-my-mind/"]);
 const PROJECT_SECTION_COUNT = 5;
 const PROJECT_CATALOGUE_ALIAS = "/projects/project-catalogue/";
 
@@ -18,6 +21,12 @@ function buildProjectSectionRoutes(locale) {
 
 export const CORE_LOCALIZED_ROUTES = LOCALES.flatMap((locale) =>
   CORE_ROUTE_SUFFIXES.map((suffix) => toLocalizedRoute(locale, suffix))
+);
+
+export const SITEMAP_LOCALIZED_ROUTES = LOCALES.flatMap((locale) =>
+  CORE_ROUTE_SUFFIXES
+    .filter((suffix) => !NOINDEX_CORE_ROUTE_SUFFIXES.has(suffix))
+    .map((suffix) => toLocalizedRoute(locale, suffix))
 );
 
 export const PROJECT_LOCALIZED_ROUTES = LOCALES.flatMap((locale) =>

@@ -1,7 +1,7 @@
 import { writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
-import { CORE_LOCALIZED_ROUTES } from "./shared/prerenderRouteManifest.mjs";
+import { SITEMAP_LOCALIZED_ROUTES } from "./shared/prerenderRouteManifest.mjs";
 
 const ROOT_DIR = process.cwd();
 const BUILD_DIR = path.join(ROOT_DIR, "build");
@@ -42,7 +42,7 @@ function changefreqFor(route) {
 
 function buildSitemap(siteUrl, lastmod) {
   const origin = siteUrl.replace(/\/$/, "");
-  const urls = CORE_LOCALIZED_ROUTES.map((route) => {
+  const urls = SITEMAP_LOCALIZED_ROUTES.map((route) => {
     const slashed = toTrailingSlashRoute(route);
     const loc = `${origin}${slashed}`;
     return [
@@ -71,7 +71,7 @@ async function generate() {
   const outputPath = path.join(BUILD_DIR, "sitemap.xml");
   await writeFile(outputPath, sitemap, "utf8");
   process.stdout.write(
-    `Sitemap generated at ${outputPath} (${CORE_LOCALIZED_ROUTES.length} routes, lastmod=${lastmod}).\n`
+    `Sitemap generated at ${outputPath} (${SITEMAP_LOCALIZED_ROUTES.length} routes, lastmod=${lastmod}).\n`
   );
 }
 

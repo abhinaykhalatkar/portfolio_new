@@ -41,14 +41,17 @@ Public Routes:
 - English Skills: https://abhinaykhalatkar.de/en/skills/
 - English Projects: https://abhinaykhalatkar.de/en/projects/
 - English Contact: https://abhinaykhalatkar.de/en/contact/
+- English What's on my Mind: https://abhinaykhalatkar.de/en/whats-on-my-mind/
 - German Home: https://abhinaykhalatkar.de/de/
 - German About: https://abhinaykhalatkar.de/de/about/
 - German Skills: https://abhinaykhalatkar.de/de/skills/
 - German Projects: https://abhinaykhalatkar.de/de/projects/
 - German Contact: https://abhinaykhalatkar.de/de/contact/
+- German What's on my Mind: https://abhinaykhalatkar.de/de/whats-on-my-mind/
 
 Project Indexing Policy:
 - Dynamic project section routes under `/en/projects/project-*` and `/de/projects/project-*` are crawlable but intentionally marked noindex.
+- The `whats-on-my-mind` route embeds an external site (doordarshi.de) and is marked noindex to keep it out of search results while remaining crawlable for navigation.
 
 External Profiles:
 - LinkedIn: https://www.linkedin.com/in/abhinay-khalatkar/

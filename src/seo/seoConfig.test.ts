@@ -49,4 +49,19 @@ describe("seoConfig route mapping", () => {
     expect(isProjectSectionPath("/projects/project-catalogue")).toBe(false);
     expect(isProjectAliasPath("/projects/project-catalogue")).toBe(true);
   });
+
+  it("marks /whats-on-my-mind as noindex in both locales with locale-prefixed canonical", () => {
+    const en = resolveSeoConfig("/whats-on-my-mind", "en", false);
+    const de = resolveSeoConfig("/whats-on-my-mind", "de", false);
+
+    expect(en.kind).toBe("whatsOnMyMind");
+    expect(en.robots).toBe("noindex,follow");
+    expect(en.canonicalPath).toBe("/en/whats-on-my-mind");
+    expect(en.title).toContain("doordarshi");
+
+    expect(de.kind).toBe("whatsOnMyMind");
+    expect(de.robots).toBe("noindex,follow");
+    expect(de.canonicalPath).toBe("/de/whats-on-my-mind");
+    expect(de.title).toContain("doordarshi");
+  });
 });

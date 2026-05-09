@@ -21,7 +21,7 @@ export default function ScrollBtn() {
 
   const handlePageNavigation = useCallback(() => {
     if (activeIndex >= 0 && activeIndex <= navsData.length) {
-      if (activeIndex >= 4) {
+      if (activeIndex >= navsData.length - 1) {
         handleSetScrollDirection(1);
         navigate(localizePath("/"));
         setActiveIndex(0);
@@ -31,7 +31,7 @@ export default function ScrollBtn() {
         setActiveIndex(activeIndex + 1);
       }
     }
-  }, [activeIndex, handleSetScrollDirection, navigate, setActiveIndex]);
+  }, [activeIndex, handleSetScrollDirection, localizePath, navigate, setActiveIndex]);
   return (
     <motion.div
       className={`c-ScrollBtn ${darkTheme ? "night" : ""}`}

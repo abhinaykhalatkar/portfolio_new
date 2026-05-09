@@ -4,6 +4,7 @@ import process from "node:process";
 import {
   ALL_PRERENDER_ROUTES,
   CORE_LOCALIZED_ROUTES,
+  SITEMAP_LOCALIZED_ROUTES,
 } from "./shared/prerenderRouteManifest.mjs";
 
 const ROOT_DIR = process.cwd();
@@ -74,9 +75,9 @@ async function validate() {
 
   const sitemapXml = await readBuildFile("sitemap.xml");
   const expectedLocalizedLocs = new Set(
-    CORE_LOCALIZED_ROUTES.map((route) => `${siteOrigin}${toTrailingSlashRoute(route)}`)
+    SITEMAP_LOCALIZED_ROUTES.map((route) => `${siteOrigin}${toTrailingSlashRoute(route)}`)
   );
-  for (const route of CORE_LOCALIZED_ROUTES) {
+  for (const route of SITEMAP_LOCALIZED_ROUTES) {
     const expectedLoc = `${siteOrigin}${toTrailingSlashRoute(route)}`;
     assert(
       sitemapXml.includes(expectedLoc),

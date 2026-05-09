@@ -173,7 +173,7 @@ async function main() {
 
   await assertFtpReachable(connection);
 
-  execSync("npm run build:prod", {
+  execSync("npm run verify:prod", {
     cwd: ROOT_DIR,
     stdio: "inherit",
   });

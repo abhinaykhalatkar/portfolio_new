@@ -39,4 +39,16 @@ describe("locale route helpers", () => {
     expect(isLocalizablePath("/de/projects/project-1")).toBe(true);
     expect(isLocalizablePath("/RESUME-Abhinay_Khalatkar.pdf")).toBe(false);
   });
+
+  it("treats /whats-on-my-mind as a canonical main route in both locales", () => {
+    expect(isLocalizablePath("/whats-on-my-mind")).toBe(true);
+    expect(isLocalizablePath("/en/whats-on-my-mind")).toBe(true);
+    expect(isLocalizablePath("/de/whats-on-my-mind")).toBe(true);
+    expect(toPublicLocalizedPath("/whats-on-my-mind", "en")).toBe(
+      "/en/whats-on-my-mind/"
+    );
+    expect(toPublicLocalizedPath("/whats-on-my-mind", "de")).toBe(
+      "/de/whats-on-my-mind/"
+    );
+  });
 });

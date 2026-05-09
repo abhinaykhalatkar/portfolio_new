@@ -12,6 +12,9 @@ const AboutPage = lazy(() => import("../Pages/About/About"));
 const SkillsPage = lazy(() => import("../Pages/Skills/Skills"));
 const RenderProjectsRoutes = lazy(() => import("../Pages/Projects/project-router"));
 const ContactPage = lazy(() => import("../Pages/Contact/Contact"));
+const WhatsOnMyMindPage = lazy(
+  () => import("../Pages/WhatsOnMyMind/WhatsOnMyMind")
+);
 const NotFound404 = lazy(() => import("../Pages/NotFound404/NotFound404"));
 
 function createLocalizedRoutes(locale: Locale) {
@@ -35,6 +38,10 @@ function createLocalizedRoutes(locale: Locale) {
     {
       path: `/${locale}/contact`,
       element: <ContactPage />,
+    },
+    {
+      path: `/${locale}/whats-on-my-mind`,
+      element: <WhatsOnMyMindPage />,
     },
   ];
 }
