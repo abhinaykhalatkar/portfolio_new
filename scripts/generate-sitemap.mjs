@@ -1,4 +1,4 @@
-import { writeFile } from "node:fs/promises";
+import { stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { SITEMAP_LOCALIZED_ROUTES } from "./shared/prerenderRouteManifest.mjs";
@@ -40,25 +40,48 @@ function changefreqFor(route) {
   return "monthly";
 }
 
-function buildSitemap(siteUrl, lastmod) {
+function routeToPrerenderedPath(route) {
+  if (route === "/") {
+    return path.join(BUILD_DIR, "index.html");
+  }
+  const stripped = route.replace(/^\//, "").replace(/\/$/, "");
+  return path.join(BUILD_DIR, stripped, "index.html");
+}
+
+async function lastmodForRoute(route, fallback) {
+  const candidate = routeToPrerenderedPath(route);
+  try {
+    const stats = await stat(candidate);
+    return stats.mtime.toISOString().slice(0, 10);
+  } catch {
+    return fallback;
+  }
+}
+
+async function buildSitemap(siteUrl) {
   const origin = siteUrl.replace(/\/$/, "");
-  const urls = SITEMAP_LOCALIZED_ROUTES.map((route) => {
-    const slashed = toTrailingSlashRoute(route);
-    const loc = `${origin}${slashed}`;
-    return [
-      "  <url>",
-      `    <loc>${loc}</loc>`,
-      `    <lastmod>${lastmod}</lastmod>`,
-      `    <changefreq>${changefreqFor(slashed)}</changefreq>`,
-      `    <priority>${priorityFor(slashed)}</priority>`,
-      "  </url>",
-    ].join("\n");
-  }).join("\n");
+  const fallbackLastmod = new Date().toISOString().slice(0, 10);
+
+  const urls = await Promise.all(
+    SITEMAP_LOCALIZED_ROUTES.map(async (route) => {
+      const slashed = toTrailingSlashRoute(route);
+      const loc = `${origin}${slashed}`;
+      const lastmod = await lastmodForRoute(slashed, fallbackLastmod);
+      return [
+        "  <url>",
+        `    <loc>${loc}</loc>`,
+        `    <lastmod>${lastmod}</lastmod>`,
+        `    <changefreq>${changefreqFor(slashed)}</changefreq>`,
+        `    <priority>${priorityFor(slashed)}</priority>`,
+        "  </url>",
+      ].join("\n");
+    })
+  );
 
   return [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-    urls,
+    urls.join("\n"),
     "</urlset>",
     "",
   ].join("\n");
@@ -66,12 +89,11 @@ function buildSitemap(siteUrl, lastmod) {
 
 async function generate() {
   const siteUrl = normalizeSiteUrl(process.env.VITE_SITE_URL);
-  const lastmod = new Date().toISOString().slice(0, 10);
-  const sitemap = buildSitemap(siteUrl, lastmod);
+  const sitemap = await buildSitemap(siteUrl);
   const outputPath = path.join(BUILD_DIR, "sitemap.xml");
   await writeFile(outputPath, sitemap, "utf8");
   process.stdout.write(
-    `Sitemap generated at ${outputPath} (${SITEMAP_LOCALIZED_ROUTES.length} routes, lastmod=${lastmod}).\n`
+    `Sitemap generated at ${outputPath} (${SITEMAP_LOCALIZED_ROUTES.length} routes, per-route lastmod from prerendered HTML mtime).\n`
   );
 }
 

@@ -230,6 +230,36 @@ export default function ProjectsHome() {
           </div>
 
           <div className="project-slider-stage">
+            {/* SEO: emit all slide bodies into static HTML so prerender + crawlers
+                see every case study, not just the active carousel slide.
+                The pool is visually hidden and removed from the a11y tree —
+                the active slide below is the user-facing one. */}
+            <div className="project-slide-prerender-pool" aria-hidden="true" hidden>
+              {projects.map((project) => (
+                <article key={`seo-${project.id}`} className="project-slide-seo">
+                  <h2 className="project-slide-title">{project.title}</h2>
+                  <dl className="project-slide-details">
+                    <div className="project-slide-row">
+                      <dt>{t("projects.projectSummary.architecture")}</dt>
+                      <dd>{project.architecture}</dd>
+                    </div>
+                    <div className="project-slide-row">
+                      <dt>{t("projects.projectSummary.delivery")}</dt>
+                      <dd>{project.deliveryModel}</dd>
+                    </div>
+                    <div className="project-slide-row">
+                      <dt>{t("projects.projectSummary.stack")}</dt>
+                      <dd>{project.stack}</dd>
+                    </div>
+                    <div className="project-slide-row">
+                      <dt>{t("projects.projectSummary.outcome")}</dt>
+                      <dd>{project.outcomeFocus}</dd>
+                    </div>
+                  </dl>
+                </article>
+              ))}
+            </div>
+
             {currentProject ? (
               <AnimatePresence mode="wait" custom={slideDirection}>
                 <motion.article

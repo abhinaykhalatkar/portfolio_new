@@ -53,6 +53,38 @@
             }
         }
 
+        .contact-extended {
+            margin-top: 2rem;
+            text-align: left;
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+
+            .contact-subheading {
+                font-size: 1.05rem;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                font-weight: 600;
+                margin: 1.4rem 0 0.6rem;
+                opacity: 0.78;
+            }
+
+            .contact-subbody {
+                font-size: 1rem;
+                line-height: 1.6;
+                margin: 0 0 0.8rem;
+                opacity: 0.86;
+            }
+
+            .contact-locale-note {
+                font-size: 0.92rem;
+                line-height: 1.5;
+                margin-top: 1rem;
+                opacity: 0.62;
+                font-style: italic;
+            }
+        }
+
         @media only screen and (min-width: 480px) and (max-width:1000px) {
             top: 15%;
             left: 50%;

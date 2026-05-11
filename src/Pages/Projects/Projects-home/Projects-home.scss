@@ -120,6 +120,13 @@
     overflow: hidden;
   }
 
+  // SEO-only pool: emits all case-study bodies into the prerendered HTML so
+  // crawlers see every slide. `hidden` HTML attribute removes it from layout
+  // and a11y tree; this rule belts-and-suspenders against UA quirks.
+  .project-slide-prerender-pool {
+    display: none !important;
+  }
+
   .project-slide-card {
     border-radius: 18px;
     border: 1px solid rgba($white, 0.14);

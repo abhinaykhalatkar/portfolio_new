@@ -99,6 +99,14 @@ const enMessages = {
   "contact.heading": "Contact",
   "contact.body":
     "Need help with a senior full-stack build, architecture decision, or delivery acceleration using AI-assisted workflows? Let's connect. Contact me at",
+  "contact.intro.heading": "Let's work together",
+  "contact.intro.body":
+    "I take on senior full-stack engineering, system design reviews, Craft CMS implementations, and agentic AI workflow consulting. The right fit is mid-to-late-stage projects where reliability, architecture clarity, and delivery rigor matter more than headcount.",
+  "contact.process.heading": "How I work",
+  "contact.process.body":
+    "Send a one-paragraph brief: the problem, the stack, and the constraint that matters most. I respond within 1–2 business days with either a scope or a referral. For larger engagements we usually start with a paid discovery call before any deeper commitment.",
+  "contact.locale.note":
+    "Based in Germany. Available remotely across the EU and globally.",
   "timeline.heading": "Experience & Education",
   "timeline.aria": "Experience timeline",
   "timeline.loading": "Loading timeline data...",
@@ -230,6 +238,14 @@ const deMessages: typeof enMessages = {
   "contact.heading": "Kontakt",
   "contact.body":
     "Sie brauchen Unterstützung bei einem Senior-Full-Stack-Projekt, einer Architekturentscheidung oder schnellerer Lieferung mit KI-gestützten Workflows? Lassen Sie uns sprechen. Kontaktieren Sie mich unter",
+  "contact.intro.heading": "Lassen Sie uns zusammenarbeiten",
+  "contact.intro.body":
+    "Ich übernehme Senior-Full-Stack-Engineering, Systemdesign-Reviews, Craft-CMS-Implementierungen und Beratung zu agentischen KI-Workflows. Passend sind Projekte mittlerer bis späterer Phase, bei denen Zuverlässigkeit, Architekturklarheit und Lieferdisziplin mehr zählen als bloße Personalstärke.",
+  "contact.process.heading": "Arbeitsweise",
+  "contact.process.body":
+    "Schicken Sie ein kurzes Briefing in einem Absatz: das Problem, der Stack und die wichtigste Rahmenbedingung. Ich antworte innerhalb von 1–2 Werktagen mit einem Scope oder einer Empfehlung. Bei größeren Engagements starten wir meist mit einem bezahlten Discovery-Call, bevor wir uns tiefer binden.",
+  "contact.locale.note":
+    "Standort Deutschland. Remote-Zusammenarbeit innerhalb der EU und weltweit.",
   "timeline.heading": "Erfahrung & Ausbildung",
   "timeline.aria": "Erfahrungstimeline",
   "timeline.loading": "Timeline-Daten werden geladen...",
