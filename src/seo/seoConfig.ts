@@ -8,6 +8,7 @@ export type SeoKind =
   | "skills"
   | "projects"
   | "projectSection"
+  | "resume"
   | "contact"
   | "whatsOnMyMind"
   | "notFound"
@@ -34,7 +35,7 @@ export function isProjectAliasPath(pathname: string): boolean {
 }
 
 function getIndexableRouteConfig(
-  kind: "home" | "about" | "skills" | "projects" | "contact",
+  kind: "home" | "about" | "skills" | "projects" | "resume" | "contact",
   locale: Locale
 ): RouteConfig {
   const caseStudyTitles = getCaseStudyTitles(locale);
@@ -43,85 +44,98 @@ function getIndexableRouteConfig(
     en: {
       home: {
         kind: "home" as const,
-        title:
-          "Abhinay Khalatkar — Full-Stack Engineer (React, Craft CMS)",
+        title: "Abhinay Khalatkar — Full-Stack Developer (React, Craft CMS)",
         description:
-          "Senior full-stack engineer in Germany. 10+ years building scalable React, TypeScript, and Craft CMS platforms with agentic AI workflows.",
+          "Full-stack developer in Germany. React, TypeScript, Next.js, Node.js, PHP, Craft CMS — and an autonomous bilingual AI newsroom. Projects and resume.",
         keywords: [
           "Abhinay Khalatkar",
-          "Full-Stack Engineer Germany",
+          "Full-Stack Developer Germany",
           "React Developer",
           "Craft CMS Developer",
           "TypeScript",
-          "Agentic AI",
-          "System Design",
+          "PHP Developer",
+          "AI Newsroom",
         ],
         robots: "index,follow" as const,
         ogType: "profile" as const,
       },
       about: {
         kind: "about" as const,
-        title: "About Abhinay Khalatkar — Engineering Approach & Story",
+        title: "About Abhinay Khalatkar — Full-Stack Developer Story",
         description:
-          "Senior engineer focused on system design, frontend rigor, and AI-assisted delivery. Background, current role at scribble Werbeagentur, and how I work.",
+          "Full-stack developer in Geilenkirchen, Germany — sole engineer on client platforms at scribble Werbeagentur, builder of an autonomous AI newsroom.",
         keywords: [
           "Abhinay Khalatkar",
           "About",
-          "Engineering Approach",
-          "System Design",
+          "Full-Stack Developer Geilenkirchen",
           "scribble Werbeagentur",
+          "Doordarshi Newsroom",
+          "Reliability Engineering",
         ],
         robots: "index,follow" as const,
         ogType: "website" as const,
       },
       skills: {
         kind: "skills" as const,
-        title: "Engineering Skills — TypeScript, React, Craft CMS, AI",
+        title: "Skills — React, TypeScript, PHP, Craft CMS, AI/LLM",
         description:
-          "Tech stack and methodology: TypeScript, React, Node.js, Craft CMS, Tailwind, Hetzner/AWS deploys, and agentic AI workflows with Copilot and Codex.",
+          "Full skill set: React 18, Next.js, TypeScript, Node.js, PHP 8, Craft CMS 5, Jest, Cypress, Docker, rsync deploys, and LLM orchestration with Ollama.",
         keywords: [
+          "React 18",
+          "Next.js",
           "TypeScript",
-          "React",
           "Node.js",
-          "Craft CMS",
-          "Tailwind CSS",
-          "Hetzner",
-          "AWS",
-          "Copilot",
-          "Codex",
-          "Agentic AI",
-          "TDD",
-          "System Design",
+          "PHP 8",
+          "Craft CMS 5",
+          "Jest",
+          "Cypress",
+          "LLM Orchestration",
+          "Ollama",
         ],
         robots: "index,follow" as const,
         ogType: "website" as const,
       },
       projects: {
         kind: "projects" as const,
-        title: "Engineering Case Studies — Commerce, CMS, Deploy Systems",
+        title: "Case Studies — AI Newsroom, E-Commerce, Deploy Tools",
         description:
-          "Selected full-stack case studies: enterprise commerce on Craft + React, deployment orchestration with rollback, modular CMS, and reusable boilerplates.",
+          "Four production systems: an autonomous bilingual AI newsroom, an e-commerce platform grown ~6x, a deployment console, a zero-data-loss migration.",
         keywords: [
           "Engineering Case Studies",
           "Full-Stack Projects",
           ...caseStudyTitles,
-          "React Architecture",
-          "GraphQL Proxy",
-          "Deployment Orchestration",
+          "Technical SEO",
+          "CMS Migration",
+        ],
+        robots: "index,follow" as const,
+        ogType: "website" as const,
+      },
+      resume: {
+        kind: "resume" as const,
+        title: "Resume — Abhinay Khalatkar, Full-Stack Developer",
+        description:
+          "Resume of Abhinay Khalatkar, full-stack developer in Germany: React, TypeScript, PHP, Craft CMS, and AI/LLM engineering. View or download the PDF.",
+        keywords: [
+          "Abhinay Khalatkar Resume",
+          "Full-Stack Developer CV",
+          "React Developer Resume",
+          "Craft CMS",
+          "PHP",
+          "Germany",
         ],
         robots: "index,follow" as const,
         ogType: "website" as const,
       },
       contact: {
         kind: "contact" as const,
-        title: "Contact Abhinay Khalatkar — Senior Engineering Inquiries",
+        title: "Contact Abhinay Khalatkar — Full-Stack Developer",
         description:
-          "Available for senior full-stack engineering, system design leadership, and Craft CMS / AI workflow consulting. Reply within 1–2 business days.",
+          "Open to Full-Stack, Frontend, and Software Engineer roles in NRW and remote Germany. Reach Abhinay Khalatkar directly by email, LinkedIn, or GitHub.",
         keywords: [
           "Contact Abhinay Khalatkar",
-          "Senior Full-Stack Engineering",
-          "Craft CMS Consulting",
-          "AI Workflow Consulting",
+          "Full-Stack Developer NRW",
+          "Frontend Engineer Germany",
+          "Software Engineer remote Germany",
         ],
         robots: "index,follow" as const,
         ogType: "website" as const,
@@ -130,85 +144,97 @@ function getIndexableRouteConfig(
     de: {
       home: {
         kind: "home" as const,
-        title:
-          "Abhinay Khalatkar — Full-Stack Engineer (React, Craft CMS)",
+        title: "Abhinay Khalatkar — Full-Stack-Entwickler (React, PHP)",
         description:
-          "Senior Full-Stack Engineer in Deutschland. 10+ Jahre skalierbare React-, TypeScript- und Craft-CMS-Plattformen mit agentischen KI-Workflows.",
+          "Full-Stack-Entwickler in Deutschland. React, TypeScript, Node.js, PHP, Craft CMS — und ein autonomer zweisprachiger KI-Newsroom. Projekte & Lebenslauf.",
         keywords: [
           "Abhinay Khalatkar",
-          "Full-Stack Engineer Deutschland",
+          "Full-Stack-Entwickler Deutschland",
           "React Entwickler",
           "Craft CMS Entwickler",
           "TypeScript",
-          "Agentische KI",
-          "Systemdesign",
+          "PHP",
+          "KI-Newsroom",
         ],
         robots: "index,follow" as const,
         ogType: "profile" as const,
       },
       about: {
         kind: "about" as const,
-        title: "Über Abhinay Khalatkar — Engineering-Ansatz & Werdegang",
+        title: "Über Abhinay Khalatkar — Full-Stack-Entwickler",
         description:
-          "Senior Engineer mit Fokus auf Systemdesign, Frontend-Qualität und KI-gestützte Lieferung. Werdegang, aktuelle Rolle bei scribble Werbeagentur, Arbeitsweise.",
+          "Full-Stack-Entwickler in Geilenkirchen — alleiniger Entwickler auf Kundenprojekten bei scribble Werbeagentur und Betreiber eines autonomen KI-Newsrooms.",
         keywords: [
           "Abhinay Khalatkar",
           "Über mich",
-          "Engineering-Ansatz",
-          "Systemdesign",
+          "Full-Stack-Entwickler Geilenkirchen",
           "scribble Werbeagentur",
+          "Doordarshi Newsroom",
         ],
         robots: "index,follow" as const,
         ogType: "website" as const,
       },
       skills: {
         kind: "skills" as const,
-        title: "Engineering-Skills — TypeScript, React, Craft CMS, KI",
+        title: "Skills — React, TypeScript, PHP, Craft CMS, KI/LLM",
         description:
-          "Stack und Methodik: TypeScript, React, Node.js, Craft CMS, Tailwind, Hetzner/AWS-Deploys, agentische KI-Workflows mit Copilot und Codex.",
+          "Komplettes Skill-Set: React 18, Next.js, TypeScript, Node.js, PHP 8, Craft CMS 5, Jest, Cypress, Docker, rsync-Deploys und LLM-Orchestrierung mit Ollama.",
         keywords: [
+          "React 18",
+          "Next.js",
           "TypeScript",
-          "React",
           "Node.js",
-          "Craft CMS",
-          "Tailwind CSS",
-          "Hetzner",
-          "AWS",
-          "Copilot",
-          "Codex",
-          "Agentische KI",
-          "TDD",
-          "Systemdesign",
+          "PHP 8",
+          "Craft CMS 5",
+          "Jest",
+          "Cypress",
+          "LLM-Orchestrierung",
+          "Ollama",
         ],
         robots: "index,follow" as const,
         ogType: "website" as const,
       },
       projects: {
         kind: "projects" as const,
-        title: "Projekt-Highlights — Commerce, CMS, Deployment-Systeme",
+        title: "Projekte — KI-Newsroom, E-Commerce, Deploy-Systeme",
         description:
-          "Ausgewählte Full-Stack-Projekte: Enterprise-Commerce auf Craft + React, sichere Deployment-Orchestrierung mit Rollback, modulares CMS, Boilerplates.",
+          "Vier Produktionssysteme: autonomer zweisprachiger KI-Newsroom, E-Commerce-Plattform mit ~6x Wachstum, Deployment-Konsole, CMS-Migration ohne Datenverlust.",
         keywords: [
           "Projekt-Highlights",
           "Full-Stack Projekte",
           ...caseStudyTitles,
-          "React-Architektur",
-          "GraphQL-Proxy",
-          "Deployment-Orchestrierung",
+          "Technisches SEO",
+          "CMS-Migration",
+        ],
+        robots: "index,follow" as const,
+        ogType: "website" as const,
+      },
+      resume: {
+        kind: "resume" as const,
+        title: "Lebenslauf — Abhinay Khalatkar, Full-Stack-Entwickler",
+        description:
+          "Lebenslauf von Abhinay Khalatkar: Full-Stack-Entwickler in Deutschland — React, TypeScript, PHP, Craft CMS, KI/LLM-Engineering. Als PDF verfügbar.",
+        keywords: [
+          "Abhinay Khalatkar Lebenslauf",
+          "Full-Stack-Entwickler CV",
+          "React Entwickler Lebenslauf",
+          "Craft CMS",
+          "PHP",
+          "Deutschland",
         ],
         robots: "index,follow" as const,
         ogType: "website" as const,
       },
       contact: {
         kind: "contact" as const,
-        title: "Kontakt — Abhinay Khalatkar | Senior-Engineering",
+        title: "Kontakt — Abhinay Khalatkar, Full-Stack-Entwickler",
         description:
-          "Verfügbar für Senior Full-Stack Engineering, Systemdesign-Leitung und Craft-CMS / KI-Workflow-Beratung. Antwort in 1–2 Werktagen.",
+          "Offen für Rollen als Full-Stack-, Frontend- und Software-Engineer in NRW sowie remote in Deutschland. Erreichbar per E-Mail, LinkedIn oder GitHub.",
         keywords: [
           "Kontakt Abhinay Khalatkar",
-          "Senior Full-Stack Engineering",
-          "Craft-CMS-Beratung",
-          "KI-Workflow-Beratung",
+          "Full-Stack-Entwickler NRW",
+          "Frontend Engineer Deutschland",
+          "Software Engineer remote",
         ],
         robots: "index,follow" as const,
         ogType: "website" as const,
@@ -229,11 +255,11 @@ function getNonIndexableRouteConfig(
         kind: "projectSection" as const,
         title: "Project Section | Abhinay Khalatkar",
         description:
-          "Deep project section featuring anonymized architecture implementation details across frontend-backend integration and deployment reliability. Crawlable for navigation but excluded from indexing.",
+          "Project catalog section showing public GitHub repositories in a browsable carousel. Crawlable for navigation but excluded from indexing.",
         keywords: [
           "Projects",
           "Portfolio Section",
-          "Architecture Snapshot",
+          "GitHub Repository Catalog",
           "Engineering Delivery",
         ],
         robots: "noindex,follow" as const,
@@ -265,13 +291,13 @@ function getNonIndexableRouteConfig(
       },
       generic: {
         kind: "generic" as const,
-        title: "Abhinay Khalatkar | Senior Full-Stack Software Developer",
+        title: "Abhinay Khalatkar | Full-Stack Software Developer",
         description:
-          "Portfolio of Abhinay Khalatkar, senior full-stack engineer specializing in scalable systems, modern web architecture, and AI-assisted engineering workflows.",
+          "Portfolio of Abhinay Khalatkar, full-stack developer building React, TypeScript, PHP, and Craft CMS platforms with AI-assisted engineering workflows.",
         keywords: [
           "Abhinay Khalatkar",
-          "Senior Developer",
-          "Full Stack Portfolio",
+          "Full-Stack Developer",
+          "Portfolio",
         ],
         robots: "noindex,follow" as const,
         ogType: "website" as const,
@@ -318,13 +344,13 @@ function getNonIndexableRouteConfig(
       },
       generic: {
         kind: "generic" as const,
-        title: "Abhinay Khalatkar | Senior Full-Stack Softwareentwickler",
+        title: "Abhinay Khalatkar | Full-Stack-Softwareentwickler",
         description:
-          "Portfolio von Abhinay Khalatkar, Senior Full-Stack Engineer mit Fokus auf skalierbare Systeme, moderne Web-Architektur und KI-gestützte Engineering-Workflows.",
+          "Portfolio von Abhinay Khalatkar, Full-Stack-Entwickler für React-, TypeScript-, PHP- und Craft-CMS-Plattformen mit KI-gestützten Engineering-Workflows.",
         keywords: [
           "Abhinay Khalatkar",
-          "Senior Entwickler",
-          "Full-Stack Portfolio",
+          "Full-Stack-Entwickler",
+          "Portfolio",
         ],
         robots: "noindex,follow" as const,
         ogType: "website" as const,
@@ -360,6 +386,8 @@ export function resolveSeoConfig(
       return { ...getIndexableRouteConfig("skills", locale), canonicalPath };
     case "/projects":
       return { ...getIndexableRouteConfig("projects", locale), canonicalPath };
+    case "/resume":
+      return { ...getIndexableRouteConfig("resume", locale), canonicalPath };
     case "/contact":
       return { ...getIndexableRouteConfig("contact", locale), canonicalPath };
     case "/whats-on-my-mind":

@@ -1,6 +1,43 @@
 {
   "items": [
     {
+      "id": "exp-doordarshi-newsroom",
+      "type": "experience",
+      "title": {
+        "en": "Doordarshi Newsroom — Personal Project, in Production",
+        "de": "Doordarshi Newsroom — Persönliches Projekt, in Produktion"
+      },
+      "organization": "Doordarshi Newsroom (personal project)",
+      "start": "2025-01",
+      "end": "present",
+      "location": {
+        "en": "Self-hosted, Germany",
+        "de": "Selbst gehostet, Deutschland"
+      },
+      "description": {
+        "en": "Autonomous English/German AI newsroom in production: an eight-stage nightly pipeline discovers, verifies, writes, and translates ~100 verified articles a month at €5–8/month total operating cost — and nothing publishes without a human pressing the button.",
+        "de": "Autonomer englisch-deutscher KI-Newsroom in Produktion: Eine achtstufige nächtliche Pipeline entdeckt, verifiziert, schreibt und übersetzt ~100 verifizierte Artikel im Monat bei 5–8 € Gesamtbetriebskosten — und nichts erscheint, ohne dass ein Mensch den Knopf drückt."
+      },
+      "link": "https://doordarshi.de/",
+      "skills": [
+        "Python",
+        "Ollama",
+        {
+          "en": "LLM Orchestration & Routing",
+          "de": "LLM-Orchestrierung & -Routing"
+        },
+        {
+          "en": "Multi-Agent Pipelines",
+          "de": "Multi-Agent-Pipelines"
+        },
+        "pytest",
+        {
+          "en": "Technical SEO",
+          "de": "Technisches SEO"
+        }
+      ]
+    },
+    {
       "id": "exp-scribble-associate-software-developer",
       "type": "experience",
       "title": {
@@ -15,10 +52,10 @@
         "de": "Geilenkirchen, Nordrhein-Westfalen, Deutschland (Hybrid)"
       },
       "description": {
-        "en": "Architected and maintained reusable React and Craft CMS boilerplates with a streamlined Git workflow. Engineered high-performance Next.js applications with optimized SSR and CSR, integrated Craft CMS APIs, and led end-to-end delivery from requirements to deployment. Accelerated implementation with Copilot and Codex inside test-driven delivery workflows.",
-        "de": "Konzipierte und pflegte wiederverwendbare React- und Craft-CMS-Boilerplates mit einem schlanken Git-Workflow. Entwickelte performante Next.js-Anwendungen mit optimiertem SSR und CSR, integrierte Craft-CMS-APIs und verantwortete die End-to-End-Auslieferung von der Anforderungsaufnahme bis zum Deployment. Beschleunigte die Umsetzung mit Copilot und Codex innerhalb testgetriebener Delivery-Workflows."
+        "en": "Sole engineer per client project from UI design handoff to production: architecture, React/TypeScript and Craft CMS implementation, database design, security hardening, technical SEO, deployment, and maintenance. Recent deliveries include a bilingual hybrid headless e-commerce platform whose technical SEO rebuild grew organic traffic ~6x, and a live Craft CMS 4→5 migration with zero data loss.",
+        "de": "Alleiniger Entwickler pro Kundenprojekt von der UI-Designübergabe bis zur Produktion: Architektur, React/TypeScript- und Craft-CMS-Implementierung, Datenbankdesign, Sicherheitshärtung, technisches SEO, Deployment und Wartung. Zuletzt u. a. eine zweisprachige Hybrid-Headless-E-Commerce-Plattform, deren technischer SEO-Rebuild den organischen Traffic ~6x steigerte, und eine Live-Migration von Craft CMS 4 auf 5 ohne Datenverlust."
       },
-      "link": "https://www.linkedin.com/in/abhinay-khalatkar/",
+      "link": "https://www.linkedin.com/in/abhinay-khalatkar",
       "skills": [
         "React.js",
         "Next.js",
@@ -32,8 +69,8 @@
           "de": "Softwarearchitektur"
         },
         {
-          "en": "Agentic Workflows",
-          "de": "Agentische Workflows"
+          "en": "Technical SEO",
+          "de": "Technisches SEO"
         },
         "GitHub Copilot",
         "OpenAI Codex",
@@ -47,7 +84,7 @@
         "en": "Software Developer",
         "de": "Software Developer"
       },
-      "organization": "wob AG (Work Study)",
+      "organization": "wob AG",
       "start": "2022-03",
       "end": "2023-09",
       "location": {
@@ -55,10 +92,10 @@
         "de": "Viernheim, Hessen, Deutschland (Hybrid)"
       },
       "description": {
-        "en": "Built interactive React components and optimized multipage architecture for performance and server efficiency. Created structured responsive pages with Bootstrap-based styling systems, integrated PIMCORE CMS endpoints, and improved customer-journey workflows in Salesforce-based operations.",
-        "de": "Entwickelte interaktive React-Komponenten und optimierte eine Multipage-Architektur für Performance und Servereffizienz. Erstellte strukturierte responsive Seiten mit Bootstrap-basierten Styling-Systemen, integrierte PIMCORE-CMS-Endpunkte und verbesserte Customer-Journey-Workflows in Salesforce-basierten Prozessen."
+        "en": "Built React components and performance-optimized multipage architecture for enterprise B2B clients. Implemented responsive, cross-browser frontends, integrated PIMCORE CMS endpoints, and managed Salesforce customer-journey workflows for marketing campaigns.",
+        "de": "Entwickelte React-Komponenten und eine performanceoptimierte Multipage-Architektur für Enterprise-B2B-Kunden. Setzte responsive, browserübergreifende Frontends um, integrierte PIMCORE-CMS-Endpunkte und betreute Salesforce-Customer-Journey-Workflows für Marketingkampagnen."
       },
-      "link": "https://www.linkedin.com/in/abhinay-khalatkar/",
+      "link": "https://www.linkedin.com/in/abhinay-khalatkar",
       "skills": [
         "React.js",
         "TypeScript",
@@ -71,6 +108,7 @@
         "PHP",
         "Docker",
         "PIMCORE CMS",
+        "Salesforce",
         {
           "en": "Performance Optimization",
           "de": "Performance-Optimierung"
@@ -92,10 +130,10 @@
         "de": "Nagpur, Maharashtra, Indien (vor Ort)"
       },
       "description": {
-        "en": "Implemented a client shop system, developed a React SPA to improve loading performance, integrated Firebase-backed dynamic data instead of static datasets, and implemented RESTful client-server communication.",
-        "de": "Implementierte ein Shop-System für einen Kunden, entwickelte eine React-SPA zur Verbesserung der Ladeperformance, integrierte Firebase-gestützte dynamische Daten anstelle statischer Datensätze und setzte eine REST-basierte Client-Server-Kommunikation um."
+        "en": "Rebuilt a client website as a React single-page application, improving load performance; replaced static content with Firebase-backed dynamic data over REST APIs and implemented an e-commerce shop system.",
+        "de": "Baute eine Kundenwebsite als React-Single-Page-Application neu und verbesserte die Ladeperformance; ersetzte statische Inhalte durch Firebase-gestützte dynamische Daten über REST-APIs und implementierte ein E-Commerce-Shopsystem."
       },
-      "link": "https://www.linkedin.com/in/abhinay-khalatkar/",
+      "link": "https://www.linkedin.com/in/abhinay-khalatkar",
       "skills": [
         {
           "en": "Front-End Development",
@@ -107,8 +145,6 @@
         "REST APIs",
         "HTML5",
         "CSS",
-        "MUI",
-        "Docker",
         "Firebase"
       ]
     },
@@ -116,8 +152,8 @@
       "id": "edu-srh-masters",
       "type": "education",
       "title": {
-        "en": "Masters in Applied Computer Science",
-        "de": "Master in Applied Computer Science"
+        "en": "M.Sc. Applied Computer Science",
+        "de": "M.Sc. Applied Computer Science"
       },
       "organization": "SRH Hochschule Heidelberg",
       "start": "2021-09",
@@ -127,8 +163,8 @@
         "de": "Heidelberg, Deutschland"
       },
       "description": {
-        "en": "Focused on advanced databases, software architecture, cybersecurity, and UX engineering with practical projects in modern component-based frontend systems and React.",
-        "de": "Schwerpunkt auf fortgeschrittenen Datenbanken, Softwarearchitektur, Cybersecurity und UX Engineering mit Praxisprojekten in modernen komponentenbasierten Frontend-Systemen und React."
+        "en": "Focus on software architecture, advanced databases, cybersecurity, and UX engineering, with practical projects in modern component-based frontend systems and React.",
+        "de": "Schwerpunkt auf Softwarearchitektur, fortgeschrittenen Datenbanken, Cybersecurity und UX Engineering, mit Praxisprojekten in modernen komponentenbasierten Frontend-Systemen und React."
       },
       "skills": [
         {
@@ -161,10 +197,10 @@
         "de": "Nagpur, Indien"
       },
       "description": {
-        "en": "Studied Linux OS, data structures, software testing, computer networks, SQL/PLSQL, Java, C++, and web development fundamentals.",
-        "de": "Beschäftigte mich mit Linux, Datenstrukturen, Softwaretests, Rechnernetzen, SQL/PLSQL, Java, C++ und Grundlagen der Webentwicklung."
+        "en": "Studied data structures, software testing, SQL/PLSQL, computer networks, Java, C++, and web development fundamentals.",
+        "de": "Beschäftigte mich mit Datenstrukturen, Softwaretests, SQL/PLSQL, Rechnernetzen, Java, C++ und Grundlagen der Webentwicklung."
       },
-      "link": "https://www.linkedin.com/in/abhinay-khalatkar/",
+      "link": "https://www.linkedin.com/in/abhinay-khalatkar",
       "skills": [
         {
           "en": "Data Structures",

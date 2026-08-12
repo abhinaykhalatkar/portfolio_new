@@ -86,6 +86,16 @@ export default function HomePage() {
           text={t("home.heading.line2")}
         />
         <motion.p
+          className="home-tagline"
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          custom={0.4}
+          variants={contentVariants}
+        >
+          {t("home.tagline")}
+        </motion.p>
+        <motion.p
           className="heading-para"
           initial="hidden"
           animate="visible"
@@ -94,6 +104,37 @@ export default function HomePage() {
           variants={contentVariants}
         >
           {t("home.intro")}
+        </motion.p>
+        <motion.div
+          className="home-stats"
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          custom={0.6}
+          variants={contentVariants}
+        >
+          <div className="home-stat">
+            <strong className="home-stat-value">{t("home.stats.1.value")}</strong>
+            <span className="home-stat-label">{t("home.stats.1.label")}</span>
+          </div>
+          <div className="home-stat">
+            <strong className="home-stat-value">{t("home.stats.2.value")}</strong>
+            <span className="home-stat-label">{t("home.stats.2.label")}</span>
+          </div>
+          <div className="home-stat">
+            <strong className="home-stat-value">{t("home.stats.3.value")}</strong>
+            <span className="home-stat-label">{t("home.stats.3.label")}</span>
+          </div>
+        </motion.div>
+        <motion.p
+          className="home-teaser"
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          custom={0.7}
+          variants={contentVariants}
+        >
+          {t("home.aboutTeaser")}
         </motion.p>
         {screenSize < 480 ? null : (
           <motion.div

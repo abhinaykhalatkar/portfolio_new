@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" font-family="Helvetica, Arial, sans-serif">
+  <title>Live CMS migration — runbook timeline</title>
+  <desc>Timeline diagram of an in-place Craft CMS 4 to 5 migration of a live, order-taking commerce database for an equipment rental and sales company: 153 database migrations rehearsed on a production replica, then a staged go-live runbook with a rollback point at every stage, ending with zero data loss.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5c6470"/>
+    </marker>
+    <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#c0552b"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="640" fill="#fbfaf8"/>
+  <text x="60" y="58" font-size="26" font-weight="700" fill="#1d232b">Live CMS migration — staged go-live runbook</text>
+  <text x="60" y="86" font-size="15" fill="#5c6470">Craft CMS 4 → 5, in place, on a live order-taking commerce database · 153 migrations · zero data loss</text>
+
+  <!-- Phase 1: rehearsal -->
+  <g font-size="15" fill="#1d232b">
+    <rect x="60" y="140" width="1080" height="120" rx="12" fill="#f2f0ec" stroke="#c9d2dc" stroke-width="1.5"/>
+    <text x="90" y="176" font-size="17" font-weight="700">Phase 1 — Rehearsal on a production replica</text>
+    <text x="90" y="202" font-size="13.5" fill="#5c6470">All 153 database migrations executed and timed against a full copy of production. Failures found here, not on go-live night.</text>
+    <text x="90" y="226" font-size="13.5" fill="#5c6470">Result: a step-by-step runbook with expected duration and a verified rollback procedure per stage.</text>
+  </g>
+
+  <path d="M 600 260 L 600 300" fill="none" stroke="#5c6470" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Phase 2: staged go-live timeline -->
+  <g font-size="14" fill="#1d232b" text-anchor="middle">
+    <text x="90" y="330" font-size="17" font-weight="700" text-anchor="start">Phase 2 — Staged go-live</text>
+
+    <line x1="90" y1="420" x2="1110" y2="420" stroke="#5c6470" stroke-width="2"/>
+
+    <g>
+      <circle cx="170" cy="420" r="9" fill="#2a9d8f"/>
+      <text x="170" y="390" font-weight="600">Freeze</text>
+      <text x="170" y="454" font-size="11.5" fill="#5c6470">orders paused,</text>
+      <text x="170" y="470" font-size="11.5" fill="#5c6470">backup taken</text>
+    </g>
+    <g>
+      <circle cx="400" cy="420" r="9" fill="#2a9d8f"/>
+      <text x="400" y="390" font-weight="600">Migrate</text>
+      <text x="400" y="454" font-size="11.5" fill="#5c6470">153 migrations,</text>
+      <text x="400" y="470" font-size="11.5" fill="#5c6470">rehearsed order</text>
+    </g>
+    <g>
+      <circle cx="630" cy="420" r="9" fill="#2a9d8f"/>
+      <text x="630" y="390" font-weight="600">Verify</text>
+      <text x="630" y="454" font-size="11.5" fill="#5c6470">orders, content,</text>
+      <text x="630" y="470" font-size="11.5" fill="#5c6470">config integrity</text>
+    </g>
+    <g>
+      <circle cx="860" cy="420" r="9" fill="#2a9d8f"/>
+      <text x="860" y="390" font-weight="600">Reopen</text>
+      <text x="860" y="454" font-size="11.5" fill="#5c6470">live traffic on</text>
+      <text x="860" y="470" font-size="11.5" fill="#5c6470">Craft CMS 5</text>
+    </g>
+    <g>
+      <circle cx="1060" cy="420" r="11" fill="#eaf6f4" stroke="#2a9d8f" stroke-width="2.5"/>
+      <text x="1060" y="390" font-weight="700" fill="#19776c">Zero data loss</text>
+      <text x="1060" y="454" font-size="11.5" fill="#19776c">every order and</text>
+      <text x="1060" y="470" font-size="11.5" fill="#19776c">record intact</text>
+    </g>
+
+    <!-- rollback points -->
+    <g font-size="11.5" fill="#c0552b">
+      <path d="M 170 500 L 170 436" fill="none" stroke="#c0552b" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrowRed)"/>
+      <path d="M 400 500 L 400 436" fill="none" stroke="#c0552b" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrowRed)"/>
+      <path d="M 630 500 L 630 436" fill="none" stroke="#c0552b" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrowRed)"/>
+      <path d="M 860 500 L 860 436" fill="none" stroke="#c0552b" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrowRed)"/>
+      <text x="515" y="530" text-anchor="middle" font-size="13" font-weight="600">Rollback point at every stage — restore and reopen on Craft 4 without losing an order</text>
+    </g>
+  </g>
+
+  <text x="60" y="590" font-size="13.5" fill="#5c6470">Platform context: German-language rental &amp; commerce platform · 30-module page builder · 47 entry types · 103 fields in version-controlled Project Config YAML</text>
+</svg>

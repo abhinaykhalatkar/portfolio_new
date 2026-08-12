@@ -9,6 +9,7 @@ export const MAIN_BASE_ROUTES = [
   "/about",
   "/skills",
   "/projects",
+  "/resume",
   "/contact",
   "/whats-on-my-mind",
 ] as const;

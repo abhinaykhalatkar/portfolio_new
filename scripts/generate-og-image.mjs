@@ -131,7 +131,7 @@ const html = `<!doctype html>
     <div class="frame">
       <div class="top-row">
         <div class="kicker">
-          <span class="accent-dot"></span>Senior Engineering · DE
+          <span class="accent-dot"></span>Full-Stack Development · DE
         </div>
         <div class="domain">abhinaykhalatkar.de</div>
       </div>
@@ -140,9 +140,9 @@ const html = `<!doctype html>
         <div class="rule"></div>
         <h1>Abhinay <span class="accent">Khalatkar</span></h1>
         <p class="subtitle">
-          <strong>Senior Full-Stack Engineer.</strong>
-          10+ years building scalable React, TypeScript, and Craft CMS
-          platforms with agentic AI workflows.
+          <strong>Full-Stack Developer.</strong>
+          React · Next.js · TypeScript · Node.js · PHP · Craft CMS —
+          and an autonomous bilingual AI newsroom.
         </p>
       </div>
 
@@ -150,8 +150,9 @@ const html = `<!doctype html>
         <div class="stack">
           <span>React</span>
           <span>TypeScript</span>
+          <span>PHP</span>
           <span>Craft CMS</span>
-          <span>Agentic AI</span>
+          <span>AI/LLM</span>
         </div>
         <div class="corner-tag">portfolio</div>
       </div>

@@ -44,4 +44,9 @@ describe("navsData", () => {
       navsData.length - 2
     );
   });
+
+  it("keeps /projects at index 3 (hardcoded gitIcon check in ChildApp1) and /resume right after it", () => {
+    expect(navsData[3].Address).toBe("/projects");
+    expect(navsData[4].Address).toBe("/resume");
+  });
 });

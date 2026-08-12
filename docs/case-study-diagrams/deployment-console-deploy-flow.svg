@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" font-family="Helvetica, Arial, sans-serif">
+  <title>Security-first deployment console — deploy flow</title>
+  <desc>Deploy flow diagram of a framework-free PHP 8 deployment console: a build streams live over Server-Sent Events into an in-browser terminal, an isolated temp release is built, checks run, and only on success is the release promoted to production via rsync; a rollback path returns to the previous release. Auth is hardened with bcrypt, per-IP rate limiting, and 90-second action-bound run tokens.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5c6470"/>
+    </marker>
+    <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#c0552b"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="640" fill="#fbfaf8"/>
+  <text x="60" y="58" font-size="26" font-weight="700" fill="#1d232b">Security-first deployment console — deploy flow</text>
+  <text x="60" y="86" font-size="15" fill="#5c6470">~7,700 LOC framework-free PHP 8 + vanilla JS · 1 dependency (symfony/yaml) · new projects deploy-ready in one day</text>
+
+  <g font-size="15" fill="#1d232b" text-anchor="middle">
+    <!-- Trigger / auth -->
+    <rect x="60" y="150" width="220" height="130" rx="10" fill="#fdf6e6" stroke="#d9a919" stroke-width="1.5"/>
+    <text x="170" y="185" font-weight="700" fill="#8a6d10">Authenticated trigger</text>
+    <text x="170" y="210" font-size="12" fill="#8a6d10">bcrypt auth · per-IP rate limit</text>
+    <text x="170" y="228" font-size="12" fill="#8a6d10">(5 fails/60s → 5-min lockout)</text>
+    <text x="170" y="246" font-size="12" fill="#8a6d10">90-second run tokens</text>
+    <text x="170" y="264" font-size="12" fill="#8a6d10">'self'-only CSP, zero CDN</text>
+
+    <!-- Build -->
+    <rect x="340" y="150" width="200" height="130" rx="10" fill="#ffffff" stroke="#c9d2dc" stroke-width="1.5"/>
+    <text x="440" y="192" font-weight="600">Build</text>
+    <text x="440" y="216" font-size="12" fill="#5c6470">CLI runner only —</text>
+    <text x="440" y="234" font-size="12" fill="#5c6470">refuses non-CLI SAPI</text>
+    <text x="440" y="252" font-size="12" fill="#5c6470">(web/CLI privilege split)</text>
+
+    <!-- Temp release -->
+    <rect x="600" y="150" width="200" height="130" rx="10" fill="#ffffff" stroke="#c9d2dc" stroke-width="1.5"/>
+    <text x="700" y="192" font-weight="600">Temp release</text>
+    <text x="700" y="216" font-size="12" fill="#5c6470">isolated build directory,</text>
+    <text x="700" y="234" font-size="12" fill="#5c6470">production-only content</text>
+    <text x="700" y="252" font-size="12" fill="#5c6470">protected automatically</text>
+
+    <!-- Checks -->
+    <rect x="860" y="150" width="140" height="130" rx="10" fill="#ffffff" stroke="#c9d2dc" stroke-width="1.5"/>
+    <text x="930" y="200" font-weight="600">Checks</text>
+    <text x="930" y="224" font-size="12" fill="#5c6470">success</text>
+    <text x="930" y="242" font-size="12" fill="#5c6470">required</text>
+
+    <!-- Production -->
+    <rect x="1040" y="150" width="110" height="130" rx="10" fill="#eaf6f4" stroke="#2a9d8f" stroke-width="2"/>
+    <text x="1095" y="200" font-weight="700" fill="#19776c">Live</text>
+    <text x="1095" y="224" font-size="12" fill="#19776c">rsync</text>
+    <text x="1095" y="242" font-size="12" fill="#19776c">promotion</text>
+  </g>
+
+  <line x1="280" y1="215" x2="340" y2="215" stroke="#5c6470" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="540" y1="215" x2="600" y2="215" stroke="#5c6470" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="800" y1="215" x2="860" y2="215" stroke="#5c6470" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="1000" y1="215" x2="1040" y2="215" stroke="#5c6470" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1020" y="305" font-size="12" fill="#5c6470" text-anchor="middle">promoted only on success</text>
+
+  <!-- SSE stream -->
+  <g>
+    <rect x="340" y="340" width="460" height="90" rx="10" fill="#f2f0ec" stroke="#c9d2dc" stroke-width="1.5"/>
+    <text x="570" y="376" font-size="14.5" font-weight="600" fill="#1d232b" text-anchor="middle">Live build output — Server-Sent Events</text>
+    <text x="570" y="400" font-size="12.5" fill="#5c6470" text-anchor="middle">streamed into an in-browser xterm.js terminal, token-bound per action</text>
+    <path d="M 440 280 L 440 340" fill="none" stroke="#5c6470" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+    <path d="M 700 280 L 700 340" fill="none" stroke="#5c6470" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Rollback path -->
+  <g>
+    <path d="M 1095 280 C 1095 500 700 500 700 435" fill="none" stroke="#c0552b" stroke-width="1.8" stroke-dasharray="7 5"/>
+    <path d="M 700 500 C 700 500 560 500 470 500 L 440 500" fill="none" stroke="#c0552b" stroke-width="1.8" stroke-dasharray="7 5" marker-end="url(#arrowRed)"/>
+    <text x="770" y="520" font-size="13.5" font-weight="600" fill="#c0552b">Rollback path — previous release restored, fast and testable</text>
+  </g>
+
+  <text x="60" y="590" font-size="13.5" fill="#5c6470">Now part of the standard workflow on every agency project, paired with a reusable React + Craft CMS boilerplate.</text>
+</svg>

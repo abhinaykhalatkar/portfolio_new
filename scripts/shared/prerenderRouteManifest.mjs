@@ -1,5 +1,5 @@
 const LOCALES = ["en", "de"];
-const CORE_ROUTE_SUFFIXES = ["/", "/about/", "/skills/", "/projects/", "/contact/", "/whats-on-my-mind/"];
+const CORE_ROUTE_SUFFIXES = ["/", "/about/", "/skills/", "/projects/", "/resume/", "/contact/", "/whats-on-my-mind/"];
 // Routes that are prerendered + crawlable but should NOT appear in sitemap.xml
 // (they carry a `noindex,follow` robots policy in seoConfig.ts).
 const NOINDEX_CORE_ROUTE_SUFFIXES = new Set(["/whats-on-my-mind/"]);

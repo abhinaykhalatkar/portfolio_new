@@ -12,6 +12,7 @@ const HomePage = lazy(() => import("../Pages/Home/Home"));
 const AboutPage = lazy(() => import("../Pages/About/About"));
 const SkillsPage = lazy(() => import("../Pages/Skills/Skills"));
 const RenderProjectsRoutes = lazy(() => import("../Pages/Projects/project-router"));
+const ResumePage = lazy(() => import("../Pages/Resume/Resume"));
 const ContactPage = lazy(() => import("../Pages/Contact/Contact"));
 const WhatsOnMyMindPage = lazy(
   () => import("../Pages/WhatsOnMyMind/WhatsOnMyMind")
@@ -44,6 +45,10 @@ function createLocalizedRoutes(locale: Locale) {
     {
       path: `/${locale}/projects/*`,
       element: <RenderProjectsRoutes />,
+    },
+    {
+      path: `/${locale}/resume`,
+      element: <ResumePage />,
     },
     {
       path: `/${locale}/contact`,

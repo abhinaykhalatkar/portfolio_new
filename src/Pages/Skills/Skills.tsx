@@ -78,7 +78,7 @@ export default function SkillsPage() {
           {t("skills.linkedin.prefix")}{" "}
           <a
             className="linkedInLink"
-            href="https://www.linkedin.com/in/abhinay-khalatkar/"
+            href="https://www.linkedin.com/in/abhinay-khalatkar"
             target="_blank"
             rel="noreferrer noopener"
           >

@@ -40,6 +40,14 @@ describe("locale route helpers", () => {
     expect(isLocalizablePath("/RESUME-Abhinay_Khalatkar.pdf")).toBe(false);
   });
 
+  it("treats /resume as a canonical main route in both locales", () => {
+    expect(isLocalizablePath("/resume")).toBe(true);
+    expect(isLocalizablePath("/en/resume")).toBe(true);
+    expect(isLocalizablePath("/de/resume")).toBe(true);
+    expect(toPublicLocalizedPath("/resume", "en")).toBe("/en/resume/");
+    expect(toPublicLocalizedPath("/resume", "de")).toBe("/de/resume/");
+  });
+
   it("treats /whats-on-my-mind as a canonical main route in both locales", () => {
     expect(isLocalizablePath("/whats-on-my-mind")).toBe(true);
     expect(isLocalizablePath("/en/whats-on-my-mind")).toBe(true);

@@ -1,51 +1,62 @@
 Name: Abhinay Khalatkar
 Canonical: https://abhinaykhalatkar.de/en/
-Current Positioning: Senior Full-Stack Software Developer (10+ years experience)
+Current Positioning: Full-Stack Software Developer (4+ years of professional experience in Germany)
 
 Professional Summary:
-Abhinay Khalatkar is a senior full-stack engineer focused on scalable web product delivery. His work spans frontend architecture, backend API design, CMS integration, and system design decisions for long-term maintainability. He works with modern JavaScript/TypeScript stacks and combines test-driven engineering discipline with agentic AI workflows to accelerate delivery quality and speed.
+Abhinay Khalatkar is a full-stack developer based in Geilenkirchen, Germany. At scribble Werbeagentur GmbH he is the sole engineer on his client projects: once a design is approved, everything from architecture to go-live and maintenance is his — React/TypeScript and Craft CMS implementation, database design, security hardening, technical SEO, and deployment. Outside work he builds and operates Doordarshi Newsroom, an autonomous English/German AI newsroom running on self-hosted hardware. He is open to Full-Stack, Frontend, and Software Engineer roles in NRW and remote Germany.
 
 Core Expertise:
-- Scalable system design and software architecture
-- React, Next.js, TypeScript, Node.js
-- Craft CMS and custom API endpoint integrations
-- Performance-focused, responsive UI engineering
-- CI-ready workflows, test-driven development, production hardening
-- AI-assisted engineering with GitHub Copilot and OpenAI Codex
+- Frontend: React 18, Next.js, TypeScript (strict), Redux Toolkit, Tailwind CSS, SCSS, Bootstrap, MUI
+- Backend & APIs: PHP 8, Node.js, GraphQL, REST, Craft Commerce, Yii2 modules, Twig, Server-Sent Events
+- CMS & Data: Craft CMS 5 (headless & templated), PIMCORE, MySQL, Firebase
+- Testing & Quality: Jest, Cypress E2E, pytest, TDD, regression fixtures, pre-push quality gates
+- DevOps & Security: Git, Docker, CI/CD, Apache hardening (.htaccess, CSP, CSRF), Linux administration, rsync deployments, Hetzner, AWS
+- AI & LLM Engineering: LLM orchestration and routing (Ollama, local + cloud models), multi-agent pipelines, schema-validated model output
+- Practices: system design, performance optimization (SSR/CSR), technical SEO, GDPR-by-design development, release management
 
-Anonymized Architecture Case Studies:
-- Enterprise Commerce Platform:
-  Hybrid Craft CMS + React SPA architecture with secure GraphQL proxying, multilingual route resolution, and canonical URL validation.
-- Secure Deployment Orchestration Service:
-  Authenticated deployment control plane with SSE observability, guarded command execution, rollback safety, and staged promotion.
-- Modular Content Platform:
-  Custom Craft module architecture with structured configuration and maintainable frontend asset pipeline boundaries.
-- Reusable Full-Stack Boilerplate System:
-  Standardized TypeScript + React + Craft foundation enabling faster setup, upgrade-safe merges, and environment-aware delivery.
+Case Studies (client work anonymized; all numbers are real):
+- Doordarshi Newsroom — Autonomous Bilingual AI Newsroom (personal project, in production since 2025):
+  Eight-stage nightly pipeline (intake → claim verification → editorial standards → growth → original writing → media → EU/DE compliance → human approval gate) on a self-hosted multi-agent control plane with Unix-socket orchestration, schema-validated JSON contracts, and local-first LLM routing. ~100 verified bilingual articles/month at €5–8/month total operating cost; nothing publishes without human approval.
+- Hybrid Headless E-Commerce Platform (for an industrial manufacturer):
+  Craft CMS 5 / PHP 8.2 backend server-rendering the SEO-critical document head, React 18 + strict TypeScript SPA (~29k lines), zero-credential same-origin GraphQL proxy. Organic visitors grew from ~1,000 to ~6,000/month after the technical SEO rebuild; search impressions from ~64,000 to ~105,000. 91 Jest test files and 23 Cypress E2E specs.
+- Security-First Deployment Console (internal agency tool):
+  ~7,700 lines of framework-free PHP 8 + vanilla JS with one dependency. SSE build streaming to an in-browser terminal, temp-release builds promoted via rsync on success, 90-second action-bound run tokens, 'self'-only CSP. New client projects reach deploy-ready in one day.
+- Rental & Commerce Platform + Live CMS Migration (for an equipment rental and sales company):
+  German-language Craft CMS 5 / Twig platform with Craft Commerce repurposed as a rental-inquiry engine and a 30-module page builder (47 entry types, 103 fields). In-place Craft CMS 4→5 migration of the live, order-taking database with zero data loss — 153 migrations rehearsed on a production replica, staged go-live runbook with per-stage rollbacks.
 
 Selected Experience:
+- Doordarshi Newsroom — personal project, in production (2025 - Present)
+  Autonomous bilingual AI newsroom: ~100 verified articles/month, €5–8/month operating cost, 100% human-gated publishing.
 - Associate Software Developer, scribble Werbeagentur GmbH (Apr 2024 - Present)
-  Architected reusable React + Craft CMS boilerplates, engineered Next.js apps, integrated CMS APIs, and led end-to-end project execution.
-- Software Developer (Work Study), wob AG (Mar 2022 - Sep 2023)
-  Built interactive React components, optimized multipage architecture, integrated PIMCORE CMS and Salesforce workflows.
+  Sole engineer per client project from UI design handoff to production; architecture, implementation, security, SEO, deployment, and maintenance.
+- Software Developer, wob AG (Mar 2022 - Sep 2023)
+  React components, performance work, PIMCORE CMS integrations, and Salesforce customer journeys for enterprise B2B clients.
 - Jr. Frontend Developer (Internship), AK Advertising (Jan 2018 - Mar 2018)
-  Implemented SPA improvements, Firebase-backed dynamic data flows, and REST API client integrations.
+  Rebuilt a client site as a React SPA with Firebase-backed data and an e-commerce shop.
 
 Education:
-- Masters in Applied Computer Science, SRH Hochschule Heidelberg
-- Bachelor of Computer Application, Nagpur University
+- M.Sc. Applied Computer Science, SRH Hochschule Heidelberg (2021 - 2023) — software architecture, advanced databases, cybersecurity, UX engineering
+- Bachelor of Computer Application, Nagpur University (2018 - 2021)
+
+Languages:
+- English — fluent (working language)
+- German — A2–B1, actively improving
+- Hindi — native
+- Marathi — native
 
 Public Routes:
 - English Home: https://abhinaykhalatkar.de/en/
 - English About: https://abhinaykhalatkar.de/en/about/
 - English Skills: https://abhinaykhalatkar.de/en/skills/
 - English Projects: https://abhinaykhalatkar.de/en/projects/
+- English Resume: https://abhinaykhalatkar.de/en/resume/
 - English Contact: https://abhinaykhalatkar.de/en/contact/
 - English What's on my Mind: https://abhinaykhalatkar.de/en/whats-on-my-mind/
 - German Home: https://abhinaykhalatkar.de/de/
 - German About: https://abhinaykhalatkar.de/de/about/
 - German Skills: https://abhinaykhalatkar.de/de/skills/
 - German Projects: https://abhinaykhalatkar.de/de/projects/
+- German Resume: https://abhinaykhalatkar.de/de/resume/
 - German Contact: https://abhinaykhalatkar.de/de/contact/
 - German What's on my Mind: https://abhinaykhalatkar.de/de/whats-on-my-mind/
 
@@ -54,8 +65,8 @@ Project Indexing Policy:
 - The `whats-on-my-mind` route embeds an external site (doordarshi.de) and is marked noindex to keep it out of search results while remaining crawlable for navigation.
 
 External Profiles:
-- LinkedIn: https://www.linkedin.com/in/abhinay-khalatkar/
+- LinkedIn: https://www.linkedin.com/in/abhinay-khalatkar
 - GitHub: https://github.com/abhinaykhalatkar
-- Instagram: https://www.instagram.com/abhinaykhalatkar/
+- Doordarshi Newsroom: https://doordarshi.de/
 - Contact Email: mailto:abhinaykhalatkar@gmail.com
 - Resume PDF: https://abhinaykhalatkar.de/RESUME-Abhinay_Khalatkar.pdf

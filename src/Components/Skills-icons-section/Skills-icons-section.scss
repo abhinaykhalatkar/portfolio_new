@@ -1,132 +1,118 @@
 .skills-icons-section {
-    
     display: flex;
-   
-    flex-wrap: wrap;
-    align-content: center;
-    row-gap: 1rem;
-    column-gap: 1rem;
-    justify-content: space-around;
-    align-items: center;
+    flex-direction: column;
+    row-gap: 1.1rem;
     scrollbar-width: none;
+
     &::-webkit-scrollbar {
         width: 0; /* Hide the scrollbar */
-      }
+    }
+
+    .skill-group {
+        display: flex;
+        flex-direction: column;
+        row-gap: 0.45rem;
+    }
+
+    .skill-group-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        opacity: 0.75;
+        margin: 0;
+    }
+
+    .skill-group-items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
 
     .icon-container {
         display: flex;
-        flex: 0 0 calc(14.2857% - 4rem);
-        flex-direction: column;
+        flex-direction: row;
+        align-items: center;
+        column-gap: 0.45rem;
+        padding: 0.35rem 0.7rem;
+        border: 1px solid rgba(126, 182, 243, 0.35);
+        border-radius: 999px;
+        background: rgba(126, 182, 243, 0.08);
 
         .icons {
-            height: 50px;
-            width: 50px;
-            margin: 0 auto;
+            height: 22px;
+            width: 22px;
+            flex-shrink: 0;
         }
 
         .icon-glyph {
             height: auto;
-            font-size: 50px;
+            font-size: 22px;
             color: #7eb6f3;
+        }
+
+        p {
+            margin: 0;
+            font-size: 0.85rem;
+            white-space: nowrap;
         }
     }
 
     @media only screen and (min-width: 1330px) {
         padding-left: 5%;
         padding-right: 5%;
-        .icons {
+
+        .icon-container {
             transition: transform 0.3s ease;
 
             &:hover {
-                transform: scale(1.2, 1.2);
+                transform: scale(1.05);
             }
         }
     }
 
-    @media only screen and (min-width: 970px) and (max-width:1330px) {
-        row-gap: 0.2rem;
-        column-gap: 1.5rem;
+    @media only screen and (max-width: 970px) {
+        row-gap: 0.8rem;
 
         .icon-container {
-            .icons {
-                height: 60px;
-                width: 60px;
-                transition: transform 0.3s ease;
+            padding: 0.28rem 0.55rem;
 
-                &:hover {
-                    transform: scale(1.2, 1.2);
-                }
+            .icons {
+                height: 18px;
+                width: 18px;
             }
 
             .icon-glyph {
-                height: auto;
-                font-size: 60px;
+                font-size: 18px;
+            }
+
+            p {
+                font-size: 0.78rem;
             }
         }
     }
 
-    @media only screen and (min-width: 480px) and (max-width:970px) {
-        row-gap: 0rem;
-        column-gap: 0.6rem;
-
-
-        .icon-container {
-            flex: 0 0 calc(16.6667% - 4rem);
-
-            .icons {
-                height: 40px;
-                width: 40px;
-            }
-
-            .icon-glyph {
-                height: auto;
-                font-size: 40px;
-            }
-        }
-    }
-@media screen and (max-height:650px){
-
-    .icon-container {
-        flex: 0 0 calc(16.6667% - 4rem);
-    row-gap: 0.1rem;
-    column-gap: 0.1rem;
-        .icons {
-            height: 40px;
-            width: 40px;
-        }
-
-        .icon-glyph {
-            height: auto;
-            font-size: 40px;
-        }
-    }
-    
-}
-    @media only screen and (max-width:480px)  {
+    @media screen and (max-height: 650px), only screen and (max-width: 480px) {
+        height: 34vh;
+        overflow-y: scroll;
         align-content: baseline;
 
-        column-gap: 0.1rem;
-
-        height: 30vh;
-
-        overflow-y: scroll;
-
         .icon-container {
-
-            flex: 0 0 calc(44.3333% - 4rem);
-            max-width: calc(44.3333% - 4rem);
+            padding: 0.24rem 0.5rem;
 
             .icons {
-                height: 40px;
-                width: 40px;
+                height: 16px;
+                width: 16px;
             }
 
             .icon-glyph {
-                height: auto;
-                font-size: 40px;
+                font-size: 16px;
+            }
+
+            p {
+                font-size: 0.74rem;
+                white-space: normal;
             }
         }
-
-
     }
 }

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useThemeContext } from "../../Context/ThemeContext/ThemeContext";
 import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import { useLocaleContext } from "../../i18n/LocaleContext";
-import { BsGit, BsLinkedin, BsWhatsapp, BsInstagram } from "react-icons/bs";
+import { BsGit, BsLinkedin } from "react-icons/bs";
 import BouncyText from "../Bouncy-text/BouncyText";
 
 export default function SocialIconsSection() {
@@ -20,17 +20,7 @@ export default function SocialIconsSection() {
     {
       name: "LinkedIn",
       icon: <BsLinkedin className={`fa fa-LinkedIn`} />,
-      link: "https://www.linkedin.com/in/abhinay-khalatkar/",
-    },
-    {
-      name: "Whatsapp",
-      icon: <BsWhatsapp className={`fa fa-Whatsapp`} />,
-      link: "https://wa.me/+4917677947889",
-    },
-    {
-      name: "Instagram",
-      icon: <BsInstagram className={`fa fa-Instagram`} />,
-      link: "https://www.instagram.com/abhinaykhalatkar/",
+      link: "https://www.linkedin.com/in/abhinay-khalatkar",
     },
   ];
 

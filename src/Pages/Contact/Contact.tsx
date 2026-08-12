@@ -39,20 +39,6 @@ export default function ContactPage() {
               abhinaykhalatkar@gmail.com
             </a>
           </motion.p>
-          <motion.section
-            className="contact-extended"
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            custom={1.2}
-            variants={contentVariants}
-          >
-            <h2 className="contact-subheading">{t("contact.intro.heading")}</h2>
-            <p className="contact-subbody">{t("contact.intro.body")}</p>
-            <h2 className="contact-subheading">{t("contact.process.heading")}</h2>
-            <p className="contact-subbody">{t("contact.process.body")}</p>
-            <p className="contact-locale-note">{t("contact.locale.note")}</p>
-          </motion.section>
           <SocialIconsSection />
         </div>
       </div>

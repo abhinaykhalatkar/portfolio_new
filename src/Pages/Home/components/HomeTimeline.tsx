@@ -204,7 +204,7 @@ export default function HomeTimeline({
         <div className="timeline-header-actions">
           <a
             className="timeline-link"
-            href="https://www.linkedin.com/in/abhinay-khalatkar/"
+            href="https://www.linkedin.com/in/abhinay-khalatkar"
             target="_blank"
             rel="noreferrer noopener"
           >

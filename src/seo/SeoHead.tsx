@@ -69,7 +69,7 @@ export default function SeoHead({ isNotFoundPage }: SeoHeadProps) {
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:type" content="image/png" />
-      <meta property="og:image:alt" content="Abhinay Khalatkar — Senior Full-Stack Engineer" />
+      <meta property="og:image:alt" content="Abhinay Khalatkar — Full-Stack Developer" />
       <meta property="og:site_name" content="Abhinay Khalatkar Portfolio" />
       <meta property="og:locale" content={getOpenGraphLocale(locale)} />
 

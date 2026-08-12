@@ -12,8 +12,9 @@ export const navsData = [
   { Name: "01", Address: "/about" },
   { Name: "02", Address: "/skills" },
   { Name: "03", Address: "/projects" },
-  { Name: "04", Address: "/contact" },
-  { Name: "05", Address: "/whats-on-my-mind" },
+  { Name: "04", Address: "/resume" },
+  { Name: "05", Address: "/contact" },
+  { Name: "06", Address: "/whats-on-my-mind" },
 ];
 
 // Returns the x-translation that centres the lavalamp under the active item,

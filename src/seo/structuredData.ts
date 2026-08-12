@@ -17,44 +17,49 @@ function buildPersonSchema(siteUrl: string, locale: Locale) {
     name: "Abhinay Khalatkar",
     jobTitle:
       locale === "de"
-        ? "Senior Full-Stack Softwareentwickler"
-        : "Senior Full-Stack Software Developer",
+        ? "Full-Stack-Softwareentwickler"
+        : "Full-Stack Software Developer",
     url: siteUrl,
     email: "mailto:abhinaykhalatkar@gmail.com",
-    image: toAbsoluteUrl("/favicon.ico", siteUrl),
+    image: toAbsoluteUrl("/og-image.png", siteUrl),
     sameAs: [
-      "https://www.linkedin.com/in/abhinay-khalatkar/",
+      "https://www.linkedin.com/in/abhinay-khalatkar",
       "https://github.com/abhinaykhalatkar",
-      "https://www.instagram.com/abhinaykhalatkar/",
     ],
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Geilenkirchen",
+      addressCountry: "DE",
+    },
     worksFor: {
       "@type": "Organization",
       name: "scribble Werbeagentur GmbH",
     },
     knowsAbout: [
-      "System Design",
-      "Scalable Architecture",
-      "Architecture Ownership",
       "React",
       "Next.js",
       "TypeScript",
       "Node.js",
+      "PHP",
       "Craft CMS",
-      "Tailwind CSS",
-      "Infrastructure Reliability",
-      "Deployment Orchestration",
-      "Hetzner",
-      "AWS",
-      "Agentic AI Workflow",
-      "GitHub Copilot",
-      "OpenAI Codex",
+      "Craft Commerce",
+      "GraphQL",
+      "MySQL",
+      "Technical SEO",
+      "GDPR-by-design Development",
+      "LLM Orchestration",
+      "Ollama",
+      "Multi-Agent Pipelines",
       "Test-Driven Development",
-      "API Engineering",
+      "Jest",
+      "Cypress",
+      "Linux Server Administration",
+      "Docker",
     ],
     description:
       locale === "de"
-        ? "Senior Full-Stack Engineer mit über 10 Jahren Erfahrung in skalierbaren Web-Systemen, architekturgetriebener Umsetzung und verlässlichen Deployment-Workflows mit KI-gestütztem Engineering."
-        : "Senior full-stack engineer with 10+ years of experience delivering scalable web systems, architecture-led execution, and reliability-focused deployment workflows with AI-assisted engineering.",
+        ? "Full-Stack-Softwareentwickler mit 4+ Jahren Berufserfahrung in Deutschland — alleiniger Entwickler auf Kundenplattformen von der Designübergabe bis zur Produktion und Betreiber eines autonomen zweisprachigen KI-Newsrooms."
+        : "Full-stack software developer with 4+ years of professional experience in Germany — sole engineer on client platforms from design handoff to production, and builder of an autonomous bilingual AI newsroom.",
   };
 }
 
@@ -66,8 +71,8 @@ function buildWebSiteSchema(siteUrl: string, locale: Locale) {
     name: "Abhinay Khalatkar Portfolio",
     description:
       locale === "de"
-        ? "Senior-Full-Stack-Portfolio mit professionellen Projekt-Highlights, skalierbaren Web-Systemen, Craft-CMS-Workflows und KI-gestützter Engineering-Delivery."
-        : "Senior full-stack portfolio focused on professional project highlights, scalable web systems, Craft CMS workflows, and AI-assisted engineering delivery.",
+        ? "Portfolio von Abhinay Khalatkar: Full-Stack-Projekt-Highlights mit React, TypeScript, PHP und Craft CMS sowie ein autonomer zweisprachiger KI-Newsroom."
+        : "Portfolio of Abhinay Khalatkar: full-stack project highlights across React, TypeScript, PHP, and Craft CMS, plus an autonomous bilingual AI newsroom.",
     inLanguage: ["en", "de"],
     publisher: {
       "@id": `${siteUrl}#person`,

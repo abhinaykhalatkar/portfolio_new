@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" font-family="Helvetica, Arial, sans-serif">
+  <title>Doordarshi Newsroom — eight-stage pipeline and self-hosted control plane</title>
+  <desc>Architecture diagram of an autonomous bilingual AI newsroom: an eight-stage nightly pipeline (intake, claim verification, editorial standards, growth, original writing, media, EU/DE compliance, human approval gate) running on a self-hosted multi-agent control plane with an orchestrator, isolated workers, a local-first model gateway, and an escalation-only cloud lane.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5c6470"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="780" fill="#fbfaf8"/>
+  <text x="60" y="58" font-size="26" font-weight="700" fill="#1d232b">Doordarshi Newsroom — nightly pipeline</text>
+  <text x="60" y="86" font-size="15" fill="#5c6470">~100 verified bilingual articles/month · €5–8/month total operating cost · 100% human-gated publishing</text>
+
+  <!-- Pipeline stages: two rows of four -->
+  <g font-size="15" fill="#1d232b" text-anchor="middle">
+    <!-- row 1 -->
+    <g>
+      <rect x="60"  y="130" width="240" height="76" rx="10" fill="#ffffff" stroke="#c9d2dc" stroke-width="1.5"/>
+      <text x="180" y="162" font-weight="600">1 · Intake</text>
+      <text x="180" y="184" font-size="12.5" fill="#5c6470">story discovery</text>
+
+      <rect x="350" y="130" width="240" height="76" rx="10" fill="#ffffff" stroke="#c9d2dc" stroke-width="1.5"/>
+      <text x="470" y="162" font-weight="600">2 · Claim verification</text>
+      <text x="470" y="184" font-size="12.5" fill="#5c6470">facts checked before writing</text>
+
+      <rect x="640" y="130" width="240" height="76" rx="10" fill="#ffffff" stroke="#c9d2dc" stroke-width="1.5"/>
+      <text x="760" y="162" font-weight="600">3 · Editorial standards</text>
+      <text x="760" y="184" font-size="12.5" fill="#5c6470">tone, sourcing, balance</text>
+
+      <rect x="930" y="130" width="210" height="76" rx="10" fill="#ffffff" stroke="#c9d2dc" stroke-width="1.5"/>
+      <text x="1035" y="162" font-weight="600">4 · Growth</text>
+      <text x="1035" y="184" font-size="12.5" fill="#5c6470">coverage planning</text>
+    </g>
+    <line x1="300" y1="168" x2="350" y2="168" stroke="#5c6470" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <line x1="590" y1="168" x2="640" y2="168" stroke="#5c6470" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <line x1="880" y1="168" x2="930" y2="168" stroke="#5c6470" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- wrap connector row1 -> row2 -->
+    <path d="M 1035 206 L 1035 240 L 180 240 L 180 266" fill="none" stroke="#5c6470" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- row 2 -->
+    <g>
+      <rect x="60"  y="270" width="240" height="76" rx="10" fill="#ffffff" stroke="#c9d2dc" stroke-width="1.5"/>
+      <text x="180" y="302" font-weight="600">5 · Original writing</text>
+      <text x="180" y="324" font-size="12.5" fill="#5c6470">EN/DE articles</text>
+
+      <rect x="350" y="270" width="240" height="76" rx="10" fill="#ffffff" stroke="#c9d2dc" stroke-width="1.5"/>
+      <text x="470" y="302" font-weight="600">6 · Media</text>
+      <text x="470" y="324" font-size="12.5" fill="#5c6470">generated, synthetic-labeled</text>
+
+      <rect x="640" y="270" width="240" height="76" rx="10" fill="#ffffff" stroke="#c9d2dc" stroke-width="1.5"/>
+      <text x="760" y="302" font-weight="600">7 · EU/DE compliance</text>
+      <text x="760" y="324" font-size="12.5" fill="#5c6470">GDPR, press code, fail-closed</text>
+
+      <rect x="930" y="270" width="210" height="76" rx="10" fill="#eaf6f4" stroke="#2a9d8f" stroke-width="2"/>
+      <text x="1035" y="302" font-weight="700" fill="#19776c">8 · Approval gate</text>
+      <text x="1035" y="324" font-size="12.5" fill="#19776c">human presses publish</text>
+    </g>
+    <line x1="300" y1="308" x2="350" y2="308" stroke="#5c6470" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <line x1="590" y1="308" x2="640" y2="308" stroke="#5c6470" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <line x1="880" y1="308" x2="930" y2="308" stroke="#5c6470" stroke-width="1.5" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Control plane -->
+  <g>
+    <rect x="60" y="400" width="1080" height="330" rx="14" fill="#f2f0ec" stroke="#c9d2dc" stroke-width="1.5"/>
+    <text x="90" y="440" font-size="19" font-weight="700" fill="#1d232b">Self-hosted control plane</text>
+    <text x="90" y="464" font-size="13.5" fill="#5c6470">schema-validated JSON contracts between stages · policy-driven retries · a failed stage never corrupts a batch</text>
+
+    <g font-size="14.5" fill="#1d232b" text-anchor="middle">
+      <rect x="90" y="500" width="300" height="180" rx="10" fill="#ffffff" stroke="#c9d2dc" stroke-width="1.5"/>
+      <text x="240" y="532" font-weight="600">Orchestrator</text>
+      <text x="240" y="558" font-size="12.5" fill="#5c6470">Unix-domain-socket control</text>
+      <text x="240" y="578" font-size="12.5" fill="#5c6470">lease / heartbeat semantics</text>
+      <text x="240" y="598" font-size="12.5" fill="#5c6470">policy-driven retries</text>
+
+      <rect x="450" y="500" width="240" height="180" rx="10" fill="#ffffff" stroke="#c9d2dc" stroke-width="1.5"/>
+      <text x="570" y="532" font-weight="600">Workers</text>
+      <text x="570" y="558" font-size="12.5" fill="#5c6470">per-task isolation</text>
+      <text x="570" y="578" font-size="12.5" fill="#5c6470">one stage per worker</text>
+
+      <rect x="750" y="500" width="240" height="180" rx="10" fill="#ffffff" stroke="#c9d2dc" stroke-width="1.5"/>
+      <text x="870" y="532" font-weight="600">Model gateway</text>
+      <text x="870" y="558" font-size="12.5" fill="#5c6470">local-first: Ollama +</text>
+      <text x="870" y="578" font-size="12.5" fill="#5c6470">external GPU node</text>
+      <text x="870" y="598" font-size="12.5" fill="#5c6470">deterministic quality gates</text>
+      <text x="870" y="618" font-size="12.5" fill="#5c6470">self-healing circuit breaker</text>
+
+      <rect x="1020" y="500" width="90" height="180" rx="10" fill="#fdf6e6" stroke="#d9a919" stroke-width="1.5"/>
+      <text x="1065" y="540" font-size="12.5" font-weight="600" fill="#8a6d10">Cloud</text>
+      <text x="1065" y="560" font-size="11.5" fill="#8a6d10">escalation</text>
+      <text x="1065" y="578" font-size="11.5" fill="#8a6d10">lane only</text>
+    </g>
+    <line x1="390" y1="590" x2="450" y2="590" stroke="#5c6470" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <line x1="690" y1="590" x2="750" y2="590" stroke="#5c6470" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <line x1="990" y1="590" x2="1020" y2="590" stroke="#5c6470" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- connector pipeline -> control plane -->
+  <path d="M 600 346 L 600 400" fill="none" stroke="#5c6470" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  <text x="614" y="380" font-size="12.5" fill="#5c6470">all stages run on the control plane</text>
+</svg>

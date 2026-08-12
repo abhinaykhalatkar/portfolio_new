@@ -76,16 +76,26 @@ describe("ScrollBtn handler", () => {
     expect(setScrollDirectionMock).toHaveBeenCalledWith(0);
   });
 
-  it("advances from Contact (index 4) to /whats-on-my-mind/ — fixes the 'goes home' regression", () => {
-    mockActiveIndex = 4;
+  it("advances from Contact to /whats-on-my-mind/ — fixes the 'goes home' regression", () => {
+    mockActiveIndex = navsData.findIndex((n) => n.Address === "/contact");
     render(<ScrollBtn />);
 
     expect(screen.getByText("scroll.next")).toBeInTheDocument();
     fireEvent.click(screen.getByText("scroll.next").parentElement!);
 
     expect(navigateMock).toHaveBeenCalledWith("/en/whats-on-my-mind/");
-    expect(setActiveIndexMock).toHaveBeenCalledWith(5);
+    expect(setActiveIndexMock).toHaveBeenCalledWith(navsData.length - 1);
     expect(setScrollDirectionMock).toHaveBeenCalledWith(0);
+  });
+
+  it("advances from Projects (index 3) to /resume/", () => {
+    mockActiveIndex = 3;
+    render(<ScrollBtn />);
+
+    fireEvent.click(screen.getByText("scroll.next").parentElement!);
+
+    expect(navigateMock).toHaveBeenCalledWith("/en/resume/");
+    expect(setActiveIndexMock).toHaveBeenCalledWith(4);
   });
 
   it("loops home from the last page (index = navsData.length - 1) and shows the back-to-start label", () => {

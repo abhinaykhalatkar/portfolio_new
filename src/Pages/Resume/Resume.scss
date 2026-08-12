@@ -1,0 +1,93 @@
+.p-Resume {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+
+    .resume-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 0.9rem;
+        width: min(92vw, 900px);
+        padding-top: 4.5rem;
+        padding-bottom: 2rem;
+    }
+
+    .resume-heading {
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        font-weight: 700;
+    }
+
+    .resume-note {
+        margin: 0;
+        text-align: center;
+        opacity: 0.85;
+        max-width: 60ch;
+    }
+
+    .resume-actions {
+        display: flex;
+        justify-content: center;
+    }
+
+    .resume-viewer {
+        width: 100%;
+        height: min(68vh, 900px);
+        border: 1px solid rgba(126, 182, 243, 0.35);
+        border-radius: 10px;
+        overflow: hidden;
+        background: rgba(126, 182, 243, 0.06);
+    }
+
+    .resume-embed {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+    }
+
+    .resume-fallback {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        row-gap: 0.6rem;
+        height: 100%;
+        padding: 1.5rem;
+        text-align: center;
+
+        .resume-fallback-title {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .resume-fallback-body {
+            margin: 0;
+            opacity: 0.8;
+            max-width: 46ch;
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .resume-content {
+            padding-top: 3.5rem;
+            row-gap: 0.7rem;
+        }
+
+        .resume-viewer {
+            height: auto;
+            min-height: 34vh;
+        }
+    }
+
+    @media screen and (max-height: 650px) {
+        .resume-content {
+            padding-top: 3rem;
+        }
+
+        .resume-viewer {
+            height: 55vh;
+        }
+    }
+}
