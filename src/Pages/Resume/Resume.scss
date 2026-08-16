@@ -98,4 +98,23 @@
             row-gap: 0.7rem;
         }
     }
+
+    // Landscape phones / very short windows: not enough height for a useful
+    // flex-fit viewer — the page root scrolls instead and the viewer gets a
+    // fixed, usable height.
+    @media screen and (max-height: 520px) {
+        overflow-y: auto;
+
+        .resume-content {
+            height: auto;
+            min-height: 100%;
+            padding-top: 40px;
+        }
+
+        .resume-viewer {
+            flex: none;
+            width: 100%;
+            height: 320px;
+        }
+    }
 }

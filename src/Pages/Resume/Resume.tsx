@@ -31,6 +31,8 @@ export default function ResumePage() {
   return (
     <motion.div
       className={`p-Resume ${darkTheme ? "" : "light"}`}
+      data-wheel-lock="true"
+      data-wheel-axis="y"
       initial="initial"
       animate="animate"
       exit="exit"

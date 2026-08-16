@@ -197,13 +197,16 @@
         }
     }
 
+    // The page root is the scroll container (the app shell #main-content is
+    // overflow-hidden at viewport height, so `height: auto` would be clipped,
+    // not scrollable). data-wheel-lock on the root lets the wheel scroll here
+    // first; page navigation resumes at the scroll ends.
     @media only screen and (max-width: 900px) {
-        height: auto;
-        min-height: 100vh;
-        min-height: 100dvh;
+        height: 100vh;
+        height: 100dvh;
         overflow-y: auto;
         display: block;
-        padding: 0 2rem 2rem;
+        padding: 0 2rem;
 
         .content-block {
             margin-left: 0;
@@ -212,6 +215,7 @@
             height: auto;
             max-width: 680px;
             padding-top: 96px;
+            padding-bottom: $page-chrome-bottom-clearance;
         }
     }
 

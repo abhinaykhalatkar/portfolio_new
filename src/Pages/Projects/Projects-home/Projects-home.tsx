@@ -137,6 +137,8 @@ export default function ProjectsHome() {
   return (
     <motion.div
       className={`p-Project-home ${darkTheme ? "" : "light"}`}
+      data-wheel-lock="true"
+      data-wheel-axis="y"
       initial="initial"
       animate="animate"
       exit="exit"

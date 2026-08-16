@@ -63,6 +63,8 @@ export default function HomePage() {
   return (
     <motion.div
       className={`p-Home ${darkTheme ? "" : "light"}`}
+      data-wheel-lock="true"
+      data-wheel-axis="y"
       initial="initial"
       animate="animate"
       exit="exit"

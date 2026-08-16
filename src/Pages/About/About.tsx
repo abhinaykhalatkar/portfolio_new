@@ -17,6 +17,8 @@ export default function AboutPage() {
   return (
     <motion.div
       className={`p-About ${darkTheme ? "" : "light"}`}
+      data-wheel-lock="true"
+      data-wheel-axis="y"
       initial="initial"
       animate="animate"
       exit="exit"
