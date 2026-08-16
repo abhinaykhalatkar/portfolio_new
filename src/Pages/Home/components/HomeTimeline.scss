@@ -4,7 +4,9 @@
   position: absolute;
   left: 70%;
   top: 0;
-  bottom: clamp(58px, 7.5vh, 96px);
+  // Must clear the numbered progress bar band; the bar's right end ("06")
+  // reaches under this column on narrower desktop widths.
+  bottom: max(clamp(58px, 7.5vh, 96px), #{$page-chrome-bottom-clearance});
   width: min(29vw, 420px);
   border-radius: 24px;
   border: 1px solid rgba($white, 0.12);

@@ -29,7 +29,10 @@ $wom-pad-side: clamp(16px, 4vw, 56px);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: $wom-pad-top $wom-pad-side $wom-pad-bottom;
+    // Bottom padding must at least clear the numbered progress bar band
+    // (>=768px), which needs more room than the aesthetic default on short
+    // viewports — hence the max().
+    padding: $wom-pad-top $wom-pad-side max(#{$wom-pad-bottom}, #{$page-chrome-bottom-clearance});
     box-sizing: border-box;
   }
 
@@ -342,10 +345,12 @@ $wom-pad-side: clamp(16px, 4vw, 56px);
     flex-wrap: wrap;
   }
 
-  // Tablet — tighten chrome, reduce window padding
+  // Tablet — tighten chrome, reduce window padding (bar still shows >=768px,
+  // so the bottom keeps the clearance-aware max()).
   @media only screen and (max-width: 900px) {
     &__stage {
-      padding: clamp(56px, 7vh, 84px) clamp(12px, 3vw, 32px) clamp(56px, 7vh, 84px);
+      padding: clamp(56px, 7vh, 84px) clamp(12px, 3vw, 32px)
+        max(clamp(56px, 7vh, 84px), #{$page-chrome-bottom-clearance});
     }
 
     &__window {
@@ -364,10 +369,18 @@ $wom-pad-side: clamp(16px, 4vw, 56px);
     }
   }
 
+  // Below 768px the progress bar is hidden; the centered ScrollBtn owns the
+  // bottom band instead.
+  @media only screen and (max-width: 767px) {
+    &__stage {
+      padding-bottom: $page-chrome-bottom-clearance-mobile;
+    }
+  }
+
   // Mobile — drop the chrome to a slim bar, dialog stretches full-width
   @media only screen and (max-width: 600px) {
     &__stage {
-      padding: 60px 8px 60px;
+      padding: 60px 8px $page-chrome-bottom-clearance-mobile;
     }
 
     &__window {

@@ -9,18 +9,14 @@
 
   // The story + languages content is taller than the old copy; on narrow
   // screens let the page scroll instead of clipping (same pattern as .p-Home).
+  // The matching .about-content un-centering lives in its own max-width:684px
+  // block below (it must come after the base top/transform declarations).
   @media only screen and (max-width: 684px) {
     height: auto;
     min-height: 100vh;
     min-height: 100dvh;
     overflow-y: auto;
     padding-bottom: 2rem;
-
-    .about-content {
-      top: 0;
-      transform: none;
-      padding-top: 96px;
-    }
   }
   // background-color: $darkBlack;
   // background-image: linear-gradient(135deg, $black 38%, $darkBlack ),
@@ -155,6 +151,9 @@
 
     @media only screen and (max-width: 684px) {
       flex-direction: column;
+      top: 0;
+      transform: none;
+      padding-top: 96px;
 
       .content-block-heading {
         padding-left: 0rem;

@@ -5,6 +5,8 @@
     height: 100dvh;
     overflow: hidden;
     padding: 0 50px;
+    display: flex;
+    justify-content: center;
     background-image: linear-gradient(135deg, $darkGray 38%, $darkBlue ),
         linear-gradient(315deg, $darkBlack 10%, $black 74%);
 
@@ -13,15 +15,18 @@
         background-image: linear-gradient(315deg, #b8c6db 0%, #faf3f3 74%)
     }
 
+    // Centered inside the safe area: top padding clears the sidebar toggle,
+    // bottom padding reserves the progress-bar band. margin:auto centers the
+    // (short) content vertically within what remains.
     .contact-container-Out {
         max-width: 80vw;
+        width: 100%;
         display: flex;
         flex-direction: column;
         text-align: center;
-        position: relative;
-        top: 35%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        margin: auto;
+        padding-top: clamp(48px, 6vh, 72px);
+        padding-bottom: $page-chrome-bottom-clearance;
 
         .contact-heading {
             font-size: 3.5rem;
@@ -86,10 +91,6 @@
         }
 
         @media only screen and (min-width: 480px) and (max-width:1000px) {
-            top: 15%;
-            left: 50%;
-            transform: translate(-50%, 0%);
-
             .contact-heading {
                 font-size: 3rem;
                 margin-bottom: 1.5rem;
@@ -97,6 +98,7 @@
 
             .contact-container {
                 flex-direction: column;
+                align-items: center;
 
                 .contact-content,
                 .social-contact {
@@ -107,11 +109,13 @@
 
         }
 
+        @media only screen and (max-width: 767px) {
+            // Progress bar hidden below 768px; ScrollBtn owns the bottom band.
+            padding-bottom: $page-chrome-bottom-clearance-mobile;
+        }
+
         @media only screen and (max-width: 480px) {
-            min-width: 374px;
-            top: 15%;
-            left: 50%;
-            transform: translate(-50%, 0%);
+            min-width: 340px;
 
             .contact-heading {
                 font-size: 3rem;
@@ -120,6 +124,7 @@
 
             .contact-container {
                 flex-direction: column;
+                align-items: center;
 
                 .contact-content,
                 .social-contact {

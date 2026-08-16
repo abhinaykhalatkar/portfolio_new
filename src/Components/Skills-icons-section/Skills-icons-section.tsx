@@ -126,7 +126,11 @@ export default function SkillIconSection() {
   const { t } = useLocaleContext();
 
   return (
-    <div className="skills-icons-section">
+    <div
+      className="skills-icons-section"
+      data-wheel-lock="true"
+      data-wheel-axis="y"
+    >
       {skillGroups.map((group, groupIndex) => (
         <section className="skill-group" key={group.titleKey}>
           <motion.h2

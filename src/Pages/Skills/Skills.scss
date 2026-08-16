@@ -2,8 +2,8 @@
 
 .p-Skills {
     min-width: 100%;
-    min-height: 100vh;
-    min-height: 100dvh;
+    height: 100vh;
+    height: 100dvh;
     overflow: hidden;
     background-image: linear-gradient(135deg, $darkGray 38%, $darkBlue ),
         linear-gradient(315deg, $darkBlack 10%, $black 74%);
@@ -15,143 +15,97 @@
 
     text-align: center;
 
+    // Full-height flex column: the intro block keeps its natural height and the
+    // skills-icons-section (flex: 1) absorbs the rest, scrolling internally
+    // behind data-wheel-lock. Bottom padding reserves the progress-bar band.
     .container {
-        padding-left: 5%;
-        padding-right: 5%;
-        top: 20vh;
-        transform: translateY(-10vh);
+        box-sizing: border-box;
+        height: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: clamp(52px, 7vh, 80px) 5% $page-chrome-bottom-clearance;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
         line-height: 1.5;
         font-size: 18px;
-        position: relative;
-        margin: auto;
 
         .top-quote {
-            height: 1vh;
-            margin-bottom: 1rem;
+            margin-bottom: 0.7rem;
             text-transform: uppercase;
             font-weight: 300;
             opacity: .7;
+            font-size: 0.85em;
         }
 
         .Skills-heading {
-            // height: 7vh;
             display: flex;
-            margin-bottom: 1.3rem;
-            font-size: 3.5rem;
+            margin-bottom: 0.9rem;
+            font-size: clamp(1.8rem, 4vw, 3rem);
             font-weight: 500;
-            .Skills-heading1{
+
+            .Skills-heading1 {
                 margin: auto;
             }
         }
 
-        .skill-para-head {
-            // height: 2vh;
-            margin-bottom: 1rem;
-        }
-
+        .skill-para-head,
         .skill-para-content {
-            // height: 12vh;
-            margin-bottom: 1rem;
+            margin: 0 auto 0.7rem;
+            max-width: 880px;
         }
 
         .linkedInPara {
-            // height: 5vh;
-            margin-bottom: 3rem;
-            .linkedInLink{
+            margin-bottom: 1.1rem;
+
+            .linkedInLink {
                 text-decoration: none;
                 color: darken-by($heighlightBlue, 15%);
                 font-size: larger;
                 font-weight: 500;
                 transition: color 0.4s ease;
-                &:hover{
+
+                &:hover {
                     color: $heighlightBlue;
                 }
             }
         }
 
-        @media only screen and (min-width: 850px) and (max-width:1330px) {
-            padding-left: 0%;
-            padding-right: 0%;
-            // min-width: 90vw;
+        @media screen and (max-height: 760px) {
+            padding-top: clamp(44px, 6vh, 60px);
             line-height: 1.3;
-            font-size: 18px;
-
-            .top-quote {
-                margin-bottom: 1rem;
-                font-weight: 300;
-                opacity: .7;
-            }
+            font-size: 15px;
 
             .Skills-heading {
-                margin-bottom: 1.3rem;
+                margin-bottom: 0.6rem;
+                font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+            }
+
+            .top-quote,
+            .skill-para-head,
+            .skill-para-content {
+                margin-bottom: 0.45rem;
             }
 
             .linkedInPara {
-                margin-bottom: 4rem;
-            }
-        }
-        @media screen and (max-height:650px){
-            padding-left: 0%;
-            padding-right: 0%;
-            line-height: 1.2;
-            font-size: 16px;
-
-            .top-quote {
-                margin-bottom: 1rem;
-                font-weight: 300;
-                opacity: .7;
-            }
-
-            .Skills-heading {
-                margin-bottom: 1.1rem;
-            }
-
-            .linkedInPara {
-                margin-bottom: 2rem;
+                margin-bottom: 0.7rem;
             }
         }
 
-        @media only screen and (min-width: 480px) and (max-width:850px) {
-            padding-left: 0%;
-            padding-right: 0%;
-            min-width: 90%;
-            line-height: 1.3;
+        @media only screen and (min-width: 480px) and (max-width: 850px) {
+            line-height: 1.35;
             font-size: 14px;
-
-            .top-quote {
-                margin-bottom: 1rem;
-            }
-
-            .Skills-heading {
-                margin-bottom: 1.3rem;
-                font-size: 2rem;
-                font-weight: 500;
-            }
-
-            .linkedInPara {
-                margin-bottom: 2rem;
-            }
-
         }
 
-        @media only screen and (max-width:480px) {
-            padding-left: 0%;
-            padding-right: 0%;
-            font-size: 10px;
-            min-width: 90%;
-            max-width: 90%;
-
-            .top-quote {
-                font-weight: 200;
-            }
-
-            .Skills-heading {
-                font-size: 1.8rem;
-                font-weight: 400;
-            }
-
+        @media only screen and (max-width: 767px) {
+            // Progress bar hidden below 768px; ScrollBtn owns the bottom band.
+            padding-bottom: $page-chrome-bottom-clearance-mobile;
         }
 
+        @media only screen and (max-width: 480px) {
+            font-size: 12px;
+            padding-left: 4%;
+            padding-right: 4%;
+        }
     }
-
 }

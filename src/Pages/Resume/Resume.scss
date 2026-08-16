@@ -1,21 +1,31 @@
+@use '../../Styles/variables' as *;
+
 .p-Resume {
     display: flex;
     justify-content: center;
     width: 100%;
-    min-height: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
 
+    // Full-height flex column: heading/note/actions keep natural height, the
+    // PDF viewer (flex: 1) absorbs the rest. Bottom padding reserves the
+    // progress-bar band so the viewer never slides under the global chrome.
     .resume-content {
+        box-sizing: border-box;
         display: flex;
         flex-direction: column;
         align-items: center;
-        row-gap: 0.9rem;
+        row-gap: 0.8rem;
         width: min(92vw, 900px);
-        padding-top: 4.5rem;
-        padding-bottom: 2rem;
+        height: 100%;
+        min-height: 0;
+        padding-top: clamp(48px, 7vh, 76px);
+        padding-bottom: $page-chrome-bottom-clearance;
     }
 
     .resume-heading {
-        font-size: clamp(2rem, 5vw, 3.2rem);
+        font-size: clamp(1.7rem, 4vw, 2.8rem);
         font-weight: 700;
     }
 
@@ -32,8 +42,9 @@
     }
 
     .resume-viewer {
+        flex: 1;
+        min-height: 160px;
         width: 100%;
-        height: min(68vh, 900px);
         border: 1px solid rgba(126, 182, 243, 0.35);
         border-radius: 10px;
         overflow: hidden;
@@ -69,25 +80,22 @@
         }
     }
 
-    @media only screen and (max-width: 768px) {
+    @media screen and (max-height: 760px) {
         .resume-content {
-            padding-top: 3.5rem;
-            row-gap: 0.7rem;
+            row-gap: 0.55rem;
+            padding-top: clamp(40px, 6vh, 56px);
         }
 
-        .resume-viewer {
-            height: auto;
-            min-height: 34vh;
+        .resume-note {
+            font-size: 0.85rem;
         }
     }
 
-    @media screen and (max-height: 650px) {
+    @media only screen and (max-width: 767px) {
+        // Progress bar hidden below 768px; ScrollBtn owns the bottom band.
         .resume-content {
-            padding-top: 3rem;
-        }
-
-        .resume-viewer {
-            height: 55vh;
+            padding-bottom: $page-chrome-bottom-clearance-mobile;
+            row-gap: 0.7rem;
         }
     }
 }

@@ -19,3 +19,13 @@ $white: #faf3f3;
 @function darken-by($value, $amount) {
   @return color.adjust($value, $lightness: -$amount);
 }
+
+// Fixed-slide pages (100dvh, overflow hidden) must keep their content clear of
+// the global chrome pinned to the viewport bottom:
+// - >=768px: the numbered progress bar — bottom edge 5vh above the viewport
+//   bottom, ~48px tall (NavLink + padding + border + lavalamp).
+// - <768px: the bar is hidden; the centered ScrollBtn sits at bottom 5%.
+// Content areas on those pages end above this clearance; regions taller than
+// the remaining space scroll internally behind data-wheel-lock.
+$page-chrome-bottom-clearance: calc(5vh + 72px);
+$page-chrome-bottom-clearance-mobile: calc(5vh + 56px);

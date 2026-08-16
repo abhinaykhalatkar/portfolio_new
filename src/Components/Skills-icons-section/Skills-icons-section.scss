@@ -1,7 +1,13 @@
 .skills-icons-section {
+    // Fills the leftover height of the .p-Skills flex column and scrolls
+    // internally (data-wheel-lock) instead of pushing the page past 100dvh.
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
-    row-gap: 1.1rem;
+    row-gap: 1rem;
+    padding-bottom: 0.5rem;
     scrollbar-width: none;
 
     &::-webkit-scrollbar {
@@ -11,11 +17,12 @@
     .skill-group {
         display: flex;
         flex-direction: column;
-        row-gap: 0.45rem;
+        row-gap: 0.4rem;
+        flex-shrink: 0;
     }
 
     .skill-group-title {
-        font-size: 0.95rem;
+        font-size: 0.82rem;
         font-weight: 600;
         letter-spacing: 0.06em;
         text-transform: uppercase;
@@ -26,7 +33,8 @@
     .skill-group-items {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.5rem;
+        justify-content: center;
+        gap: 0.45rem;
     }
 
     .icon-container {
@@ -34,34 +42,31 @@
         flex-direction: row;
         align-items: center;
         column-gap: 0.45rem;
-        padding: 0.35rem 0.7rem;
+        padding: 0.32rem 0.65rem;
         border: 1px solid rgba(126, 182, 243, 0.35);
         border-radius: 999px;
         background: rgba(126, 182, 243, 0.08);
 
         .icons {
-            height: 22px;
-            width: 22px;
+            height: 20px;
+            width: 20px;
             flex-shrink: 0;
         }
 
         .icon-glyph {
             height: auto;
-            font-size: 22px;
+            font-size: 20px;
             color: #7eb6f3;
         }
 
         p {
             margin: 0;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             white-space: nowrap;
         }
     }
 
     @media only screen and (min-width: 1330px) {
-        padding-left: 5%;
-        padding-right: 5%;
-
         .icon-container {
             transition: transform 0.3s ease;
 
@@ -71,31 +76,12 @@
         }
     }
 
-    @media only screen and (max-width: 970px) {
-        row-gap: 0.8rem;
+    @media only screen and (max-width: 970px), screen and (max-height: 760px) {
+        row-gap: 0.7rem;
 
-        .icon-container {
-            padding: 0.28rem 0.55rem;
-
-            .icons {
-                height: 18px;
-                width: 18px;
-            }
-
-            .icon-glyph {
-                font-size: 18px;
-            }
-
-            p {
-                font-size: 0.78rem;
-            }
+        .skill-group {
+            row-gap: 0.3rem;
         }
-    }
-
-    @media screen and (max-height: 650px), only screen and (max-width: 480px) {
-        height: 34vh;
-        overflow-y: scroll;
-        align-content: baseline;
 
         .icon-container {
             padding: 0.24rem 0.5rem;
@@ -111,8 +97,14 @@
 
             p {
                 font-size: 0.74rem;
-                white-space: normal;
             }
+        }
+    }
+
+    @media only screen and (max-width: 480px) {
+        .icon-container p {
+            white-space: normal;
+            text-align: left;
         }
     }
 }

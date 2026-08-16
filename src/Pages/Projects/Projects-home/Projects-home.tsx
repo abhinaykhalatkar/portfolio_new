@@ -275,7 +275,11 @@ export default function ProjectsHome() {
                     {t("projects.professionalEyebrow")}
                   </div>
                   <h2 className="project-slide-title">{currentProject.title}</h2>
-                  <dl className="project-slide-details">
+                  <dl
+                    className="project-slide-details"
+                    data-wheel-lock="true"
+                    data-wheel-axis="y"
+                  >
                     <div className="project-slide-row">
                       <dt>{t("projects.projectSummary.architecture")}</dt>
                       <dd>{currentProject.architecture}</dd>
