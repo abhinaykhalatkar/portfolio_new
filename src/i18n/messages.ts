@@ -53,7 +53,7 @@ const enMessages = {
   "about.foot":
     "Full-Stack Software Developer — React · TypeScript · PHP · Craft CMS",
   "about.body.1":
-    "I'm a full-stack developer based in Geilenkirchen, Germany. At scribble Werbeagentur, I'm the only engineer on my client projects: once a design is approved, everything from architecture to go-live and maintenance is mine. Before that I built React frontends and CMS integrations for enterprise B2B clients at wob AG, and completed an M.Sc. in Applied Computer Science at SRH Hochschule Heidelberg with a focus on software architecture, databases, cybersecurity, and UX engineering.",
+    "I'm a full-stack developer based in Geilenkirchen, Germany. In my current agency role I'm the only engineer on my client projects: once a design is approved, everything from architecture to go-live and maintenance is mine. Before that I built React frontends and CMS integrations for enterprise B2B clients, and completed an M.Sc. in Applied Computer Science at SRH Hochschule Heidelberg with a focus on software architecture, databases, cybersecurity, and UX engineering.",
   "about.body.2":
     "Evenings and weekends go into Doordarshi Newsroom, an autonomous English/German AI newsroom that runs on hardware in my apartment. It has taught me more about reliability engineering than anything else I've built — and it still can't publish a single word without me pressing the button.",
   "about.body.3":
@@ -67,7 +67,7 @@ const enMessages = {
   "skills.topQuote": "Making software keep working — not just work once",
   "skills.heading": "Skills & Experience",
   "skills.body.1":
-    "At scribble Werbeagentur I'm the sole engineer on my client projects: once a design is approved, architecture, frontend, backend, database, security hardening, and deployment are mine through to production.",
+    "I'm the sole engineer on my client projects: once a design is approved, architecture, frontend, backend, database, security hardening, and deployment are mine through to production.",
   "skills.body.2":
     "My stack centers on React 18, Next.js, TypeScript, Node.js, PHP 8, and Craft CMS 5, deployed to Hetzner and AWS. I work test-driven with Jest, Cypress, and pytest, build GDPR-by-design, and use LLM tooling — Ollama-based orchestration, GitHub Copilot, OpenAI Codex — behind deterministic quality gates.",
   "skills.linkedin.prefix": "Feel free to explore my",
@@ -82,7 +82,7 @@ const enMessages = {
   "skills.group.practices": "Practices",
   "projects.heading": "Projects",
   "projects.overviewIntro":
-    "Four production systems built end to end as the sole engineer — client platforms at scribble Werbeagentur and an autonomous AI newsroom I run on my own hardware.",
+    "Four production systems built end to end as the sole engineer — client platforms from my agency work and an autonomous AI newsroom I run on my own hardware.",
   "projects.overviewBody":
     "Each highlight covers architecture, delivery, stack, and measured outcomes. Client work is anonymized; every number is real.",
   "projects.catalogHint":
@@ -218,7 +218,7 @@ const deMessages: typeof enMessages = {
   "about.foot":
     "Full-Stack-Softwareentwickler — React · TypeScript · PHP · Craft CMS",
   "about.body.1":
-    "Ich bin Full-Stack-Entwickler in Geilenkirchen. Bei scribble Werbeagentur bin ich der einzige Entwickler auf meinen Kundenprojekten: Sobald ein Design freigegeben ist, liegt alles von der Architektur bis zu Go-live und Wartung bei mir. Davor habe ich bei der wob AG React-Frontends und CMS-Integrationen für Enterprise-B2B-Kunden gebaut und einen M.Sc. in Applied Computer Science an der SRH Hochschule Heidelberg abgeschlossen — mit Schwerpunkt Softwarearchitektur, Datenbanken, Cybersecurity und UX Engineering.",
+    "Ich bin Full-Stack-Entwickler in Geilenkirchen. In meiner aktuellen Agenturrolle bin ich der einzige Entwickler auf meinen Kundenprojekten: Sobald ein Design freigegeben ist, liegt alles von der Architektur bis zu Go-live und Wartung bei mir. Davor habe ich React-Frontends und CMS-Integrationen für Enterprise-B2B-Kunden gebaut und einen M.Sc. in Applied Computer Science an der SRH Hochschule Heidelberg abgeschlossen — mit Schwerpunkt Softwarearchitektur, Datenbanken, Cybersecurity und UX Engineering.",
   "about.body.2":
     "Abende und Wochenenden gehören Doordarshi Newsroom, einem autonomen englisch-deutschen KI-Newsroom, der auf Hardware in meiner Wohnung läuft. Er hat mir mehr über Reliability Engineering beigebracht als alles andere, was ich je gebaut habe — und er kann immer noch kein einziges Wort veröffentlichen, ohne dass ich den Knopf drücke.",
   "about.body.3":
@@ -232,7 +232,7 @@ const deMessages: typeof enMessages = {
   "skills.topQuote": "Software, die nicht nur einmal funktioniert, sondern dauerhaft läuft",
   "skills.heading": "Skills & Erfahrung",
   "skills.body.1":
-    "Bei scribble Werbeagentur bin ich der einzige Entwickler auf meinen Kundenprojekten: Sobald ein Design freigegeben ist, liegen Architektur, Frontend, Backend, Datenbank, Sicherheitshärtung und Deployment bis zur Produktion bei mir.",
+    "Ich bin der einzige Entwickler auf meinen Kundenprojekten: Sobald ein Design freigegeben ist, liegen Architektur, Frontend, Backend, Datenbank, Sicherheitshärtung und Deployment bis zur Produktion bei mir.",
   "skills.body.2":
     "Mein Stack konzentriert sich auf React 18, Next.js, TypeScript, Node.js, PHP 8 und Craft CMS 5, ausgeliefert auf Hetzner und AWS. Ich arbeite testgetrieben mit Jest, Cypress und pytest, entwickle GDPR-by-Design und nutze LLM-Tooling — Ollama-basierte Orchestrierung, GitHub Copilot, OpenAI Codex — hinter deterministischen Quality Gates.",
   "skills.linkedin.prefix": "Eine ausführlichere Übersicht meiner Skills und Erfahrungen finden Sie auf meinem",
@@ -246,7 +246,7 @@ const deMessages: typeof enMessages = {
   "skills.group.practices": "Arbeitsweisen",
   "projects.heading": "Projekte",
   "projects.overviewIntro":
-    "Vier Produktionssysteme, Ende-zu-Ende als alleiniger Entwickler gebaut — Kundenplattformen bei scribble Werbeagentur und ein autonomer KI-Newsroom auf eigener Hardware.",
+    "Vier Produktionssysteme, Ende-zu-Ende als alleiniger Entwickler gebaut — Kundenplattformen aus meiner Agenturarbeit und ein autonomer KI-Newsroom auf eigener Hardware.",
   "projects.overviewBody":
     "Jedes Highlight zeigt Architektur, Delivery, Stack und gemessene Ergebnisse. Kundenprojekte sind anonymisiert; jede Zahl ist echt.",
   "projects.catalogHint":

@@ -38,13 +38,16 @@
       ]
     },
     {
-      "id": "exp-scribble-associate-software-developer",
+      "id": "exp-agency-associate-software-developer",
       "type": "experience",
       "title": {
         "en": "Associate Software Developer",
         "de": "Associate Software Developer"
       },
-      "organization": "scribble Werbeagentur GmbH",
+      "organization": {
+        "en": "Digital agency — sole engineer per client project",
+        "de": "Digitalagentur — alleiniger Entwickler pro Kundenprojekt"
+      },
       "start": "2024-04",
       "end": "present",
       "location": {
@@ -78,13 +81,16 @@
       ]
     },
     {
-      "id": "exp-wob-software-developer",
+      "id": "exp-b2b-agency-software-developer",
       "type": "experience",
       "title": {
         "en": "Software Developer",
         "de": "Software Developer"
       },
-      "organization": "wob AG",
+      "organization": {
+        "en": "B2B agency serving enterprise clients",
+        "de": "B2B-Agentur für Enterprise-Kunden"
+      },
       "start": "2022-03",
       "end": "2023-09",
       "location": {
@@ -116,13 +122,16 @@
       ]
     },
     {
-      "id": "exp-ak-jr-frontend-internship",
+      "id": "exp-advertising-agency-jr-frontend-internship",
       "type": "experience",
       "title": {
         "en": "Jr. Frontend Developer (Internship)",
         "de": "Junior Frontend Developer (Praktikum)"
       },
-      "organization": "AK Advertising",
+      "organization": {
+        "en": "Advertising agency",
+        "de": "Werbeagentur"
+      },
       "start": "2018-01",
       "end": "2018-03",
       "location": {

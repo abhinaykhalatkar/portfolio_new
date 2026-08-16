@@ -31,10 +31,6 @@ function buildPersonSchema(siteUrl: string, locale: Locale) {
       addressLocality: "Geilenkirchen",
       addressCountry: "DE",
     },
-    worksFor: {
-      "@type": "Organization",
-      name: "scribble Werbeagentur GmbH",
-    },
     knowsAbout: [
       "React",
       "Next.js",

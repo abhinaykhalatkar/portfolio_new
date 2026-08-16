@@ -3,7 +3,7 @@ Canonical: https://abhinaykhalatkar.de/en/
 Current Positioning: Full-Stack Software Developer (4+ years of professional experience in Germany)
 
 Professional Summary:
-Abhinay Khalatkar is a full-stack developer based in Geilenkirchen, Germany. At scribble Werbeagentur GmbH he is the sole engineer on his client projects: once a design is approved, everything from architecture to go-live and maintenance is his — React/TypeScript and Craft CMS implementation, database design, security hardening, technical SEO, and deployment. Outside work he builds and operates Doordarshi Newsroom, an autonomous English/German AI newsroom running on self-hosted hardware. He is open to Full-Stack, Frontend, and Software Engineer roles in NRW and remote Germany.
+Abhinay Khalatkar is a full-stack developer based in Geilenkirchen, Germany. In his current agency role he is the sole engineer on his client projects: once a design is approved, everything from architecture to go-live and maintenance is his — React/TypeScript and Craft CMS implementation, database design, security hardening, technical SEO, and deployment. Outside work he builds and operates Doordarshi Newsroom, an autonomous English/German AI newsroom running on self-hosted hardware. He is open to Full-Stack, Frontend, and Software Engineer roles in NRW and remote Germany.
 
 Core Expertise:
 - Frontend: React 18, Next.js, TypeScript (strict), Redux Toolkit, Tailwind CSS, SCSS, Bootstrap, MUI
@@ -27,11 +27,11 @@ Case Studies (client work anonymized; all numbers are real):
 Selected Experience:
 - Doordarshi Newsroom — personal project, in production (2025 - Present)
   Autonomous bilingual AI newsroom: ~100 verified articles/month, €5–8/month operating cost, 100% human-gated publishing.
-- Associate Software Developer, scribble Werbeagentur GmbH (Apr 2024 - Present)
+- Associate Software Developer, digital agency in Geilenkirchen (Apr 2024 - Present)
   Sole engineer per client project from UI design handoff to production; architecture, implementation, security, SEO, deployment, and maintenance.
-- Software Developer, wob AG (Mar 2022 - Sep 2023)
+- Software Developer, B2B agency serving enterprise clients (Mar 2022 - Sep 2023)
   React components, performance work, PIMCORE CMS integrations, and Salesforce customer journeys for enterprise B2B clients.
-- Jr. Frontend Developer (Internship), AK Advertising (Jan 2018 - Mar 2018)
+- Jr. Frontend Developer (Internship), advertising agency in Nagpur (Jan 2018 - Mar 2018)
   Rebuilt a client site as a React SPA with Firebase-backed data and an e-commerce shop.
 
 Education:

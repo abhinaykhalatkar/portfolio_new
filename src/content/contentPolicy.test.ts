@@ -11,9 +11,12 @@ import timelineFeed from "../../public/data/linkedin-timeline.json";
 // - no phone number anywhere; contact = email + LinkedIn + GitHub only
 // - the rental platform is German-only; only the industrial-manufacturer
 //   platform is bilingual
+// - site copy is about the person, not the employer: no employer names in any
+//   site-facing content (resume PDF is exempt — it is a document, not site copy)
 // Real client names are deliberately NOT asserted here (that would embed them
 // in the repo); the pre-deploy build grep covers them manually.
-const FORBIDDEN = /Senior|10\+|10 Jahre|über 10 Jahre|instagram|wa\.me|17677947889/i;
+const FORBIDDEN =
+  /Senior|10\+|10 Jahre|über 10 Jahre|instagram|wa\.me|17677947889|scribble|wob AG|AK Advertising/i;
 
 function collectStrings(value: unknown, out: string[] = []): string[] {
   if (typeof value === "string") {

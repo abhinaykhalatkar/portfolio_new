@@ -63,12 +63,12 @@ function getIndexableRouteConfig(
         kind: "about" as const,
         title: "About Abhinay Khalatkar — Full-Stack Developer Story",
         description:
-          "Full-stack developer in Geilenkirchen, Germany — sole engineer on client platforms at scribble Werbeagentur, builder of an autonomous AI newsroom.",
+          "Full-stack developer in Geilenkirchen, Germany — sole engineer on client platforms from design handoff to go-live, builder of an autonomous AI newsroom.",
         keywords: [
           "Abhinay Khalatkar",
           "About",
           "Full-Stack Developer Geilenkirchen",
-          "scribble Werbeagentur",
+          "Sole Engineer",
           "Doordarshi Newsroom",
           "Reliability Engineering",
         ],
@@ -163,12 +163,12 @@ function getIndexableRouteConfig(
         kind: "about" as const,
         title: "Über Abhinay Khalatkar — Full-Stack-Entwickler",
         description:
-          "Full-Stack-Entwickler in Geilenkirchen — alleiniger Entwickler auf Kundenprojekten bei scribble Werbeagentur und Betreiber eines autonomen KI-Newsrooms.",
+          "Full-Stack-Entwickler in Geilenkirchen — alleiniger Entwickler auf Kundenplattformen von der Designübergabe bis zum Go-live, Betreiber eines KI-Newsrooms.",
         keywords: [
           "Abhinay Khalatkar",
           "Über mich",
           "Full-Stack-Entwickler Geilenkirchen",
-          "scribble Werbeagentur",
+          "Alleiniger Entwickler",
           "Doordarshi Newsroom",
         ],
         robots: "index,follow" as const,
