@@ -3,6 +3,7 @@ import type { Locale } from "../i18n/localeRoutes";
 type LocalizedCopy = Record<Locale, string>;
 
 export type CaseStudySummary = {
+  /** Stable identifier; also the URL slug under /projects/ (per-slide URLs). */
   id: string;
   title: LocalizedCopy;
   architecture: LocalizedCopy;
@@ -19,6 +20,9 @@ export type ResolvedCaseStudySummary = {
   stack: string;
   outcomeFocus: string;
 };
+
+/** Base path prefix shared by every case-study URL: /projects/<id> */
+export const CASE_STUDY_BASE_PATH = "/projects";
 
 export const portfolioCaseStudies: CaseStudySummary[] = [
   {
@@ -40,8 +44,8 @@ export const portfolioCaseStudies: CaseStudySummary[] = [
       de: "Python, pytest mit Regression-Fixtures, Ollama mit lokalem + Cloud-LLM-Routing, Multi-Agent-Orchestrierung über Unix-Sockets, Google-News-Sitemaps, Atom/RSS mit WebSub-Push, IndexNow, zweisprachiges hreflang, JSON-LD.",
     },
     outcomeFocus: {
-      en: "~100 verified bilingual articles/month · €5–8/month total operating cost · 8 pipeline stages · 2 languages · 100% human-gated publishing.",
-      de: "~100 verifizierte zweisprachige Artikel/Monat · 5–8 € Gesamtbetriebskosten/Monat · 8 Pipeline-Stufen · 2 Sprachen · 100 % menschlich freigegebene Veröffentlichung.",
+      en: "100% human-gated publishing · ~100 verified bilingual articles/month · 8 pipeline stages · 2 languages · €5–8/month total operating cost.",
+      de: "100 % menschlich freigegebene Veröffentlichung · ~100 verifizierte zweisprachige Artikel/Monat · 8 Pipeline-Stufen · 2 Sprachen · 5–8 € Gesamtbetriebskosten/Monat.",
     },
   },
   {
@@ -159,4 +163,33 @@ export function getCaseStudyBySection(
 
 export function getCaseStudyTitles(locale: Locale = "en"): string[] {
   return portfolioCaseStudies.map((study) => study.title[locale]);
+}
+
+/** All case-study slugs, in carousel order. Source of truth for routing + prerender. */
+export function getCaseStudySlugs(): string[] {
+  return portfolioCaseStudies.map((study) => study.id);
+}
+
+export function isCaseStudySlug(slug: string | undefined | null): boolean {
+  return typeof slug === "string" && portfolioCaseStudies.some((s) => s.id === slug);
+}
+
+/** Index of a slug in carousel order, or -1. */
+export function getCaseStudyIndexBySlug(slug: string | undefined | null): number {
+  if (!slug) return -1;
+  return portfolioCaseStudies.findIndex((study) => study.id === slug);
+}
+
+export function getCaseStudyBySlug(
+  slug: string | undefined | null,
+  locale: Locale = "en"
+): ResolvedCaseStudySummary | null {
+  const index = getCaseStudyIndexBySlug(slug);
+  if (index === -1) return null;
+  return resolveCaseStudy(portfolioCaseStudies[index], locale);
+}
+
+/** Locale-less base path for a case study, e.g. "/projects/doordarshi-newsroom". */
+export function getCaseStudyBasePath(slug: string): string {
+  return `${CASE_STUDY_BASE_PATH}/${slug}`;
 }

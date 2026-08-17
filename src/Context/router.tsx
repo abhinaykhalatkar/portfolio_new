@@ -4,6 +4,7 @@ import { usePageAnimationContext } from "./PageAnimationContext/PageAnimationCon
 import {
   MAIN_BASE_ROUTES,
   getPreferredLocale,
+  isCaseStudyBasePath,
   stripLocalePrefix,
   type Locale,
 } from "../i18n/localeRoutes";
@@ -72,9 +73,12 @@ const RenderRoutes = () => {
 
   useEffect(() => {
     const basePath = stripLocalePrefix(location.pathname);
-    const isMain = MAIN_BASE_ROUTES.includes(
-      basePath as (typeof MAIN_BASE_ROUTES)[number]
-    );
+    // Per-slide case-study URLs (/projects/<slug>) render the Projects main
+    // page with a different slide active — they are main-page URLs, not
+    // project-section sub-pages.
+    const isMain =
+      MAIN_BASE_ROUTES.includes(basePath as (typeof MAIN_BASE_ROUTES)[number]) ||
+      isCaseStudyBasePath(basePath);
     setIsOnMainPage(isMain);
   }, [location.pathname, setIsOnMainPage]);
 

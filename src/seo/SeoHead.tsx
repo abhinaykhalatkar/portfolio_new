@@ -53,7 +53,6 @@ export default function SeoHead({ isNotFoundPage }: SeoHeadProps) {
       <html lang={locale} />
       <title>{metadata.title}</title>
       <meta name="description" content={metadata.description} />
-      <meta name="keywords" content={metadata.keywords.join(", ")} />
       <meta name="robots" content={metadata.robots} />
 
       <link rel="canonical" href={canonicalUrl} />

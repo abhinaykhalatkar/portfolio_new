@@ -42,9 +42,11 @@ const enMessages = {
   "home.stats.2.value": "Zero-data-loss migration",
   "home.stats.2.label":
     "Moved a live, order-taking commerce database across a major CMS version. 153 migrations, staged rollbacks.",
-  "home.stats.3.value": "~100 articles/month for under €8",
+  "home.stats.3.value": "100% human-gated AI newsroom",
   "home.stats.3.label":
-    "Autonomous EN/DE AI newsroom, self-hosted, human-approved before anything publishes.",
+    "Nothing publishes without my approval — ~100 verified EN/DE articles/month, self-hosted, €5–8/month infrastructure.",
+  "home.roleStatement":
+    "I work as a full-stack developer in Germany — React, Next.js and TypeScript on the front, PHP 8 and Craft CMS on the back — and increasingly on LLM engineering: orchestration, routing, and quality gates for production AI systems.",
   "about.heading.line1": "Hi, I'm Abhinay.",
   "about.heading.line2": "Designing",
   "about.heading.line3": "Digital Systems",
@@ -74,6 +76,21 @@ const enMessages = {
   "skills.group.devopsSecurity": "DevOps & Security",
   "skills.group.aiLlm": "AI & LLM Engineering",
   "skills.group.practices": "Practices",
+  "skills.evidence.frontend":
+    "~29k lines of strict-mode TypeScript across a React 18 e-commerce SPA →",
+  "skills.evidence.backend":
+    "Zero-credential GraphQL proxy and Craft Commerce as a rental-inquiry engine →",
+  "skills.evidence.cmsData":
+    "Live Craft CMS 4→5 migration of an order database, 153 migrations, zero data loss →",
+  "skills.evidence.testing":
+    "91 Jest test files and 23 Cypress specs behind a pre-push gate →",
+  "skills.evidence.devopsSecurity":
+    "~7,700-line PHP 8 deployment console with SSE streaming and rsync rollbacks →",
+  "skills.evidence.aiLlm":
+    "Local-first LLM routing and an 8-stage, human-gated newsroom pipeline →",
+  "skills.evidence.practices":
+    "Technical SEO rebuild that grew organic traffic ~6x →",
+  "skills.evidence.linkLabel": "case study",
   "projects.heading": "Projects",
   "projects.overviewIntro":
     "Four production systems — three client platforms and my own AI newsroom. Client work is anonymized; every number is real.",
@@ -199,9 +216,11 @@ const deMessages: typeof enMessages = {
   "home.stats.2.value": "Migration ohne Datenverlust",
   "home.stats.2.label":
     "Live-Commerce-Datenbank mit laufenden Bestellungen über eine große CMS-Version migriert — 153 Migrationen, gestufte Rollbacks.",
-  "home.stats.3.value": "~100 Artikel/Monat für unter 8 €",
+  "home.stats.3.value": "KI-Newsroom, 100 % menschlich freigegeben",
   "home.stats.3.label":
-    "Autonomer EN/DE-KI-Newsroom, selbst gehostet — nichts erscheint ohne menschliche Freigabe.",
+    "Nichts erscheint ohne meine Freigabe — ~100 geprüfte EN/DE-Artikel/Monat, selbst gehostet, 5–8 € Infrastruktur/Monat.",
+  "home.roleStatement":
+    "Ich arbeite als Full-Stack-Entwickler in Deutschland — React, Next.js und TypeScript im Frontend, PHP 8 und Craft CMS im Backend — und zunehmend im LLM-Engineering: Orchestrierung, Routing und Quality Gates für produktive KI-Systeme.",
   "about.heading.line1": "Hi, ich bin Abhinay.",
   "about.heading.line2": "Ich entwickle",
   "about.heading.line3": "digitale Systeme",
@@ -231,6 +250,21 @@ const deMessages: typeof enMessages = {
   "skills.group.devopsSecurity": "DevOps & Sicherheit",
   "skills.group.aiLlm": "KI & LLM-Engineering",
   "skills.group.practices": "Arbeitsweisen",
+  "skills.evidence.frontend":
+    "~29k Zeilen Strict-Mode-TypeScript in einer React-18-E-Commerce-SPA →",
+  "skills.evidence.backend":
+    "Zero-Credential-GraphQL-Proxy und Craft Commerce als Mietanfrage-Engine →",
+  "skills.evidence.cmsData":
+    "Live-Migration einer Bestelldatenbank von Craft CMS 4 auf 5, 153 Migrationen, kein Datenverlust →",
+  "skills.evidence.testing":
+    "91 Jest-Testdateien und 23 Cypress-Specs hinter einem Pre-Push-Gate →",
+  "skills.evidence.devopsSecurity":
+    "~7.700 Zeilen PHP-8-Deployment-Konsole mit SSE-Streaming und rsync-Rollbacks →",
+  "skills.evidence.aiLlm":
+    "Local-first-LLM-Routing und eine 8-stufige, menschlich freigegebene Newsroom-Pipeline →",
+  "skills.evidence.practices":
+    "Technischer SEO-Rebuild, der den organischen Traffic ~6x steigerte →",
+  "skills.evidence.linkLabel": "Case Study",
   "projects.heading": "Projekte",
   "projects.overviewIntro":
     "Vier Produktionssysteme — drei Kundenplattformen und mein eigener KI-Newsroom. Kundenprojekte sind anonymisiert; jede Zahl ist echt.",

@@ -1,3 +1,5 @@
+import { isCaseStudySlug } from "../content/portfolioCaseStudies";
+
 export type Locale = "en" | "de";
 
 export const DEFAULT_LOCALE: Locale = "en";
@@ -81,6 +83,18 @@ export function isMainBaseRoute(basePath: string): boolean {
 
 export function isProjectBasePath(basePath: string): boolean {
   return stripLocalePrefix(basePath).startsWith("/projects");
+}
+
+/**
+ * True for per-slide case-study URLs (/projects/<slug>) — these render the
+ * Projects MAIN page with that slide active, so they count as main-page
+ * routes (nav index, progress bar, wheel navigation), unlike the
+ * /projects/project-N section pages.
+ */
+export function isCaseStudyBasePath(basePath: string): boolean {
+  const stripped = stripLocalePrefix(basePath);
+  const match = stripped.match(/^\/projects\/([^/]+)$/);
+  return match !== null && isCaseStudySlug(match[1]);
 }
 
 export function isLocalizablePath(pathname: string): boolean {

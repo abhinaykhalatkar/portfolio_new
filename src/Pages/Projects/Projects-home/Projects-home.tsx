@@ -10,12 +10,27 @@ import {
   getProjectAddressByIndex,
   normalizeProjectSectionCount,
 } from "../../../Components/ProgressNav/VerticalProgressNav";
-import { getProfessionalProjects } from "../../../content/portfolioCaseStudies";
+import {
+  getCaseStudyBasePath,
+  getCaseStudyIndexBySlug,
+  getProfessionalProjects,
+} from "../../../content/portfolioCaseStudies";
 import { useLocaleContext } from "../../../i18n/LocaleContext";
+import { toPublicLocalizedPath } from "../../../i18n/localeRoutes";
 
 const AUTOPLAY_DELAY_MS = 10_000;
 
-export default function ProjectsHome() {
+type ProjectsHomeProps = {
+  /**
+   * When rendered at a per-slide URL (/projects/<slug>), the slug whose slide
+   * starts active. Undefined at the /projects index (slide 0). The carousel UI
+   * is identical either way; only the starting slide, the H1, and the URL
+   * that follows slide changes differ.
+   */
+  caseStudySlug?: string;
+};
+
+export default function ProjectsHome({ caseStudySlug }: ProjectsHomeProps) {
   const { darkTheme } = useThemeContext();
   const { locale, t } = useLocaleContext();
   const {
@@ -33,9 +48,13 @@ export default function ProjectsHome() {
   const projects = useMemo(() => getProfessionalProjects(locale), [locale]);
   const projectCount = projects.length;
 
-  const [activeSlide, setActiveSlide] = useState(0);
+  const initialSlide = Math.max(0, getCaseStudyIndexBySlug(caseStudySlug));
+  const [activeSlide, setActiveSlide] = useState(initialSlide);
   const [slideDirection, setSlideDirection] = useState<1 | -1>(1);
   const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
+  // True once the user (or autoplay) has moved the carousel in this mount —
+  // only then does the URL start following the active slide.
+  const [hasNavigatedSlides, setHasNavigatedSlides] = useState(false);
 
   const resolveIndex = useCallback(
     (next: number) => {
@@ -59,6 +78,7 @@ export default function ProjectsHome() {
       }
       setSlideDirection(resolved > activeSlide ? 1 : -1);
       setActiveSlide(resolved);
+      setHasNavigatedSlides(true);
     },
     [activeSlide, projectCount, resolveIndex]
   );
@@ -69,6 +89,7 @@ export default function ProjectsHome() {
     }
     setSlideDirection(1);
     setActiveSlide((previous) => resolveIndex(previous + 1));
+    setHasNavigatedSlides(true);
   }, [projectCount, resolveIndex]);
 
   const goToPrevSlide = useCallback(() => {
@@ -77,11 +98,31 @@ export default function ProjectsHome() {
     }
     setSlideDirection(-1);
     setActiveSlide((previous) => resolveIndex(previous - 1));
+    setHasNavigatedSlides(true);
   }, [projectCount, resolveIndex]);
 
+  // Re-sync when the URL slug changes underneath us (browser back/forward,
+  // language switch, in-app link) without remounting.
   useEffect(() => {
-    setActiveSlide(0);
-  }, [projectCount]);
+    setActiveSlide(Math.max(0, getCaseStudyIndexBySlug(caseStudySlug)));
+    setHasNavigatedSlides(false);
+  }, [caseStudySlug, projectCount]);
+
+  // Per-slide URLs: once the carousel has moved, keep the address bar on the
+  // active slide's canonical URL. `replace` so flipping slides never floods
+  // browser history; each URL is also a real prerendered page for crawlers.
+  useEffect(() => {
+    if (!hasNavigatedSlides || projectCount <= 0) {
+      return;
+    }
+    const target = toPublicLocalizedPath(
+      getCaseStudyBasePath(projects[activeSlide].id),
+      locale
+    );
+    if (window.location.pathname !== target) {
+      navigate(target, { replace: true });
+    }
+  }, [activeSlide, hasNavigatedSlides, locale, navigate, projectCount, projects]);
 
   useEffect(() => {
     if (projectCount <= 1 || isAutoplayPaused) {
@@ -91,6 +132,7 @@ export default function ProjectsHome() {
     const timer = window.setInterval(() => {
       setSlideDirection(1);
       setActiveSlide((previous) => resolveIndex(previous + 1));
+      setHasNavigatedSlides(true);
     }, AUTOPLAY_DELAY_MS);
 
     return () => {
@@ -150,7 +192,14 @@ export default function ProjectsHome() {
       transition={pageTransition}
     >
       <div className="project-page-content">
-        <h1 className="sr-only">{t("projects.heading")}</h1>
+        {/* Per-slide URLs get the project title as the page H1 (unique per URL
+            for search); the /projects index keeps "Projects". The visible
+            heading below is identical either way. */}
+        <h1 className="sr-only">
+          {caseStudySlug && currentProject
+            ? currentProject.title
+            : t("projects.heading")}
+        </h1>
         <BouncyText name_class="heading" text={t("projects.heading")} />
 
         <motion.div

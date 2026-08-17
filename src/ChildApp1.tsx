@@ -19,7 +19,11 @@ import {
   parseProjectSectionFromPathname,
   resolveProjectNavIndex,
 } from "./Components/ProgressNav/VerticalProgressNav";
-import { stripLocalePrefix, toPublicLocalizedPath } from "./i18n/localeRoutes";
+import {
+  isCaseStudyBasePath,
+  stripLocalePrefix,
+  toPublicLocalizedPath,
+} from "./i18n/localeRoutes";
 
 type Direction = "next" | "prev";
 
@@ -124,7 +128,13 @@ function ChildApp1() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const basePath = stripLocalePrefix(location.pathname);
+  // Per-slide case-study URLs (/projects/<slug>) ARE the Projects main page
+  // with a different slide active — normalize them to /projects for every
+  // nav-index / wheel-navigation decision below.
+  const rawBasePath = stripLocalePrefix(location.pathname);
+  const basePath = isCaseStudyBasePath(rawBasePath)
+    ? PROJECTS_HOME_PATH
+    : rawBasePath;
   const mainRef = useRef<HTMLElement | null>(null);
   const {
     handleSetScrollDirection,

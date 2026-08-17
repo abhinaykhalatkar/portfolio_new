@@ -15,8 +15,8 @@
         "de": "Selbst gehostet, Deutschland"
       },
       "description": {
-        "en": "Autonomous English/German AI newsroom in production: an eight-stage nightly pipeline discovers, verifies, writes, and translates ~100 verified articles a month at €5–8/month total operating cost — and nothing publishes without a human pressing the button.",
-        "de": "Autonomer englisch-deutscher KI-Newsroom in Produktion: Eine achtstufige nächtliche Pipeline entdeckt, verifiziert, schreibt und übersetzt ~100 verifizierte Artikel im Monat bei 5–8 € Gesamtbetriebskosten — und nichts erscheint, ohne dass ein Mensch den Knopf drückt."
+        "en": "Autonomous English/German AI newsroom in production, 100% human-gated: nothing publishes without me pressing the button. An eight-stage nightly pipeline discovers, verifies, writes, and translates ~100 verified articles a month at €5–8/month total operating cost.",
+        "de": "Autonomer englisch-deutscher KI-Newsroom in Produktion, zu 100 % menschlich freigegeben: Nichts erscheint, ohne dass ich den Knopf drücke. Eine achtstufige nächtliche Pipeline entdeckt, verifiziert, schreibt und übersetzt ~100 verifizierte Artikel im Monat bei 5–8 € Gesamtbetriebskosten."
       },
       "link": "https://doordarshi.de/",
       "skills": [

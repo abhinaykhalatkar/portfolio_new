@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  isCaseStudyBasePath,
   isLocalizablePath,
   parseLocaleFromPath,
   stripLocalePrefix,
@@ -38,6 +39,19 @@ describe("locale route helpers", () => {
     expect(isLocalizablePath("/projects")).toBe(true);
     expect(isLocalizablePath("/de/projects/project-1")).toBe(true);
     expect(isLocalizablePath("/RESUME-Abhinay_Khalatkar.pdf")).toBe(false);
+  });
+
+  it("recognises per-slide case-study URLs as main-page routes, but not project sections or unknown slugs", () => {
+    expect(isCaseStudyBasePath("/projects/doordarshi-newsroom")).toBe(true);
+    expect(isCaseStudyBasePath("/en/projects/doordarshi-newsroom")).toBe(true);
+    expect(isCaseStudyBasePath("/de/projects/rental-commerce-migration/")).toBe(true);
+    expect(isCaseStudyBasePath("/projects/project-1")).toBe(false);
+    expect(isCaseStudyBasePath("/projects/project-catalogue")).toBe(false);
+    expect(isCaseStudyBasePath("/projects")).toBe(false);
+    expect(isCaseStudyBasePath("/projects/doordarshi-newsroom/extra")).toBe(false);
+    expect(toPublicLocalizedPath("/projects/doordarshi-newsroom", "de")).toBe(
+      "/de/projects/doordarshi-newsroom/"
+    );
   });
 
   it("treats /resume as a canonical main route in both locales", () => {

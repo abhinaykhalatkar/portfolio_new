@@ -107,6 +107,16 @@ export default function HomePage() {
         >
           {t("home.intro")}
         </motion.p>
+        <motion.p
+          className="home-role"
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          custom={0.55}
+          variants={contentVariants}
+        >
+          {t("home.roleStatement")}
+        </motion.p>
         <motion.div
           className="home-stats"
           initial="hidden"

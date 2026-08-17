@@ -48,7 +48,26 @@
         .heading-para {
             line-height: 1.5;
             max-width: 520px;
+            margin-bottom: 0.7rem;
+        }
+
+        .home-role {
+            font-size: 0.86rem;
+            line-height: 1.5;
+            opacity: 0.85;
+            max-width: 520px;
             margin-bottom: 1.2rem;
+        }
+
+        // Constrained desktop viewports (short, or narrow enough that the
+        // column wraps heavily): the role line is secondary to the stats —
+        // hide it before anything else has to compress or reach the bar.
+        // The full text stays in the About story + Skills page + meta.
+        @media only screen and (min-width: 900px) and (max-height: 720px),
+               only screen and (min-width: 900px) and (max-width: 1180px) {
+            .home-role {
+                display: none;
+            }
         }
 
         .home-stats {

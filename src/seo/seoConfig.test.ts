@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { getCaseStudySlugs } from "../content/portfolioCaseStudies";
 import {
   isProjectAliasPath,
   isProjectSectionPath,
@@ -63,12 +64,32 @@ describe("seoConfig route mapping", () => {
     expect(de.canonicalPath).toBe("/de/resume");
   });
 
+  it("maps per-slide case-study URLs to indexable caseStudy configs with unique titles (both locales)", () => {
+    const slugs = getCaseStudySlugs();
+    expect(slugs).toHaveLength(4);
+    for (const locale of ["en", "de"] as const) {
+      const titles = new Set<string>();
+      for (const slug of slugs) {
+        const config = resolveSeoConfig(`/projects/${slug}`, locale, false);
+        expect(config.kind).toBe("caseStudy");
+        expect(config.robots).toBe("index,follow");
+        expect(config.canonicalPath).toBe(`/${locale}/projects/${slug}`);
+        titles.add(config.title);
+      }
+      expect(titles.size, `${locale} case-study titles must be unique`).toBe(4);
+    }
+    // Unknown slugs still fall through to generic/noindex, and project-N stays a section.
+    expect(resolveSeoConfig("/projects/not-a-real-slug", "en", false).kind).toBe("generic");
+    expect(resolveSeoConfig("/projects/project-2", "en", false).kind).toBe("projectSection");
+  });
+
   it("keeps every indexable title ≤ 60 chars and description within 140–155 chars", () => {
     const indexablePaths = [
       "/",
       "/about",
       "/skills",
       "/projects",
+      ...getCaseStudySlugs().map((slug) => `/projects/${slug}`),
       "/resume",
       "/contact",
     ];

@@ -30,6 +30,26 @@
         margin: 0;
     }
 
+    // One proof line per group: ties the keywords below to shipped work and
+    // deep-links to the case-study URL.
+    .skill-group-evidence {
+        margin: 0;
+        font-size: 0.78rem;
+        line-height: 1.4;
+        opacity: 0.8;
+
+        .skill-group-evidence-link {
+            color: #7eb6f3;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            font-weight: 600;
+
+            &:hover {
+                opacity: 0.85;
+            }
+        }
+    }
+
     .skill-group-items {
         display: flex;
         flex-wrap: wrap;
@@ -81,6 +101,10 @@
 
         .skill-group {
             row-gap: 0.3rem;
+        }
+
+        .skill-group-evidence {
+            font-size: 0.72rem;
         }
 
         .icon-container {

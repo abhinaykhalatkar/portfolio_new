@@ -59,6 +59,28 @@ describe("content policy — case studies", () => {
     expect(portfolioCaseStudies[0].id).toBe("doordarshi-newsroom");
   });
 
+  it("keeps case-study slugs in sync with the prerender manifest (per-slide URLs must all be prerendered + in the sitemap)", async () => {
+    // The manifest is a plain .mjs (no TS imports) so the slug list is duplicated
+    // there on purpose; this test is the drift guard for the 5-file URL contract.
+    const manifest = await import("../../scripts/shared/prerenderRouteManifest.mjs");
+    expect(manifest.CASE_STUDY_SLUGS).toEqual(portfolioCaseStudies.map((s) => s.id));
+    for (const slug of manifest.CASE_STUDY_SLUGS) {
+      expect(manifest.SITEMAP_LOCALIZED_ROUTES).toContain(`/en/projects/${slug}/`);
+      expect(manifest.SITEMAP_LOCALIZED_ROUTES).toContain(`/de/projects/${slug}/`);
+    }
+  });
+
+  it("leads the newsroom claim with human gating, not volume (quality-first ordering)", () => {
+    for (const locale of ["en", "de"] as const) {
+      const value = getMessages(locale)["home.stats.3.value"];
+      expect(value.toLowerCase()).toMatch(/human-gated|menschlich freigegeben/);
+      expect(value).not.toMatch(/^~?100 /);
+    }
+    const doordarshi = portfolioCaseStudies[0];
+    expect(doordarshi.outcomeFocus.en.startsWith("100% human-gated")).toBe(true);
+    expect(doordarshi.outcomeFocus.de.startsWith("100 % menschlich freigegeben")).toBe(true);
+  });
+
   it("contains no retired framing or forbidden channels in any locale field", () => {
     for (const study of portfolioCaseStudies) {
       for (const text of collectStrings(study)) {

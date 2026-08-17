@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { usePageAnimationContext } from "../../Context/PageAnimationContext/PageAnimationContext";
 import { useLocaleContext } from "../../i18n/LocaleContext";
-import { stripLocalePrefix } from "../../i18n/localeRoutes";
+import { isCaseStudyBasePath, stripLocalePrefix } from "../../i18n/localeRoutes";
 import "./ProgressNav.scss";
 import ScrollBtn from "./ScrollBtn";
 
@@ -37,7 +37,10 @@ export function ProgressNav({ endPosition }: ProgressNavProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const { localizePath, t } = useLocaleContext();
-  const basePath = stripLocalePrefix(location.pathname);
+  // Per-slide case-study URLs (/projects/<slug>) are the Projects main page —
+  // highlight "03" for them, same as ChildApp1's nav-index normalization.
+  const rawBasePath = stripLocalePrefix(location.pathname);
+  const basePath = isCaseStudyBasePath(rawBasePath) ? "/projects" : rawBasePath;
 
   const [squash, setSquash] = useState(false);
   const [prevIndex, setPrevIndex] = useState(

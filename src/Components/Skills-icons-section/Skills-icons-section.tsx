@@ -22,8 +22,10 @@ import mysqlIcon from "../../Assets/skills-icons/mysql.svg";
 import nodejsIcon from "../../Assets/skills-icons/node-js.svg";
 import reactIcon from "../../Assets/skills-icons/react.svg";
 import bootStrapIcon from "../../Assets/skills-icons/bootstrap.svg";
+import { Link } from "react-router-dom";
 import { useLocaleContext } from "../../i18n/LocaleContext";
 import type { MessageKey } from "../../i18n/messages";
+import { getCaseStudyBasePath } from "../../content/portfolioCaseStudies";
 
 type SkillIconEntry = {
   title: string;
@@ -33,12 +35,18 @@ type SkillIconEntry = {
 
 type SkillGroup = {
   titleKey: MessageKey;
+  /** One evidence line tying the group to shipped work (E-E-A-T). */
+  evidenceKey: MessageKey;
+  /** Case-study slug the evidence links to (per-slide URL /projects/<slug>). */
+  evidenceSlug: string;
   items: SkillIconEntry[];
 };
 
 const skillGroups: SkillGroup[] = [
   {
     titleKey: "skills.group.frontend",
+    evidenceKey: "skills.evidence.frontend",
+    evidenceSlug: "hybrid-headless-ecommerce",
     items: [
       { iconSrc: reactIcon, title: "React 18" },
       { Icon: SiNextdotjs, title: "Next.js" },
@@ -52,6 +60,8 @@ const skillGroups: SkillGroup[] = [
   },
   {
     titleKey: "skills.group.backend",
+    evidenceKey: "skills.evidence.backend",
+    evidenceSlug: "hybrid-headless-ecommerce",
     items: [
       { Icon: FaPhp, title: "PHP 8" },
       { iconSrc: nodejsIcon, title: "Node.js" },
@@ -65,6 +75,8 @@ const skillGroups: SkillGroup[] = [
   },
   {
     titleKey: "skills.group.cmsData",
+    evidenceKey: "skills.evidence.cmsData",
+    evidenceSlug: "rental-commerce-migration",
     items: [
       { Icon: SiCraftcms, title: "Craft CMS 5" },
       { title: "PIMCORE" },
@@ -74,6 +86,8 @@ const skillGroups: SkillGroup[] = [
   },
   {
     titleKey: "skills.group.testing",
+    evidenceKey: "skills.evidence.testing",
+    evidenceSlug: "hybrid-headless-ecommerce",
     items: [
       { Icon: SiJest, title: "Jest" },
       { Icon: SiCypress, title: "Cypress (E2E)" },
@@ -85,6 +99,8 @@ const skillGroups: SkillGroup[] = [
   },
   {
     titleKey: "skills.group.devopsSecurity",
+    evidenceKey: "skills.evidence.devopsSecurity",
+    evidenceSlug: "security-first-deployment-console",
     items: [
       { iconSrc: gitIcon, title: "Git" },
       { iconSrc: dockerIcon, title: "Docker" },
@@ -99,6 +115,8 @@ const skillGroups: SkillGroup[] = [
   },
   {
     titleKey: "skills.group.aiLlm",
+    evidenceKey: "skills.evidence.aiLlm",
+    evidenceSlug: "doordarshi-newsroom",
     items: [
       { title: "Ollama" },
       { Icon: SiOpenai, title: "LLM orchestration & routing" },
@@ -110,6 +128,8 @@ const skillGroups: SkillGroup[] = [
   },
   {
     titleKey: "skills.group.practices",
+    evidenceKey: "skills.evidence.practices",
+    evidenceSlug: "hybrid-headless-ecommerce",
     items: [
       { title: "System design" },
       { title: "Software architecture" },
@@ -123,7 +143,7 @@ const skillGroups: SkillGroup[] = [
 
 export default function SkillIconSection() {
   const { contentVariants } = usePageAnimationContext();
-  const { t } = useLocaleContext();
+  const { t, localizePath } = useLocaleContext();
 
   return (
     <div
@@ -143,6 +163,15 @@ export default function SkillIconSection() {
           >
             {t(group.titleKey)}
           </motion.h2>
+          <p className="skill-group-evidence">
+            {t(group.evidenceKey)}{" "}
+            <Link
+              className="skill-group-evidence-link"
+              to={localizePath(getCaseStudyBasePath(group.evidenceSlug))}
+            >
+              {t("skills.evidence.linkLabel")}
+            </Link>
+          </p>
           <div className="skill-group-items">
             {group.items.map((el, ind) => {
               const Glyph = el.Icon;

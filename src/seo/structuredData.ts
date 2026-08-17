@@ -1,6 +1,13 @@
-import { getCaseStudyTitles } from "../content/portfolioCaseStudies";
-import type { Locale } from "../i18n/localeRoutes";
-import type { SeoRouteConfig } from "./seoConfig";
+import {
+  getCaseStudyBySlug,
+  getCaseStudyTitles,
+} from "../content/portfolioCaseStudies";
+import {
+  stripLocalePrefix,
+  toPublicLocalizedPath,
+  type Locale,
+} from "../i18n/localeRoutes";
+import { getCaseStudySlugFromPath, type SeoRouteConfig } from "./seoConfig";
 import { toAbsoluteUrl } from "./siteUrl";
 
 export type StructuredDataPayload = {
@@ -25,12 +32,25 @@ function buildPersonSchema(siteUrl: string, locale: Locale) {
     sameAs: [
       "https://www.linkedin.com/in/abhinay-khalatkar",
       "https://github.com/abhinaykhalatkar",
+      "https://doordarshi.de/",
     ],
     address: {
       "@type": "PostalAddress",
       addressLocality: "Geilenkirchen",
       addressCountry: "DE",
     },
+    // Education is visible on the Home timeline (and About story) — schema
+    // describes only on-page content.
+    alumniOf: [
+      {
+        "@type": "CollegeOrUniversity",
+        name: "SRH Hochschule Heidelberg",
+      },
+      {
+        "@type": "CollegeOrUniversity",
+        name: "Nagpur University",
+      },
+    ],
     knowsAbout: [
       "React",
       "Next.js",
@@ -84,7 +104,9 @@ function buildPageSchema({
 }: StructuredDataPayload) {
   const caseStudyTitles = getCaseStudyTitles(locale);
 
-  if (metadata.kind === "home") {
+  // Home and About are both profile pages for the same Person (About is the
+  // long-form story; Home is the pitch).
+  if (metadata.kind === "home" || metadata.kind === "about") {
     return {
       "@type": "ProfilePage",
       "@id": `${canonicalUrl}#webpage`,
@@ -95,6 +117,21 @@ function buildPageSchema({
       mainEntity: {
         "@id": `${siteUrl}#person`,
       },
+      isPartOf: {
+        "@id": `${siteUrl}#website`,
+      },
+    };
+  }
+
+  if (metadata.kind === "caseStudy") {
+    return {
+      "@type": "WebPage",
+      "@id": `${canonicalUrl}#webpage`,
+      url: canonicalUrl,
+      name: metadata.title,
+      description: metadata.description,
+      inLanguage: locale,
+      author: { "@id": `${siteUrl}#person` },
       isPartOf: {
         "@id": `${siteUrl}#website`,
       },
@@ -156,16 +193,67 @@ function buildPageSchema({
   };
 }
 
+/**
+ * BreadcrumbList for per-slide case-study URLs: Home › Projects › <title>.
+ * Only emitted for the caseStudy kind; item URLs are absolute canonicals.
+ */
+function buildCaseStudyBreadcrumb({
+  metadata,
+  canonicalUrl,
+  siteUrl,
+  locale,
+}: StructuredDataPayload) {
+  const slug = getCaseStudySlugFromPath(
+    stripLocalePrefix(new URL(canonicalUrl).pathname)
+  );
+  const study = slug ? getCaseStudyBySlug(slug, locale) : null;
+  const homeUrl = toAbsoluteUrl(toPublicLocalizedPath("/", locale), siteUrl);
+  const projectsUrl = toAbsoluteUrl(
+    toPublicLocalizedPath("/projects", locale),
+    siteUrl
+  );
+
+  return {
+    "@type": "BreadcrumbList",
+    "@id": `${canonicalUrl}#breadcrumb`,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: locale === "de" ? "Start" : "Home",
+        item: homeUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: locale === "de" ? "Projekte" : "Projects",
+        item: projectsUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: study?.title ?? metadata.title,
+        item: canonicalUrl,
+      },
+    ],
+  };
+}
+
 export function buildStructuredDataGraph(
   payload: StructuredDataPayload
 ): Record<string, unknown> {
-  const { siteUrl, locale } = payload;
+  const { siteUrl, locale, metadata } = payload;
   const person = buildPersonSchema(siteUrl, locale);
   const website = buildWebSiteSchema(siteUrl, locale);
   const page = buildPageSchema(payload);
+  const graph: Record<string, unknown>[] = [website, person, page];
+
+  if (metadata.kind === "caseStudy") {
+    graph.push(buildCaseStudyBreadcrumb(payload));
+  }
 
   return {
     "@context": "https://schema.org",
-    "@graph": [website, person, page],
+    "@graph": graph,
   };
 }
