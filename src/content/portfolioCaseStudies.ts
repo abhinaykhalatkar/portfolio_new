@@ -2,10 +2,14 @@ import type { Locale } from "../i18n/localeRoutes";
 
 type LocalizedCopy = Record<Locale, string>;
 
+// Card structure follows the portfolio-seo-content skill's case-study template:
+// Problem → My role (deliveryModel) → Approach/Architecture → Stack → Outcome.
 export type CaseStudySummary = {
   /** Stable identifier; also the URL slug under /projects/ (per-slide URLs). */
   id: string;
   title: LocalizedCopy;
+  /** The concrete problem this system had to solve — one or two sentences. */
+  problem: LocalizedCopy;
   architecture: LocalizedCopy;
   deliveryModel: LocalizedCopy;
   stack: LocalizedCopy;
@@ -15,6 +19,7 @@ export type CaseStudySummary = {
 export type ResolvedCaseStudySummary = {
   id: string;
   title: string;
+  problem: string;
   architecture: string;
   deliveryModel: string;
   stack: string;
@@ -30,6 +35,10 @@ export const portfolioCaseStudies: CaseStudySummary[] = [
     title: {
       en: "Doordarshi Newsroom — Autonomous Bilingual AI Newsroom",
       de: "Doordarshi Newsroom — Autonomer zweisprachiger KI-Newsroom",
+    },
+    problem: {
+      en: "Running a credible newsroom autonomously means solving three problems at once: trust (nothing false or non-compliant may publish), cost (cloud LLM pricing makes per-article economics fail fast), and reliability (an unattended nightly pipeline on consumer hardware must survive its own failures).",
+      de: "Einen glaubwürdigen Newsroom autonom zu betreiben heißt, drei Probleme gleichzeitig zu lösen: Vertrauen (nichts Falsches oder Nicht-Konformes darf erscheinen), Kosten (bei Cloud-LLM-Preisen kippt die Rechnung pro Artikel schnell) und Zuverlässigkeit (eine unbeaufsichtigte nächtliche Pipeline auf Consumer-Hardware muss ihre eigenen Ausfälle überstehen).",
     },
     architecture: {
       en: "An eight-stage nightly pipeline — intake, claim verification, editorial standards, growth, original writing, media, EU/DE compliance, and a human approval gate — on a self-hosted multi-agent control plane: a Unix-domain-socket orchestrator with lease/heartbeat semantics, schema-validated JSON contracts between stages, and policy-driven retries, so a failed stage never corrupts a batch.",
@@ -54,6 +63,10 @@ export const portfolioCaseStudies: CaseStudySummary[] = [
       en: "Hybrid Headless E-Commerce Platform",
       de: "Hybride Headless-E-Commerce-Plattform",
     },
+    problem: {
+      en: "SPAs and SEO are natural enemies: crawlers need server-rendered metadata, users want app-like navigation, and the CMS API must be reachable from the browser without ever exposing credentials.",
+      de: "SPAs und SEO sind natürliche Gegner: Crawler brauchen serverseitig gerenderte Metadaten, Nutzer wollen App-artige Navigation, und die CMS-API muss aus dem Browser erreichbar sein, ohne je Credentials preiszugeben.",
+    },
     architecture: {
       en: "A bilingual e-commerce platform for an industrial manufacturer: the Craft CMS 5 / PHP 8.2 backend server-renders the SEO-critical document head — canonical and hreflang tags, Open Graph, four JSON-LD schema types, per-language XML sitemaps — while a React 18 + TypeScript SPA owns the body. A staged client-side URL resolver with in-flight request cancellation and a queue-based product catalog import complete the platform.",
       de: "Eine zweisprachige E-Commerce-Plattform für einen Industriehersteller: Das Craft-CMS-5/PHP-8.2-Backend rendert den SEO-kritischen Dokumentkopf serverseitig — Canonical- und hreflang-Tags, Open Graph, vier JSON-LD-Schema-Typen, XML-Sitemaps pro Sprache — während eine React-18+TypeScript-SPA den Body übernimmt. Ein gestufter clientseitiger URL-Resolver mit Request-Abbruch und ein queue-basierter Produktkatalog-Import runden die Plattform ab.",
@@ -63,8 +76,8 @@ export const portfolioCaseStudies: CaseStudySummary[] = [
       de: "Als alleiniger Entwickler von der Designübergabe bis zur Produktion gebaut. Eine Zero-Credential-API-Grenze — ein Same-Origin-GraphQL-Proxy — hält Schema-Tokens serverseitig, erzwingt CSRF nur auf Mutationen und stempelt API-Antworten mit noindex; Credentials erreichen den Browser nie. DSGVO-Consent schützt alle Storage-Zugriffe, DOMPurify bereinigt alle CMS-Inhalte, hCaptcha sichert öffentliche Formulare.",
     },
     stack: {
-      en: "Craft CMS 5, PHP 8.2 (~7,100 lines across 2 custom modules), GraphQL, React 18, strict-mode TypeScript (~29k lines, 203 files, 47 components, 8 Redux slices), 48 GraphQL query files — with 91 Jest test files and 23 Cypress E2E specs behind a pre-push gate.",
-      de: "Craft CMS 5, PHP 8.2 (~7.100 Zeilen in 2 eigenen Modulen), GraphQL, React 18, Strict-Mode-TypeScript (~29k Zeilen, 203 Dateien, 47 Komponenten, 8 Redux-Slices), 48 GraphQL-Query-Dateien — mit 91 Jest-Testdateien und 23 Cypress-E2E-Specs hinter einem Pre-Push-Gate.",
+      en: "Craft CMS 5, PHP 8.2 with 2 custom modules, GraphQL, React 18, strict-mode TypeScript (47 components, 8 Redux slices, 48 GraphQL query files) — with 91 Jest test files and 23 Cypress E2E specs behind a pre-push gate.",
+      de: "Craft CMS 5, PHP 8.2 mit 2 eigenen Modulen, GraphQL, React 18, Strict-Mode-TypeScript (47 Komponenten, 8 Redux-Slices, 48 GraphQL-Query-Dateien) — mit 91 Jest-Testdateien und 23 Cypress-E2E-Specs hinter einem Pre-Push-Gate.",
     },
     outcomeFocus: {
       en: "Organic visitors grew ~6x after the technical SEO rebuild: from ~1,000 to ~6,000/month; search impressions from ~64,000 to ~105,000. Two live languages, a third scaffolded.",
@@ -77,9 +90,13 @@ export const portfolioCaseStudies: CaseStudySummary[] = [
       en: "Security-First Deployment Console",
       de: "Security-First-Deployment-Konsole",
     },
+    problem: {
+      en: "Deployments to shared-hosting environments were slow, opaque, and hard to reverse: no live build output, no safe way to roll back, and every new client project started from scratch.",
+      de: "Deployments auf Shared-Hosting-Umgebungen waren langsam, undurchsichtig und schwer rückgängig zu machen: keine Live-Build-Ausgabe, kein sicherer Rollback, und jedes neue Kundenprojekt begann bei null.",
+    },
     architecture: {
-      en: "~7,700 lines of framework-free PHP 8 and vanilla JavaScript with a single dependency (symfony/yaml). Live build output streams over Server-Sent Events into an in-browser xterm.js terminal; isolated temp-release builds are promoted via rsync only on success, with automatic protection of production-only content and fast, testable rollbacks.",
-      de: "~7.700 Zeilen framework-freies PHP 8 und Vanilla JavaScript mit einer einzigen Abhängigkeit (symfony/yaml). Live-Build-Ausgabe streamt über Server-Sent Events in ein xterm.js-Terminal im Browser; isolierte Temp-Release-Builds werden nur bei Erfolg per rsync promotet — mit automatischem Schutz produktionsspezifischer Inhalte und schnellen, testbaren Rollbacks.",
+      en: "Framework-free PHP 8 and vanilla JavaScript with a single dependency (symfony/yaml). Live build output streams over Server-Sent Events into an in-browser xterm.js terminal; isolated temp-release builds are promoted via rsync only on success, with automatic protection of production-only content and fast, testable rollbacks.",
+      de: "Framework-freies PHP 8 und Vanilla JavaScript mit einer einzigen Abhängigkeit (symfony/yaml). Live-Build-Ausgabe streamt über Server-Sent Events in ein xterm.js-Terminal im Browser; isolierte Temp-Release-Builds werden nur bei Erfolg per rsync promotet — mit automatischem Schutz produktionsspezifischer Inhalte und schnellen, testbaren Rollbacks.",
     },
     deliveryModel: {
       en: "An internal tool I designed and built at my agency, now part of the standard workflow on every project. Hardened by default: bcrypt auth, per-IP rate limiting (5 failures/60s triggers a 5-minute lockout), one-time action-bound run tokens valid for 90 seconds — CSRF protection designed for EventSource — a 'self'-only Content-Security-Policy with zero CDN assets, and a web/CLI privilege split.",
@@ -90,8 +107,8 @@ export const portfolioCaseStudies: CaseStudySummary[] = [
       de: "PHP 8 (framework-frei), Vanilla JavaScript, Server-Sent Events, xterm.js, rsync, symfony/yaml, Apache-Härtung.",
     },
     outcomeFocus: {
-      en: "Paired with the reusable React + Craft CMS boilerplate I architected, new client projects reach deploy-ready in one day. ~7,700 LOC · 1 dependency · 90-second run tokens.",
-      de: "Zusammen mit dem von mir entworfenen wiederverwendbaren React+Craft-CMS-Boilerplate sind neue Kundenprojekte in einem Tag deploy-ready. ~7.700 LOC · 1 Abhängigkeit · 90-Sekunden-Run-Tokens.",
+      en: "Paired with the reusable React + Craft CMS boilerplate I architected, new client projects reach deploy-ready in one day. 1 dependency · 90-second run tokens · 5-minute lockout after 5 failed logins.",
+      de: "Zusammen mit dem von mir entworfenen wiederverwendbaren React+Craft-CMS-Boilerplate sind neue Kundenprojekte in einem Tag deploy-ready. 1 Abhängigkeit · 90-Sekunden-Run-Tokens · 5-Minuten-Sperre nach 5 Fehlversuchen.",
     },
   },
   {
@@ -99,6 +116,10 @@ export const portfolioCaseStudies: CaseStudySummary[] = [
     title: {
       en: "Rental & Commerce Platform + Live CMS Migration",
       de: "Miet- & Commerce-Plattform + Live-CMS-Migration",
+    },
+    problem: {
+      en: "A live, order-taking commerce platform had to move across a major CMS version without losing a single order — and its content model needed a builder flexible enough for editors yet locked against production drift.",
+      de: "Eine live laufende Commerce-Plattform mit eingehenden Bestellungen musste eine große CMS-Version wechseln, ohne eine einzige Bestellung zu verlieren — und ihr Content-Modell brauchte einen Builder, flexibel genug für Redakteure und dennoch gegen Produktions-Drift gesichert.",
     },
     architecture: {
       en: "A German-language product, rental-inquiry, and e-commerce platform for an equipment rental and sales company, on templated Craft CMS 5 with Twig and Bootstrap 5. Craft Commerce is repurposed as a rental-inquiry engine (no online payment): date-bounded rental options attached to cart line items in a 3-step CSRF-protected flow, plus a 30-module page builder whose full content schema — 47 entry types, 103 fields, 12 sections — lives in version-controlled Project Config YAML, locked against production drift.",
@@ -109,12 +130,12 @@ export const portfolioCaseStudies: CaseStudySummary[] = [
       de: "Als alleiniger Entwickler gebaut und betreut. Kernstück: eine In-Place-Migration der live laufenden, Bestellungen entgegennehmenden Commerce-Datenbank von Craft CMS 4 auf 5 ohne Datenverlust — 153 Datenbankmigrationen auf einer Produktionsreplik geprobt, dann ein gestuftes Go-live-Runbook mit Rollbacks pro Stufe. Serverseitige Formular-Härtung mit Honeypots und DSGVO-Pflicht-Consent; tracker-frei und cookie-minimal.",
     },
     stack: {
-      en: "Craft CMS 5, Craft Commerce, Twig (100 templates, ~7,300 lines), Bootstrap 5, MySQL, one environment-aware .htaccess handling canonical 301s, ~25 preserved legacy redirects, and an origin-fallback serving ~540 MB of media across 3 environments without duplication.",
-      de: "Craft CMS 5, Craft Commerce, Twig (100 Templates, ~7.300 Zeilen), Bootstrap 5, MySQL, eine umgebungsbewusste .htaccess für kanonische 301s, ~25 erhaltene Legacy-Redirects und ein Origin-Fallback, der ~540 MB Medien ohne Duplizierung über 3 Umgebungen bereitstellt.",
+      en: "Craft CMS 5, Craft Commerce, Twig (100 templates), Bootstrap 5, MySQL, one environment-aware .htaccess handling canonical 301s, ~25 preserved legacy redirects, and an origin-fallback serving ~540 MB of media across 3 environments without duplication.",
+      de: "Craft CMS 5, Craft Commerce, Twig (100 Templates), Bootstrap 5, MySQL, eine umgebungsbewusste .htaccess für kanonische 301s, ~25 erhaltene Legacy-Redirects und ein Origin-Fallback, der ~540 MB Medien ohne Duplizierung über 3 Umgebungen bereitstellt.",
     },
     outcomeFocus: {
-      en: "153 migrations, zero data loss · 100 Twig templates (~7,300 lines) · 30 builder modules · 47 entry types · 103 fields · ~540 MB media across 3 environments · ~25 legacy redirects preserved.",
-      de: "153 Migrationen, kein Datenverlust · 100 Twig-Templates (~7.300 Zeilen) · 30 Builder-Module · 47 Entry-Types · 103 Felder · ~540 MB Medien über 3 Umgebungen · ~25 Legacy-Redirects erhalten.",
+      en: "153 migrations, zero data loss · 100 Twig templates · 30 builder modules · 47 entry types · 103 fields · ~540 MB media across 3 environments · ~25 legacy redirects preserved.",
+      de: "153 Migrationen, kein Datenverlust · 100 Twig-Templates · 30 Builder-Module · 47 Entry-Types · 103 Felder · ~540 MB Medien über 3 Umgebungen · ~25 Legacy-Redirects erhalten.",
     },
   },
 ];
@@ -126,6 +147,7 @@ function resolveCaseStudy(
   return {
     id: study.id,
     title: study.title[locale],
+    problem: study.problem[locale],
     architecture: study.architecture[locale],
     deliveryModel: study.deliveryModel[locale],
     stack: study.stack[locale],

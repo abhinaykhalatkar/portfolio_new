@@ -18,9 +18,9 @@ Case Studies (client work anonymized; all numbers are real):
 - Doordarshi Newsroom — Autonomous Bilingual AI Newsroom (personal project, in production since 2025):
   Eight-stage nightly pipeline (intake → claim verification → editorial standards → growth → original writing → media → EU/DE compliance → human approval gate) on a self-hosted multi-agent control plane with Unix-socket orchestration, schema-validated JSON contracts, and local-first LLM routing. ~100 verified bilingual articles/month at €5–8/month total operating cost; nothing publishes without human approval.
 - Hybrid Headless E-Commerce Platform (for an industrial manufacturer):
-  Craft CMS 5 / PHP 8.2 backend server-rendering the SEO-critical document head, React 18 + strict TypeScript SPA (~29k lines), zero-credential same-origin GraphQL proxy. Organic visitors grew from ~1,000 to ~6,000/month after the technical SEO rebuild; search impressions from ~64,000 to ~105,000. 91 Jest test files and 23 Cypress E2E specs.
+  Craft CMS 5 / PHP 8.2 backend server-rendering the SEO-critical document head, React 18 + strict TypeScript SPA, zero-credential same-origin GraphQL proxy. Organic visitors grew from ~1,000 to ~6,000/month after the technical SEO rebuild; search impressions from ~64,000 to ~105,000. 91 Jest test files and 23 Cypress E2E specs.
 - Security-First Deployment Console (internal agency tool):
-  ~7,700 lines of framework-free PHP 8 + vanilla JS with one dependency. SSE build streaming to an in-browser terminal, temp-release builds promoted via rsync on success, 90-second action-bound run tokens, 'self'-only CSP. New client projects reach deploy-ready in one day.
+  Framework-free PHP 8 + vanilla JS with one dependency. SSE build streaming to an in-browser terminal, temp-release builds promoted via rsync on success, 90-second action-bound run tokens, 'self'-only CSP. New client projects reach deploy-ready in one day.
 - Rental & Commerce Platform + Live CMS Migration (for an equipment rental and sales company):
   German-language Craft CMS 5 / Twig platform with Craft Commerce repurposed as a rental-inquiry engine and a 30-module page builder (47 entry types, 103 fields). In-place Craft CMS 4→5 migration of the live, order-taking database with zero data loss — 153 migrations rehearsed on a production replica, staged go-live runbook with per-stage rollbacks.
 

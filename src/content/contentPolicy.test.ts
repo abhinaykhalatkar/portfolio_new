@@ -13,10 +13,12 @@ import timelineFeed from "../../public/data/linkedin-timeline.json";
 //   platform is bilingual
 // - site copy is about the person, not the employer: no employer names in any
 //   site-facing content (resume PDF is exempt — it is a document, not site copy)
+// - no lines-of-code / file-count metrics (skill rule 9, 2026-08-17): they say
+//   nothing about quality; specificity must measure outcomes or scope instead
 // Real client names are deliberately NOT asserted here (that would embed them
 // in the repo); the pre-deploy build grep covers them manually.
 const FORBIDDEN =
-  /Senior|10\+|10 Jahre|über 10 Jahre|instagram|wa\.me|17677947889|scribble|wob AG|AK Advertising/i;
+  /Senior|10\+|10 Jahre|über 10 Jahre|instagram|wa\.me|17677947889|scribble|wob AG|AK Advertising|\b\d[\d.,]*k?\s*(lines|Zeilen|LOC)\b|\bLOC\b|203 (source )?(files|Dateien)/i;
 
 function collectStrings(value: unknown, out: string[] = []): string[] {
   if (typeof value === "string") {
@@ -67,6 +69,18 @@ describe("content policy — case studies", () => {
     for (const slug of manifest.CASE_STUDY_SLUGS) {
       expect(manifest.SITEMAP_LOCALIZED_ROUTES).toContain(`/en/projects/${slug}/`);
       expect(manifest.SITEMAP_LOCALIZED_ROUTES).toContain(`/de/projects/${slug}/`);
+    }
+  });
+
+  it("gives every case study a non-generic Problem statement in both locales (skill template: Problem → role → approach → outcome)", () => {
+    for (const study of portfolioCaseStudies) {
+      for (const locale of ["en", "de"] as const) {
+        const problem = study.problem[locale];
+        expect(problem.length, `${study.id} ${locale} problem too short`).toBeGreaterThan(80);
+        // Must name a concrete constraint, not a buzzword — every Problem here
+        // mentions at least one specific noun from the system it introduces.
+        expect(problem).toMatch(/SEO|CMS|newsroom|Newsroom|deploy|Deploy|order|Bestell|credential|Credential|LLM|rollback|Rollback/i);
+      }
     }
   });
 

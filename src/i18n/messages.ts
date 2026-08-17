@@ -46,7 +46,7 @@ const enMessages = {
   "home.stats.3.label":
     "Nothing publishes without my approval — ~100 verified EN/DE articles/month, self-hosted, €5–8/month infrastructure.",
   "home.roleStatement":
-    "I work as a full-stack developer in Germany — React, Next.js and TypeScript on the front, PHP 8 and Craft CMS on the back — and increasingly on LLM engineering: orchestration, routing, and quality gates for production AI systems.",
+    "Full-stack developer in Germany. Frontend in React, Next.js and strict TypeScript, backend in PHP 8 and Craft CMS 5, and LLM engineering with a local-first Ollama gateway that keeps a production newsroom under €8/month.",
   "about.heading.line1": "Hi, I'm Abhinay.",
   "about.heading.line2": "Designing",
   "about.heading.line3": "Digital Systems",
@@ -66,7 +66,7 @@ const enMessages = {
   "skills.topQuote": "What I work with",
   "skills.heading": "Skills",
   "skills.body.1":
-    "Grouped the way I use them day to day — from frontend to deployment, testing, and LLM engineering. Everything here has shipped to production.",
+    "Every group below links to the production system where I used it — one e-commerce platform grown ~6x, one live CMS migration with zero data loss, one deployment console, one human-gated AI newsroom. Nothing here is résumé filler.",
   "skills.linkedin.prefix": "Full work history on",
   "skills.linkedin.suffix": "and in my resume.",
   "skills.group.frontend": "Frontend",
@@ -77,7 +77,7 @@ const enMessages = {
   "skills.group.aiLlm": "AI & LLM Engineering",
   "skills.group.practices": "Practices",
   "skills.evidence.frontend":
-    "~29k lines of strict-mode TypeScript across a React 18 e-commerce SPA →",
+    "A bilingual React 18 + strict TypeScript e-commerce SPA with a server-rendered SEO head →",
   "skills.evidence.backend":
     "Zero-credential GraphQL proxy and Craft Commerce as a rental-inquiry engine →",
   "skills.evidence.cmsData":
@@ -85,7 +85,7 @@ const enMessages = {
   "skills.evidence.testing":
     "91 Jest test files and 23 Cypress specs behind a pre-push gate →",
   "skills.evidence.devopsSecurity":
-    "~7,700-line PHP 8 deployment console with SSE streaming and rsync rollbacks →",
+    "A framework-free PHP 8 deployment console with SSE build streaming and rsync rollbacks →",
   "skills.evidence.aiLlm":
     "Local-first LLM routing and an 8-stage, human-gated newsroom pipeline →",
   "skills.evidence.practices":
@@ -101,6 +101,7 @@ const enMessages = {
   "projects.previousHighlight": "Previous professional project",
   "projects.nextHighlight": "Next professional project",
   "projects.goToProject": "Go to project",
+  "projects.projectSummary.problem": "Problem",
   "projects.projectSummary.architecture": "Architecture",
   "projects.projectSummary.delivery": "Delivery Model",
   "projects.projectSummary.stack": "Stack",
@@ -220,7 +221,7 @@ const deMessages: typeof enMessages = {
   "home.stats.3.label":
     "Nichts erscheint ohne meine Freigabe — ~100 geprüfte EN/DE-Artikel/Monat, selbst gehostet, 5–8 € Infrastruktur/Monat.",
   "home.roleStatement":
-    "Ich arbeite als Full-Stack-Entwickler in Deutschland — React, Next.js und TypeScript im Frontend, PHP 8 und Craft CMS im Backend — und zunehmend im LLM-Engineering: Orchestrierung, Routing und Quality Gates für produktive KI-Systeme.",
+    "Full-Stack-Entwickler in Deutschland. Frontend in React, Next.js und striktem TypeScript, Backend in PHP 8 und Craft CMS 5, dazu LLM-Engineering mit einem Local-first-Ollama-Gateway, das einen produktiven Newsroom unter 8 € im Monat hält.",
   "about.heading.line1": "Hi, ich bin Abhinay.",
   "about.heading.line2": "Ich entwickle",
   "about.heading.line3": "digitale Systeme",
@@ -240,7 +241,7 @@ const deMessages: typeof enMessages = {
   "skills.topQuote": "Womit ich arbeite",
   "skills.heading": "Skills",
   "skills.body.1":
-    "Gruppiert, wie ich sie im Alltag einsetze — von Frontend über Deployment bis Testing und LLM-Engineering. Alles hier ist bereits in Produktion gelaufen.",
+    "Jede Gruppe unten verlinkt auf das Produktionssystem, in dem ich sie eingesetzt habe — eine E-Commerce-Plattform mit ~6x Wachstum, eine Live-CMS-Migration ohne Datenverlust, eine Deployment-Konsole, ein menschlich freigegebener KI-Newsroom. Nichts hier ist Lebenslauf-Füllmaterial.",
   "skills.linkedin.prefix": "Vollständiger Werdegang auf",
   "skills.linkedin.suffix": "und in meinem Lebenslauf.",
   "skills.group.frontend": "Frontend",
@@ -251,7 +252,7 @@ const deMessages: typeof enMessages = {
   "skills.group.aiLlm": "KI & LLM-Engineering",
   "skills.group.practices": "Arbeitsweisen",
   "skills.evidence.frontend":
-    "~29k Zeilen Strict-Mode-TypeScript in einer React-18-E-Commerce-SPA →",
+    "Eine zweisprachige React-18+Strict-TypeScript-E-Commerce-SPA mit serverseitigem SEO-Head →",
   "skills.evidence.backend":
     "Zero-Credential-GraphQL-Proxy und Craft Commerce als Mietanfrage-Engine →",
   "skills.evidence.cmsData":
@@ -259,7 +260,7 @@ const deMessages: typeof enMessages = {
   "skills.evidence.testing":
     "91 Jest-Testdateien und 23 Cypress-Specs hinter einem Pre-Push-Gate →",
   "skills.evidence.devopsSecurity":
-    "~7.700 Zeilen PHP-8-Deployment-Konsole mit SSE-Streaming und rsync-Rollbacks →",
+    "Eine framework-freie PHP-8-Deployment-Konsole mit SSE-Build-Streaming und rsync-Rollbacks →",
   "skills.evidence.aiLlm":
     "Local-first-LLM-Routing und eine 8-stufige, menschlich freigegebene Newsroom-Pipeline →",
   "skills.evidence.practices":
@@ -275,6 +276,7 @@ const deMessages: typeof enMessages = {
   "projects.previousHighlight": "Vorheriges professionelles Projekt",
   "projects.nextHighlight": "Nächstes professionelles Projekt",
   "projects.goToProject": "Zu Projekt",
+  "projects.projectSummary.problem": "Problem",
   "projects.projectSummary.architecture": "Architektur",
   "projects.projectSummary.delivery": "Delivery-Modell",
   "projects.projectSummary.stack": "Stack",

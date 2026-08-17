@@ -290,6 +290,10 @@ export default function ProjectsHome({ caseStudySlug }: ProjectsHomeProps) {
                   <h2 className="project-slide-title">{project.title}</h2>
                   <dl className="project-slide-details">
                     <div className="project-slide-row">
+                      <dt>{t("projects.projectSummary.problem")}</dt>
+                      <dd>{project.problem}</dd>
+                    </div>
+                    <div className="project-slide-row">
                       <dt>{t("projects.projectSummary.architecture")}</dt>
                       <dd>{project.architecture}</dd>
                     </div>
@@ -330,6 +334,10 @@ export default function ProjectsHome({ caseStudySlug }: ProjectsHomeProps) {
                     data-wheel-lock="true"
                     data-wheel-axis="y"
                   >
+                    <div className="project-slide-row">
+                      <dt>{t("projects.projectSummary.problem")}</dt>
+                      <dd>{currentProject.problem}</dd>
+                    </div>
                     <div className="project-slide-row">
                       <dt>{t("projects.projectSummary.architecture")}</dt>
                       <dd>{currentProject.architecture}</dd>

@@ -23,5 +23,5 @@ Capabilities:
 Case Study Themes (client work anonymized):
 - Autonomous bilingual AI newsroom: 8-stage verification and writing pipeline, ~100 articles/month for €5–8 total, 100% human-gated publishing
 - Hybrid headless e-commerce platform for an industrial manufacturer: organic traffic grew ~6x after a technical SEO rebuild
-- Security-first deployment console (~7,700 LOC framework-free PHP 8): new client projects deploy-ready in one day
+- Security-first deployment console (framework-free PHP 8, one dependency): new client projects deploy-ready in one day
 - Rental & commerce platform for an equipment rental and sales company: in-place Craft CMS 4→5 migration of a live order database, 153 migrations, zero data loss
