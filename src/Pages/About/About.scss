@@ -1,6 +1,11 @@
 @use '../../Styles/variables' as *;
 
 .p-About {
+  // border-box is load-bearing: this root becomes a scroll container on
+  // narrow/short viewports and adds bottom padding. Without border-box the
+  // padding grows the box past 100dvh and the app shell clips the tail —
+  // content there is unreachable, not merely scrolled-under.
+  box-sizing: border-box;
   height: 100vh;
   height: 100dvh;
   min-width: 362px;
@@ -16,7 +21,10 @@
     height: 100vh;
     height: 100dvh;
     overflow-y: auto;
-    padding-bottom: $page-chrome-bottom-clearance-mobile;
+    // A scrolling root's padding is only "reserved" when scrolled to the end,
+    // so give the final element (the Skills CTA) generous room to clear the
+    // centered ScrollBtn (bottom: 5%, ~24px tall) with a visible gap.
+    padding-bottom: calc(#{$page-chrome-bottom-clearance-mobile} + 24px);
   }
 
   // Landscape phones / very short windows: same root-scroll treatment while

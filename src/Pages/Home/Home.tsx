@@ -128,16 +128,6 @@ export default function HomePage() {
             <span className="home-stat-label">{t("home.stats.3.label")}</span>
           </div>
         </motion.div>
-        <motion.p
-          className="home-teaser"
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          custom={0.7}
-          variants={contentVariants}
-        >
-          {t("home.aboutTeaser")}
-        </motion.p>
         {screenSize < 480 ? null : (
           <motion.div
             className="next-page"

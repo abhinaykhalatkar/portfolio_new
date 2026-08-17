@@ -162,7 +162,6 @@ export default function ProjectsHome() {
           variants={contentVariants}
         >
           <p className="projects-overview-intro">{t("projects.overviewIntro")}</p>
-          <p className="projects-overview-body">{t("projects.overviewBody")}</p>
         </motion.div>
 
         <motion.div

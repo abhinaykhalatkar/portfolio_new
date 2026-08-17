@@ -57,16 +57,6 @@ export default function SkillsPage() {
         >
           {t("skills.body.1")}
         </motion.p>
-        <motion.p
-          className="skill-para-content"
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          custom={0.4}
-          variants={contentVariants}
-        >
-          {t("skills.body.2")}
-        </motion.p>
         <motion.div
           className="linkedInPara"
           initial="hidden"

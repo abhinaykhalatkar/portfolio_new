@@ -96,14 +96,14 @@ describe("Home mobile timeline drawer", () => {
     expect(screen.getByTestId("home-timeline-desktop")).toBeInTheDocument();
   });
 
-  it("renders the tagline, all three highlight stats, and the about teaser unconditionally (SEO-load-bearing)", () => {
+  it("renders the tagline, intro, and all three highlight stats unconditionally (SEO-load-bearing)", () => {
     render(<HomePage />);
 
     expect(screen.getByText("home.tagline")).toBeInTheDocument();
+    expect(screen.getByText("home.intro")).toBeInTheDocument();
     for (const n of [1, 2, 3]) {
       expect(screen.getByText(`home.stats.${n}.value`)).toBeInTheDocument();
       expect(screen.getByText(`home.stats.${n}.label`)).toBeInTheDocument();
     }
-    expect(screen.getByText("home.aboutTeaser")).toBeInTheDocument();
   });
 });

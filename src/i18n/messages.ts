@@ -45,13 +45,10 @@ const enMessages = {
   "home.stats.3.value": "~100 articles/month for under €8",
   "home.stats.3.label":
     "Autonomous EN/DE AI newsroom, self-hosted, human-approved before anything publishes.",
-  "home.aboutTeaser":
-    "At my agency, once a design is approved, everything after that is me: architecture, frontend, backend, database, security, deployment, go-live. On my own time I run a harder version of the same problem — an AI newsroom that verifies, writes, and translates about 100 articles a month and still can't publish a word without a human pressing the button.",
   "about.heading.line1": "Hi, I'm Abhinay.",
   "about.heading.line2": "Designing",
   "about.heading.line3": "Digital Systems",
-  "about.foot":
-    "Full-Stack Software Developer — React · TypeScript · PHP · Craft CMS",
+  "about.foot": "Full-stack developer · Geilenkirchen, Germany",
   "about.body.1":
     "I'm a full-stack developer based in Geilenkirchen, Germany. In my current agency role I'm the only engineer on my client projects: once a design is approved, everything from architecture to go-live and maintenance is mine. Before that I built React frontends and CMS integrations for enterprise B2B clients, and completed an M.Sc. in Applied Computer Science at SRH Hochschule Heidelberg with a focus on software architecture, databases, cybersecurity, and UX engineering.",
   "about.body.2":
@@ -64,15 +61,12 @@ const enMessages = {
   "about.languages.hindi": "Hindi — native",
   "about.languages.marathi": "Marathi — native",
   "about.skillsCta": "See my full skill set",
-  "skills.topQuote": "Making software keep working — not just work once",
-  "skills.heading": "Skills & Experience",
+  "skills.topQuote": "What I work with",
+  "skills.heading": "Skills",
   "skills.body.1":
-    "I'm the sole engineer on my client projects: once a design is approved, architecture, frontend, backend, database, security hardening, and deployment are mine through to production.",
-  "skills.body.2":
-    "My stack centers on React 18, Next.js, TypeScript, Node.js, PHP 8, and Craft CMS 5, deployed to Hetzner and AWS. I work test-driven with Jest, Cypress, and pytest, build GDPR-by-design, and use LLM tooling — Ollama-based orchestration, GitHub Copilot, OpenAI Codex — behind deterministic quality gates.",
-  "skills.linkedin.prefix": "Feel free to explore my",
-  "skills.linkedin.suffix":
-    "for a more comprehensive overview of my skills and experience.",
+    "Grouped the way I use them day to day — from frontend to deployment, testing, and LLM engineering. Everything here has shipped to production.",
+  "skills.linkedin.prefix": "Full work history on",
+  "skills.linkedin.suffix": "and in my resume.",
   "skills.group.frontend": "Frontend",
   "skills.group.backend": "Backend & APIs",
   "skills.group.cmsData": "CMS & Data",
@@ -82,9 +76,7 @@ const enMessages = {
   "skills.group.practices": "Practices",
   "projects.heading": "Projects",
   "projects.overviewIntro":
-    "Four production systems built end to end as the sole engineer — client platforms from my agency work and an autonomous AI newsroom I run on my own hardware.",
-  "projects.overviewBody":
-    "Each highlight covers architecture, delivery, stack, and measured outcomes. Client work is anonymized; every number is real.",
+    "Four production systems — three client platforms and my own AI newsroom. Client work is anonymized; every number is real.",
   "projects.catalogHint":
     "Public GitHub repositories remain available in the vertical project catalog sections.",
   "projects.professionalEyebrow": "Professional Project",
@@ -210,13 +202,10 @@ const deMessages: typeof enMessages = {
   "home.stats.3.value": "~100 Artikel/Monat für unter 8 €",
   "home.stats.3.label":
     "Autonomer EN/DE-KI-Newsroom, selbst gehostet — nichts erscheint ohne menschliche Freigabe.",
-  "home.aboutTeaser":
-    "Sobald in meiner Agentur ein Design freigegeben ist, liegt alles Weitere bei mir: Architektur, Frontend, Backend, Datenbank, Sicherheit, Deployment, Go-live. In meiner freien Zeit betreibe ich eine härtere Variante desselben Problems — einen KI-Newsroom, der rund 100 Artikel im Monat verifiziert, schreibt und übersetzt und trotzdem kein Wort veröffentlichen kann, ohne dass ein Mensch den Knopf drückt.",
   "about.heading.line1": "Hi, ich bin Abhinay.",
   "about.heading.line2": "Ich entwickle",
   "about.heading.line3": "digitale Systeme",
-  "about.foot":
-    "Full-Stack-Softwareentwickler — React · TypeScript · PHP · Craft CMS",
+  "about.foot": "Full-Stack-Entwickler · Geilenkirchen, Deutschland",
   "about.body.1":
     "Ich bin Full-Stack-Entwickler in Geilenkirchen. In meiner aktuellen Agenturrolle bin ich der einzige Entwickler auf meinen Kundenprojekten: Sobald ein Design freigegeben ist, liegt alles von der Architektur bis zu Go-live und Wartung bei mir. Davor habe ich React-Frontends und CMS-Integrationen für Enterprise-B2B-Kunden gebaut und einen M.Sc. in Applied Computer Science an der SRH Hochschule Heidelberg abgeschlossen — mit Schwerpunkt Softwarearchitektur, Datenbanken, Cybersecurity und UX Engineering.",
   "about.body.2":
@@ -229,14 +218,12 @@ const deMessages: typeof enMessages = {
   "about.languages.hindi": "Hindi — Muttersprache",
   "about.languages.marathi": "Marathi — Muttersprache",
   "about.skillsCta": "Zum vollständigen Skill-Set",
-  "skills.topQuote": "Software, die nicht nur einmal funktioniert, sondern dauerhaft läuft",
-  "skills.heading": "Skills & Erfahrung",
+  "skills.topQuote": "Womit ich arbeite",
+  "skills.heading": "Skills",
   "skills.body.1":
-    "Ich bin der einzige Entwickler auf meinen Kundenprojekten: Sobald ein Design freigegeben ist, liegen Architektur, Frontend, Backend, Datenbank, Sicherheitshärtung und Deployment bis zur Produktion bei mir.",
-  "skills.body.2":
-    "Mein Stack konzentriert sich auf React 18, Next.js, TypeScript, Node.js, PHP 8 und Craft CMS 5, ausgeliefert auf Hetzner und AWS. Ich arbeite testgetrieben mit Jest, Cypress und pytest, entwickle GDPR-by-Design und nutze LLM-Tooling — Ollama-basierte Orchestrierung, GitHub Copilot, OpenAI Codex — hinter deterministischen Quality Gates.",
-  "skills.linkedin.prefix": "Eine ausführlichere Übersicht meiner Skills und Erfahrungen finden Sie auf meinem",
-  "skills.linkedin.suffix": ".",
+    "Gruppiert, wie ich sie im Alltag einsetze — von Frontend über Deployment bis Testing und LLM-Engineering. Alles hier ist bereits in Produktion gelaufen.",
+  "skills.linkedin.prefix": "Vollständiger Werdegang auf",
+  "skills.linkedin.suffix": "und in meinem Lebenslauf.",
   "skills.group.frontend": "Frontend",
   "skills.group.backend": "Backend & APIs",
   "skills.group.cmsData": "CMS & Daten",
@@ -246,9 +233,7 @@ const deMessages: typeof enMessages = {
   "skills.group.practices": "Arbeitsweisen",
   "projects.heading": "Projekte",
   "projects.overviewIntro":
-    "Vier Produktionssysteme, Ende-zu-Ende als alleiniger Entwickler gebaut — Kundenplattformen aus meiner Agenturarbeit und ein autonomer KI-Newsroom auf eigener Hardware.",
-  "projects.overviewBody":
-    "Jedes Highlight zeigt Architektur, Delivery, Stack und gemessene Ergebnisse. Kundenprojekte sind anonymisiert; jede Zahl ist echt.",
+    "Vier Produktionssysteme — drei Kundenplattformen und mein eigener KI-Newsroom. Kundenprojekte sind anonymisiert; jede Zahl ist echt.",
   "projects.catalogHint":
     "Öffentliche GitHub-Repositories bleiben in den vertikalen Projektkatalog-Bereichen verfügbar.",
   "projects.professionalEyebrow": "Professionelles Projekt",
