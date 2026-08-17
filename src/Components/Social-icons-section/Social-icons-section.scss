@@ -3,16 +3,20 @@
 .contact-btn-section {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    row-gap: clamp(0.9rem, 2vh, 1.4rem);
+    width: 100%;
 
+    // "Let's Get Social" is the label for the icons below it — a subheading,
+    // clearly smaller than the page H1.
     .exit-heading-contact-div {
-        align-self: center;
-        margin-top: 3rem;
+        margin: 0;
+        font-weight: 500;
 
         .exit-heading-contact {
             display: flex;
-
-            align-self: center;
-            font-size: 2rem;
+            justify-content: center;
+            font-size: clamp(1.3rem, 2.4vw, 1.75rem);
         }
     }
 
@@ -140,23 +144,23 @@
         color: #1da1f2;
     }
 
-    @media only screen and (min-width: 480px) and (max-width:1000px) {
-        margin-top: 2rem;
+    @media screen and (max-height: 700px) {
+        row-gap: 0.7rem;
+
+        ul li a {
+            width: 58px;
+            height: 58px;
+            font-size: 32px;
+            margin: 0 22px;
+        }
     }
 
     @media only screen and (max-width: 480px) {
-        margin-top: 2rem;
-
-        .contact-container-Out {
-            &>ul {
-                flex-wrap: wrap;
-                gap: 10px;
-
-                li {
-                    text-align: -webkit-center;
-                    flex-basis: calc(50% - 10px);
-                }
-            }
+        ul li a {
+            width: 60px;
+            height: 60px;
+            font-size: 34px;
+            margin: 0 18px;
         }
     }
 }

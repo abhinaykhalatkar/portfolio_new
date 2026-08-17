@@ -26,6 +26,21 @@ export default function SocialIconsSection() {
 
   return (
     <div className={`contact-btn-section ${darkTheme ? "" : "light"}`}>
+      {/* Label first, then the icons it labels — reads top-down and gives the
+          page a proper h2 for the social block. */}
+      <motion.h2
+        className="exit-heading-contact-div"
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        custom={0.4}
+        variants={contentVariants2}
+      >
+        <BouncyText
+          name_class="exit-heading-contact"
+          text={t("social.heading")}
+        />
+      </motion.h2>
       <div className="contact-container-Out">
         <ul>
           {contactBtnData.map((el, ind) => {
@@ -34,7 +49,7 @@ export default function SocialIconsSection() {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                custom={ind * 0.2}
+                custom={0.6 + ind * 0.2}
                 variants={contentVariants2}
                 key={ind}
               >
@@ -56,19 +71,6 @@ export default function SocialIconsSection() {
           })}
         </ul>
       </div>
-      <motion.div
-        className="exit-heading-contact-div"
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-        custom={0.8}
-        variants={contentVariants2}
-      >
-        <BouncyText
-          name_class="exit-heading-contact"
-          text={t("social.heading")}
-        />
-      </motion.div>
     </div>
   );
 }

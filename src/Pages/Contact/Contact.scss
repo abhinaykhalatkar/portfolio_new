@@ -1,6 +1,7 @@
 @use '../../Styles/variables' as *;
 
 .p-Contact {
+    box-sizing: border-box;
     height: 100vh;
     height: 100dvh;
     overflow: hidden;
@@ -15,124 +16,105 @@
         background-image: linear-gradient(315deg, #b8c6db 0%, #faf3f3 74%)
     }
 
-    // Centered inside the safe area: top padding clears the sidebar toggle,
-    // bottom padding reserves the progress-bar band. margin:auto centers the
-    // (short) content vertically within what remains.
+    // One centered column, read top-down:
+    //   heading → availability line + email → "Let's Get Social" → icons.
+    // Vertically centered inside the safe area (top padding clears the
+    // sidebar toggle / Contact button; bottom padding reserves the progress
+    // bar band). No side-by-side split — with only two contact channels a
+    // two-column layout left the icons floating in empty space.
     .contact-container-Out {
-        max-width: 80vw;
-        width: 100%;
+        box-sizing: border-box;
+        width: min(100%, 720px);
         display: flex;
         flex-direction: column;
+        align-items: center;
         text-align: center;
         margin: auto;
-        padding-top: clamp(48px, 6vh, 72px);
+        padding-top: clamp(56px, 7vh, 84px);
         padding-bottom: $page-chrome-bottom-clearance;
+        row-gap: clamp(1.1rem, 2.4vh, 2rem);
 
         .contact-heading {
-            font-size: 3.5rem;
+            font-size: clamp(2.4rem, 5vw, 3.5rem);
             display: flex;
             justify-content: center;
-            margin-bottom: 2rem;
+            margin: 0;
         }
 
         .contact-container {
-            // justify-content: space-between;
             display: flex;
-
-            .contact-content,
-            .social-contact {
-                width: 50%;
-                height: 100%;
-            }
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            row-gap: clamp(1.4rem, 3.4vh, 2.6rem);
 
             .contact-content {
-                align-self: center;
+                margin: 0;
+                max-width: 52ch;
+                font-size: 1.05rem;
+                line-height: 1.6;
 
                 a {
                     display: block;
+                    margin-top: 0.4rem;
                     text-decoration: none;
                     color: $yellow;
                     font-size: 1.5rem;
+                    word-break: break-word;
                 }
-
             }
         }
+    }
 
-        .contact-extended {
-            margin-top: 2rem;
-            text-align: left;
-            max-width: 720px;
-            margin-left: auto;
-            margin-right: auto;
+    // Short desktop viewports: tighten the vertical rhythm before the
+    // column would touch the bar band.
+    @media screen and (max-height: 700px) {
+        .contact-container-Out {
+            padding-top: clamp(44px, 6vh, 60px);
+            row-gap: 0.8rem;
 
-            .contact-subheading {
-                font-size: 1.05rem;
-                letter-spacing: 0.18em;
-                text-transform: uppercase;
-                font-weight: 600;
-                margin: 1.4rem 0 0.6rem;
-                opacity: 0.78;
-            }
-
-            .contact-subbody {
-                font-size: 1rem;
-                line-height: 1.6;
-                margin: 0 0 0.8rem;
-                opacity: 0.86;
-            }
-
-            .contact-locale-note {
-                font-size: 0.92rem;
-                line-height: 1.5;
-                margin-top: 1rem;
-                opacity: 0.62;
-                font-style: italic;
-            }
-        }
-
-        @media only screen and (min-width: 480px) and (max-width:1000px) {
             .contact-heading {
-                font-size: 3rem;
-                margin-bottom: 1.5rem;
+                font-size: clamp(2rem, 4vw, 2.6rem);
             }
 
             .contact-container {
-                flex-direction: column;
-                align-items: center;
+                row-gap: 1.1rem;
 
-                .contact-content,
-                .social-contact {
-                    width: 80%;
+                .contact-content {
+                    font-size: 0.95rem;
+
+                    a {
+                        font-size: 1.25rem;
+                    }
                 }
-
             }
-
         }
+    }
 
-        @media only screen and (max-width: 767px) {
-            // Progress bar hidden below 768px; ScrollBtn owns the bottom band.
+    @media only screen and (max-width: 767px) {
+        // Progress bar hidden below 768px; ScrollBtn owns the bottom band.
+        padding: 0 24px;
+
+        .contact-container-Out {
             padding-bottom: $page-chrome-bottom-clearance-mobile;
         }
+    }
 
-        @media only screen and (max-width: 480px) {
-            min-width: 340px;
+    @media only screen and (max-width: 480px) {
+        padding: 0 18px;
 
+        .contact-container-Out {
             .contact-heading {
-                font-size: 3rem;
-                margin-bottom: 1.5rem;
+                font-size: 2.2rem;
             }
 
-            .contact-container {
-                flex-direction: column;
-                align-items: center;
+            .contact-container .contact-content {
+                font-size: 0.98rem;
 
-                .contact-content,
-                .social-contact {
-                    width: 100%;
+                a {
+                    font-size: 1.2rem;
                 }
-
             }
         }
-
     }
 }
