@@ -75,5 +75,14 @@ export default defineConfig(({ mode }) => {
       port: 3000,
       strictPort: true,
     },
+    // The prerender step (scripts/prerender-routes.mjs) spawns `vite preview`
+    // on 4173 and snapshots THAT server. Without strictPort Vite silently
+    // falls back to 4174 when 4173 is busy, and the prerenderer then talks to
+    // whatever stale process holds 4173 (or nothing) — producing an aborted
+    // deploy or, worse, snapshots of an old build. Fail loudly instead.
+    preview: {
+      port: 4173,
+      strictPort: true,
+    },
   };
 });

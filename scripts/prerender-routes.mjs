@@ -1,5 +1,6 @@
 import { spawn } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
+import net from "node:net";
 import path from "node:path";
 import { setTimeout as wait } from "node:timers/promises";
 import process from "node:process";
@@ -13,6 +14,37 @@ const PORT = Number(process.env.PRERENDER_PORT || 4173);
 const BASE_URL = `http://${HOST}:${PORT}`;
 const ROUTES = ALL_PRERENDER_ROUTES;
 
+/**
+ * Refuse to start if something already listens on the prerender port.
+ * Otherwise `vite preview` (strictPort) fails, but our poll below could still
+ * get a 200 from the STALE process on that port and snapshot the wrong build.
+ * Root cause of the 2026-08-17 `deploy:prod` failure: a preview server left
+ * over from an earlier prerender still held 4173.
+ */
+async function assertPortFree(port) {
+  await new Promise((resolve, reject) => {
+    const probe = net
+      .createServer()
+      .once("error", (error) => {
+        if (error.code === "EADDRINUSE") {
+          reject(
+            new Error(
+              `Prerender port ${port} is already in use (a stale \`vite preview\` from an earlier ` +
+                `run, or another server). Stop it first, e.g. \`kill $(lsof -ti :${port})\`, or set ` +
+                `PRERENDER_PORT to a free port. Refusing to prerender against an unknown server.`
+            )
+          );
+          return;
+        }
+        reject(error);
+      })
+      .once("listening", () => {
+        probe.close(() => resolve(undefined));
+      })
+      .listen(port, HOST);
+  });
+}
+
 function getNpmCommand() {
   return process.platform === "win32" ? "npm.cmd" : "npm";
 }
@@ -25,9 +57,18 @@ function routeToOutputPath(route) {
   return path.join(BUILD_DIR, stripped, "index.html");
 }
 
-async function waitForPreviewServer() {
+async function waitForPreviewServer(previewProcess) {
   const maxAttempts = 80;
   for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    // If the preview process died (e.g. strictPort refused the busy port),
+    // stop polling immediately with the real reason instead of timing out
+    // 20s later with a misleading "not reachable".
+    if (previewProcess.exitCode !== null) {
+      throw new Error(
+        `\`vite preview\` exited with code ${previewProcess.exitCode} before serving ${BASE_URL}. ` +
+          `See the [preview] output above (usually: port ${PORT} already in use).`
+      );
+    }
     try {
       const response = await fetch(BASE_URL, { redirect: "follow" });
       if (response.ok) {
@@ -59,6 +100,8 @@ async function run() {
   let previewProcess;
   let browser;
   try {
+    await assertPortFree(PORT);
+
     previewProcess = spawn(
       getNpmCommand(),
       ["run", "preview", "--", "--host", HOST, "--port", String(PORT)],
@@ -75,7 +118,7 @@ async function run() {
       process.stderr.write(`[preview] ${chunk}`);
     });
 
-    await waitForPreviewServer();
+    await waitForPreviewServer(previewProcess);
 
     browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
